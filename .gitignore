@@ -1,0 +1,7 @@
+*.log
+*.xml
+*.imp
+*.swap
+*.DS_Store
+
+.idea/
