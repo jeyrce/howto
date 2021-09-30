@@ -1,0 +1,20 @@
+# yml doc
+---
+global:
+  resolved: true
+  timeout: 3
+
+route:
+  - /api/v1
+  - /api/test
+
+#2yml doc
+---
+global:
+  resolved: false
+  timeout: 7
+
+route:
+  - /api/v1
+  - /api/test
+
