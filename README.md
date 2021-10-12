@@ -1,2 +1,2 @@
-how to work the code
+how to run the code
 ---
