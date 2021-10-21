@@ -1,0 +1,65 @@
+- name: my-db-hang
+  aliasName: mysql集群状态
+  labels:
+    job: ipmi
+    alertingTypeName: mysqlCluster
+  description: 监控主机电源状态是否正常
+  spec:
+    # 原本是用来切换 百分比|MB|GB 这样的多个告警项的，现已全部平铺，字段弃用
+    unitOptional: false
+    rules:
+      - name: 电源状态
+        expr: redfish_power_information
+        description: 监控主机电源状态是否正常
+        # 是否开启高级功能
+        advanced:
+          last: 1
+          status: false
+        time:
+          status: false
+          groupInterval: 2
+          repeatInterval: 10
+        # 过滤规则
+        match:
+          # 需要过滤的指标标签，2个的组合使用英文逗号隔开
+          labelName: "name"
+          # 默认过滤值
+          values: [ ]
+          # 过滤提示
+          prompt: "请输入需要过滤的电源名称，例如 PS1, PS2"
+          desc: "需要过滤的电源"
+          # 是否启用过滤功能
+          status: true
+          op: '!~'
+        warn:
+          errorcode: QDM-H001
+          message: 'QDM-H001： 主机节点 <span>{{ $labels.targetIP }}</span> 的电源 <span>{{ $labels.name }}</span> 的状态出现异常'
+          suggest: 请检查电源线是否已连接或出现松动，避免出现电源冗余丢失。如有疑问，请联系原厂工程师处理。
+          operator: '!='
+          value: 1
+          status: true
+        critical:
+          errorcode: QDM-H001
+          message: 'QDM-H001： 主机节点 <span>{{ $labels.targetIP }}</span> 的电源 <span>{{ $labels.name }}</span> 的状态出现异常'
+          suggest: 请检查电源线是否已连接或出现松动，避免出现电源冗余丢失。如有疑问，请联系原厂工程师处理。
+          operator: '!='
+          value: 1
+          status: true
+        # 状态为true则只开起value中的告警级别，且他是一个状态型告警，否则可以分别配置两个级别的告警阈值
+        severity:
+          value: critical
+          status: true
+        unit:
+          desc: ""
+          value: ""
+  supportedTargetTypes:
+    - mysqlCluster
+
+- name: rd-memory-usage
+  aliasName: 内存使用率
+  ...
+  supportedTargetTypes:
+    - node
+
+os-cpu-usage：主机CPU使用率
+os-disk-usage：主机磁盘使用率

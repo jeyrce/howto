@@ -1,0 +1,44 @@
+- name: cluster
+  aliasName: 数据库集群
+  supportedTargetTypes:
+    - mysqlCluster
+    - redisCluster
+    - sqlserverCluster
+
+- name: host
+  aliasName: 主机节点
+  supportedTargetTypes:
+    - node
+
+- name: instance
+  aliasName: 数据库实例
+  supportedTargetTypes:
+    - mysqlInstance
+    - redisInstance
+    - sqlserverInstance
+
+#  MySQL 集群告警类型
+#  my-db-hang：集群状态
+#  my-execute-count：连接数
+#  my-dml-count：dml语句数
+#  os-cpu-usage：主机CPU使用率
+#  os-disk-usage：主机磁盘使用率
+#  my-slave-delay：主备延迟
+
+
+#  Redis 集群告警类型
+#  rd-db-hang：集群状态
+#  rd-execute-count：连接数
+#  rd-memory-usage：内存使用率
+#  os-cpu-usage：主机CPU使用率
+#  os-disk-usage：主机磁盘使用率
+#  rd-slave-delay：主备延迟
+
+
+#  SQLServer 集群告警类型
+#  my-db-hang：集群状态
+#  my-execute-count：连接数
+#  my-dml-count：dml语句数
+#  os-cpu-usage：主机CPU使用率
+#  os-disk-usage：主机磁盘使用率
+#  my-slave-delay：主备延迟

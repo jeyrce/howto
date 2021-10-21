@@ -1,0 +1,8 @@
+- name: 主机节点
+  type: node
+  repeatIntervalMinute: 20
+  groupIntervalMinute: 5
+  metrics:
+    - name: node_cpu_rate
+    - name: node_cle
+    - name: xxxx
