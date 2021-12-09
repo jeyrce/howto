@@ -1,4 +1,4 @@
-module lujianxin.com/howto
+module ioseek.cn/howto
 
 go 1.16
 
