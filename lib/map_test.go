@@ -5,6 +5,6 @@ import (
 )
 
 func TestMap(t *testing.T) {
-	m := map[string]string{"x": "author"}
+	m := map[string]string{"x": "author", "x yz dd": "clsfd"}
 	t.Log(m)
 }
