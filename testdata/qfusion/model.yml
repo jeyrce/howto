@@ -1,0 +1,1229 @@
+- name: node_available
+  aliasName: 宿主机可用性
+  labels: {}
+  supportedTargetTypes:
+    - WorkerNode
+  description: 检测宿主机可用性
+  spec:
+    unitOptional: false
+    rules:
+      - name: 宿主机可用性
+        expr: up{job="node"}
+        advanced:
+          last: 1
+          status: false
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: =~
+        warn:
+          errorcode: QF-001
+          message: QF-001：当前节点{{ $labels.alertingTargetName }}异常不可用
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '!='
+          value: 1
+          status: false
+        critical:
+          errorcode: QF-001
+          message: QF-001：当前节点{{ $labels.alertingTargetName }}异常不可用
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '!='
+          value: 1
+          status: false
+        severity:
+          value: critical
+          status: true
+        unit:
+          desc: ""
+          value: ""
+- name: node_filesystem_free_bytes
+  aliasName: 根目录空间剩余容量
+  labels: {}
+  supportedTargetTypes:
+    - WorkerNode
+  description: 检测根目录剩余容量
+  spec:
+    unitOptional: false
+    rules:
+      - name: 根目录空间剩余容量
+        expr: node_filesystem_free_bytes{mountpoint="/", device!="rootfs"} / node_filesystem_size_bytes{mountpoint="/",
+          device!="rootfs"} * 100
+        advanced:
+          last: 1
+          status: false
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: ""
+        warn:
+          errorcode: QF-101
+          message: QF-101：当前节点{{ $labels.alertingTargetName }}根目录剩余可用空间不足{{ $value |
+            printf "%.1f" }}%，请提前进行扩容保证系统正常运行
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: <=
+          value: 20
+          status: true
+        critical:
+          errorcode: QF-101
+          message: QF-101：当前节点{{ $labels.alertingTargetName }}根目录剩余可用空间不足{{ $value |
+            printf "%.1f" }}%，请提前进行扩容保证系统正常运行
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: <=
+          value: 10
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: ""
+          value: '%'
+- name: node_network_interface
+  aliasName: 网络端口状态
+  labels: {}
+  supportedTargetTypes:
+    - WorkerNode
+  description: 检测网络端口状态是否正常
+  spec:
+    unitOptional: false
+    rules:
+      - name: 网络端口状态
+        expr: node_network_interface
+        advanced:
+          last: 1
+          status: false
+        match:
+          labelName: device
+          values: ["eth0"]
+          prompt: ""
+          desc: 网络端口
+          status: true
+          op: =~
+        warn:
+          errorcode: QF-005
+          message: QF-005：当前节点{{ $labels.alertingTargetName }}网络端口{{ $labels.device
+            }}异常
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '!='
+          value: 1
+          status: false
+        critical:
+          errorcode: QF-005
+          message: QF-005：当前节点{{ $labels.alertingTargetName }}网络端口{{ $labels.device
+            }}异常
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '!='
+          value: 1
+          status: false
+        severity:
+          value: critical
+          status: true
+        unit:
+          desc: ""
+          value: ""
+- name: load5
+  aliasName: 系统负载
+  labels: {}
+  supportedTargetTypes:
+    - WorkerNode
+  description: 监控主机在过去5分钟内的平均负载是否超出既定范围
+  spec:
+    unitOptional: false
+    rules:
+      - name: 系统负载
+        expr: node_load5
+        advanced:
+          last: 1
+          status: false
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: =~
+        warn:
+          errorcode: QF-102
+          message: QF-102：当前节点{{ $labels.alertingTargetName }}过去5分钟平均负载达到{{ $value |
+            printf "%.1f" }}，处于高负荷运载
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '>='
+          value: 45
+          status: true
+        critical:
+          errorcode: QF-102
+          message: QF-102：当前节点{{ $labels.alertingTargetName }}过去5分钟平均负载达到{{ $value |
+            printf "%.1f" }}，处于高负荷运载
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '>='
+          value: 65
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: ""
+          value: ""
+- name: kube_system_component_up
+  aliasName: 系统组件的可用性
+  labels: {}
+  supportedTargetTypes:
+    - SystemComponent
+  description: 监控系统组件可用性状态
+  spec:
+    unitOptional: false
+    rules:
+      - name: 系统组件的可用性
+        expr: kube_system_component_up
+        advanced:
+          last: 1
+          status: false
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: =~
+        warn:
+          errorcode: QF-003
+          message: QF-003：当前系统组件{{ $labels.podname }}异常不可用
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '!='
+          value: 1
+          status: false
+        critical:
+          errorcode: QF-003
+          message: QF-003：当前系统组件{{ $labels.podname }}异常不可用
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '!='
+          value: 1
+          status: false
+        severity:
+          value: critical
+          status: true
+        unit:
+          desc: ""
+          value: ""
+- name: qcfs_namespace_Encodes_enodes_data_nic_status
+  aliasName: QCFS节点网络端口状态
+  labels: {}
+  supportedTargetTypes:
+    - SystemComponent
+  description: 分布式存储节点网络端口可用性状态
+  spec:
+    unitOptional: false
+    rules:
+      - name: QCFS节点网络端口状态
+        expr: qcfs_namespace_Encodes_enodes_data_nic_status{device=~"A|B"}
+        advanced:
+          last: 1
+          status: false
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: =~
+        warn:
+          errorcode: QF-109
+          message: QF-109：QCFS存储节点{{ $labels.componentName }}网络复制端口异常
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '!='
+          value: 1
+          status: false
+        critical:
+          errorcode: QF-109
+          message: QF-109：QCFS存储节点{{ $labels.componentName }}网络复制端口异常
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '!='
+          value: 1
+          status: false
+        severity:
+          value: critical
+          status: true
+        unit:
+          desc: ""
+          value: ""
+- name: qcfs_namespace_System_info_enodes_System_percent
+  aliasName: QCFS分布式存储剩余可用空间
+  labels: {}
+  supportedTargetTypes:
+    - SystemComponent
+  description: QCFS分布式存储剩余可用空间
+  spec:
+    unitOptional: false
+    rules:
+      - name: QCFS分布式存储剩余可用空间
+        expr: 100 - qcfs_namespace_System_info_enodes_System_percent
+        advanced:
+          last: 1
+          status: false
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: =~
+        warn:
+          errorcode: QF-108
+          message: QF-108：QCFS分布式存储当前剩余可用空间不足{{ $value | printf "%.1f" }}%，请提前进行存储扩容保证系统稳定运行
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: <=
+          value: 20
+          status: true
+        critical:
+          errorcode: QF-108
+          message: QF-108：QCFS分布式存储当前剩余可用空间不足{{ $value | printf "%.1f" }}%，请提前进行存储扩容保证系统稳定运行
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: <=
+          value: 10
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: ""
+          value: '%'
+- name: qcfs_namespace_System_info_enodes_manager_status
+  aliasName: QCFS分布式存储可用性
+  labels: {}
+  supportedTargetTypes:
+    - SystemComponent
+  description: 分布式存储可用性状态，状态码：1-正常，2-警告，3-严重警告，4-注意，7-危险，8-风险，9-已停止，10-状态未知，11-紧急
+  spec:
+    unitOptional: false
+    rules:
+      - name: QCFS分布式存储可用性
+        expr: qcfs_namespace_System_info_enodes_manager_status
+        advanced:
+          last: 1
+          status: false
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: =~
+        warn:
+          errorcode: QF-006
+          message: QF-006：QCFS分布式存储当前处于异常状态，状态码：{{ $value }}（1-正常，2-警告，3-严重警告，4-注意，7-危险，8-风险，9-已停止，10-状态未知，11-紧急）
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '>'
+          value: 3
+          status: true
+        critical:
+          errorcode: QF-006
+          message: QF-006：QCFS分布式存储当前处于异常状态，状态码：{{ $value }}（1-正常，2-警告，3-严重警告，4-注意，7-危险，8-风险，9-已停止，10-状态未知，11-紧急）
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '>'
+          value: 8
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: ""
+          value: ""
+- name: mysql_up
+  aliasName: 集群数据库实例可用性
+  labels: {}
+  supportedTargetTypes:
+    - MySQLCluster
+  description: 检测数据库集群实例的可用性
+  spec:
+    unitOptional: false
+    rules:
+      - name: 集群数据库实例可用性
+        expr: mysql_up
+        advanced:
+          last: 1
+          status: false
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: ""
+        warn:
+          errorcode: QF-002
+          message: QF-002：当前数据库实例{{ $labels.instance }}异常不可用
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '!='
+          value: 1
+          status: false
+        critical:
+          errorcode: QF-002
+          message: QF-002：当前数据库实例{{ $labels.instance }}异常不可用
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '!='
+          value: 1
+          status: false
+        severity:
+          value: critical
+          status: true
+        unit:
+          desc: ""
+          value: ""
+- name: external_mysql_up
+  aliasName: MySQL数据库实例可用性
+  labels: {}
+  supportedTargetTypes:
+    - ExternalSlaveMySQLDatabase
+    - ExternalMasterMySQLDatabase
+  description: 检测MySQL数据库实例的可用性
+  spec:
+    unitOptional: false
+    rules:
+      - name: 数据库实例可用性
+        expr: mysql_up
+        advanced:
+          last: 1
+          status: false
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: ""
+        warn:
+          errorcode: QF-002
+          message: QF-002：当前数据库实例{{ $labels.database_name }}异常不可用
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '!='
+          value: 1
+          status: false
+        critical:
+          errorcode: QF-002
+          message: QF-002：当前数据库实例{{ $labels.database_name }}异常不可用
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '!='
+          value: 1
+          status: false
+        severity:
+          value: critical
+          status: true
+        unit:
+          desc: ""
+          value: ""
+- name: kube_mycat_up
+  aliasName: 集群中间件可用性
+  labels: {}
+  supportedTargetTypes:
+    - MySQLCluster
+  description: 检测集群中间件可用性
+  spec:
+    unitOptional: false
+    rules:
+      - name: 集群中间件可用性
+        expr: kube_mycat_up
+        advanced:
+          last: 1
+          status: false
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: ""
+        warn:
+          errorcode: QF-004
+          message: QF-004：当前中间件{{ $labels.alertingTargetName }}异常不可用
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '!='
+          value: 1
+          status: false
+        critical:
+          errorcode: QF-004
+          message: QF-004：当前中间件{{ $labels.alertingTargetName }}异常不可用
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '!='
+          value: 1
+          status: false
+        severity:
+          value: critical
+          status: true
+        unit:
+          desc: ""
+          value: ""
+- name: mysql_filesystem_avail_percent
+  aliasName: 集群实例空间剩余容量
+  labels: {}
+  supportedTargetTypes:
+    - MySQLCluster
+  description: 检测数据库实例分配的数据空间剩余容量
+  spec:
+    unitOptional: false
+    rules:
+      - name: 集群实例空间剩余容量
+        expr: (mysql_filesystem_avail_bytes{mountpoint=~"/var/lib/mysql/data|/var/lib/mysql/archive"}
+          / mysql_filesystem_size_bytes{mountpoint=~"/var/lib/mysql/data|/var/lib/mysql/archive"})
+          * 100
+        advanced:
+          last: 1
+          status: false
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: =~
+        warn:
+          errorcode: QF-103
+          message: QF-103：当前数据库实例{{ $labels.instance }}{{if eq $labels.mountpoint "/var/lib/mysql/data"}}数据{{else
+            if eq $labels.mountpoint "/var/lib/mysql/archive"}}日志{{else}}未知卷类型{{end}}可用空间不足{{
+            $value | printf "%.1f" }}%，请提前进行存储卷扩容，保证实例正常运行
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: <=
+          value: 20
+          status: true
+        critical:
+          errorcode: QF-103
+          message: QF-103：当前数据库实例{{ $labels.instance }}{{if eq $labels.mountpoint "/var/lib/mysql/data"}}数据{{else
+            if eq $labels.mountpoint "/var/lib/mysql/archive"}}日志{{else}}未知卷类型{{end}}可用空间不足{{
+            $value | printf "%.1f" }}%，请提前进行存储卷扩容，保证实例正常运行
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: <=
+          value: 10
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: ""
+          value: '%'
+- name: mysql_inst_memory_usage
+  aliasName: 数据库实例内存使用率
+  labels: {}
+  supportedTargetTypes:
+    - MySQLCluster
+  description: 检测数据库实例内存使用率
+  spec:
+    unitOptional: false
+    rules:
+      - name: 数据库实例内存使用率
+        expr: (container_memory_rss/container_spec_memory_limit_bytes)*100
+        advanced:
+          last: 1
+          status: false
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: =~
+        warn:
+          errorcode: QF-104
+          message: QF-104：当前数据库实例{{ $labels.pod_name }}的内存使用率达到{{ $value | printf "%.1f"
+            }}%，处于高负荷运行状态
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '>='
+          value: 70
+          status: true
+        critical:
+          errorcode: QF-104
+          message: QF-104：当前数据库实例{{ $labels.pod_name }}的内存使用率达到{{ $value | printf "%.1f"
+            }}%，处于高负荷运行状态
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '>='
+          value: 90
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: ""
+          value: '%'
+- name: mysql_inst_cpu_usage
+  aliasName: 数据库实例CPU使用率
+  labels: {}
+  supportedTargetTypes:
+    - MySQLCluster
+  description: 检测数据库实例CPU使用率
+  spec:
+    unitOptional: false
+    rules:
+      - name: 数据库实例CPU使用率
+        expr: (rate(container_cpu_usage_seconds_total[3m]) / ignoring(cpu) (container_spec_cpu_quota
+          / 100000)) * 100
+        advanced:
+          last: 1
+          status: false
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: =~
+        warn:
+          errorcode: QF-105
+          message: QF-105：当前数据库实例{{ $labels.pod_name }}的CPU使用率达到{{ $value | printf "%.1f"
+            }}%，处于高负荷运行状态
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '>='
+          value: 70
+          status: true
+        critical:
+          errorcode: QF-105
+          message: QF-105：当前数据库实例{{ $labels.pod_name }}的CPU使用率达到{{ $value | printf "%.1f"
+            }}%，处于高负荷运行状态
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '>='
+          value: 90
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: ""
+          value: '%'
+- name: mysql_slave_status_slave_sql_running
+  aliasName: 集群从库复制状态
+  labels: {}
+  supportedTargetTypes:
+    - MySQLCluster
+  description: 检测数据库从库复制状态
+  spec:
+    unitOptional: false
+    rules:
+      - name: 集群从库复制状态
+        expr: mysql_slave_status_slave_sql_running + mysql_slave_status_slave_io_running
+        advanced:
+          last: 1
+          status: false
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: =~
+        warn:
+          errorcode: QF-107
+          message: QF-107：当前数据库从库实例{{ $labels.instance }}的主备复制状态异常
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '!='
+          value: 2
+          status: false
+        critical:
+          errorcode: QF-107
+          message: QF-107：当前数据库从库实例{{ $labels.instance }}的主备复制状态异常
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '!='
+          value: 2
+          status: false
+        severity:
+          value: critical
+          status: true
+        unit:
+          desc: ""
+          value: ""
+- name: mysql_slave_status_seconds_behind_master
+  aliasName: 集群从库延迟状态
+  labels: {}
+  supportedTargetTypes:
+    - MySQLCluster
+  description: 检测集群从库延迟状态
+  spec:
+    unitOptional: false
+    rules:
+      - name: 集群从库延迟状态
+        expr: mysql_slave_status_seconds_behind_master
+        advanced:
+          last: 1
+          status: false
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: ""
+        warn:
+          errorcode: QF-106
+          message: QF-106：当前数据库从库实例{{ $labels.instance }}的延迟超过阈值，达到{{ $value | printf
+            "%.1f" }}S
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '>'
+          value: 30
+          status: true
+        critical:
+          errorcode: QF-106
+          message: QF-106：当前数据库从库实例{{ $labels.instance }}的延迟超过阈值，达到{{ $value | printf
+            "%.1f" }}S
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '>'
+          value: 60
+          status: true
+        severity:
+          value: critical
+          status: false
+        unit:
+          desc: ""
+          value: ""
+- name: external_mysql_slave_status_slave_sql_running
+  aliasName: 集群从库复制状态
+  labels: {}
+  supportedTargetTypes:
+    - ExternalSlaveMySQLDatabase
+  description: 检测数据库从库复制状态
+  spec:
+    unitOptional: false
+    rules:
+      - name: 集群从库复制状态
+        expr: mysql_slave_status_slave_sql_running + mysql_slave_status_slave_io_running
+        advanced:
+          last: 1
+          status: false
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: =~
+        warn:
+          errorcode: QF-107
+          message: QF-107：当前数据库从库{{ $labels.database_name }}的主备复制状态异常
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '!='
+          value: 2
+          status: false
+        critical:
+          errorcode: QF-107
+          message: QF-107：当前数据库从库{{ $labels.database_name }}的主备复制状态异常
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '!='
+          value: 2
+          status: false
+        severity:
+          value: critical
+          status: true
+        unit:
+          desc: ""
+          value: ""
+- name: external_mysql_slave_status_seconds_behind_master
+  aliasName: 集群从库延迟状态
+  labels: {}
+  supportedTargetTypes:
+    - ExternalSlaveMySQLDatabase
+  description: 检测集群从库延迟状态
+  spec:
+    unitOptional: false
+    rules:
+      - name: 集群从库延迟状态
+        expr: mysql_slave_status_seconds_behind_master
+        advanced:
+          last: 1
+          status: false
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: ""
+        warn:
+          errorcode: QF-106
+          message: QF-106：当前数据库从库{{ $labels.database_name }}的延迟超过阈值，达到{{ $value | printf
+            "%.1f" }}S
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '>'
+          value: 30
+          status: true
+        critical:
+          errorcode: QF-106
+          message: QF-106：当前数据库从库{{ $labels.database_name }}的延迟超过阈值，达到{{ $value | printf
+            "%.1f" }}S
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '>'
+          value: 60
+          status: true
+        severity:
+          value: critical
+          status: false
+        unit:
+          desc: ""
+          value: ""
+- name: oracle_db_available_check
+  aliasName: 实例可用性
+  labels: {}
+  supportedTargetTypes:
+    - OracleCluster
+  description: 检查数据库可用性，数据库更新操作hang，连接报错，都会被认为数据库不可用
+  spec:
+    unitOptional: false
+    rules:
+      - name: Oracle数据库实例可用性
+        expr: oracle_db_available_check
+        advanced:
+          last: 1
+          status: false
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: ""
+        warn:
+          errorcode: QF-008
+          message: QF-008：数据库实例{{$labels.AppName}}可用性检测超时，30秒无响应，可能已无法满足服务质量要求，请立即检查数据库环境
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '!='
+          value: 1
+          status: false
+        critical:
+          errorcode: QF-008
+          message: QF-008：数据库实例{{$labels.AppName}}可用性检测超时，30秒无响应，可能已无法满足服务质量要求，请立即检查数据库环境
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '!='
+          value: 1
+          status: false
+        severity:
+          value: critical
+          status: true
+        unit:
+          desc: ""
+          value: ""
+- name: external_oracle_db_available_check
+  aliasName: 数据库可用性
+  labels: {}
+  supportedTargetTypes:
+    - ExternalOracleDatabase
+  description: 检查数据库可用性，数据库更新操作hang，连接报错，都会被认为数据库不可用
+  spec:
+    unitOptional: false
+    rules:
+      - name: Oracle数据库实例可用性
+        expr: oracle_db_available_check
+        advanced:
+          last: 1
+          status: false
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: ""
+        warn:
+          errorcode: QF-008
+          message: QF-008：数据库{{$labels.database_name}}可用性检测超时，30秒无响应，可能已无法满足服务质量要求，请立即检查数据库环境
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '!='
+          value: 1
+          status: false
+        critical:
+          errorcode: QF-008
+          message: QF-008：数据库{{$labels.database_name}}可用性检测超时，30秒无响应，可能已无法满足服务质量要求，请立即检查数据库环境
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '!='
+          value: 1
+          status: false
+        severity:
+          value: critical
+          status: true
+        unit:
+          desc: ""
+          value: ""
+- name: oracle_filesystem_avail_percent
+  aliasName: 实例空间剩余容量检测
+  labels: {}
+  supportedTargetTypes:
+    - OracleCluster
+  description: 检测数据库实例分配的数据空间剩余容量
+  spec:
+    unitOptional: false
+    rules:
+      - name: 实例空间剩余容量
+        expr: (oracle_filesystem_avail_bytes{mountpoint=~"/opt/oracle/oradata|/opt/oracle/oralog"}
+          / oracle_filesystem_size_bytes{mountpoint=~"/opt/oracle/oradata|/opt/oracle/oralog"})
+          * 100
+        advanced:
+          last: 1
+          status: false
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: =~
+        warn:
+          errorcode: QF-111
+          message: QF-111：实例当前剩余可用空间不足{{ $value | printf "%.1f" }}%，请提前进行存储扩容保证系统稳定运行
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: <=
+          value: 20
+          status: true
+        critical:
+          errorcode: QF-111
+          message: QF-111：实例当前剩余可用空间不足{{ $value | printf "%.1f" }}%，请提前进行存储扩容保证系统稳定运行
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: <=
+          value: 10
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: ""
+          value: '%'
+- name: oracle_tablespace_usage
+  aliasName: 表空间检测
+  labels: {}
+  supportedTargetTypes:
+    - OracleCluster
+    - ExternalOracleDatabase
+  description: 检查数据库表空间剩余可用容量
+  spec:
+    unitOptional: false
+    rules:
+      - name: 表空间检测
+        expr: 100-oracle_dba_tablespace_used_percent
+        advanced:
+          last: 1
+          status: false
+        match:
+          labelName: tablespacename
+          values: []
+          prompt: 请输入需要过滤的表空间的完整名称，如有多个，可以用逗号或输入回车隔开。
+          desc: 过滤的表空间名称
+          status: true
+          op: '!~'
+        warn:
+          errorcode: QF-110
+          message: QF-110：表空间{{ $labels.tablespacename }}剩余可用空间{{ $value | printf "%.1f"
+            }}%，已经小于设定阀值，请立即检查数据库环境
+          suggest: 可通过尝试为表空间添加数据文件或清除过期数据/分区的方式来解决表空间不够用的问题。如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: <=
+          value: 10
+          status: true
+        critical:
+          errorcode: QF-110
+          message: QF-110：表空间{{ $labels.tablespacename }}剩余可用空间{{ $value | printf "%.1f"
+            }}%，已经小于设定阀值，请立即检查数据库环境
+          suggest: 可通过尝试为表空间添加数据文件或清除过期数据/分区的方式来解决表空间不够用的问题。如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: <=
+          value: 5
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: ""
+          value: '%'
+- name: oracle_inst_cpu_usage
+  aliasName: 数据库实例CPU使用率
+  labels: {}
+  supportedTargetTypes:
+    - OracleCluster
+  description: 检测实例的CPU利用率负载状态
+  spec:
+    unitOptional: false
+    rules:
+      - name: Oracle实例CPU使用率
+        expr: (rate(container_cpu_usage_seconds_total[3m]) / ignoring(cpu) (container_spec_cpu_quota
+          / 100000)) * 100
+        advanced:
+          last: 1
+          status: false
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: =~
+        warn:
+          errorcode: QF-113
+          message: QF-113：当前数据库实例{{ $labels.pod_name }}的CPU使用率达到{{ $value | printf "%.1f"
+            }}%，处于高负荷运行状态
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '>='
+          value: 70
+          status: true
+        critical:
+          errorcode: QF-113
+          message: QF-105：当前数据库实例{{ $labels.pod_name }}的CPU使用率达到{{ $value | printf "%.1f"
+            }}%，处于高负荷运行状态
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '>='
+          value: 90
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: ""
+          value: '%'
+- name: oracle_inst_memory_usage
+  aliasName: 数据库实例内存使用率
+  labels: {}
+  supportedTargetTypes:
+    - OracleCluster
+  description: 检测数据库实例内存使用率
+  spec:
+    unitOptional: false
+    rules:
+      - name: Oracle数据库实例内存使用率
+        expr: (container_memory_rss/container_spec_memory_limit_bytes)*100
+        advanced:
+          last: 1
+          status: false
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: =~
+        warn:
+          errorcode: QF-112
+          message: QF-112：当前数据库实例{{ $labels.pod_name }}的内存使用率达到{{ $value | printf "%.1f"
+            }}%，处于高负荷运行状态
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '>='
+          value: 70
+          status: true
+        critical:
+          errorcode: QF-112
+          message: QF-112：当前数据库实例{{ $labels.pod_name }}的内存使用率达到{{ $value | printf "%.1f"
+            }}%，处于高负荷运行状态
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '>='
+          value: 90
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: ""
+          value: '%'
+- name: mssql_up
+  aliasName: 实例可用性
+  labels: {}
+  supportedTargetTypes:
+    - MSSQLCluster
+  description: 检测数据库实例可用性
+  spec:
+    unitOptional: false
+    rules:
+      - name: MSSQL数据库实例可用性
+        expr: mssql_up
+        advanced:
+          last: 1
+          status: false
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: ""
+        warn:
+          errorcode: QF-009
+          message: QF-009：当前数据库实例{{$labels.AppName}}异常不可用
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '!='
+          value: 1
+          status: false
+        critical:
+          errorcode: QF-009
+          message: QF-009：当前数据库实例{{$labels.AppName}}异常不可用
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '!='
+          value: 1
+          status: false
+        severity:
+          value: critical
+          status: true
+        unit:
+          desc: ""
+          value: ""
+- name: external_mssql_up
+  aliasName: 实例可用性
+  labels: {}
+  supportedTargetTypes:
+    - ExternalMSSQLDatabase
+  description: 检测数据库实例可用性
+  spec:
+    unitOptional: false
+    rules:
+      - name: MSSQL数据库实例可用性
+        expr: mssql_up
+        advanced:
+          last: 1
+          status: false
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: ""
+        warn:
+          errorcode: QF-009
+          message: QF-009：当前数据库实例{{$labels.database_name}}异常不可用
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '!='
+          value: 1
+          status: false
+        critical:
+          errorcode: QF-009
+          message: QF-009：当前数据库实例{{$labels.database_name}}异常不可用
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '!='
+          value: 1
+          status: false
+        severity:
+          value: critical
+          status: true
+        unit:
+          desc: ""
+          value: ""
+- name: mssql_filesystem_avail_percent
+  aliasName: 实例空间剩余容量检测
+  labels: {}
+  supportedTargetTypes:
+    - MSSQLCluster
+  description: 检测数据库实例分配的数据空间剩余容量
+  spec:
+    unitOptional: false
+    rules:
+      - name: MSSQL数据库实例目录空间
+        expr: (mssql_filesystem_avail_bytes{mountpoint=~"/var/opt/mssql/data/data|/var/opt/mssql/data/log"}
+          / mssql_filesystem_size_bytes{mountpoint=~"/var/opt/mssql/data/data|/var/opt/mssql/data/log"})
+          * 100
+        advanced:
+          last: 1
+          status: false
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: =~
+        warn:
+          errorcode: QF-114
+          message: QF-114：实例当前剩余可用空间不足{{ $value | printf "%.1f" }}%，请提前进行存储扩容保证系统稳定运行
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: <=
+          value: 20
+          status: true
+        critical:
+          errorcode: QF-114
+          message: QF-114：实例当前剩余可用空间不足{{ $value | printf "%.1f" }}%，请提前进行存储扩容保证系统稳定运行
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: <=
+          value: 10
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: ""
+          value: '%'
+- name: mssql_inst_cpu_usage
+  aliasName: 数据库实例CPU使用率
+  labels: {}
+  supportedTargetTypes:
+    - MSSQLCluster
+  description: 检测实例的CPU利用率负载状态
+  spec:
+    unitOptional: false
+    rules:
+      - name: MSSQL实例CPU使用率
+        expr: (rate(container_cpu_usage_seconds_total[3m]) / ignoring(cpu) (container_spec_cpu_quota
+          / 100000)) * 100
+        advanced:
+          last: 1
+          status: false
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: =~
+        warn:
+          errorcode: QF-116
+          message: QF-116：当前数据库实例{{ $labels.pod_name }}的CPU使用率达到{{ $value | printf "%.1f"
+            }}%，处于高负荷运行状态
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '>='
+          value: 70
+          status: true
+        critical:
+          errorcode: QF-116
+          message: QF-116：当前数据库实例{{ $labels.pod_name }}的CPU使用率达到{{ $value | printf "%.1f"
+            }}%，处于高负荷运行状态
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '>='
+          value: 90
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: ""
+          value: '%'
+- name: mssql_inst_memory_usage
+  aliasName: 数据库实例内存使用率
+  labels: {}
+  supportedTargetTypes:
+    - MSSQLCluster
+  description: 检测数据库实例内存使用率
+  spec:
+    unitOptional: false
+    rules:
+      - name: MSSQL数据库实例内存使用率
+        expr: (container_memory_rss/container_spec_memory_limit_bytes)*100
+        advanced:
+          last: 1
+          status: false
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: =~
+        warn:
+          errorcode: QF-115
+          message: QF-115：当前数据库实例{{ $labels.pod_name }}的内存使用率达到{{ $value | printf "%.1f"
+            }}%，处于高负荷运行状态
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '>='
+          value: 70
+          status: true
+        critical:
+          errorcode: QF-115
+          message: QF-115：当前数据库实例{{ $labels.pod_name }}的内存使用率达到{{ $value | printf "%.1f"
+            }}%，处于高负荷运行状态
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '>='
+          value: 90
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: ""
+          value: '%'

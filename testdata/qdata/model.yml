@@ -1,0 +1,3015 @@
+- name: oracle_db_max_blocks
+  aliasName: 大事务检测
+  labels:
+    alertType: cloud_instance
+    exporter: oracle
+    productType: cloud
+    type: instance
+  description: 检查数据库是否存在大事务，告警阀值的单位为undo block
+  spec:
+    unitOptional: false
+    rules:
+      - name: 大事务检测
+        expr: oracle_db_max_blocks
+        advanced:
+          last: 1
+          status: false
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: '!~'
+        warn:
+          errorcode: QC-D009
+          message: QC-D009：检测到数据库中存在大事务，消耗的undo block <span>{{ $value | printf "%.f"
+            }}</span>个，请立即检查数据库环境！
+          suggest: 大事务容易引起undo表空间不足，导致其它事务不能执行或异常情况后长时间的回退，可能会引发严重故障。如有疑问，可通过服务热线400-678-1800进行相关咨询。
+          operator: '>'
+          value: 100000
+          status: true
+        critical:
+          errorcode: QC-D009
+          message: QC-D009：检测到数据库中存在大事务，消耗的undo block <span>{{ $value | printf "%.f"
+            }}</span>个，请立即检查数据库环境！
+          suggest: 大事务容易引起undo表空间不足，导致其它事务不能执行或异常情况后长时间的回退，可能会引发严重故障。如有疑问，可通过服务热线400-678-1800进行相关咨询。
+          operator: '>'
+          value: 1000000
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: ""
+          value: ""
+  supportedTargetTypes:
+    - OracleContainerInstance
+    - NonOracleContainerInstance
+    - OraclePDBInstance
+- name: node_asm_diskgroup_capacity
+  aliasName: ASM磁盘组剩余裸容量
+  labels:
+    alertType: sanfree
+    exporter: host
+    productType: Sanfree
+    type: rac
+  description: 监控ASM磁盘组的剩余裸容量
+  spec:
+    unitOptional: true
+    rules:
+      - name: ASM磁盘组剩余裸容量-0
+        expr: node_asm_diskgroup_free_capacity_percent
+        advanced:
+          last: 0
+          status: false
+        match:
+          labelName: name
+          values: []
+          prompt: 请输入ASM磁盘组名称，如果有多个，请用逗号或输入回车隔开，如DATADG, REDODG
+          desc: 需要过滤的磁盘组
+          status: true
+          op: '!~'
+        warn:
+          errorcode: QD-R004
+          message: QD-R004：磁盘组 <span>{{ $labels.name }}</span> 的剩余裸容量百分比为 <span>{{ $value
+            }}%</span>
+          suggest: 请尝试清除数据释放空间，如果需要扩容，可通过服务热线400-678-1800进行相关咨询
+          operator: <
+          value: 30
+          status: true
+        critical:
+          errorcode: QD-R004
+          message: QD-R004：磁盘组 <span>{{ $labels.name }}</span> 的剩余裸容量百分比为 <span>{{ $value
+            }}%</span>，剩余空间严重不足！
+          suggest: 请立刻尝试清除或备份数据释放空间，如果需要扩容，可通过服务热线400-678-1800进行相关咨询
+          operator: <
+          value: 10
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: 百分比%
+          value: '%'
+      - name: ASM磁盘组剩余裸容量-1
+        expr: 1/1024*node_asm_diskgroup_capacity
+        advanced:
+          last: 0
+          status: false
+        match:
+          labelName: name
+          values: []
+          prompt: 请输入ASM磁盘组名称，如果有多个，请用逗号或输入回车隔开，如DATADG, REDODG
+          desc: 需要过滤的磁盘组
+          status: true
+          op: '!~'
+        warn:
+          errorcode: QD-R004
+          message: QD-R004：磁盘组 <span>{{ $labels.name }}</span> 的剩余裸容量为 <span>{{ $value
+            | printf "%.1f" }}GB</span>
+          suggest: 请尝试清除数据释放空间，如果需要扩容，可通过服务热线400-678-1800进行相关咨询
+          operator: <
+          value: 3
+          status: true
+        critical:
+          errorcode: QD-R004
+          message: QD-R004：磁盘组 <span>{{ $labels.name }}</span> 的剩余裸容量为 <span>{{ $value
+            | printf "%.1f" }}GB</span>，剩余空间严重不足！
+          suggest: 请立刻尝试清除或备份数据释放空间，如果需要扩容，可通过服务热线400-678-1800进行相关咨询
+          operator: <
+          value: 1
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: 容量GB
+          value: GB
+      - name: ASM磁盘组剩余裸容量-2
+        expr: node_asm_diskgroup_capacity
+        advanced:
+          last: 0
+          status: false
+        match:
+          labelName: name
+          values: []
+          prompt: 请输入ASM磁盘组名称，如果有多个，请用逗号或输入回车隔开，如DATADG, REDODG
+          desc: 需要过滤的磁盘组
+          status: true
+          op: '!~'
+        warn:
+          errorcode: QD-R004
+          message: QD-R004：磁盘组 <span>{{ $labels.name }}</span> 的剩余裸容量为 <span>{{ $value
+            }}MB</span>
+          suggest: 请尝试清除数据释放空间，如果需要扩容，可通过服务热线400-678-1800进行相关咨询
+          operator: <
+          value: 300
+          status: true
+        critical:
+          errorcode: QD-R004
+          message: QD-R004：磁盘组 <span>{{ $labels.name }}</span> 的剩余裸容量为 <span>{{ $value
+            }}MB</span>，剩余空间严重不足！
+          suggest: 请立刻尝试清除或备份数据释放空间，如果需要扩容，可通过服务热线400-678-1800进行相关咨询
+          operator: <
+          value: 100
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: 容量MB
+          value: MB
+  supportedTargetTypes:
+    - Compute
+    - Sanfree
+    - RACNode
+    - OracleSingleNode
+- name: node_asm_disk_usage
+  aliasName: ASM磁盘剩余空间
+  labels:
+    alertType: cloud_node
+    exporter: host
+    productType: cloud
+    type: rac
+  description: 监控ASM磁盘的剩余空间
+  spec:
+    unitOptional: true
+    rules:
+      - name: ASM磁盘剩余空间-0
+        expr: 100-node_asm_disk_usage
+        advanced:
+          last: 0
+          status: false
+        match:
+          labelName: name
+          values: []
+          prompt: 请输入ASM磁盘名称，如果有多个，可以用逗号或输入回车隔开，如DATADG_0001, DATADG_0002
+          desc: 需要过滤的磁盘
+          status: true
+          op: '!~'
+        warn:
+          errorcode: QC-R005
+          message: QC-R005：ASM磁盘 <span>{{ $labels.name }}</span> 的剩余空间为<span>{{ $value
+            }}%</span>
+          suggest: 请尝试清除数据释放空间，如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: <
+          value: 30
+          status: true
+        critical:
+          errorcode: QC-R005
+          message: QC-R005：ASM磁盘 <span>{{ $labels.name }}</span> 的剩余空间为<span>{{ $value
+            }}%</span>
+          suggest: 请立刻尝试清除或备份数据释放空间，如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: <
+          value: 10
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: 百分比%
+          value: '%'
+      - name: ASM磁盘剩余空间-1
+        expr: 1/1024*node_asm_disk_free_mb
+        advanced:
+          last: 0
+          status: false
+        match:
+          labelName: name
+          values: []
+          prompt: 请输入ASM磁盘名称，如果有多个，可以用逗号或输入回车隔开，如DATADG_0001, DATADG_0002
+          desc: 需要过滤的磁盘
+          status: true
+          op: '!~'
+        warn:
+          errorcode: QC-R005
+          message: QC-R005：ASM磁盘 <span>{{ $labels.name }}</span> 的剩余空间为<span>{{ $value
+            }}GB</span>
+          suggest: 请尝试清除数据释放空间，如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: <
+          value: 3
+          status: true
+        critical:
+          errorcode: QC-R005
+          message: QC-R005：ASM磁盘 <span>{{ $labels.name }}</span> 的剩余空间为<span>{{ $value
+            }}GB</span>
+          suggest: 请立刻尝试清除或备份数据释放空间，如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: <
+          value: 1
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: 容量GB
+          value: GB
+      - name: ASM磁盘剩余空间-2
+        expr: node_asm_disk_free_mb
+        advanced:
+          last: 0
+          status: false
+        match:
+          labelName: name
+          values: []
+          prompt: 请输入ASM磁盘名称，如果有多个，可以用逗号或输入回车隔开，如DATADG_0001, DATADG_0002
+          desc: 需要过滤的磁盘
+          status: true
+          op: '!~'
+        warn:
+          errorcode: QC-R005
+          message: QC-R005：ASM磁盘 <span>{{ $labels.name }}</span> 的剩余空间为<span>{{ $value
+            }}MB</span>
+          suggest: 请尝试清除数据释放空间，如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: <
+          value: 300
+          status: true
+        critical:
+          errorcode: QC-R005
+          message: QC-R005：ASM磁盘 <span>{{ $labels.name }}</span> 的剩余空间为<span>{{ $value
+            }}MB</span>
+          suggest: 请立刻尝试清除或备份数据释放空间，如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: <
+          value: 100
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: 容量MB
+          value: MB
+  supportedTargetTypes:
+    - Compute
+    - Sanfree
+    - RACNode
+    - OracleSingleNode
+- name: node_pcie_state
+  aliasName: PCIe闪存状态
+  labels:
+    alertType: Three-tier@host
+    exporter: hardware
+    productType: Three-tier
+    type: hardware
+  description: 监控PCIe闪存设备的状态是否正常
+  spec:
+    unitOptional: false
+    rules:
+      - name: PCIe闪存状态
+        expr: node_pcie_state
+        advanced:
+          last: 0
+          status: false
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: '!~'
+        warn:
+          errorcode: QD-H012
+          message: QD-H012：PCIe闪存设备 <span>{{ $labels.deviceName }}</span> 状态异常，无法读写数据
+          suggest: PCIe闪存设备可能已经损坏。如有疑问，可通过服务热线400-678-1800进行相关咨询，进行硬件更换
+          operator: '!='
+          value: 1
+          status: false
+        critical:
+          errorcode: QD-H012
+          message: QD-H012：PCIe闪存设备 <span>{{ $labels.deviceName }}</span> 状态异常，无法读写数据
+          suggest: PCIe闪存设备可能已经损坏。如有疑问，可通过服务热线400-678-1800进行相关咨询，进行硬件更换
+          operator: '!='
+          value: 1
+          status: false
+        severity:
+          value: critical
+          status: true
+        unit:
+          desc: ""
+          value: ""
+  supportedTargetTypes:
+    - Compute
+    - Storage
+    - Sanfree
+    - RACNode
+- name: node_pcie_life
+  aliasName: PCIe闪存寿命
+  labels:
+    alertType: Three-tier@host
+    exporter: hardware
+    productType: Three-tier
+    type: hardware
+  description: 监控PCIe闪存的剩余寿命
+  spec:
+    unitOptional: false
+    rules:
+      - name: PCIe闪存寿命
+        expr: node_pcie_life
+        advanced:
+          last: 0
+          status: false
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: '!~'
+        warn:
+          errorcode: QD-H014
+          message: QD-H014：PCIe闪存设备 <span>{{ $labels.deviceName }}</span> 的寿命剩余 <span>{{
+            $value }}%</span>
+          suggest: 请提前备货，如有需要，可通过服务热线400-678-1800进行相关咨询
+          operator: <
+          value: 50
+          status: true
+        critical:
+          errorcode: QD-H014
+          message: QD-H014：PCIe闪存设备 <span>{{ $labels.deviceName }}</span> 的寿命仅剩 <span>{{
+            $value }}%</span>！
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询，对PCIe闪存设备进行更换
+          operator: <
+          value: 20
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: ""
+          value: '%'
+  supportedTargetTypes:
+    - Compute
+    - Storage
+    - Sanfree
+    - RACNode
+- name: node_memory_HugePages_Free
+  aliasName: 剩余大页内存
+  labels:
+    alertType: cloud_node
+    exporter: host
+    productType: cloud
+    type: os
+  description: 监控剩余大页内存是否充足
+  spec:
+    unitOptional: false
+    rules:
+      - name: 剩余大页内存
+        expr: 2*(node_memory_HugePages_Free-node_memory_HugePages_Rsvd)
+        advanced:
+          last: 1
+          status: false
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: '!~'
+        warn:
+          errorcode: QC-S006
+          message: QC-S006：系统内存大页剩余<span>{{ $value }}MB</span>
+          suggest: 请扩容大页或降低数据库实例的SGA值大小。如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: <
+          value: 2000
+          status: true
+        critical:
+          errorcode: QC-S006
+          message: QC-S006：系统内存大页仅剩<span>{{ $value }}MB</span>
+          suggest: 请扩容大页或降低数据库实例的SGA值大小。如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: <
+          value: 1000
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: ""
+          value: ""
+  supportedTargetTypes:
+    - Compute
+    - Storage
+    - Sanfree
+    - RACNode
+    - OracleSingleNode
+- name: node_css_up
+  aliasName: CSS服务状态
+  labels:
+    alertType: cloud_node
+    exporter: host
+    productType: cloud
+    type: rac
+  description: 监控RAC集群中本地节点的CSS服务状态
+  spec:
+    unitOptional: false
+    rules:
+      - name: CSS服务状态
+        expr: node_css_up
+        advanced:
+          last: 1
+          status: false
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: '!~'
+        warn:
+          errorcode: QC-R002
+          message: QC-R002：该主机上的CSS服务异常，与CSS守护进程通信失败
+          suggest: 请尝试重启CSS服务，并监控RAC集群alert日志（通常在$GRID_HOME/log/$HOST_NAME/目录下），查看是否有异常情况发生。如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '!='
+          value: 1
+          status: false
+        critical:
+          errorcode: QC-R002
+          message: QC-R002：该主机上的CSS服务异常，与CSS守护进程通信失败
+          suggest: 请尝试重启CSS服务，并监控RAC集群alert日志（通常在$GRID_HOME/log/$HOST_NAME/目录下），查看是否有异常情况发生。如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '!='
+          value: 1
+          status: false
+        severity:
+          value: critical
+          status: true
+        unit:
+          desc: ""
+          value: ""
+  supportedTargetTypes:
+    - Compute
+    - Sanfree
+    - RACNode
+    - OracleSingleNode
+- name: redfish_system_cpu
+  aliasName: CPU状态
+  labels:
+    alertType: Three-tier@host
+    exporter: redfish
+    productType: Three-tier
+    type: hardware
+  description: 监控单个CPU的运行状态是否正常
+  spec:
+    unitOptional: false
+    rules:
+      - name: CPU状态
+        expr: redfish_system_cpu
+        advanced:
+          last: 0
+          status: false
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: '!~'
+        warn:
+          errorcode: QD-H005
+          message: 'QD-H005: <span>{{ $labels.name }}</span> 的状态出现异常'
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '!='
+          value: 1
+          status: false
+        critical:
+          errorcode: QD-H005
+          message: 'QD-H005: <span>{{ $labels.name }}</span> 的状态出现异常'
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '!='
+          value: 1
+          status: false
+        severity:
+          value: critical
+          status: true
+        unit:
+          desc: ""
+          value: ""
+  supportedTargetTypes:
+    - Compute
+    - Storage
+    - Sanfree
+    - RACNode
+- name: node_qlink_target
+  aliasName: 存储节点Target服务状态
+  labels:
+    alertType: storage
+    exporter: hardware
+    productType: Three-tier
+    type: qlink
+  description: 监控存储节点Target的服务状态
+  spec:
+    unitOptional: false
+    rules:
+      - name: 存储节点Target服务状态
+        expr: node_qlink_target
+        advanced:
+          last: 0
+          status: false
+        match:
+          labelName: name
+          values: []
+          prompt: 请输入Target的名称，如果有多个，请用逗号或输入回车隔开，如s02.3261.01
+          desc: 需要过滤的Target
+          status: true
+          op: '!~'
+        warn:
+          errorcode: QD-Q001
+          message: QD-Q001：Target <span>{{ $labels.name }}</span> 处于停止状态，无法提供存储服务
+          suggest: 建议检查对应的QLink进程状态，可尝试重启QLink进程。如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '!='
+          value: 1
+          status: false
+        critical:
+          errorcode: QD-Q001
+          message: QD-Q001：Target <span>{{ $labels.name }}</span> 处于停止状态，无法提供存储服务
+          suggest: 建议检查对应的QLink进程状态，可尝试重启QLink进程。如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '!='
+          value: 1
+          status: false
+        severity:
+          value: warn
+          status: true
+        unit:
+          desc: ""
+          value: ""
+  supportedTargetTypes:
+    - Compute
+    - Storage
+    - Sanfree
+    - RACNode
+- name: node_qlink_storage_lun
+  aliasName: 存储节点LUN的状态
+  labels:
+    alertType: storage
+    exporter: hardware
+    productType: Three-tier
+    type: qlink
+  description: 监控存储节点上每个通过Qlink输出的LUN的状态
+  spec:
+    unitOptional: false
+    rules:
+      - name: 存储节点LUN的状态
+        expr: node_qlink_storage_lun
+        advanced:
+          last: 0
+          status: false
+        match:
+          labelName: name
+          values: []
+          prompt: 请输入LUN的完整路径，如果有多个，请用逗号或输入回车隔开，如/dev/qdisk/P0B00S02
+          desc: 需要过滤的LUN
+          status: true
+          op: '!~'
+        warn:
+          errorcode: QD-Q002
+          message: QD-Q002：LUN <span>{{ $labels.name }}</span> 不可用
+          suggest: 请先检查其对应的物理磁盘状态是否正常。如果确认磁盘没有任何问题，可通过服务热线400-678-1800进行相关咨询
+          operator: '!='
+          value: 1
+          status: false
+        critical:
+          errorcode: QD-Q002
+          message: QD-Q002：LUN <span>{{ $labels.name }}</span> 不可用
+          suggest: 请先检查其对应的物理磁盘状态是否正常。如果确认磁盘没有任何问题，可通过服务热线400-678-1800进行相关咨询
+          operator: '!='
+          value: 1
+          status: false
+        severity:
+          value: warn
+          status: true
+        unit:
+          desc: ""
+          value: ""
+  supportedTargetTypes:
+    - Compute
+    - Storage
+    - Sanfree
+    - RACNode
+- name: node_filesystem_size_mb
+  aliasName: 目录空间剩余容量
+  labels:
+    alertType: Sanfree@host
+    exporter: host
+    productType: Sanfree
+    type: os
+  description: 监控文件系统挂载点目录的剩余空间，在空间耗尽之前及时告警
+  spec:
+    unitOptional: true
+    rules:
+      - name: 目录空间剩余容量-0
+        expr: 100*node_filesystem_free/node_filesystem_size
+        advanced:
+          last: 0
+          status: false
+        match:
+          labelName: mountpoint
+          values: []
+          prompt: 请输入挂载点目录的完整路径，如果有多个，请用逗号或输入回车隔开，如/root, /home, /opt
+          desc: 需要过滤的目录
+          status: true
+          op: '!~'
+        warn:
+          errorcode: QD-S007
+          message: QD-S007：文件系统挂载点目录 <span>{{ $labels.mountpoint }}</span> 的剩余空间百分比为
+            <span>{{ $value | printf "%.1f" }}%</span>
+          suggest: 请尝试删除一些不必要的文件释放空间，或者增加其空间
+          operator: <
+          value: 30
+          status: true
+        critical:
+          errorcode: QD-S007
+          message: QD-S007：文件系统挂载点目录 <span>{{ $labels.mountpoint }}</span> 的剩余空间百分比仅剩
+            <span>{{ $value | printf "%.1f" }}%</span>！某些重要的目录空间不足可能导致严重的问题
+          suggest: 请尝试删除一些不必要的文件释放空间，或者增加其空间
+          operator: <
+          value: 10
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: 百分比%
+          value: '%'
+      - name: 目录空间剩余容量-1
+        expr: 1/1024/1024/1024*node_filesystem_avail
+        advanced:
+          last: 0
+          status: false
+        match:
+          labelName: mountpoint
+          values: []
+          prompt: 请输入挂载点目录的完整路径，如果有多个，请用逗号或输入回车隔开，如/root, /home, /opt
+          desc: 需要过滤的目录
+          status: true
+          op: '!~'
+        warn:
+          errorcode: QD-S007
+          message: QD-S007：文件系统挂载点目录 <span>{{ $labels.mountpoint }}</span> 的剩余空间容量为
+            <span>{{ $value | printf "%.1f" }}GB</span>
+          suggest: 请尝试删除一些不必要的文件释放空间，或者增加其空间
+          operator: <
+          value: 3
+          status: true
+        critical:
+          errorcode: QD-S007
+          message: QD-S007：文件系统挂载点目录 <span>{{ $labels.mountpoint }}</span> 的剩余空间容量仅剩
+            <span>{{ $value | printf "%.1f" }}GB</span>！某些重要的目录空间不足可能导致严重的问题
+          suggest: 请尝试删除一些不必要的文件释放空间，或者增加其空间
+          operator: <
+          value: 1
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: 容量GB
+          value: GB
+      - name: 目录空间剩余容量-2
+        expr: 1/1024/1024*node_filesystem_avail
+        advanced:
+          last: 0
+          status: false
+        match:
+          labelName: mountpoint
+          values: []
+          prompt: 请输入挂载点目录的完整路径，如果有多个，请用逗号或输入回车隔开，如/root, /home, /opt
+          desc: 需要过滤的目录
+          status: true
+          op: '!~'
+        warn:
+          errorcode: QD-S007
+          message: QD-S007：文件系统挂载点目录 <span>{{ $labels.mountpoint }}</span> 的剩余空间容量为
+            <span>{{ $value }}MB</span>
+          suggest: 请尝试删除一些不必要的文件释放空间，或者增加其空间
+          operator: <
+          value: 300
+          status: true
+        critical:
+          errorcode: QD-S007
+          message: QD-S007：文件系统挂载点目录 <span>{{ $labels.mountpoint }}</span> 的剩余空间容量仅剩
+            <span>{{ $value }}MB</span>！某些重要的目录空间不足可能导致严重的问题
+          suggest: 请尝试删除一些不必要的文件释放空间，或者增加其空间
+          operator: <
+          value: 100
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: 容量MB
+          value: MB
+  supportedTargetTypes:
+    - Compute
+    - Storage
+    - Sanfree
+    - RACNode
+    - OracleSingleNode
+- name: oracle_db_file_sequential_read_time_waited
+  aliasName: IO读取时间超时
+  labels:
+    alertType: cloud_instance
+    exporter: oracle
+    productType: cloud
+    type: instance
+  description: 检查数据库IO读取时间是否严重超时，通过检查db file sequential read等待事件的时间来检测每次IO读取的时间。
+  spec:
+    unitOptional: false
+    rules:
+      - name: IO读取时间超时
+        expr: delta(oracle_db_file_sequential_read_time_waited[90s])/delta(oracle_db_file_sequential_read_total_waits[90s])
+        advanced:
+          last: 1
+          status: true
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: '!~'
+        warn:
+          errorcode: QC-D006
+          message: QC-D006：数据库IO响应缓慢，达到每次读取<span>{{ $value | printf "%.1f" }}</span>ms，请立即检查数据库环境，确认是否存在异常！
+          suggest: IO响应过慢可能是磁盘的IOPS过高导致磁盘IO队列较深，或者底层磁盘的IO性能较差，SSD环境下，数据库的IO在1ms左右，HDD环境下，数据库的IO一般在3-10ms左右。如有疑问，可通过服务热线400-678-1800进行相关咨询。
+          operator: '>'
+          value: 3
+          status: true
+        critical:
+          errorcode: QC-D006
+          message: QC-D006：数据库IO响应缓慢，达到每次读取<span>{{ $value | printf "%.1f" }}</span>ms，请立即检查数据库环境，确认是否存在异常！
+          suggest: IO响应过慢可能是磁盘的IOPS过高导致磁盘IO队列较深，或者底层磁盘的IO性能较差，SSD环境下，数据库的IO在1ms左右，HDD环境下，数据库的IO一般在3-10ms左右。如有疑问，可通过服务热线400-678-1800进行相关咨询。
+          operator: '>'
+          value: 12
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: ""
+          value: ""
+  supportedTargetTypes:
+    - OracleContainerInstance
+    - NonOracleContainerInstance
+    - OraclePDBInstance
+- name: oracle_mrp0
+  aliasName: 备库日志恢复开启状态
+  labels:
+    alertType: cloud_instance
+    exporter: oracle
+    productType: cloud
+    type: instance
+  description: 监控备库日志恢复开启状态
+  spec:
+    unitOptional: false
+    rules:
+      - name: 备库日志恢复开启状态
+        expr: oracle_mrp0{job='Oracle', conid='0'}
+        advanced:
+          last: 20
+          status: false
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: '!~'
+        warn:
+          errorcode: QC-D014
+          message: 'QC-D014: 数据库未能找到MRP0进程，日志恢复可能未开启'
+          suggest: 请检查备库日志恢复是否开启！如有疑问，可通过服务热线400-678-1800进行相关咨询。
+          operator: '!='
+          value: 1
+          status: false
+        critical:
+          errorcode: QC-D014
+          message: 'QC-D014: 数据库未能找到MRP0进程，日志恢复可能未开启'
+          suggest: 请检查备库日志恢复是否开启！如有疑问，可通过服务热线400-678-1800进行相关咨询。
+          operator: '!='
+          value: 1
+          status: false
+        severity:
+          value: critical
+          status: true
+        unit:
+          desc: ""
+          value: ""
+  supportedTargetTypes:
+    - OracleContainerInstance
+    - NonOracleContainerInstance
+    - OraclePDBInstance
+- name: oracle_db_max_duration
+  aliasName: 长事务检测
+  labels:
+    alertType: cloud_instance
+    exporter: oracle
+    productType: cloud
+    type: instance
+  description: 检查数据库是否存在长事务，告警阀值的单位为s（秒）
+  spec:
+    unitOptional: false
+    rules:
+      - name: 长事务检测
+        expr: oracle_db_max_duration
+        advanced:
+          last: 1
+          status: false
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: '!~'
+        warn:
+          errorcode: QC-D010
+          message: QC-D010：数据库中存在长事务，运行时间超过了<span>{{ $value }}秒</span>
+          suggest: 请检查存在的长事务是否正常。如有疑问，可通过服务热线400-678-1800进行相关咨询。
+          operator: '>'
+          value: 3600
+          status: true
+        critical:
+          errorcode: QC-D010
+          message: QC-D010：数据库中存在长事务，运行时间超过了<span>{{ $value }}秒</span>
+          suggest: 请检查存在的长事务是否正常。如有疑问，可通过服务热线400-678-1800进行相关咨询。
+          operator: '>'
+          value: 86400
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: ""
+          value: ""
+  supportedTargetTypes:
+    - OracleContainerInstance
+    - NonOracleContainerInstance
+    - OraclePDBInstance
+- name: node_ib_port_status
+  aliasName: IB端口逻辑状态
+  labels:
+    alertType: Three-tier@host
+    exporter: hardware
+    productType: Three-tier
+    type: os
+  description: '监控IB端口的逻辑状态是否正常 '
+  spec:
+    unitOptional: false
+    rules:
+      - name: IB端口逻辑状态
+        expr: node_ib_port_status
+        advanced:
+          last: 0
+          status: false
+        match:
+          labelName: ib_card_name,port
+          values: []
+          prompt: 请输入IB卡和端口名称，格式为 IB_CARD_NAME:PORT，如果有多个，请用逗号或输入回车隔开，如mlx4_0:Port1,
+            mlx4_1:Port2
+          desc: 需要过滤的端口
+          status: true
+          op: '!~'
+        warn:
+          errorcode: QD-S005
+          message: QD-S005：IB卡 <span>{{ $labels.ib_card_name }}</span> 的端口 <span>{{
+            $labels.port }}</span> 的逻辑状态异常，该IB链路无法正常工作
+          suggest: 可尝试检查IB线缆，如果无法恢复，可通过服务热线400-678-1800进行相关咨询
+          operator: '!='
+          value: 1
+          status: false
+        critical:
+          errorcode: QD-S005
+          message: QD-S005：IB卡 <span>{{ $labels.ib_card_name }}</span> 的端口 <span>{{
+            $labels.port }}</span> 的逻辑状态异常，该IB链路无法正常工作
+          suggest: 可尝试检查IB线缆，如果无法恢复，可通过服务热线400-678-1800进行相关咨询
+          operator: '!='
+          value: 1
+          status: false
+        severity:
+          value: warn
+          status: true
+        unit:
+          desc: ""
+          value: ""
+  supportedTargetTypes:
+    - Compute
+    - Storage
+    - Sanfree
+    - RACNode
+    - OracleSingleNode
+- name: node_crs_up
+  aliasName: CRS服务状态
+  labels:
+    alertType: cloud_node
+    exporter: host
+    productType: cloud
+    type: rac
+  description: 监控RAC集群中本地节点的CRS服务状态
+  spec:
+    unitOptional: false
+    rules:
+      - name: CRS服务状态
+        expr: node_crs_up
+        advanced:
+          last: 1
+          status: false
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: '!~'
+        warn:
+          errorcode: QC-R001
+          message: QC-R001：该主机上的CRS服务异常，无法与CRS通信
+          suggest: 请尝试重启CRS服务，并监控RAC集群alert日志（通常在$GRID_HOME/log/$HOST_NAME/目录下），查看是否有异常情况发生。如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '!='
+          value: 1
+          status: false
+        critical:
+          errorcode: QC-R001
+          message: QC-R001：该主机上的CRS服务异常，无法与CRS通信
+          suggest: 请尝试重启CRS服务，并监控RAC集群alert日志（通常在$GRID_HOME/log/$HOST_NAME/目录下），查看是否有异常情况发生。如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '!='
+          value: 1
+          status: false
+        severity:
+          value: critical
+          status: true
+        unit:
+          desc: ""
+          value: ""
+  supportedTargetTypes:
+    - Compute
+    - Sanfree
+    - RACNode
+    - OracleSingleNode
+- name: ib_switch_up
+  aliasName: IB交换机状态
+  labels:
+    alertType: ib_switch
+    exporter: snmp
+    productType: Three-tier
+    type: ib_switch
+  description: 监控InfiniBand交换机是否发生宕机
+  spec:
+    unitOptional: false
+    rules:
+      - name: IB交换机状态
+        expr: up{job='Snmp'}
+        advanced:
+          last: 0
+          status: false
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: '!~'
+        warn:
+          errorcode: QD-I001
+          message: QD-I001：InfiniBand交换机 <span>{{ $labels.ip}}</span> 发生宕机！
+          suggest: 请检查IB交换机的电源是否正常，如需技术支持，可通过服务热线400-678-1800进行相关咨询
+          operator: ==
+          value: 0
+          status: false
+        critical:
+          errorcode: QD-I001
+          message: QD-I001：InfiniBand交换机 <span>{{ $labels.ip}}</span> 发生宕机！
+          suggest: 请检查IB交换机的电源是否正常，如需技术支持，如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: ==
+          value: 0
+          status: false
+        severity:
+          value: warn
+          status: true
+        unit:
+          desc: ""
+          value: ""
+  supportedTargetTypes:
+    - IBSwitch
+- name: node_asm_diskgroup_free_capacity_percent
+  aliasName: ASM磁盘组剩余裸容量
+  labels:
+    alertType: cloud_node
+    exporter: host
+    productType: cloud
+    type: rac
+  description: 监控ASM磁盘组的剩余裸容量
+  spec:
+    unitOptional: true
+    rules:
+      - name: ASM磁盘组剩余裸容量-0
+        expr: 1/1024*node_asm_diskgroup_capacity
+        advanced:
+          last: 0
+          status: false
+        match:
+          labelName: name
+          values: []
+          prompt: 请输入ASM磁盘组名称，如果有多个，可以用逗号或输入回车隔开，如DATADG, REDODG
+          desc: 需要过滤的磁盘组
+          status: true
+          op: '!~'
+        warn:
+          errorcode: QC-R004
+          message: QC-R004：磁盘组<span>{{ $labels.name }}</span>的剩余裸容量为<span>{{ $value
+            | printf "%.1f" }}GB</span>
+          suggest: 请尝试清除数据释放空间，如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: <
+          value: 3
+          status: true
+        critical:
+          errorcode: QC-R004
+          message: QC-R004：磁盘组<span>{{ $labels.name }}</span>的剩余裸容量为<span>{{ $value
+            | printf "%.1f" }}GB</span>，剩余空间严重不足！
+          suggest: 请立刻尝试清除或备份数据释放空间，如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: <
+          value: 1
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: 容量GB
+          value: GB
+      - name: ASM磁盘组剩余裸容量-1
+        expr: node_asm_diskgroup_capacity
+        advanced:
+          last: 0
+          status: false
+        match:
+          labelName: name
+          values: []
+          prompt: 请输入ASM磁盘组名称，如果有多个，可以用逗号或输入回车隔开，如DATADG, REDODG
+          desc: 需要过滤的磁盘组
+          status: true
+          op: '!~'
+        warn:
+          errorcode: QC-R004
+          message: QC-R004：磁盘组<span>{{ $labels.name }}</span>的剩余裸容量为<span>{{ $value
+            }}MB</span>
+          suggest: 请尝试清除数据释放空间，如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: <
+          value: 300
+          status: true
+        critical:
+          errorcode: QC-R004
+          message: QC-R004：磁盘组<span>{{ $labels.name }}</span>的剩余裸容量为<span>{{ $value
+            }}MB</span>，剩余空间严重不足！
+          suggest: 请立刻尝试清除或备份数据释放空间，如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: <
+          value: 100
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: 容量MB
+          value: MB
+      - name: ASM磁盘组剩余裸容量-2
+        expr: node_asm_diskgroup_free_capacity_percent
+        advanced:
+          last: 0
+          status: false
+        match:
+          labelName: name
+          values: []
+          prompt: 请输入ASM磁盘组名称，如果有多个，可以用逗号或输入回车隔开，如DATADG, REDODG
+          desc: 需要过滤的磁盘组
+          status: true
+          op: '!~'
+        warn:
+          errorcode: QC-R004
+          message: QC-R004：磁盘组<span>{{ $labels.name }}</span>的剩余裸容量百分比为<span>{{ $value
+            }}%</span>
+          suggest: 请尝试清除数据释放空间，如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: <
+          value: 30
+          status: true
+        critical:
+          errorcode: QC-R004
+          message: QC-R004：磁盘组<span>{{ $labels.name }}</span>的剩余裸容量百分比为<span>{{ $value
+            }}%</span>，剩余空间严重不足！
+          suggest: 请立刻尝试清除或备份数据释放空间，如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: <
+          value: 10
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: 百分比%
+          value: '%'
+  supportedTargetTypes:
+    - Compute
+    - Sanfree
+    - RACNode
+    - OracleSingleNode
+- name: oracle_dba_tablespace_used_percent
+  aliasName: 表空间检测
+  labels:
+    alertType: cloud_instance
+    exporter: oracle
+    productType: cloud
+    type: instance
+  description: 检查数据库表空间剩余可用空间。强烈推荐设置。
+  spec:
+    unitOptional: true
+    rules:
+      - name: 表空间检测-0
+        expr: 100-oracle_dba_tablespace_used_percent
+        advanced:
+          last: 0
+          status: false
+        match:
+          labelName: tablespacename
+          values: []
+          prompt: 请输入需要过滤的表空间的完整名称，如有多个，可以用逗号或输入回车隔开。
+          desc: 需要过滤的空间
+          status: true
+          op: '!~'
+        warn:
+          errorcode: QC-D003
+          message: QC-D003：表空间<span>{{ $labels.tablespacename }}</span>剩余可用空间<span>{{
+            $value | printf "%.1f" }}%</span>,已经小于设定阀值，请立即检查数据库环境！
+          suggest: 可通过尝试为表空间添加数据文件或清除过期数据/分区的方式来解决表空间不够用的问题。如有疑问，可通过服务热线400-678-1800进行相关咨询。
+          operator: <
+          value: 10
+          status: true
+        critical:
+          errorcode: QC-D003
+          message: QC-D003：表空间<span>{{ $labels.tablespacename }}</span>剩余可用空间<span>{{
+            $value | printf "%.1f" }}%</span>,已经小于设定阀值，请立即检查数据库环境！
+          suggest: 可通过尝试为表空间添加数据文件或清除过期数据/分区的方式来解决表空间不够用的问题。如有疑问，可通过服务热线400-678-1800进行相关咨询。
+          operator: <
+          value: 5
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: 百分比%
+          value: '%'
+      - name: 表空间检测-1
+        expr: 1/1024/1024/1024*oracle_dba_tablespace_free_size
+        advanced:
+          last: 0
+          status: false
+        match:
+          labelName: tablespacename
+          values: []
+          prompt: 请输入需要过滤的表空间的完整名称，如有多个，可以用逗号或输入回车隔开。
+          desc: 需要过滤的空间
+          status: true
+          op: '!~'
+        warn:
+          errorcode: QC-D003
+          message: QC-D003：表空间<span>{{ $labels.tablespacename }}</span>剩余可用空间<span>{{
+            $value | printf "%.1f" }}</span>G,已经小于设定阀值，请立即检查数据库环境！
+          suggest: 可通过尝试为表空间添加数据文件或清除过期数据/分区的方式来解决表空间不够用的问题。如有疑问，可通过服务热线400-678-1800进行相关咨询。
+          operator: <
+          value: 20
+          status: true
+        critical:
+          errorcode: QC-D003
+          message: QC-D003：表空间<span>{{ $labels.tablespacename }}</span>剩余可用空间<span>{{
+            $value | printf "%.1f" }}</span>G,已经小于设定阀值，请立即检查数据库环境！
+          suggest: 可通过尝试为表空间添加数据文件或清除过期数据/分区的方式来解决表空间不够用的问题。如有疑问，可通过服务热线400-678-1800进行相关咨询。
+          operator: <
+          value: 10
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: 容量GB
+          value: GB
+  supportedTargetTypes:
+    - OracleContainerInstance
+    - NonOracleContainerInstance
+    - OraclePDBInstance
+- name: node_raid_battery
+  aliasName: RAID控制器电池状态
+  labels:
+    alertType: Three-tier@host
+    exporter: hardware
+    productType: Three-tier
+    type: hardware
+  description: 监控RAID控制器的电池状态
+  spec:
+    unitOptional: false
+    rules:
+      - name: RAID控制器电池状态
+        expr: node_raid_battery
+        advanced:
+          last: 0
+          status: false
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: '!~'
+        warn:
+          errorcode: QD-H007
+          message: 'QD-H007：RAID控制器Adapter #<span>{{ $labels.raid_controller }}</span>
+          的电池状态异常，如果服务器异常断电，RAID控制器缓存中的数据可能会丢失！'
+          suggest: 请将该主机正常关机，如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: ==
+          value: 2
+          status: false
+        critical:
+          errorcode: QD-H007
+          message: 'QD-H007：RAID控制器Adapter #<span>{{ $labels.raid_controller }}</span>
+          的电池状态异常，如果服务器异常断电，RAID控制器缓存中的数据可能会丢失！'
+          suggest: 请将该主机正常关机，如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: ==
+          value: 0
+          status: false
+        severity:
+          value: critical
+          status: true
+        unit:
+          desc: ""
+          value: ""
+  supportedTargetTypes:
+    - Compute
+    - Storage
+    - Sanfree
+    - RACNode
+- name: node_disk_life
+  aliasName: SSD寿命
+  labels:
+    alertType: Three-tier@host
+    exporter: hardware
+    productType: Three-tier
+    type: hardware
+  description: 监控SSD的剩余寿命
+  spec:
+    unitOptional: false
+    rules:
+      - name: SSD寿命
+        expr: node_disk_life
+        advanced:
+          last: 0
+          status: false
+        match:
+          labelName: slot
+          values: []
+          prompt: 请输入磁盘的盘符，如果有多个，请用逗号或输入回车隔开，如P0B00S01, P0B00S02
+          desc: 需要过滤的SSD
+          status: true
+          op: '!~'
+        warn:
+          errorcode: QD-H010
+          message: QD-H010 固态硬盘 <span>{{ $labels.slot }}</span> 的剩余寿命剩余 <span>{{ $value
+            }}%</span>
+          suggest: 请提前备货，如有需要，可通过服务热线400-678-1800进行相关咨询
+          operator: <
+          value: 50
+          status: true
+        critical:
+          errorcode: QD-H010
+          message: QD-H010 固态硬盘 <span>{{ $labels.slot }}</span> 的剩余寿命仅剩 <span>{{ $value
+            }}%</span>
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询，对SSD进行更换
+          operator: <
+          value: 20
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: ""
+          value: '%'
+  supportedTargetTypes:
+    - Compute
+    - Storage
+    - Sanfree
+    - RACNode
+- name: node_disk_predicative_failure
+  aliasName: 磁盘潜在故障
+  labels:
+    alertType: Three-tier@host
+    exporter: hardware
+    productType: Three-tier
+    type: hardware
+  description: 监控磁盘的潜在故障，在磁盘彻底损坏前提前预警
+  spec:
+    unitOptional: false
+    rules:
+      - name: 磁盘潜在故障
+        expr: node_disk_predicative_failure
+        advanced:
+          last: 0
+          status: false
+        match:
+          labelName: deviceName
+          values: []
+          prompt: 请输入磁盘的盘符，如果有多个，请用逗号或输入回车隔开，如P0B00S01, P0B00S02
+          desc: 需要过滤的磁盘
+          status: true
+          op: '!~'
+        warn:
+          errorcode: QD-H011
+          message: QD-H011：磁盘 <span>{{ $labels.deviceName }}</span> 已发生 <span>{{ $value
+            }}</span> 次可预测的失败，有潜在故障风险
+          suggest: 可通过服务热线400-678-1800进行相关咨询，更换磁盘
+          operator: '>'
+          value: 0
+          status: false
+        critical:
+          errorcode: QD-H011
+          message: QD-H011：磁盘 <span>{{ $labels.deviceName }}</span> 已发生 <span>{{ $value
+            }}</span> 次可预测的失败，有潜在故障风险
+          suggest: 可通过服务热线400-678-1800进行相关咨询，更换磁盘
+          operator: '>'
+          value: 0
+          status: false
+        severity:
+          value: warn
+          status: true
+        unit:
+          desc: ""
+          value: ""
+  supportedTargetTypes:
+    - Compute
+    - Storage
+    - Sanfree
+    - RACNode
+- name: node_udp_packet_receive_errors
+  aliasName: 接收失败的UDP数据包数量
+  labels:
+    alertType: cloud_node
+    exporter: host
+    productType: cloud
+    type: os
+  description: 监控接收失败的UDP数据包数量
+  spec:
+    unitOptional: false
+    rules:
+      - name: 接收失败的UDP数据包数量
+        expr: delta(node_udp_packet_receive_errors[3m])
+        advanced:
+          last: 5
+          status: true
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: '!~'
+        warn:
+          errorcode: QC-S008
+          message: QC-S008：系统在过去5分钟内接收失败的UDP数据包数量达到<span>{{ $value | printf "%.f" }}</span>
+          suggest: 该值过大可能会影响RAC之间的心跳，如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '>'
+          value: 1000
+          status: false
+        critical:
+          errorcode: QC-S008
+          message: QC-S008：系统在过去5分钟内接收失败的UDP数据包数量达到<span>{{ $value | printf "%.f" }}</span>
+          suggest: 该值过大可能会影响RAC之间的心跳，如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '>'
+          value: 1000
+          status: false
+        severity:
+          value: critical
+          status: true
+        unit:
+          desc: ""
+          value: ""
+  supportedTargetTypes:
+    - Compute
+    - Storage
+    - Sanfree
+    - RACNode
+    - OracleSingleNode
+- name: node_qlink_lun_disk
+  aliasName: 计算节点LUN的链路状态
+  labels:
+    alertType: compute
+    exporter: hardware
+    productType: Three-tier
+    type: qlink
+  description: 监控计算节点上每个LUN的链路状态
+  spec:
+    unitOptional: false
+    rules:
+      - name: 计算节点LUN的链路状态
+        expr: node_qlink_lun_disk
+        advanced:
+          last: 1
+          status: false
+        match:
+          labelName: lun,ibip
+          values: []
+          prompt: 请输入LUN的完整路径和IB链路IP，格式为 LUN_PATH:IB_IP，如果有多个，请用逗号或输入回车隔开，如/dev/qdata/mpath-1s02.3262.01.P3B00S12:172.16.128.3
+          desc: 需要过滤的LUN的链路
+          status: true
+          op: '!~'
+        warn:
+          errorcode: QD-Q003
+          message: QD-Q003：LUN <span>{{ $labels.lun }}</span> 的链路 <span>{{ $labels.ibip
+            }}</span> 状态异常，LUN的冗余失效
+          suggest: 请检查对应的IB链路是否正常，如果链路正常，可以尝试通过qdatamgr重新加载这条链路。如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '!='
+          value: 1
+          status: false
+        critical:
+          errorcode: QD-Q003
+          message: QD-Q003：LUN <span>{{ $labels.lun}}</span> 的链路 <span>{{ $labels.ibip
+            }}</span> 状态异常，LUN的冗余失效
+          suggest: 请检查对应的IB链路是否正常，如果链路正常，可以尝试通过qdatamgr重新加载这条链路。如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '!='
+          value: 1
+          status: false
+        severity:
+          value: warn
+          status: true
+        unit:
+          desc: ""
+          value: ""
+  supportedTargetTypes:
+    - Compute
+    - Storage
+    - Sanfree
+    - RACNode
+- name: node_asm_disk_free_gb
+  aliasName: ASM磁盘组剩余裸容量
+  labels:
+    alertType: compute
+    exporter: host
+    productType: Three-tier
+    type: rac
+  description: 监控ASM磁盘组的剩余裸容量
+  spec:
+    unitOptional: true
+    rules:
+      - name: ASM磁盘组剩余裸容量-0
+        expr: node_asm_diskgroup_free_capacity_percent
+        advanced:
+          last: 0
+          status: false
+        match:
+          labelName: name
+          values: []
+          prompt: 请输入ASM磁盘组名称，如果有多个，请用逗号或输入回车隔开，如DATADG, REDODG
+          desc: 需要过滤的磁盘组
+          status: true
+          op: '!~'
+        warn:
+          errorcode: QD-R004
+          message: QD-R004：磁盘组 <span>{{ $labels.name }}</span> 的剩余裸容量百分比为 <span>{{ $value
+            }}%</span>
+          suggest: 请尝试清除数据释放空间，如果需要扩容，可通过服务热线400-678-1800进行相关咨询
+          operator: <
+          value: 30
+          status: true
+        critical:
+          errorcode: QD-R004
+          message: QD-R004：磁盘组 <span>{{ $labels.name }}</span> 的剩余裸容量百分比为 <span>{{ $value
+            }}%</span>，剩余空间严重不足！
+          suggest: 请立刻尝试清除或备份数据释放空间，如果需要扩容，可通过服务热线400-678-1800进行相关咨询
+          operator: <
+          value: 10
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: 百分比%
+          value: '%'
+      - name: ASM磁盘组剩余裸容量-1
+        expr: 1/1024*node_asm_diskgroup_capacity
+        advanced:
+          last: 0
+          status: false
+        match:
+          labelName: name
+          values: []
+          prompt: 请输入ASM磁盘组名称，如果有多个，请用逗号或输入回车隔开，如DATADG, REDODG
+          desc: 需要过滤的磁盘组
+          status: true
+          op: '!~'
+        warn:
+          errorcode: QD-R004
+          message: QD-R004：磁盘组 <span>{{ $labels.name }}</span> 的剩余裸容量为 <span>{{ $value
+            | printf "%.1f" }}GB</span>
+          suggest: 请尝试清除数据释放空间，如果需要扩容，可通过服务热线400-678-1800进行相关咨询
+          operator: <
+          value: 3
+          status: true
+        critical:
+          errorcode: QD-R004
+          message: QD-R004：磁盘组 <span>{{ $labels.name }}</span> 的剩余裸容量为 <span>{{ $value
+            | printf "%.1f" }}GB</span>，剩余空间严重不足！
+          suggest: 请立刻尝试清除或备份数据释放空间，如果需要扩容，可通过服务热线400-678-1800进行相关咨询
+          operator: <
+          value: 1
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: 容量GB
+          value: GB
+      - name: ASM磁盘组剩余裸容量-2
+        expr: node_asm_diskgroup_capacity
+        advanced:
+          last: 0
+          status: false
+        match:
+          labelName: name
+          values: []
+          prompt: 请输入ASM磁盘组名称，如果有多个，请用逗号或输入回车隔开，如DATADG, REDODG
+          desc: 需要过滤的磁盘组
+          status: true
+          op: '!~'
+        warn:
+          errorcode: QD-R004
+          message: QD-R004：磁盘组 <span>{{ $labels.name }}</span> 的剩余裸容量为 <span>{{ $value
+            }}MB</span>
+          suggest: 请尝试清除数据释放空间，如果需要扩容，可通过服务热线400-678-1800进行相关咨询
+          operator: <
+          value: 300
+          status: true
+        critical:
+          errorcode: QD-R004
+          message: QD-R004：磁盘组 <span>{{ $labels.name }}</span> 的剩余裸容量为 <span>{{ $value
+            }}MB</span>，剩余空间严重不足！
+          suggest: 请立刻尝试清除或备份数据释放空间，如果需要扩容，可通过服务热线400-678-1800进行相关咨询
+          operator: <
+          value: 100
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: 容量MB
+          value: MB
+  supportedTargetTypes:
+    - Compute
+    - Sanfree
+    - RACNode
+    - OracleSingleNode
+- name: oracle_log_file_parallel_write_time_waited
+  aliasName: 日志IO响应时间超时
+  labels:
+    alertType: cloud_instance
+    exporter: oracle
+    productType: cloud
+    type: instance
+  description: 检查数据库日志IO响应时间是否超时，通过检查log file parallel write等待事件的时间来检测每次日志IO写入的时间。
+  spec:
+    unitOptional: false
+    rules:
+      - name: 日志IO响应时间超时
+        expr: delta(oracle_log_file_parallel_write_time_waited[90s])/delta(oracle_log_file_parallel_write_total_waits[90s])
+        advanced:
+          last: 1
+          status: true
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: '!~'
+        warn:
+          errorcode: QC-D005
+          message: QC-D005：数据库日志IO响应缓慢，达到每次写入<span>{{ $value | printf "%.1f" }}</span>ms，正常范围为1-3ms，请立即检查数据库环境，确认是否存在异常！
+          suggest: 日志IO响应时间超时可能是日志量写入过大、服务器raid卡cache性能不足、内存swap、或者计算节点负载过高等情况导致，建议把数据库的重做日志放在带有raid卡cache的存储之上，正常范围为1-3ms。如有疑问，可通过服务热线400-678-1800进行相关咨询。
+          operator: '>'
+          value: 3
+          status: true
+        critical:
+          errorcode: QC-D005
+          message: QC-D005：数据库日志IO响应缓慢，达到每次写入<span>{{ $value | printf "%.1f" }}</span>ms，正常范围为1-3ms，请立即检查数据库环境，确认是否存在异常！
+          suggest: 日志IO响应时间超时可能是日志量写入过大、服务器raid卡cache性能不足、内存swap、或者计算节点负载过高等情况导致，建议把数据库的重做日志放在带有raid卡cache的存储之上，正常范围为1-3ms。如有疑问，可通过服务热线400-678-1800进行相关咨询。
+          operator: '>'
+          value: 12
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: ""
+          value: ""
+  supportedTargetTypes:
+    - OracleContainerInstance
+    - NonOracleContainerInstance
+    - OraclePDBInstance
+- name: node_qlink_compute_lun
+  aliasName: 计算节点LUN的状态
+  labels:
+    alertType: compute
+    exporter: hardware
+    productType: Three-tier
+    type: qlink
+  description: 监控计算节点上每个LUN的状态
+  spec:
+    unitOptional: false
+    rules:
+      - name: 计算节点LUN的状态
+        expr: node_qlink_compute_lun
+        advanced:
+          last: 0
+          status: false
+        match:
+          labelName: name
+          values: []
+          prompt: 请输入LUN的完整路径，如果有多个，请用逗号或输入回车隔开，如/dev/qdata/mpath-1s02.3262.01.P3B00S12
+          desc: 需要过滤的LUN
+          status: true
+          op: '!~'
+        warn:
+          errorcode: QD-Q004
+          message: QD-Q004：LUN <span>{{ $labels.name }}</span> 不可用
+          suggest: 请先检查这个LUN在其对应的存储节点上的状态。如果没有问题，可以尝试用qdatamgr来重新加载这个LUN。如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '!='
+          value: 1
+          status: false
+        critical:
+          errorcode: QD-Q004
+          message: QD-Q004：LUN <span>{{ $labels.name }}</span> 不可用
+          suggest: 请先检查这个LUN在其对应的存储节点上的状态。如果没有问题，可以尝试用qdatamgr来重新加载这个LUN。如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '!='
+          value: 1
+          status: false
+        severity:
+          value: warn
+          status: true
+        unit:
+          desc: ""
+          value: ""
+  supportedTargetTypes:
+    - Compute
+    - Storage
+    - Sanfree
+    - RACNode
+- name: node_ib_port_phystatus
+  aliasName: IB端口物理状态
+  labels:
+    alertType: Three-tier@host
+    exporter: hardware
+    productType: Three-tier
+    type: os
+  description: '监控IB端口的物理状态是否正常 '
+  spec:
+    unitOptional: false
+    rules:
+      - name: IB端口物理状态
+        expr: node_ib_port_phystatus
+        advanced:
+          last: 0
+          status: false
+        match:
+          labelName: ib_card_name,port
+          values: []
+          prompt: 请输入IB卡和端口名称，格式为 IB_CARD_NAME:PORT，如果有多个，请用逗号或输入回车隔开，如mlx4_0:Port1,
+            mlx4_1:Port2
+          desc: 需要过滤的端口
+          status: true
+          op: '!~'
+        warn:
+          errorcode: QD-S004
+          message: QD-S004：IB卡 <span>{{ $labels.ib_card_name }}</span> 的端口 <span>{{
+            $labels.port }}</span> 的物理状态异常，该IB链路无法正常工作
+          suggest: 请检查该端口的IB线缆是否连接正常。如果确认是IB线缆故障，可通过服务热线400-678-1800进行相关咨询，更换线缆
+          operator: '!='
+          value: 1
+          status: false
+        critical:
+          errorcode: QD-S004
+          message: QD-S004：IB卡 <span>{{ $labels.ib_card_name }}</span> 的端口 <span>{{
+            $labels.port }}</span> 的物理状态异常，该IB链路无法正常工作
+          suggest: 请检查该端口的IB线缆是否连接正常。如果确认是IB线缆故障，可通过服务热线400-678-1800进行相关咨询
+          operator: '!='
+          value: 1
+          status: false
+        severity:
+          value: warn
+          status: true
+        unit:
+          desc: ""
+          value: ""
+  supportedTargetTypes:
+    - Compute
+    - Storage
+    - Sanfree
+    - RACNode
+    - OracleSingleNode
+- name: node_ctss_offset
+  aliasName: 主机时间一致性
+  labels:
+    alertType: compute
+    exporter: host
+    productType: Three-tier
+    type: rac
+  description: 检测集群计算节点时间是否一致
+  spec:
+    unitOptional: false
+    rules:
+      - name: 主机时间一致性
+        expr: node_ctss_offset
+        advanced:
+          last: 0
+          status: false
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: '!~'
+        warn:
+          errorcode: QD-R006
+          message: QD-R006：集群内计算节点时间不一致，可能会影响集群的正常工作！
+          suggest: 请检查集群各个计算节点的时间是否一致, 若不一致，请修改成一致。如有疑问，可通过服务热线400-678-1800进行相关咨询。
+          operator: '>'
+          value: 10
+          status: false
+        critical:
+          errorcode: QD-R006
+          message: QD-R006：集群内计算节点时间不一致，可能会影响集群的正常工作！
+          suggest: 请检查集群内各个计算节点的时间是否一致, 若不一致，请修改成一致。如有疑问，可通过服务热线400-678-1800进行相关咨询。
+          operator: '>'
+          value: 30
+          status: false
+        severity:
+          value: warn
+          status: true
+        unit:
+          desc: ""
+          value: ""
+  supportedTargetTypes:
+    - Compute
+    - Sanfree
+    - RACNode
+    - OracleSingleNode
+- name: redfish_power_information
+  aliasName: 电源状态
+  labels:
+    alertType: Three-tier@host
+    exporter: redfish
+    productType: Three-tier
+    type: hardware
+  description: 监控主机电源状态是否正常
+  spec:
+    unitOptional: false
+    rules:
+      - name: 电源状态
+        expr: redfish_power_information
+        advanced:
+          last: 0
+          status: false
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: '!~'
+        warn:
+          errorcode: QD-H001
+          message: 'QD-H001: 电源 <span>{{ $labels.name }}</span> 的状态出现异常，无法正常供电，电源冗余丢失'
+          suggest: 请检查电源线是否已连接或出现松动。如果确定是电源本身的故障，可通过服务热线400-678-1800进行相关咨询
+          operator: '!='
+          value: 1
+          status: false
+        critical:
+          errorcode: QD-H001
+          message: 'QD-H001: 电源 <span>{{ $labels.name }}</span> 的状态出现异常，无法正常供电，电源冗余丢失'
+          suggest: 请检查电源线是否已连接或出现松动。如果确定是电源本身的故障，可通过服务热线400-678-1800进行相关咨询
+          operator: '!='
+          value: 1
+          status: false
+        severity:
+          value: critical
+          status: true
+        unit:
+          desc: ""
+          value: ""
+  supportedTargetTypes:
+    - Compute
+    - Storage
+    - Sanfree
+    - RACNode
+- name: redfish_thermal_fan_status
+  aliasName: 风扇状态
+  labels:
+    alertType: Three-tier@host
+    exporter: redfish
+    productType: Three-tier
+    type: hardware
+  description: 监控主机风扇运行状态是否正常
+  spec:
+    unitOptional: false
+    rules:
+      - name: 风扇状态
+        expr: redfish_thermal_fan_status
+        advanced:
+          last: 0
+          status: false
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: '!~'
+        warn:
+          errorcode: QD-H002
+          message: 'QD-H002: 风扇 <span>{{ $labels.FanName }}</span> 的状态出现异常，无法正常运行，可能会影响机箱散热'
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '!='
+          value: 1
+          status: false
+        critical:
+          errorcode: QD-H002
+          message: 'QD-H002: 风扇 <span>{{ $labels.FanName }}</span> 的状态出现异常，无法正常运行，可能会影响机箱散热'
+          suggest: 如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '!='
+          value: 1
+          status: false
+        severity:
+          value: critical
+          status: true
+        unit:
+          desc: ""
+          value: ""
+  supportedTargetTypes:
+    - Compute
+    - Storage
+    - Sanfree
+    - RACNode
+- name: redfish_thermal_system_board_exhaust_temp
+  aliasName: 出风口温度
+  labels:
+    alertType: Three-tier@host
+    exporter: redfish
+    productType: Three-tier
+    type: hardware
+  description: 监控主机出风口温度是否在合理范围
+  spec:
+    unitOptional: false
+    rules:
+      - name: 出风口温度
+        expr: redfish_thermal_system_board_exhaust_temp
+        advanced:
+          last: 0
+          status: false
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: '!~'
+        warn:
+          errorcode: QD-H004
+          message: 'QD-H004: 主机出风口温度达到 <span>{{ $value }}℃</span>，过高的温度可能会影响系统正常运行'
+          suggest: 请检查BIOS中的风扇设置是否正确。如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '>'
+          value: 60
+          status: true
+        critical:
+          errorcode: QD-H004
+          message: 'QD-H004: 主机出风口温度达到 <span>{{ $value }}℃</span>，温度过高！'
+          suggest: 请检查BIOS中的风扇设置是否正确。如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '>'
+          value: 75
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: ""
+          value: ℃
+  supportedTargetTypes:
+    - Compute
+    - Storage
+    - Sanfree
+    - RACNode
+- name: oracle_db_listener_check
+  aliasName: 数据库监听状态
+  labels:
+    alertType: cloud_instance
+    exporter: oracle
+    productType: cloud
+    type: instance
+  description: 检查数据库的连接状态，数据库连接不正常会触发该告警
+  spec:
+    unitOptional: false
+    rules:
+      - name: 数据库监听状态
+        expr: oracle_db_listener_check{job='Oracle', conid='0'}
+        advanced:
+          last: 1
+          status: false
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: '!~'
+        warn:
+          errorcode: QC-D013
+          message: QC-D013：数据库连接失败，请检查数据库状态是否正确！
+          suggest: 请检查数据库状态是否正确，如有疑问，可通过服务热线400-678-1800进行相关咨询。
+          operator: '!='
+          value: 1
+          status: false
+        critical:
+          errorcode: QC-D013
+          message: QC-D013：数据库连接失败，请检查数据库状态是否正确！
+          suggest: 请检查数据库状态是否正确，如有疑问，可通过服务热线400-678-1800进行相关咨询。
+          operator: '!='
+          value: 1
+          status: false
+        severity:
+          value: critical
+          status: true
+        unit:
+          desc: ""
+          value: ""
+  supportedTargetTypes:
+    - OracleContainerInstance
+    - NonOracleContainerInstance
+    - OraclePDBInstance
+- name: node_asm_disk
+  aliasName: ASM磁盘状态
+  labels:
+    alertType: cloud_node
+    exporter: host
+    productType: cloud
+    type: rac
+  description: 监控ASM磁盘的状态
+  spec:
+    unitOptional: false
+    rules:
+      - name: ASM磁盘状态
+        expr: node_asm_disk
+        advanced:
+          last: 1
+          status: false
+        match:
+          labelName: name
+          values: []
+          prompt: 请输入ASM磁盘名称，如果有多个，可以用逗号或输入回车隔开，如DATADG_0001, DATADG_0002
+          desc: 需要过滤的磁盘
+          status: true
+          op: '!~'
+        warn:
+          errorcode: QC-R003
+          message: QC-R003：ASM磁盘<span>{{ $labels.name }}</span>的状态为offline
+          suggest: 请检查ASM磁盘所对应LUN的状态，如果状态正常，请尝试将磁盘手动online。如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '!='
+          value: 1
+          status: false
+        critical:
+          errorcode: QC-R003
+          message: QC-R003：ASM磁盘<span>{{ $labels.name }}</span>的状态为offline
+          suggest: 请检查ASM磁盘所对应LUN的状态，如果状态正常，请尝试将磁盘手动online。如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '!='
+          value: 1
+          status: false
+        severity:
+          value: warn
+          status: true
+        unit:
+          desc: ""
+          value: ""
+  supportedTargetTypes:
+    - Compute
+    - Sanfree
+    - RACNode
+    - OracleSingleNode
+- name: node_filesystem_use
+  aliasName: 目录空间剩余容量
+  labels:
+    alertType: cloud_node
+    exporter: host
+    productType: cloud
+    type: os
+  description: 监控文件系统挂载点目录的剩余空间，在空间耗尽之前及时告警
+  spec:
+    unitOptional: true
+    rules:
+      - name: 目录空间剩余容量-0
+        expr: 1/1024/1024*node_filesystem_avail
+        advanced:
+          last: 0
+          status: false
+        match:
+          labelName: mountpoint
+          values: []
+          prompt: 请输入挂载点目录的完整路径，如果有多个，可以用逗号或输入回车隔开，如/root, /home, /opt
+          desc: 需要过滤的目录
+          status: true
+          op: '!~'
+        warn:
+          errorcode: QC-S005
+          message: QC-S005：文件系统挂载点目录<span>{{ $labels.mountpoint }}</span>的剩余空间容量为<span>{{
+            $value | printf "%.1f" }}MB</span>
+          suggest: 请尝试删除一些不必要的文件释放空间，或者增加其空间，如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: <
+          value: 300
+          status: true
+        critical:
+          errorcode: QC-S005
+          message: QC-S005：文件系统挂载点目录<span>{{ $labels.mountpoint }}</span>的剩余空间容量仅剩<span>{{
+            $value | printf "%.1f" }}MB</span>！某些重要的目录空间不足可能导致严重的问题
+          suggest: 请尝试删除一些不必要的文件释放空间，或者增加其空间，如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: <
+          value: 100
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: 容量MB
+          value: MB
+      - name: 目录空间剩余容量-1
+        expr: 100*node_filesystem_free/node_filesystem_size
+        advanced:
+          last: 0
+          status: false
+        match:
+          labelName: mountpoint
+          values: []
+          prompt: 请输入挂载点目录的完整路径，可以用逗号或输入回车隔开，如/root, /home, /opt
+          desc: 需要过滤的目录
+          status: true
+          op: '!~'
+        warn:
+          errorcode: QC-S005
+          message: QC-S005：文件系统挂载点目录<span>{{ $labels.mountpoint }}</span>的剩余空间百分比为<span>{{
+            $value | printf "%.1f" }}%</span>
+          suggest: 请尝试删除一些不必要的文件释放空间，或者增加其空间，如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: <
+          value: 30
+          status: true
+        critical:
+          errorcode: QC-S005
+          message: QC-S005：文件系统挂载点目录<span>{{ $labels.mountpoint }}</span>的剩余空间百分比仅剩<span>{{
+            $value | printf "%.1f" }}%</span>！某些重要的目录空间不足可能导致严重的问题
+          suggest: 请尝试删除一些不必要的文件释放空间，或者增加其空间，如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: <
+          value: 10
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: 百分比%
+          value: '%'
+      - name: 目录空间剩余容量-2
+        expr: 1/1024/1024/1024*node_filesystem_avail
+        advanced:
+          last: 0
+          status: false
+        match:
+          labelName: mountpoint
+          values: []
+          prompt: 请输入挂载点目录的完整路径，如果有多个，可以用逗号或输入回车隔开，如/root, /home, /opt
+          desc: 需要过滤的目录
+          status: true
+          op: '!~'
+        warn:
+          errorcode: QC-S005
+          message: QC-S005：文件系统挂载点目录<span>{{ $labels.mountpoint }}</span>的剩余空间容量为<span>{{
+            $value | printf "%.1f" }}GB</span>
+          suggest: 请尝试删除一些不必要的文件释放空间，或者增加其空间，如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: <
+          value: 3
+          status: true
+        critical:
+          errorcode: QC-S005
+          message: QC-S005：文件系统挂载点目录<span>{{ $labels.mountpoint }}</span>的剩余空间容量仅剩<span>{{
+            $value | printf "%.1f" }}GB</span>！某些重要的目录空间不足可能导致严重的问题
+          suggest: 请尝试删除一些不必要的文件释放空间，或者增加其空间，如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: <
+          value: 1
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: 容量GB
+          value: GB
+  supportedTargetTypes:
+    - Compute
+    - Storage
+    - Sanfree
+    - RACNode
+    - OracleSingleNode
+- name: node_disk_state
+  aliasName: 磁盘RAID状态
+  labels:
+    alertType: Three-tier@host
+    exporter: hardware
+    productType: Three-tier
+    type: hardware
+  description: 监控物理磁盘的状态
+  spec:
+    unitOptional: false
+    rules:
+      - name: 磁盘RAID状态
+        expr: node_disk_state
+        advanced:
+          last: 0
+          status: false
+        match:
+          labelName: slot
+          values: []
+          prompt: 请输入磁盘的盘符，如果有多个，请用逗号或输入回车隔开，如P0B00S01, P0B00S02
+          desc: 需要过滤的磁盘
+          status: true
+          op: '!~'
+        warn:
+          errorcode: QD-H008
+          message: QD-H008：磁盘 <span>{{ $labels.slot }}</span> 状态异常，无法读写数据
+          suggest: 磁盘可能已损坏。如有疑问，可通过服务热线400-678-1800进行相关咨询，进行硬件更换
+          operator: ==
+          value: 1
+          status: false
+        critical:
+          errorcode: QD-H008
+          message: QD-H008：磁盘 <span>{{ $labels.slot }}</span> 状态异常，无法读写数据
+          suggest: 磁盘可能已损坏。如有疑问，可通过服务热线400-678-1800进行相关咨询，进行硬件更换
+          operator: ==
+          value: 0
+          status: false
+        severity:
+          value: warn
+          status: true
+        unit:
+          desc: ""
+          value: ""
+  supportedTargetTypes:
+    - Compute
+    - Storage
+    - Sanfree
+    - RACNode
+- name: node_ssh_time
+  aliasName: 主机可用性
+  labels:
+    alertType: cloud_node
+    exporter: host
+    productType: cloud
+    type: os
+  description: 检测主机可用性
+  spec:
+    unitOptional: false
+    rules:
+      - name: 主机可用性
+        expr: node_ssh_time
+        advanced:
+          last: 0
+          status: false
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: '!~'
+        warn:
+          errorcode: QC-S001
+          message: QC-S001： 主机可用性检测超时，50秒无响应，可能已发生宕机或无法满足服务质量要求！
+          suggest: 请首先检查机房供电状况，如果供电正常，请使用IPMI远程管理界面登录该主机查看情况。通常系统负载过高会影响可用性，请检查CPU使用率以及是否有持续的Swap发生。如有疑问，可通过服务热线400-678-1800进行相关咨询。
+          operator: ==
+          value: 0
+          status: false
+        critical:
+          errorcode: QC-S001
+          message: QC-S001：主机可用性检测超时，50秒无响应，可能已发生宕机或无法满足服务质量要求！
+          suggest: 请首先检查机房供电状况，如果供电正常，请使用IPMI远程管理界面登录该主机查看情况。通常系统负载过高会影响可用性，请检查CPU使用率以及是否有持续的Swap发生。如有疑问，可通过服务热线400-678-1800进行相关咨询。
+          operator: ==
+          value: 0
+          status: false
+        severity:
+          value: critical
+          status: true
+        unit:
+          desc: ""
+          value: ""
+  supportedTargetTypes:
+    - Compute
+    - Storage
+    - Sanfree
+    - RACNode
+    - OracleSingleNode
+- name: oracle_db_redo
+  aliasName: 可用Redo日志组检测
+  labels:
+    alertType: cloud_instance
+    exporter: oracle
+    productType: cloud
+    type: instance
+  description: 检查数据库可用的Redo日志组数，一旦没有可用的日志组，所有数据库的写操作都会被挂起。
+  spec:
+    unitOptional: false
+    rules:
+      - name: 可用Redo日志组检测
+        expr: oracle_db_redo
+        advanced:
+          last: 1
+          status: false
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: '!~'
+        warn:
+          errorcode: QC-D002
+          message: QC-D002：数据库实例可用的在线重做日志组只剩<span>{{ $value }}</span>组，请立即检查数据库环境！
+          suggest: 在线重做日志组不够用一般代表着日志组数太少或者数据库产生的日志量过大同时脏数据刷磁盘较慢。一旦当前日志组切换后没有可用的在线日志组，数据库所有的修改操作都会被hang住，引发严重故障。如有疑问，可通过服务热线400-678-1800进行相关咨询。
+          operator: <
+          value: 3
+          status: true
+        critical:
+          errorcode: QC-D002
+          message: QC-D002：数据库实例可用的在线重做日志组只剩<span>{{ $value }}</span>组，请立即检查数据库环境！
+          suggest: 在线重做日志组不够用一般代表着日志组数太少或者数据库产生的日志量过大同时脏数据刷磁盘较慢。一旦当前日志组切换后没有可用的在线日志组，数据库所有的修改操作都会被hang住，引发严重故障。如有疑问，可通过服务热线400-678-1800进行相关咨询。
+          operator: <
+          value: 2
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: ""
+          value: ""
+  supportedTargetTypes:
+    - OracleContainerInstance
+    - NonOracleContainerInstance
+    - OraclePDBInstance
+- name: oracle_db_undo
+  aliasName: undo表空间剩余百分比
+  labels:
+    alertType: cloud_instance
+    exporter: oracle
+    productType: cloud
+    type: instance
+  description: 检查数据库undo表空间使用率
+  spec:
+    unitOptional: false
+    rules:
+      - name: undo表空间剩余百分比
+        expr: 100-oracle_db_undo
+        advanced:
+          last: 1
+          status: false
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: '!~'
+        warn:
+          errorcode: QC-D008
+          message: QC-D008：undo表空间剩余可用空间只有<span>{{ $value }}%</span>，已经小于设定阀值，请立即检查数据库环境！
+          suggest: 一般过多的数据库事务、异常的大事务或者undo表空间本身较小会导致undo表空间不够用，undo表空间不够用将会导致所有写入操作挂起，引发严重故障。如有疑问，可通过服务热线400-678-1800进行相关咨询。
+          operator: <
+          value: 5
+          status: true
+        critical:
+          errorcode: QC-D008
+          message: QC-D008：undo表空间剩余可用空间只有<span>{{ $value }}%</span>，已经小于设定阀值，请立即检查数据库环境！
+          suggest: 一般过多的数据库事务、异常的大事务或者undo表空间本身较小会导致undo表空间不够用，undo表空间不够用将会导致所有写入操作挂起，引发严重故障。如有疑问，可通过服务热线400-678-1800进行相关咨询。
+          operator: <
+          value: 3
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: ""
+          value: '%'
+  supportedTargetTypes:
+    - OracleContainerInstance
+    - NonOracleContainerInstance
+    - OraclePDBInstance
+- name: oracle_blocking_session
+  aliasName: 阻塞会话数检测
+  labels:
+    alertType: cloud_instance
+    exporter: oracle
+    productType: cloud
+    type: instance
+  description: 检查数据库是否存在大量阻塞会话，告警阀值的单位为会话数（个）
+  spec:
+    unitOptional: false
+    rules:
+      - name: 阻塞会话数检测
+        expr: oracle_blocking_session
+        advanced:
+          last: 1
+          status: false
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: '!~'
+        warn:
+          errorcode: QC-D012
+          message: QC-D012：数据库中存在大量阻塞会话，被阻塞的会话数量已达<span>{{ $value }}个</span>
+          suggest: 请检查数据库中是否有异常会话阻塞了大量正常会话。如有疑问，可通过服务热线400-678-1800进行相关咨询。
+          operator: '>'
+          value: 5
+          status: true
+        critical:
+          errorcode: QC-D012
+          message: QC-D012：数据库中存在大量阻塞会话，被阻塞的会话数量已达<span>{{ $value }}个</span>
+          suggest: 请检查数据库中是否有异常会话阻塞了大量正常会话。如有疑问，可通过服务热线400-678-1800进行相关咨询。
+          operator: '>'
+          value: 10
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: ""
+          value: ""
+  supportedTargetTypes:
+    - OracleContainerInstance
+    - NonOracleContainerInstance
+    - OraclePDBInstance
+- name: node_ip_packet_reassembles_failed
+  aliasName: 重组失败的IP数据包数量
+  labels:
+    alertType: cloud_node
+    exporter: host
+    productType: cloud
+    type: os
+  description: 监控重组失败的IP数据包数量
+  spec:
+    unitOptional: false
+    rules:
+      - name: 重组失败的IP数据包数量
+        expr: delta(node_ip_packet_reassembles_failed[3m])
+        advanced:
+          last: 5
+          status: true
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: '!~'
+        warn:
+          errorcode: QC-S007
+          message: QC-S007：系统在过去5分钟内重组失败的IP数据包数量达到<span>{{ $value | printf "%.f" }}</span>
+          suggest: 该值过大可能会影响RAC之间的心跳，如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '>'
+          value: 1000
+          status: false
+        critical:
+          errorcode: QC-S007
+          message: QC-S007：系统在过去5分钟内重组失败的IP数据包数量达到<span>{{ $value | printf "%.f" }}</span>
+          suggest: 该值过大可能会影响RAC之间的心跳，如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '>'
+          value: 1000
+          status: false
+        severity:
+          value: critical
+          status: true
+        unit:
+          desc: ""
+          value: ""
+  supportedTargetTypes:
+    - Compute
+    - Storage
+    - Sanfree
+    - RACNode
+    - OracleSingleNode
+- name: oracle_db_available_check
+  aliasName: 可用性检测
+  labels:
+    alertType: cloud_instance
+    exporter: oracle
+    productType: cloud
+    type: instance
+  description: 检查数据库可用性，强烈推荐设置。数据库更新操作hang，连接报错，都会被认为数据库不可用。
+  spec:
+    unitOptional: false
+    rules:
+      - name: 可用性检测
+        expr: oracle_db_available_check{job='Oracle'}
+        advanced:
+          last: 1
+          status: false
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: '!~'
+        warn:
+          errorcode: QC-D001
+          message: QC-D001：数据库可用性检测超时，30秒无响应，可能已无法满足服务质量要求，请立即检查数据库环境!
+          suggest: 请立刻检查数据库、数据库主机是否存在异常，如有疑问，可通过服务热线400-678-1800进行相关咨询。
+          operator: '!='
+          value: 1
+          status: false
+        critical:
+          errorcode: QC-D001
+          message: QC-D001：数据库可用性检测超时，30秒无响应，可能已无法满足服务质量要求，请立即检查数据库环境!
+          suggest: 请立刻检查数据库、数据库主机是否存在异常，如有疑问，可通过服务热线400-678-1800进行相关咨询。
+          operator: '!='
+          value: 1
+          status: false
+        severity:
+          value: critical
+          status: true
+        unit:
+          desc: ""
+          value: ""
+  supportedTargetTypes:
+    - OracleContainerInstance
+    - NonOracleContainerInstance
+    - OraclePDBInstance
+- name: redfish_thermal_system_board_inlet_temp
+  aliasName: 入风口温度
+  labels:
+    alertType: Three-tier@host
+    exporter: redfish
+    productType: Three-tier
+    type: hardware
+  description: 监控主机入风口温度是否在合理范围内
+  spec:
+    unitOptional: false
+    rules:
+      - name: 入风口温度
+        expr: redfish_thermal_system_board_inlet_temp
+        advanced:
+          last: 0
+          status: false
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: '!~'
+        warn:
+          errorcode: QD-H003
+          message: 'QD-H003: 主机入风口温度达到 <span>{{ $value }}℃</span>，过高的温度可能会影响系统正常运行'
+          suggest: 可尝试检查机房散热系统是否正常，如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '>'
+          value: 35
+          status: true
+        critical:
+          errorcode: QD-H003
+          message: 'QD-H003: 主机入风口温度达到 <span>{{ $value }}℃</span>，温度过高，请马上进行监控！'
+          suggest: 可尝试检查机房散热系统是否正常。如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '>'
+          value: 47
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: ""
+          value: ℃
+  supportedTargetTypes:
+    - Compute
+    - Storage
+    - Sanfree
+    - RACNode
+- name: oracle_scheduler_job
+  aliasName: 失败job检测
+  labels:
+    alertType: cloud_instance
+    exporter: oracle
+    productType: cloud
+    type: instance
+  description: 检查数据库是否存在失败的job
+  spec:
+    unitOptional: false
+    rules:
+      - name: 失败job检测
+        expr: oracle_scheduler_job
+        advanced:
+          last: 1
+          status: false
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: '!~'
+        warn:
+          errorcode: QC-D007
+          message: QC-D007：数据库存在失败的job，请立即检查数据库环境！
+          suggest: 请检查数据库job运行失败的原因，修复错误后，可尝试重新运行job，如有疑问，可通过服务热线400-678-1800进行相关咨询。
+          operator: '>'
+          value: 0
+          status: true
+        critical:
+          errorcode: QC-D007
+          message: QC-D007：数据库存在失败的job，请立即检查数据库环境！
+          suggest: 请检查数据库job运行失败的原因，修复错误后，可尝试重新运行job，如有疑问，可通过服务热线400-678-1800进行相关咨询。
+          operator: '>'
+          value: 3
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: ""
+          value: ""
+  supportedTargetTypes:
+    - OracleContainerInstance
+    - NonOracleContainerInstance
+    - OraclePDBInstance
+- name: oracle_processes
+  aliasName: 进程数检测
+  labels:
+    alertType: cloud_instance
+    exporter: oracle
+    productType: cloud
+    type: instance
+  description: 检查数据库是否存在大量进程，告警阀值的单位为进程数（个）
+  spec:
+    unitOptional: false
+    rules:
+      - name: 进程数检测
+        expr: oracle_processes
+        advanced:
+          last: 1
+          status: false
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: '!~'
+        warn:
+          errorcode: QC-D011
+          message: QC-D011：数据库中进程数异常，进程数量已达<span>{{ $value }}个</span>
+          suggest: 请检查产生的大量进程是否正常。如有疑问，可通过服务热线400-678-1800进行相关咨询。
+          operator: '>'
+          value: 100
+          status: true
+        critical:
+          errorcode: QC-D011
+          message: QC-D011：数据库中进程数异常，进程数量已达<span>{{ $value }}个</span>
+          suggest: 请检查产生的大量进程是否正常。如有疑问，可通过服务热线400-678-1800进行相关咨询。
+          operator: '>'
+          value: 200
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: ""
+          value: ""
+  supportedTargetTypes:
+    - OracleContainerInstance
+    - NonOracleContainerInstance
+    - OraclePDBInstance
+- name: node_disk_temperature
+  aliasName: SSD温度
+  labels:
+    alertType: Three-tier@host
+    exporter: hardware
+    productType: Three-tier
+    type: hardware
+  description: 监控SSD的温度是否在合理范围
+  spec:
+    unitOptional: false
+    rules:
+      - name: SSD温度
+        expr: node_disk_temperature
+        advanced:
+          last: 0
+          status: false
+        match:
+          labelName: slot
+          values: []
+          prompt: 请输入磁盘的盘符，如果有多个，请用逗号或输入回车隔开，如P0B00S01, P0B00S02
+          desc: 需要过滤的SSD
+          status: true
+          op: '!~'
+        warn:
+          errorcode: QD-H009
+          message: QD-H009 固态硬盘 <span>{{ $labels.slot }}</span> 的温度为 <span>{{ $value
+            }}℃</span>，过高的温度可能会导致其停止工作
+          suggest: 请检查机房或服务器的散热状况
+          operator: '>'
+          value: 50
+          status: true
+        critical:
+          errorcode: QD-H009
+          message: QD-H009 固态硬盘 <span>{{ $labels.slot }}</span> 的温度已到达 <span>{{ $value
+            }}℃</span>，温度过高！
+          suggest: 请检查机房或服务器的散热状况
+          operator: '>'
+          value: 70
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: ""
+          value: ℃
+  supportedTargetTypes:
+    - Compute
+    - Storage
+    - Sanfree
+    - RACNode
+- name: node_pcie_temperature
+  aliasName: PCIe闪存温度
+  labels:
+    alertType: Three-tier@host
+    exporter: hardware
+    productType: Three-tier
+    type: hardware
+  description: 监控PCIe闪存的温度是否在合理范围
+  spec:
+    unitOptional: false
+    rules:
+      - name: PCIe闪存温度
+        expr: node_pcie_temperature
+        advanced:
+          last: 0
+          status: false
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: '!~'
+        warn:
+          errorcode: QD-H013
+          message: QD-H013：PCIe闪存设备 <span>{{ $labels.deviceName }}</span> 的温度为 <span>{{
+            $value }}℃</span>，过高的温度可能会导致闪存卡停止工作
+          suggest: 请检查机房或服务器的散热状况
+          operator: '>'
+          value: 50
+          status: true
+        critical:
+          errorcode: QD-H013
+          message: QD-H013：PCIe闪存设备 <span>{{ $labels.deviceName }}</span> 的温度已达到 <span>{{
+            $value }}℃</span>，温度过高！
+          suggest: 请检查机房或服务器的散热状况。如果散热没有问题，可能PCIe闪存设备发生故障，如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '>'
+          value: 70
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: ""
+          value: ℃
+  supportedTargetTypes:
+    - Compute
+    - Storage
+    - Sanfree
+    - RACNode
+- name: redfish_thermal_temperature
+  aliasName: CPU温度
+  labels:
+    alertType: Three-tier@host
+    exporter: redfish
+    productType: Three-tier
+    type: hardware
+  description: 监控单个CPU的温度是否在合理范围
+  spec:
+    unitOptional: false
+    rules:
+      - name: CPU温度
+        expr: redfish_thermal_temperature
+        advanced:
+          last: 0
+          status: false
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: '!~'
+        warn:
+          errorcode: QD-H006
+          message: 'QD-H006: <span>{{ $labels.cpu }}</span> 的温度达到 <span>{{ $value }}℃</span>，过高的温度可能会影响系统正常运行'
+          suggest: 请检查BIOS中的散热模式是否已经设置成最大性能模式或机房的散热系统是否正常
+          operator: '>'
+          value: 65
+          status: true
+        critical:
+          errorcode: QD-H006
+          message: 'QD-H006: <span>{{ $labels.cpu }}</span> 的温度达到 <span>{{ $value }}℃</span>，温度过高！'
+          suggest: 请请检查BIOS中的散热模式是否已经设置成最大性能模式或机房的散热系统是否正常，如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '>'
+          value: 79
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: ""
+          value: ℃
+  supportedTargetTypes:
+    - Compute
+    - Storage
+    - Sanfree
+    - RACNode
+- name: node_vmstat_pswpin
+  aliasName: 内存使用状态
+  labels:
+    alertType: cloud_node
+    exporter: host
+    productType: cloud
+    type: os
+  description: '监控主机物理内存是否被耗尽 '
+  spec:
+    unitOptional: false
+    rules:
+      - name: 内存使用状态
+        expr: changes(node_vmstat_pswpin[3m])
+        advanced:
+          last: 3
+          status: true
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: '!~'
+        warn:
+          errorcode: QC-S003
+          message: QC-S003：系统正在使用Swap空间，物理内存已被耗尽，可能出现严重的性能问题！
+          suggest: 请检查系统上正在运行的其他应用程序。如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '!='
+          value: 0
+          status: false
+        critical:
+          errorcode: QC-S003
+          message: QC-S003：系统正在使用Swap空间，物理内存已被耗尽，可能出现严重的性能问题！
+          suggest: 请检查系统上正在运行的其他应用程序。如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '!='
+          value: 0
+          status: false
+        severity:
+          value: critical
+          status: true
+        unit:
+          desc: ""
+          value: ""
+  supportedTargetTypes:
+    - Compute
+    - Storage
+    - Sanfree
+    - RACNode
+    - OracleSingleNode
+- name: node_if_status
+  aliasName: 以太网端口链接状态
+  labels:
+    alertType: cloud_node
+    exporter: host
+    productType: cloud
+    type: os
+  description: '监控以太网端口的链接状态是否正常 '
+  spec:
+    unitOptional: false
+    rules:
+      - name: 以太网端口链接状态
+        expr: node_if_status
+        advanced:
+          last: 1
+          status: false
+        match:
+          labelName: device
+          values: []
+          prompt: 请输入端口名称，如果有多个，可以用逗号或输入回车隔开，如eth0, eth1
+          desc: 需要过滤的端口
+          status: true
+          op: '!~'
+        warn:
+          errorcode: QC-S004
+          message: QC-S004：以太网卡端口<span>{{ $labels.device }}</span>的链接状态异常，该以太网链路无法正常工作
+          suggest: 请检查该端口是否已连接网线或尝试更换线缆。如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '!='
+          value: 1
+          status: false
+        critical:
+          errorcode: QC-S004
+          message: QC-S004：以太网卡端口<span>{{ $labels.device }}</span>的链接状态异常，该以太网链路无法正常工作
+          suggest: 请检查该端口是否已连接网线或尝试更换线缆。如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '!='
+          value: 1
+          status: false
+        severity:
+          value: warn
+          status: true
+        unit:
+          desc: ""
+          value: ""
+  supportedTargetTypes:
+    - Compute
+    - Storage
+    - Sanfree
+    - RACNode
+    - OracleSingleNode
+- name: node_load5
+  aliasName: 系统负载（5分钟）
+  labels:
+    alertType: cloud_node
+    exporter: host
+    productType: cloud
+    type: os
+  description: 监控主机在过去5分钟内的平均负载是否超出既定范围
+  spec:
+    unitOptional: false
+    rules:
+      - name: 系统负载（5分钟）
+        expr: node_load5
+        advanced:
+          last: 1
+          status: false
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: '!~'
+        warn:
+          errorcode: QC-S002
+          message: QC-S002：系统负载达到<span>{{ $value }}</span>，系统可能出现性能问题！
+          suggest: 可尝试检查应用状态是否正常，如活跃连接是否过多等
+          operator: '>'
+          value: 5
+          status: true
+        critical:
+          errorcode: QC-S002
+          message: QC-S002：系统负载达到<span>{{ $value }}</span>，系统可能出现性能问题！
+          suggest: 可尝试检查应用状态是否正常，如活跃连接是否过多等。如有疑问，可通过服务热线400-678-1800进行相关咨询
+          operator: '>'
+          value: 10
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: ""
+          value: ""
+  supportedTargetTypes:
+    - Compute
+    - Storage
+    - Sanfree
+    - RACNode
+    - OracleSingleNode
+- name: oracle_user_active_sessions_aas
+  aliasName: 检查数据库同时活跃会话数
+  labels:
+    alertType: cloud_instance
+    exporter: oracle
+    productType: cloud
+    type: instance
+  description: 检查数据库同时活跃会话数，强烈建议设置。建议将告警阈值设置为数据库每天的最高活跃会话数加20，严重阈值设置为最高活跃会话数加40。或者参考一种常用的办法，将告警阈值设置为逻辑CPU数，严重阈值设置为CPU数*2。
+  spec:
+    unitOptional: false
+    rules:
+      - name: 检查数据库同时活跃会话数
+        expr: oracle_user_active_sessions_aas
+        advanced:
+          last: 1
+          status: true
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: '!~'
+        warn:
+          errorcode: QC-D004
+          message: QC-D004：数据库负载较高，同时活跃会话达到了<span>{{ $value }}</span>，请检查数据库环境是否存在异常！
+          suggest: 请检查数据库的等待事件来进一步确认活跃会话的状态，一般出现锁、执行计划错误、IO抖动等情况会引起等待会话过多的情况，也有可能是业务高峰期的正常现象。如有疑问，可通过服务热线400-678-1800进行相关咨询。
+          operator: '>'
+          value: 20
+          status: true
+        critical:
+          errorcode: QC-D004
+          message: QC-D004：数据库负载较高，同时活跃会话达到了<span>{{ $value }}</span>，请检查数据库环境是否存在异常！
+          suggest: 请检查数据库的等待事件来进一步确认活跃会话的状态，一般出现锁、执行计划错误、IO抖动等情况会引起等待会话过多的情况，也有可能是业务高峰期的正常现象。如有疑问，可通过服务热线400-678-1800进行相关咨询。
+          operator: '>'
+          value: 50
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: ""
+          value: ""
+  supportedTargetTypes:
+    - OracleContainerInstance
+    - NonOracleContainerInstance
+    - OraclePDBInstance
+- name: oracle_apply_latency
+  aliasName: 应用延迟
+  labels:
+    alertType: cloud_instance
+    exporter: oracle
+    productType: cloud
+    type: instance
+  description: 监控主备应用延迟
+  spec:
+    unitOptional: false
+    rules:
+      - name: 应用延迟
+        expr: oracle_apply_latency{job='Oracle', conid='0'}
+        advanced:
+          last: 1
+          status: false
+        match:
+          labelName: ""
+          values: []
+          prompt: ""
+          desc: ""
+          status: false
+          op: '!~'
+        warn:
+          errorcode: QC-D015
+          message: 'QC-D015: 数据库日志应用延迟已达 {{$value}} s'
+          suggest: 请检查日志速度，以及IO状态！如有疑问，可通过服务热线400-678-1800进行相关咨询。
+          operator: '>='
+          value: 3600
+          status: true
+        critical:
+          errorcode: QC-D015
+          message: 'QC-D015: 数据库日志应用延迟已达 {{$value}} s'
+          suggest: 请检查日志速度，以及IO状态！如有疑问，可通过服务热线400-678-1800进行相关咨询。
+          operator: '>='
+          value: 7200
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: ""
+          value: s
+  supportedTargetTypes:
+    - OracleContainerInstance
+    - NonOracleContainerInstance
+    - OraclePDBInstance

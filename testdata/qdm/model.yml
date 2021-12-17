@@ -1,0 +1,1100 @@
+# qdm 的告警项共计 4 类 21 项
+# 注意 label 中的 alertingTypeName 需要和 alerting_type.yml 中的name 对应
+# 注意: 当前虽然rules仍然是一个列表格式，但是已经摒弃同一个告警项划分为多个规则的做法，现在所有告警都平铺渲染
+# （1）如果是状态类型的告警，非嘿即白，则使用severity.status=true + severity.value中的级别作为告警级别
+# （2）如果是阈值型告警，则severity.status=false + warn和critical块中的status来作为开启告警级别，前端也会渲染阈值框
+# 如果上述两个条件都不满足，则rule会被忽略，配置时将不会写入rule.yml
+
+# -----------主机硬件 QDM-H00X
+- name: redfish_power_information
+  aliasName: 电源状态
+  labels:
+    job: ipmi
+    alertingTypeName: hardware
+  description: 监控主机电源状态是否正常
+  spec:
+    # 原本是用来切换 百分比|MB|GB 这样的多个告警项的，现已全部平铺，字段弃用
+    unitOptional: false
+    rules:
+      - name: 电源状态
+        expr: redfish_power_information
+        description: 监控主机电源状态是否正常
+        # 是否开启高级功能
+        advanced:
+          last: 1
+          status: false
+        time:
+          status: false
+          groupInterval: 2
+          repeatInterval: 10
+        # 过滤规则
+        match:
+          # 需要过滤的指标标签，2个的组合使用英文逗号隔开
+          labelName: "name"
+          # 默认过滤值
+          values: [ ]
+          # 过滤提示
+          prompt: "请输入需要过滤的电源名称，例如 PS1, PS2"
+          desc: "需要过滤的电源"
+          # 是否启用过滤功能
+          status: true
+          op: '!~'
+        warn:
+          errorcode: QDM-H001
+          message: 'QDM-H001： 主机节点 <span>{{ $labels.targetIP }}</span> 的电源 <span>{{ $labels.name }}</span> 的状态出现异常'
+          suggest: 请检查电源线是否已连接或出现松动，避免出现电源冗余丢失。如有疑问，请联系原厂工程师处理。
+          operator: '!='
+          value: 1
+          status: true
+        critical:
+          errorcode: QDM-H001
+          message: 'QDM-H001： 主机节点 <span>{{ $labels.targetIP }}</span> 的电源 <span>{{ $labels.name }}</span> 的状态出现异常'
+          suggest: 请检查电源线是否已连接或出现松动，避免出现电源冗余丢失。如有疑问，请联系原厂工程师处理。
+          operator: '!='
+          value: 1
+          status: true
+        # 状态为true则只开起value中的告警级别，且他是一个状态型告警，否则可以分别配置两个级别的告警阈值
+        severity:
+          value: critical
+          status: true
+        unit:
+          desc: ""
+          value: ""
+  supportedTargetTypes:
+    - DMSanfree
+
+- name: redfish_thermal_fan_status
+  aliasName: 风扇状态
+  labels:
+    job: ipmi
+    alertingTypeName: hardware
+  description: 监控主机风扇运行状态是否正常
+  spec:
+    unitOptional: false
+    rules:
+      - name: 风扇状态
+        expr: redfish_thermal_fan_status
+        description: 监控主机风扇运行状态是否正常
+        advanced:
+          last: 1
+          status: false
+        time:
+          status: false
+          groupInterval: 2
+          repeatInterval: 10
+        match:
+          labelName: "FanName"
+          values: [ ]
+          prompt: "请输入风扇名称进行过滤，例如 Fan5, Fan6"
+          desc: ""
+          status: true
+          op: '!~'
+        warn:
+          errorcode: QDM-H002
+          message: 'QDM-H002：主机节点 <span>{{ $labels.targetIP }}</span> 的风扇 <span>{{ $labels.FanName }}</span> 的状态出现异常'
+          suggest: 请检查风扇状态避免机箱温度过高。如有疑问，请联系原厂工程师处理。
+          operator: '!='
+          value: 1
+          status: true
+        critical:
+          errorcode: QDM-H002
+          message: 'QDM-H002：主机节点 <span>{{ $labels.targetIP }}</span> 的风扇 <span>{{ $labels.FanName }}</span> 的状态出现异常'
+          suggest: 请检查风扇状态避免机箱温度过高。如有疑问，请联系原厂工程师处理。
+          operator: '!='
+          value: 1
+          status: true
+        severity:
+          value: warn
+          status: true
+        unit:
+          desc: ""
+          value: ""
+  supportedTargetTypes:
+    - DMSanfree
+
+- name: redfish_system_cpu
+  aliasName: CPU状态
+  labels:
+    job: ipmi
+    alertingTypeName: hardware
+  description: 监控单个CPU的运行状态是否正常
+  spec:
+    unitOptional: false
+    rules:
+      - name: CPU状态
+        expr: redfish_system_cpu
+        description: 监控单个CPU的运行状态是否正常
+        advanced:
+          last: 1
+          status: false
+        time:
+          status: false
+          groupInterval: 2
+          repeatInterval: 10
+        match:
+          labelName: ""
+          values: [ ]
+          prompt: ""
+          desc: ""
+          status: false
+          op: '!~'
+        warn:
+          errorcode: QDM-H003
+          message: 'QDM-H003：主机节点 <span>{{ $labels.targetIP }}</span> 的CPU <span>{{ $labels.name }}</span> 的状态出现异常'
+          suggest: 请及时检查系统日志、带外日志等重要信息。如有疑问，请联系原厂工程师处理。
+          operator: '!='
+          value: 1
+          status: true
+        critical:
+          errorcode: QDM-H003
+          message: 'QDM-H003：主机节点 <span>{{ $labels.targetIP }}</span> 的CPU <span>{{ $labels.name }}</span> 的状态出现异常'
+          suggest: 请及时检查系统日志、带外日志等重要信息。如有疑问，请联系原厂工程师处理。
+          operator: '!='
+          value: 1
+          status: true
+        severity:
+          value: critical
+          status: true
+        unit:
+          desc: ""
+          value: ""
+  supportedTargetTypes:
+    - DMSanfree
+
+- name: redfish_thermal_temperature
+  aliasName: CPU温度
+  labels:
+    job: ipmi
+    alertingTypeName: hardware
+  description: 监控单个CPU的温度是否在合理范围
+  spec:
+    unitOptional: false
+    rules:
+      - name: CPU温度
+        expr: redfish_thermal_temperature
+        description: 监控单个CPU的温度是否在合理范围
+        advanced:
+          last: 1
+          status: false
+        time:
+          status: false
+          groupInterval: 2
+          repeatInterval: 10
+        match:
+          labelName: ""
+          values: [ ]
+          prompt: ""
+          desc: ""
+          status: false
+          op: '!~'
+        warn:
+          errorcode: QDM-H004
+          message: 'QDM-H004：主机节点 <span>{{ $labels.targetIP }}</span> 的 <span>{{ $labels.cpu }}</span> 的温度达到 <span>{{ $value | printf "%.1f"  }}℃</span>'
+          suggest: 请检查BIOS中的散热模式是否已经设置成最大性能模式或机房的散热系统是否正常。如有疑问，请联系原厂工程师处理。
+          operator: '>'
+          value: 65
+          status: true
+        critical:
+          errorcode: QDM-H004
+          message: 'QDM-H004：主机节点 <span>{{ $labels.targetIP }}</span> 的 <span>{{ $labels.cpu }}</span> 的温度达到 <span>{{ $value | printf "%.1f"  }}℃</span>'
+          suggest: 请检查BIOS中的散热模式是否已经设置成最大性能模式或机房的散热系统是否正常。如有疑问，请联系原厂工程师处理。
+          operator: '>'
+          value: 79
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: "温度"
+          value: ℃
+  supportedTargetTypes:
+    - DMSanfree
+
+# ---------------操作系统 QDM-S00X
+- name: node_available
+  aliasName: 主机可用性
+  labels:
+    job: ping|tcp
+    alertingTypeName: os
+  description: 检测主机可用性
+  spec:
+    unitOptional: false
+    rules:
+      - name: 主机可用性
+        expr: sum(probe_success{job=~"tcp|ping"}) without (job, target, instance)
+        description: 检测主机可用性
+        advanced:
+          last: 2
+          status: true
+        time:
+          status: false
+          groupInterval: 2
+          repeatInterval: 10
+        match:
+          labelName: ""
+          values: [ ]
+          prompt: ""
+          desc: ""
+          status: false
+          op: '!~'
+        warn:
+          errorcode: QDM-S001
+          message: 'QDM-S001： 主机节点 <span>{{ $labels.targetIP }}</span> 可用性探测失败！'
+          suggest: 请及时检查节点供电状态、网络状况、负载等情况。如有疑问，请联系原厂工程师处理。
+          operator: '<'
+          value: 1
+          status: true
+        critical:
+          errorcode: QDM-S001
+          message: 'QDM-S001： 主机节点 <span>{{ $labels.targetIP }}</span> 可用性探测失败！'
+          suggest: 请及时检查节点供电状态、网络状况、负载等情况。如有疑问，请联系原厂工程师处理。
+          operator: '<'
+          value: 1
+          status: true
+        severity:
+          value: critical
+          status: true
+        unit:
+          desc: ""
+          value: ""
+  supportedTargetTypes:
+    - DMSanfree
+
+- name: node_load5
+  aliasName: 系统负载（5分钟）
+  labels:
+    job: node
+    alertingTypeName: os
+  description: 监控主机在过去5分钟内的平均负载是否超出既定范围
+  spec:
+    unitOptional: false
+    rules:
+      - name: 系统负载（5分钟）
+        expr: node_load5
+        description: 监控主机在过去5分钟内的平均负载是否超出既定范围
+        advanced:
+          last: 1
+          status: false
+        time:
+          status: false
+          groupInterval: 2
+          repeatInterval: 10
+        match:
+          labelName: ""
+          values: [ ]
+          prompt: ""
+          desc: ""
+          status: false
+          op: '!~'
+        warn:
+          errorcode: QDM-S002
+          message: 'QDM-S002：主机节点 <span>{{ $labels.targetIP }}</span> 系统负载达到 <span>{{ $value | printf "%.1f"  }}</span> 。'
+          suggest: 可尝试检查应用状态是否正常，如活跃连接是否过多等。如有疑问，请联系原厂工程师处理。
+          operator: '>'
+          value: 5
+          status: true
+        critical:
+          errorcode: QDM-S002
+          message: 'QDM-S002：主机节点 <span>{{ $labels.targetIP }}</span> 系统负载达到 <span>{{ $value | printf "%.1f"  }}</span> 。'
+          suggest: 可尝试检查应用状态是否正常，如活跃连接是否过多等。如有疑问，请联系原厂工程师处理。
+          operator: '>'
+          value: 10
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: ""
+          value: ""
+  supportedTargetTypes:
+    - DMSanfree
+
+- name: node_vmstat_pswpout
+  aliasName: 内存使用状态
+  labels:
+    job: node
+    alertingTypeName: os
+  description: 监控主机是否动用swap空间
+  spec:
+    unitOptional: false
+    rules:
+      - name: 内存使用状态
+        expr: changes(node_vmstat_pswpout[3m])
+        description: 监控主机是否动用swap空间
+        advanced:
+          last: 2
+          status: true
+        time:
+          status: false
+          groupInterval: 2
+          repeatInterval: 10
+        match:
+          labelName: ""
+          values: [ ]
+          prompt: ""
+          desc: ""
+          status: false
+          op: '!~'
+        warn:
+          errorcode: QDM-S003
+          message: 'QDM-S003：主机节点 <span>{{ $labels.targetIP }}</span> 正在使用Swap空间。'
+          suggest: 请检查节点的物理内存使用率，应用进程是否正常。如有疑问，请联系原厂工程师处理。
+          operator: '!='
+          value: 0
+          status: true
+        critical:
+          errorcode: QDM-S003
+          message: 'QDM-S003：主机节点 <span>{{ $labels.targetIP }}</span> 正在使用Swap空间。'
+          suggest: 请检查节点的物理内存使用率，应用进程是否正常。如有疑问，请联系原厂工程师处理。
+          operator: '!='
+          value: 0
+          status: true
+        severity:
+          value: warn
+          status: true
+        unit:
+          desc: ""
+          value: ""
+  supportedTargetTypes:
+    - DMSanfree
+
+- name: node_network_up
+  aliasName: 以太网端口链接状态
+  labels:
+    job: node
+    alertingTypeName: os
+  description: 监控以太网端口的链接状态是否正常
+  spec:
+    unitOptional: false
+    rules:
+      - name: 以太网端口链接状态
+        expr: node_network_up
+        description: 监控以太网端口的链接状态是否正常
+        advanced:
+          last: 1
+          status: false
+        time:
+          status: false
+          groupInterval: 2
+          repeatInterval: 10
+        match:
+          labelName: device
+          values: [ ]
+          prompt: 请输入端口名称，如eth0, eth1
+          desc: 需要过滤的端口
+          status: true
+          op: '!~'
+        warn:
+          errorcode: QDM-S004
+          message: 'QDM-S004：主机节点 <span>{{ $labels.targetIP }}</span> 以太网卡端口 <span>{{ $labels.device }}</span> 的链接状态异常。'
+          suggest: 请检查该端口是否已连接网线或尝试更换线缆。如有疑问，请联系原厂工程师处理。
+          operator: '!='
+          value: 1
+          status: true
+        critical:
+          errorcode: QDM-S004
+          message: 'QDM-S004：主机节点 <span>{{ $labels.targetIP }}</span> 以太网卡端口 <span>{{ $labels.device }}</span> 的链接状态异常。'
+          suggest: 请检查该端口是否已连接网线或尝试更换线缆。如有疑问，请联系原厂工程师处理。
+          operator: '!='
+          value: 1
+          status: true
+        severity:
+          value: critical
+          status: true
+        unit:
+          desc: ""
+          value: ""
+  supportedTargetTypes:
+    - DMSanfree
+
+- name: node_filesystem_free_capacity_pct
+  aliasName: 目录空间剩余容量百分比
+  labels:
+    job: node
+    alertingTypeName: os
+  description: 监控文件系统挂载点目录的剩余空间，在空间耗尽之前及时告警
+  spec:
+    unitOptional: false
+    rules:
+      - name: 目录空间剩余容量百分比
+        expr: 100*node_filesystem_free_bytes/node_filesystem_size_bytes
+        description: 监控文件系统挂载点目录的剩余空间，在空间耗尽之前及时告警
+        advanced:
+          last: 1
+          status: false
+        time:
+          status: false
+          groupInterval: 2
+          repeatInterval: 10
+        match:
+          labelName: mountpoint
+          values: [ ]
+          prompt: 请输入挂载点目录的完整路径，如/root, /home, /opt
+          desc: 需要过滤的目录
+          status: true
+          op: '!~'
+        warn:
+          errorcode: QDM-S005
+          message: 'QDM-S005：主机节点 <span>{{ $labels.targetIP }}</span> 文件系统挂载点目录 <span>{{ $labels.mountpoint }}</span> 空间仅剩 <span>{{ $value | printf "%.1f" }}%</span>。'
+          suggest: 请尝试删除一些不必要的文件释放空间，或者增加其空间。如有疑问，请联系原厂工程师处理。
+          operator: '<'
+          value: 30
+          status: true
+        critical:
+          errorcode: QDM-S005
+          message: 'QDM-S005：主机节点 <span>{{ $labels.targetIP }}</span> 文件系统挂载点目录 <span>{{ $labels.mountpoint }}</span> 空间仅剩 <span>{{ $value | printf "%.1f" }}%</span>。'
+          suggest: 请尝试删除一些不必要的文件释放空间，或者增加其空间。如有疑问，请联系原厂工程师处理。
+          operator: '<'
+          value: 10
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: '百分比%'
+          value: '%'
+  supportedTargetTypes:
+    - DMSanfree
+
+- name: node_filesystem_free_capacity_gb
+  aliasName: 目录空间剩余容量GB
+  labels:
+    job: node
+    alertingTypeName: os
+  description: 监控文件系统挂载点目录的剩余空间，在空间耗尽之前及时告警
+  spec:
+    unitOptional: false
+    rules:
+      - name: 目录空间剩余容量GB
+        expr: node_filesystem_free_bytes/1024/1024/1024
+        description: 监控文件系统挂载点目录的剩余空间，在空间耗尽之前及时告警
+        advanced:
+          last: 1
+          status: false
+        time:
+          status: false
+          groupInterval: 2
+          repeatInterval: 10
+        match:
+          labelName: mountpoint
+          values: [ ]
+          prompt: 请输入挂载点目录的完整路径，如/root, /home, /opt
+          desc: 需要过滤的目录
+          status: true
+          op: '!~'
+        warn:
+          errorcode: QDM-S006
+          message: 'QDM-S006：主机节点 <span>{{ $labels.targetIP }}</span> 文件系统挂载点目录 <span>{{ $labels.mountpoint }}</span> 的剩余空间容量为<span>{{ $value | printf "%.1f" }}GB</span>。'
+          suggest: 请尝试删除一些不必要的文件释放空间，或者增加其空间。如有疑问，请联系原厂工程师处理。
+          operator: '<'
+          value: 10
+          status: true
+        critical:
+          errorcode: QDM-S006
+          message: 'QDM-S006：主机节点 <span>{{ $labels.targetIP }}</span> 文件系统挂载点目录 <span>{{ $labels.mountpoint }}</span> 的剩余空间容量为<span>{{ $value | printf "%.1f" }}GB</span>。'
+          suggest: 请尝试删除一些不必要的文件释放空间，或者增加其空间。如有疑问，请联系原厂工程师处理。
+          operator: '<'
+          value: 5
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: 容量GB
+          value: GB
+  supportedTargetTypes:
+    - DMSanfree
+
+- name: node_inode_free_pct
+  aliasName: 系统inode剩余容量百分比
+  labels:
+    job: node
+    alertingTypeName: os
+  description: 监控文件系统挂载点inode的剩余容量百分比，在空间耗尽之前及时告警
+  spec:
+    unitOptional: false
+    rules:
+      - name: 目录inode剩余容量百分比
+        expr: 100*node_filesystem_files_free/node_filesystem_files
+        description: 监控文件系统挂载点inode的剩余容量百分比，在空间耗尽之前及时告警
+        advanced:
+          last: 1
+          status: false
+        time:
+          status: false
+          groupInterval: 2
+          repeatInterval: 10
+        match:
+          labelName: mountpoint
+          values: [ ]
+          prompt: 请输入挂载点目录的完整路径，如/root, /home, /opt
+          desc: 需要过滤的目录
+          status: true
+          op: '!~'
+        warn:
+          errorcode: QDM-S007
+          message: 'QDM-S007：主机节点 <span>{{ $labels.targetIP }}</span> 文件系统挂载点目录 <span>{{ $labels.mountpoint }}</span> 的剩余空间仅剩<span>{{ $value | printf "%.1f"  }}%</span>。'
+          suggest: 请尝试删除一些不必要的文件释放空间，或者增加其空间。如有疑问，请联系原厂工程师处理。
+          operator: '<'
+          value: 30
+          status: true
+        critical:
+          errorcode: QDM-S007
+          message: 'QDM-S007：主机节点 <span>{{ $labels.targetIP }}</span> 文件系统挂载点目录 <span>{{ $labels.mountpoint }}</span> 的剩余空间仅剩<span>{{ $value | printf "%.1f"  }}%</span>。'
+          suggest: 请尝试删除一些不必要的文件释放空间，或者增加其空间。如有疑问，请联系原厂工程师处理。
+          operator: '<'
+          value: 10
+          status: true
+        severity:
+          value: ""
+          status: false
+        unit:
+          desc: 百分比
+          value: '%'
+  supportedTargetTypes:
+    - DMSanfree
+
+- name: white_system_time_offset
+  aliasName: 主机时间校验
+  labels:
+    job: host
+    alertingTypeName: os
+  description: 检查一体机节点和管理节点之间的时间差异
+  spec:
+    unitOptional: false
+    rules:
+      - name: 主机时间校验
+        expr: white_system_time_offset
+        description: 检查一体机节点和管理节点之间的时间差异
+        advanced:
+          last: 1
+          status: false
+        time:
+          status: false
+          groupInterval: 2
+          repeatInterval: 10
+        match:
+          labelName: ""
+          values: [ ]
+          prompt: ""
+          desc: ""
+          status: false
+          op: '!~'
+        warn:
+          errorcode: QDM-S008
+          message: 'QDM-S008：主机节点 <span>{{ $labels.targetIP }}</span> 系统时间和管理节点相差达到 <span>{{ $value | printf "%.1f"  }}s</span>。'
+          suggest: 时间相差30s以上可能导致某些功能不正常,请及时调整一体机和管理节点时间配置。如有疑问，请联系原厂工程师处理。
+          operator: '>='
+          value: 30
+          status: true
+        critical:
+          errorcode: QDM-S008
+          message: 'QDM-S008：主机节点 <span>{{ $labels.targetIP }}</span> 系统时间和管理节点相差达到 <span>{{ $value | printf "%.1f"  }}s</span>。'
+          suggest: 时间相差30s以上可能导致某些功能不正常,请及时调整一体机和管理节点时间配置。如有疑问，请联系原厂工程师处理。
+          operator: '>='
+          value: 30
+          status: true
+        severity:
+          value: "warn"
+          status: true
+        unit:
+          desc: 秒
+          value: 's'
+  supportedTargetTypes:
+    - DMSanfree
+
+# -----------分布式存储 QDM-D00X
+- name: store_qstor_node_state
+  aliasName: QStor节点状态
+  labels:
+    job: store
+    alertingTypeName: qstor
+  description: 监控一体机节点在分布式存储集群中的状态
+  spec:
+    unitOptional: false
+    rules:
+      - name: QStor节点状态
+        expr: store_qstor_node_state
+        description: 监控一体机节点在分布式存储集群中的状态
+        advanced:
+          last: 3
+          status: true
+        time:
+          status: false
+          groupInterval: 2
+          repeatInterval: 10
+        match:
+          labelName: ""
+          values: [ ]
+          prompt: ""
+          desc: ""
+          status: false
+          op: '!~'
+        warn:
+          errorcode: QDM-D001
+          message: 'QDM-D001：主机节点 <span>{{ $labels.name }}({{ $labels.ip }})</span> 在分布式存储系统中状态异常。'
+          suggest: 请检查主机状态、分布式服务状态和网络链路状况。如有疑问，请联系原厂工程师处理。
+          operator: '!='
+          value: 1
+          status: true
+        critical:
+          errorcode: QDM-D001
+          message: 'QDM-D001：主机节点 <span>{{ $labels.name }}({{ $labels.ip }})</span> 在分布式存储系统中状态异常。'
+          suggest: 请检查主机状态、分布式服务状态和网络链路状况。如有疑问，请联系原厂工程师处理。
+          operator: '!='
+          value: 1
+          status: true
+        severity:
+          value: critical
+          status: true
+        unit:
+          desc: ''
+          value: ''
+  supportedTargetTypes:
+    - DMSanfree
+
+- name: store_qstor_res_state
+  aliasName: QStor资源状态
+  labels:
+    job: store
+    alertingTypeName: qstor
+  description: 监控一体机节点资源在分布式存储集群中的状态
+  spec:
+    unitOptional: false
+    rules:
+      - name: QStor资源状态
+        expr: store_qstor_res_state
+        description: 监控一体机节点资源在分布式存储集群中的状态
+        advanced:
+          last: 3
+          status: true
+        time:
+          status: false
+          groupInterval: 2
+          repeatInterval: 10
+        match:
+          labelName: ""
+          values: [ ]
+          prompt: ""
+          desc: ""
+          status: false
+          op: '!~'
+        warn:
+          errorcode: QDM-D002
+          message: 'QDM-D002：主机节点 <span>{{ $labels.node }}({{ $labels.target }})</span> 的分布式存储资源 <span>{{ $labels.name }}</span>状态异常。'
+          suggest: 请及时检查QStor集群中资源状态，避免造成数据异常。如有疑问，请联系原厂工程师进行处理。
+          operator: '!='
+          value: 2
+          status: true
+        critical:
+          errorcode: QDM-D002
+          message: 'QDM-D002：主机节点 <span>{{ $labels.node }}({{ $labels.target }})</span> 的分布式存储资源 <span>{{ $labels.name }}</span>状态异常。'
+          suggest: 请及时检查QStor集群中资源状态，避免造成数据异常。如有疑问，请联系原厂工程师进行处理。
+          operator: '!='
+          value: 2
+          status: true
+        severity:
+          value: critical
+          status: true
+        unit:
+          desc: ''
+          value: ''
+  supportedTargetTypes:
+    - DMSanfree
+
+- name: store_qstor_res_cstate_state
+  aliasName: QStor资源链路状态
+  labels:
+    job: store
+    alertingTypeName: qstor
+  description: 监控一体机节点资源链路在分布式存储集群中的状态
+  spec:
+    unitOptional: false
+    rules:
+      - name: QStor资源链路状态
+        expr: store_qstor_res_cstate_state
+        description: 监控一体机节点资源链路在分布式存储集群中的状态
+        advanced:
+          last: 3
+          status: true
+        time:
+          status: false
+          groupInterval: 2
+          repeatInterval: 10
+        match:
+          labelName: ""
+          values: [ ]
+          prompt: ""
+          desc: ""
+          status: false
+          op: '!~'
+        warn:
+          errorcode: QDM-D003
+          message: 'QDM-D003：主机节点 <span>{{ $labels.node }}({{ $labels.target }})</span> 的分布式存储资源 <span>{{ $labels.name }}</span>链路状态异常。'
+          suggest: 请及时检查QStor集群资源链路状态，避免数据无法同步。如有疑问，请联系原厂工程师进行处理。
+          operator: '!='
+          value: 1
+          status: true
+        critical:
+          errorcode: QDM-D003
+          message: 'QDM-D003：主机节点 <span>{{ $labels.node }}({{ $labels.target }})</span> 的分布式存储资源 <span>{{ $labels.name }}</span>链路状态异常。'
+          suggest: 请及时检查QStor集群资源链路状态，避免数据无法同步。如有疑问，请联系原厂工程师进行处理。
+          operator: '!='
+          value: 1
+          status: true
+        severity:
+          value: critical
+          status: true
+        unit:
+          desc: ''
+          value: ''
+  supportedTargetTypes:
+    - DMSanfree
+
+- name: store_qstor_res_replica_state
+  aliasName: QStor副本安全
+  labels:
+    job: store
+    alertingTypeName: qstor
+  description: 监控数据资源副本数量是否正常
+  spec:
+    unitOptional: false
+    rules:
+      - name: QStor副本安全
+        expr: store_qstor_res_replica_state
+        description: 监控数据资源副本数量是否正常
+        advanced:
+          last: 3
+          status: true
+        time:
+          status: false
+          groupInterval: 2
+          repeatInterval: 10
+        match:
+          labelName: ""
+          values: [ ]
+          prompt: ""
+          desc: ""
+          status: false
+          op: '!~'
+        warn:
+          errorcode: QDM-D004
+          message: 'QDM-D004：主机节点 <span>{{ $labels.node }}({{ $labels.targetIP }})</span> 的分布式存储资源 <span>{{ $labels.name }}</span>数据副本数量异常。'
+          suggest: 请及时检查QStor资源副本数量，避免单副本运行。如有疑问，请联系原厂工程师进行处理。
+          operator: '!='
+          value: 1
+          status: true
+        critical:
+          errorcode: QDM-D004
+          message: 'QDM-D004：主机节点 <span>{{ $labels.node }}({{ $labels.targetIP }})</span> 的分布式存储资源 <span>{{ $labels.name }}</span>数据副本数量异常。'
+          suggest: 请及时检查QStor资源副本数量，避免单副本运行。如有疑问，请联系原厂工程师进行处理。
+          operator: '!='
+          value: 1
+          status: true
+        severity:
+          value: critical
+          status: true
+        unit:
+          desc: ''
+          value: ''
+  supportedTargetTypes:
+    - DMSanfree
+
+# ---------达梦集群  QDM-C00X
+- name: os_dm_css_state
+  aliasName: dmcss状态
+  labels:
+    job: os
+    alertingTypeName: dm
+  description: 监控数据库dmcss状态
+  spec:
+    unitOptional: false
+    rules:
+      - name: dmcss状态
+        expr: os_dm_css_state
+        description: 监控数据库dmcss状态
+        advanced:
+          last: 3
+          status: true
+        time:
+          status: false
+          groupInterval: 2
+          repeatInterval: 10
+        match:
+          labelName: ""
+          values: [ ]
+          prompt: ""
+          desc: ""
+          status: false
+          op: '!~'
+        warn:
+          errorcode: QDM-C001
+          message: 'QDM-C001：主机节点 <span>{{ $labels.targetIP }}</span> 的dmcss服务状态异常。'
+          suggest: 请检查主机节点状态，主机上dmcss服务状态。如有疑问，请联系原厂工程师处理。
+          operator: '!='
+          value: 1
+          status: true
+        critical:
+          errorcode: QDM-C001
+          message: 'QDM-C001：主机节点 <span>{{ $labels.targetIP }}</span> 的dmcss服务状态异常。'
+          suggest: 请检查主机节点状态，主机上dmcss服务状态。如有疑问，请联系原厂工程师处理。
+          operator: '!='
+          value: 1
+          status: true
+        severity:
+          value: critical
+          status: true
+        unit:
+          desc: ''
+          value: ''
+  supportedTargetTypes:
+    - DMInstance
+
+- name: os_dm_asm_state
+  aliasName: dmasm状态
+  labels:
+    job: os
+    alertingTypeName: dm
+  description: 监控数据库dmasm状态
+  spec:
+    unitOptional: false
+    rules:
+      - name: dmasm状态
+        expr: os_dm_asm_state
+        description: 监控数据库dmasm状态
+        advanced:
+          last: 3
+          status: true
+        time:
+          status: false
+          groupInterval: 2
+          repeatInterval: 10
+        match:
+          labelName: ""
+          values: [ ]
+          prompt: ""
+          desc: ""
+          status: false
+          op: '!~'
+        warn:
+          errorcode: QDM-C002
+          message: 'QDM-C002：主机节点 <span>{{ $labels.targetIP }}</span> 的dmasm服务状态异常。'
+          suggest: 请检查主机节点状态，主机上dmasm服务状态。如有疑问，请联系原厂工程师处理。
+          operator: '!='
+          value: 1
+          status: true
+        critical:
+          errorcode: QDM-C002
+          message: 'QDM-C002：主机节点 <span>{{ $labels.targetIP }}</span> 的dmasm服务状态异常。'
+          suggest: 请检查主机节点状态，主机上dmasm服务状态。如有疑问，请联系原厂工程师处理。
+          operator: '!='
+          value: 1
+          status: true
+        severity:
+          value: critical
+          status: true
+        unit:
+          desc: ''
+          value: ''
+  supportedTargetTypes:
+    - DMInstance
+
+- name: os_dm_db_state
+  aliasName: dmserver状态
+  labels:
+    job: os
+    alertingTypeName: dm
+  description: 监控数据库dmserver状态
+  spec:
+    unitOptional: false
+    rules:
+      - name: dmserver状态
+        expr: os_dm_db_state
+        description: 监控数据库dmserver状态
+        advanced:
+          last: 3
+          status: true
+        time:
+          status: false
+          groupInterval: 2
+          repeatInterval: 10
+        match:
+          labelName: ""
+          values: [ ]
+          prompt: ""
+          desc: ""
+          status: false
+          op: '!~'
+        warn:
+          errorcode: QDM-C003
+          message: 'QDM-C003：主机节点 <span>{{ $labels.targetIP }}</span> 的dmserver服务状态异常。'
+          suggest: 请检查主机节点状态，主机上dm数据库服务状态。如有疑问，请联系原厂工程师处理。
+          operator: '!='
+          value: 1
+          status: true
+        critical:
+          errorcode: QDM-C003
+          message: 'QDM-C003：主机节点 <span>{{ $labels.targetIP }}</span> 的dmserver服务状态异常。'
+          suggest: 请检查主机节点状态，主机上dm数据库服务状态。如有疑问，请联系原厂工程师处理。
+          operator: '!='
+          value: 1
+          status: true
+        severity:
+          value: critical
+          status: true
+        unit:
+          desc: ''
+          value: ''
+  supportedTargetTypes:
+    - DMInstance
+
+- name: dmbd_dg_free_capacity
+  aliasName: 磁盘组剩余容量百分比
+  labels:
+    job: os
+    alertingTypeName: dm
+  description: 监控数据库磁盘组剩余容量
+  spec:
+    unitOptional: false
+    rules:
+      - name: 磁盘组剩余容量百分比
+        expr: 100*dmdb_diskgroup_free_size/dmdb_diskgroup_total_size
+        description: 监控数据库磁盘组剩余容量
+        advanced:
+          last: 1
+          status: false
+        time:
+          status: false
+          groupInterval: 2
+          repeatInterval: 10
+        match:
+          labelName: "databaseName,group_name"  # 数据库 + dg 唯一确定
+          values: [ ]
+          prompt: "请输入DB名和磁盘组名，格式为 DB:DG，如 dsc:VOTE, dsc:DATADG"
+          desc: "需要过滤的DG"
+          status: true
+          op: '!~'
+        warn:
+          errorcode: QDM-C004
+          message: 'QDM-C004：数据库 <span>{{ $labels.databaseName }}</span> 的磁盘组<span>{{ $labels.group_name }}</span>容量仅剩 <span>{{ $value | printf "%.1f" }}%</span>。'
+          suggest: 请检查磁盘组空间剩余容量，及时扩容。如有疑问，请联系原厂工程师处理。
+          operator: '<'
+          value: 20
+          status: true
+        critical:
+          errorcode: QDM-C004
+          message: 'QDM-C004：数据库 <span>{{ $labels.databaseName }}</span> 的磁盘组<span>{{ $labels.group_name }}</span>容量仅剩 <span>{{ $value | printf "%.1f" }}%</span>。'
+          suggest: 请检查磁盘组空间剩余容量，及时扩容。如有疑问，请联系原厂工程师处理。
+          operator: '<'
+          value: 10
+          status: true
+        severity:
+          value: ''
+          status: false
+        unit:
+          desc: 百分比
+          value: '%'
+  supportedTargetTypes:
+    - DMInstance
+
+- name: dmbd_tablespace_free_capacity
+  aliasName: 表空间剩余容量百分比
+  labels:
+    job: os
+    alertingTypeName: dm
+  description: 监控数据库表空间剩余容量
+  spec:
+    unitOptional: false
+    rules:
+      - name: 表空间剩余容量百分比
+        expr: dmdb_tablespace_free_percent
+        description: 监控数据库表空间剩余容量
+        advanced:
+          last: 1
+          status: false
+        time:
+          status: false
+          groupInterval: 2
+          repeatInterval: 10
+        match:
+          labelName: "databaseName,tablespace_name"  # 数据库 + 表空间 唯一确定
+          values: [ ]
+          prompt: "请输入DB名和表空间名，格式为 DB:tablespace，如 dsc:MAIN, dsc:ROLL"
+          desc: "需要过滤的表空间"
+          status: true
+          op: '!~'
+        warn:
+          errorcode: QDM-C005
+          message: 'QDM-C005：数据库 <span>{{ $labels.databaseName }}</span> 的表空间<span>{{ $labels.tablespace_name }}</span>容量仅剩 <span>{{ $value | printf "%.1f" }}%</span>。'
+          suggest: 请检查表空间剩余容量，及时扩容。如有疑问，请联系原厂工程师处理。
+          operator: '<'
+          value: 20
+          status: true
+        critical:
+          errorcode: QDM-C005
+          message: 'QDM-C005：数据库 <span>{{ $labels.databaseName }}</span> 的表空间<span>{{ $labels.tablespace_name }}</span>容量仅剩 <span>{{ $value | printf "%.1f" }}%</span>。'
+          suggest: 请检查表空间剩余容量，及时扩容。如有疑问，请联系原厂工程师处理。
+          operator: '<'
+          value: 10
+          status: true
+        severity:
+          value: ''
+          status: false
+        unit:
+          desc: 百分比
+          value: '%'
+  supportedTargetTypes:
+    - DMInstance
+
+# 日志告警项: 配置格式同普通告警项不相同, 但是共用 alertingModel 表进行存储
+#---------------------------------
+- name: log_keyword
+  aliasName: 日志关键字检测
+  labels:
+    job: loki
+    alertingTypeName: log
+  description: 检测过去一段时间日志中是否出现目标关键字
+  spec:
+    rules:
+      - name: 日志关键字检测
+        # 表达式中的 `condition` 需要按照配置动态生成 {} | xxx=cc [1m]
+        expr: 'sum(count_over_time({{ .condition }})) by(filename)'
+        description: 检测过去一段时间日志中是否出现目标关键字
+        # 需要检测的日志路径列表
+        path:
+          prompt: '支持wildcards通配符路径配置, 例如 /var/log/*.log'
+          items:
+            - /var/log/message
+        # 关键字匹配规则
+        match:
+          prompt: "支持正则表达式, 例如 ORA-\d+"
+          items:
+            - error
+            - panic
+        # 需要排除的关键字
+        exclude:
+          prompt: "支持正则表达式, 例如 ORA-100\d+"
+          items:
+            - timeout
+        # 是否忽略大小写
+        ignoreCase: false
+        # 警告级别
+        severity: 'warn'
+        warn:
+          operator: '>'
+          value: 0
+          errorcode: 'QDM-L001'
+          message: 'QDM-L001: 主机节点<span>{{ $labels.targetIP }}</span>日志文件<span>{{ $labels.filename }}</span>在过去{{ $labels.minute }}分钟内出现[<span>{{ $annotations.keywords }}</span>]等关键字共计<span>{{ $value | printf "%.1f"  }}</span>次'
+          suggest: 请及时检查核对日志相关内容。如有疑问，请联系原厂工程师处理。
+        critical:
+          operator: '>'
+          value: 0
+          errorcode: 'QDM-L001'
+          message: 'QDM-L001: 主机节点<span>{{ $labels.targetIP }}</span>日志文件<span>{{ $labels.filename }}</span>在过去{{ $labels.minute }}分钟内出现[<span>{{ $annotations.keywords }}</span>]等关键字共计<span>{{ $value | printf "%.1f"  }}</span>次'
+          suggest: 请及时检查核对日志相关内容。如有疑问，请联系原厂工程师处理。
+        # 是否设置单个执行周期(1~10m)
+        interval:
+          status: false
+          value: 1
+  supportedTargetTypes:
+    - DMSanfree

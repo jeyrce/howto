@@ -1,0 +1,22 @@
+# QDM 的告警类型
+- name: os
+  aliasName: 操作系统
+  supportedTargetTypes:
+    - DMSanfree
+- name: hardware
+  aliasName: 硬件
+  supportedTargetTypes:
+    - DMSanfree
+- name: qstor
+  aliasName: 分布式存储
+  supportedTargetTypes:
+    - DMSanfree
+- name: dm
+  aliasName: 达梦集群
+  supportedTargetTypes:
+    - DMInstance
+# 以下为试验类型
+- name: log
+  aliasName: 日志告警
+  supportedTargetTypes:
+    - LogNode

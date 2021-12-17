@@ -1,0 +1,304 @@
+# QData lite
+- name: qdata-lite4
+  typeName: Sanfree
+  labels:
+    k1: v1
+    k2: v2
+  annotations:
+    uuid: u2
+    parentUuid: u00
+  status: active
+
+- name: qdata-lite3
+  typeName: Sanfree
+  labels:
+    k1: v1
+    k2: v2
+  annotations:
+    uuid: u3
+    parentUuid: u00
+  status: active
+
+- name: orcl1
+  typeName: NonOracleContainerInstance
+  labels:
+    k1: v1
+    k2: v2
+  annotations:
+    uuid: u4
+    parentUuid: u00
+  status: active
+
+- name: orcl2
+  typeName: NonOracleContainerInstance
+  labels:
+    k1: v1
+    k2: v2
+  annotations:
+    uuid: u5
+    parentUuid: u00
+  status: active
+
+# QData Standard
+- name: qdata-com1
+  typeName: Compute
+  labels:
+    k1: v1
+    k2: v2
+  annotations:
+    uuid: u6
+    parentUuid: u01
+  status: active
+
+- name: qdata-com2
+  typeName: Compute
+  labels:
+    k1: v1
+    k2: v2
+  annotations:
+    uuid: u7
+    parentUuid: u01
+  status: active
+
+- name: qdata-sto1
+  typeName: Storage
+  labels:
+    k1: v1
+    k2: v2
+  annotations:
+    uuid: u8
+    parentUuid: u01
+  status: active
+
+- name: qdata-sto2
+  typeName: Storage
+  labels:
+    k1: v1
+    k2: v2
+  annotations:
+    uuid: u9
+    parentUuid: u01
+  status: active
+
+- name: qdata-sto3
+  typeName: Storage
+  labels:
+    k1: v1
+    k2: v2
+  annotations:
+    uuid: u10
+    parentUuid: u01
+  status: active
+
+- name: IB交换机1
+  typeName: IBSwitch
+  labels:
+    k1: v1
+    k2: v2
+  annotations:
+    uuid: u11
+    parentUuid: u01
+  status: active
+
+- name: orcl1
+  typeName: NonOracleContainerInstance
+  labels:
+    k1: v1
+    k2: v2
+  annotations:
+    uuid: u12
+    parentUuid: u01
+  status: active
+
+- name: orcl2
+  typeName: NonOracleContainerInstance
+  labels:
+    k1: v1
+    k2: v2
+  annotations:
+    uuid: u13
+    parentUuid: u01
+  status: active
+
+- name: cdb1
+  typeName: OracleContainerInstance
+  labels:
+    k1: v1
+    k2: v2
+  annotations:
+    uuid: u14
+    parentUuid: u01
+  status: active
+
+- name: pdb1
+  typeName: OraclePDBInstance
+  labels:
+    k1: v1
+    k2: v2
+  annotations:
+    uuid: u15
+    parentUuid: u14
+  status: active
+
+- name: pdb2
+  typeName: OraclePDBInstance
+  labels:
+    k1: v1
+    k2: v2
+  annotations:
+    uuid: u16
+    parentUuid: u14
+  status: active
+
+# RAC
+- name: qdata-com1
+  typeName: RACNode
+  labels:
+    k1: v1
+    k2: v2
+  annotations:
+    uuid: u17
+    parentUuid: u02
+  status: active
+
+- name: qdata-com2
+  typeName: RACNode
+  labels:
+    k1: v1
+    k2: v2
+  annotations:
+    uuid: u18
+    parentUuid: u02
+  status: active
+
+- name: orcl1
+  typeName: NonOracleContainerInstance
+  labels:
+    k1: v1
+    k2: v2
+  annotations:
+    uuid: u19
+    parentUuid: u02
+  status: active
+
+- name: orcl2
+  typeName: NonOracleContainerInstance
+  labels:
+    k1: v1
+    k2: v2
+  annotations:
+    uuid: u20
+    parentUuid: u02
+  status: active
+
+- name: cdb1
+  typeName: OracleContainerInstance
+  labels:
+    k1: v1
+    k2: v2
+  annotations:
+    uuid: u21
+    parentUuid: u02
+  status: active
+
+- name: pdb1
+  typeName: OraclePDBInstance
+  labels:
+    k1: v1
+    k2: v2
+  annotations:
+    uuid: u22
+    parentUuid: u21
+  status: active
+
+- name: pdb2
+  typeName: OraclePDBInstance
+  labels:
+    k1: v1
+    k2: v2
+  annotations:
+    uuid: u23
+    parentUuid: u21
+  status: active
+
+# 单实例系统
+- name: test123
+  typeName: OracleSingleNode
+  labels:
+    k1: v1
+    k2: v2
+  annotations:
+    uuid: u24
+    parentUuid: u03
+  status: active
+
+- name: orcl1
+  typeName: NonOracleContainerInstance
+  labels:
+    k1: v1
+    k2: v2
+  annotations:
+    uuid: u25
+    parentUuid: u03
+  status: active
+
+- name: cdb
+  typeName: OracleContainerInstance
+  labels:
+    k1: v1
+    k2: v2
+  annotations:
+    uuid: u26
+    parentUuid: u03
+  status: active
+
+- name: pdb1
+  typeName: OraclePDBInstance
+  labels:
+    k1: v1
+    k2: v2
+  annotations:
+    uuid: u27
+    parentUuid: u26
+  status: active
+
+# 数据库实例
+- name: orcl1
+  typeName: NonOracleContainerInstance
+  labels:
+    k1: v1
+    k2: v2
+  annotations:
+    uuid: u28
+    parentUuid: u04
+  status: active
+
+- name: orcl2
+  typeName: NonOracleContainerInstance
+  labels:
+    k1: v1
+    k2: v2
+  annotations:
+    uuid: u29
+    parentUuid: u04
+  status: active
+
+- name: cdb
+  typeName: OracleContainerInstance
+  labels:
+    k1: v1
+    k2: v2
+  annotations:
+    uuid: u30
+    parentUuid: u04
+  status: active
+
+- name: pdb1
+  typeName: OraclePDBInstance
+  labels:
+    k1: v1
+    k2: v2
+  annotations:
+    uuid: u31
+    parentUuid: u30
+  status: active

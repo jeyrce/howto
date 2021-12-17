@@ -1,0 +1,621 @@
+{{ define "userdefine.username" }}woqu{{ end }}
+{{ define "userdefine.subject" }}
+{{template "userdefine.username"}}
+{{ if eq .Status "firing" }}
+告警 [告警数:{{ .Alerts.Firing | len }}]
+{{ else }}
+告警已解决 [告警数:{{ .Alerts.Resolved | len }}]
+{{ end }}
+[{{ .CommonLabels.alertingTargetTypeAliasName }}:{{ .CommonLabels.alertingTargetName }}]
+{{ if eq .Status "firing" }}
+有告警发生
+{{ end }}
+{{ end }}
+
+{{ define "email.html" }}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>告警模板</title>
+    <style>
+      /* -------------------------------------
+          GLOBAL RESETS
+      ------------------------------------- */
+      img {
+        max-width: 100%;
+        border: none;
+        vertical-align: top;
+        -ms-interpolation-mode: bicubic;
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+        font-size: 14px;
+        line-height: 1.4;
+        color: #333;
+        -ms-text-size-adjust: 100%;
+        -webkit-text-size-adjust: 100%;
+        background-color: #f8f8f8;
+        -webkit-font-smoothing: antialiased;
+      }
+      table {
+        min-width: 100%;
+        width: 100%;
+        border-collapse: separate;
+        mso-table-lspace: 0pt;
+        mso-table-rspace: 0pt;
+      }
+      table td {
+        font-family: sans-serif;
+        font-size: 14px;
+        vertical-align: top;
+      }
+      hr {
+        margin: 20px 0;
+        border: 0;
+        border-bottom: 1px solid #f6f6f6;
+      }
+
+      /* -------------------------------------
+          TYPOGRAPHY
+      ------------------------------------- */
+      h1,
+      h2,
+      h3,
+      h4 {
+        margin: 0;
+        margin-bottom: 30px;
+        font-family: sans-serif;
+        font-weight: 400;
+        line-height: 1.4;
+        color: #000;
+      }
+      h1 {
+        font-size: 35px;
+        font-weight: 300;
+        text-align: center;
+        text-transform: capitalize;
+      }
+      p,
+      ul,
+      ol {
+        margin: 0;
+        margin-bottom: 15px;
+        font-family: sans-serif;
+        font-size: 14px;
+        font-weight: normal;
+      }
+      p li,
+      ul li,
+      ol li {
+        margin-left: 5px;
+        list-style-position: inside;
+      }
+      a {
+        color: #3498db;
+        text-decoration: underline;
+      }
+
+      /* -------------------------------------
+          RESPONSIVE AND MOBILE FRIENDLY STYLES
+      ------------------------------------- */
+      @media only screen and (max-width: 620px) {
+        table[class='body'] h1 {
+          font-size: 28px !important;
+          margin-bottom: 10px !important;
+        }
+        table[class='body'] p,
+        table[class='body'] ul,
+        table[class='body'] ol,
+        table[class='body'] td,
+        table[class='body'] span,
+        table[class='body'] a {
+          font-size: 16px !important;
+        }
+        table[class='body'] .container {
+          padding: 0 !important;
+          width: 100% !important;
+          max-width: 100% !important;
+        }
+        table[class='body'] .main {
+          border-left-width: 0 !important;
+          border-radius: 0 !important;
+          border-right-width: 0 !important;
+        }
+      }
+
+      /* -------------------------------------
+          OTHER STYLES THAT MIGHT BE USEFUL
+      ------------------------------------- */
+      .last {
+        margin-bottom: 0;
+      }
+      .first {
+        margin-top: 0;
+      }
+      .align-center {
+        text-align: center;
+      }
+      .align-right {
+        text-align: right;
+      }
+      .align-left {
+        text-align: left;
+      }
+      .clear {
+        clear: both;
+      }
+      .mt0 {
+        margin-top: 0;
+      }
+      .mb0 {
+        margin-bottom: 0;
+      }
+      .preheader {
+        color: transparent;
+        display: none;
+        height: 0;
+        max-height: 0;
+        max-width: 0;
+        opacity: 0;
+        overflow: hidden;
+        mso-hide: all;
+        visibility: hidden;
+        width: 0;
+      }
+      .powered-by a {
+        text-decoration: none;
+      }
+
+      /* -------------------------------------
+          BODY & CONTAINER
+      ------------------------------------- */
+      .body {
+        width: 100%;
+        background-color: #f8f8f8;
+      }
+      .container {
+        display: block;
+        margin: 0 auto !important;
+        padding: 10px;
+        max-width: 580px;
+        width: 580px;
+      }
+
+      /* -------------------------------------
+          HEADER, FOOTER, MAIN
+      ------------------------------------- */
+      .block {
+        display: block;
+        margin: 0 auto;
+        padding: 0;
+        width: 100%;
+      }
+      .header {
+        padding: 16px 24px;
+        color: #fff;
+      }
+      .header--unsolved {
+        background: #fd6969;
+      }
+      .header--solved {
+        background: #28d280;
+      }
+      .main {
+        border-radius: 3px;
+      }
+      .footer {
+        clear: both;
+        margin-top: 10px;
+        text-align: center;
+        width: 100%;
+      }
+      .footer td,
+      .footer p,
+      .footer span,
+      .footer a {
+        color: #9a9ea6;
+        font-size: 12px;
+        text-align: center;
+      }
+      .wrapper {
+        padding: 16px 24px 10px 0;
+        background: #ffffff;
+        box-sizing: border-box;
+      }
+
+      /* -------------------------------------
+          alert
+      ------------------------------------- */
+      .v-top {
+        display: inline-block;
+        height: 20px;
+        line-height: 20px;
+        vertical-align: top;
+      }
+      .item {
+      }
+      .item-row {
+      }
+      .item-title {
+        padding: 8px 0 0 24px;
+        width: 100px;
+      }
+      .item-title--border {
+        padding-left: 21px;
+      }
+      .item-title--border-unsolved {
+        border-left: 3px solid #fd6969;
+      }
+      .item-title--border-solved {
+        border-left: 3px solid #28d280;
+      }
+      .item-context {
+        padding: 8px;
+        color: #666;
+        background: #f8f8f8;
+      }
+      .item-space {
+        height: 16px;
+        line-height: 1;
+      }
+      .level {
+      }
+      .level--warnning {
+        color: #ff9f00;
+      }
+      .level--critical {
+        color: #fd6969;
+      }
+      .hr-line {
+        margin-top: 40px;
+        margin-bottom: 40px;
+        margin-left: 24px;
+        padding: 0;
+        height: 1px;
+        overflow: hidden;
+        font-size: 0;
+        color: #ebebeb;
+        border: 0;
+        border-top: 1px solid #ebebeb;
+      }
+
+      /* outlook2013 */
+      p.MsoNormal {
+        margin-bottom: 0 !important;
+      }
+    </style>
+  </head>
+  <body class="">
+    <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body">
+      <tr>
+        <td>&nbsp;</td>
+        <td class="container">
+
+          <!-- 如果存在 firing 的告警项 -->
+          {{ if gt (len .Alerts.Firing) 0 }}
+            <div class="block">
+              <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td class="header header--unsolved" style="background: #fd6969;">
+                    <img
+                      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTMyIDc5LjE1OTI4NCwgMjAxNi8wNC8xOS0xMzoxMzo0MCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTUuNSAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OTk4RTEyNUUyOEJFMTFFNzk5NzVDQUJBOTg4MTIzOEEiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OTk4RTEyNUYyOEJFMTFFNzk5NzVDQUJBOTg4MTIzOEEiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5OThFMTI1QzI4QkUxMUU3OTk3NUNBQkE5ODgxMjM4QSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5OThFMTI1RDI4QkUxMUU3OTk3NUNBQkE5ODgxMjM4QSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pmj/NgsAAADvSURBVHjaYvz//z8DNQETA5UB1Q1kAWJhIL4ExFJA/AWISQ0DRiDmAeJnQGzIAAxDUSAWAOLr/8kH14CYH4jFQAZ+AmIXUOQAcS8ZhvVA9boC8WcGJIliqEQgCYYFQvWUwARAnA9ICtZBxQSB+DYeg25D1YDUrkcS/wDzMjK4CcTCUMWrsRi2CioHUnMLTe4TNgNhwA+qMRtJLAsq5o9DD14DQaAFaoAnFDNAxf6TayAI7IcaxABl4wOfGMGmMjDwEki896EJWIGAus8sROYGRVLyMiMVszIj438ql18gL68EYk8qufQA48grYAECDADC/XEs27+V6gAAAABJRU5ErkJggg=="
+                      width="20"
+                      height="20"
+                      alt="Icon"
+                      border="0"
+                      class="v-top"
+                    />
+                    <span class="v-top">告警通知</span>
+                  </td>
+                </tr>
+              </table>
+            </div>
+
+            <div class="block main">
+              <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td class="wrapper">
+                    {{ range $i, $alert := .Alerts.Firing }}
+                      {{ if ne $i 0 }}
+                        <hr class="hr-line" />
+                      {{ end }}
+
+                      <table role="presentation" class="item" border="0" cellpadding="0" cellspacing="0">
+                        <tr>
+                          <td align="left">
+                            <table role="presentation" class="item-row" border="0" cellpadding="0" cellspacing="0">
+                              <tr>
+                                <td class="item-title item-title--border item-title--border-unsolved">告警项：</td>
+                                <td class="item-context">{{ $alert.Labels.alertingModelAliasName }}</td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="item-space">&nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td align="left">
+                            <table role="presentation" class="item-row" border="0" cellpadding="0" cellspacing="0">
+                              <tr>
+                                <td class="item-title">告警描述：</td>
+                                <td class="item-context">{{ $alert.Annotations.description }}</td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="item-space">&nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td align="left">
+                            <table role="presentation" class="item-row" border="0" cellpadding="0" cellspacing="0">
+                              <tr>
+                                <td class="item-title">监控对象：</td>
+                                <td class="item-context">{{ $alert.Labels.alertingTargetName}}({{ $alert.Labels.targetIP }})</td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="item-space">&nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td align="left">
+                            <table role="presentation" class="item-row" border="0" cellpadding="0" cellspacing="0">
+                              <tr>
+                                <td class="item-title">管理节点：</td>
+                                <td class="item-context">{{ $alert.Labels.sourceIP }}</td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="item-space">&nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td align="left">
+                            <table role="presentation" class="item-row" border="0" cellpadding="0" cellspacing="0">
+                              <tr>
+                                <td class="item-title">告警代码：</td>
+                                <td class="item-context">{{ $alert.Annotations.errorcode }}</td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="item-space">&nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td align="left">
+                            <table role="presentation" class="item-row" border="0" cellpadding="0" cellspacing="0">
+                              <tr>
+                                <td class="item-title">开始时间：</td>
+                                <td class="item-context">{{ $alert.StartsAt.Local.Format "2006-01-02 15:04:05" }}</td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="item-space">&nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td align="left">
+                            <table role="presentation" class="item-row" border="0" cellpadding="0" cellspacing="0">
+                              <tr>
+                                <td class="item-title">告警级别：</td>
+                                <td class="item-context">
+                                  {{ if eq $alert.Labels.severity "warn" }}
+                                    <span class="level level--warnning">警告</span>
+                                  {{ else }}
+                                    <span class="level level--critical">严重</span>
+                                  {{ end }}
+                                </td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="item-space">&nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td align="left">
+                            <table role="presentation" class="item-row" border="0" cellpadding="0" cellspacing="0">
+                              <tr>
+                                <td class="item-title">告警信息：</td>
+                                <td class="item-context">{{ $alert.Annotations.message | safeHtml }}</td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="item-space">&nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td align="left">
+                            <table role="presentation" class="item-row" border="0" cellpadding="0" cellspacing="0">
+                              <tr>
+                                <td class="item-title">建议：</td>
+                                <td class="item-context">{{ $alert.Annotations.suggest | safeHtml }}</td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </table>
+                    {{ end }}
+                  </td>
+                </tr>
+              </table>
+            </div>
+          {{ end }}
+
+          <!-- 如果存在 resolved 的告警项 -->
+          {{ if gt (len .Alerts.Resolved) 0 }}
+            <div class="block">
+              <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td class="header header--solved" style="background: #28d280;">
+                    <img
+                      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTMyIDc5LjE1OTI4NCwgMjAxNi8wNC8xOS0xMzoxMzo0MCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTUuNSAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OTk4RTEyNUUyOEJFMTFFNzk5NzVDQUJBOTg4MTIzOEEiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OTk4RTEyNUYyOEJFMTFFNzk5NzVDQUJBOTg4MTIzOEEiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5OThFMTI1QzI4QkUxMUU3OTk3NUNBQkE5ODgxMjM4QSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5OThFMTI1RDI4QkUxMUU3OTk3NUNBQkE5ODgxMjM4QSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pmj/NgsAAADvSURBVHjaYvz//z8DNQETA5UB1Q1kAWJhIL4ExFJA/AWISQ0DRiDmAeJnQGzIAAxDUSAWAOLr/8kH14CYH4jFQAZ+AmIXUOQAcS8ZhvVA9boC8WcGJIliqEQgCYYFQvWUwARAnA9ICtZBxQSB+DYeg25D1YDUrkcS/wDzMjK4CcTCUMWrsRi2CioHUnMLTe4TNgNhwA+qMRtJLAsq5o9DD14DQaAFaoAnFDNAxf6TayAI7IcaxABl4wOfGMGmMjDwEki896EJWIGAus8sROYGRVLyMiMVszIj438ql18gL68EYk8qufQA48grYAECDADC/XEs27+V6gAAAABJRU5ErkJggg=="
+                      width="20"
+                      height="20"
+                      alt="Icon"
+                      border="0"
+                      class="v-top"
+                    />
+                    <span class="v-top">已解决的告警</span>
+                  </td>
+                </tr>
+              </table>
+            </div>
+
+            <div class="block main">
+              <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td class="wrapper">
+                    {{ range $i, $alert := .Alerts.Resolved }}
+                      {{ if ne $i 0 }}
+                        <hr class="hr-line" />
+                      {{ end }}
+
+                      <table role="presentation" class="item" border="0" cellpadding="0" cellspacing="0">
+                        <tr>
+                          <td align="left">
+                            <table role="presentation" class="item-row" border="0" cellpadding="0" cellspacing="0">
+                              <tr>
+                                <td class="item-title item-title--border item-title--border-solved">告警项：</td>
+                                <td class="item-context">{{ $alert.Labels.alertingModelAliasName }}</td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="item-space">&nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td align="left">
+                            <table role="presentation" class="item-row" border="0" cellpadding="0" cellspacing="0">
+                              <tr>
+                                <td class="item-title">告警描述：</td>
+                                <td class="item-context">{{ $alert.Annotations.description }}</td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="item-space">&nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td align="left">
+                            <table role="presentation" class="item-row" border="0" cellpadding="0" cellspacing="0">
+                              <tr>
+                                <td class="item-title">告警代码：</td>
+                                <td class="item-context">{{ $alert.Annotations.errorcode }}</td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="item-space">&nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td align="left">
+                            <table role="presentation" class="item-row" border="0" cellpadding="0" cellspacing="0">
+                              <tr>
+                                <td class="item-title">监控对象：</td>
+                                <td class="item-context">{{ $alert.Labels.alertingTargetName }}({{ $alert.Labels.targetIP }})</td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="item-space">&nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td align="left">
+                            <table role="presentation" class="item-row" border="0" cellpadding="0" cellspacing="0">
+                              <tr>
+                                <td class="item-title">管理节点：</td>
+                                <td class="item-context">{{ $alert.Labels.sourceIP }}</td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="item-space">&nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td align="left">
+                            <table role="presentation" class="item-row" border="0" cellpadding="0" cellspacing="0">
+                              <tr>
+                                <td class="item-title">开始时间：</td>
+                                <td class="item-context">{{ $alert.StartsAt.Local.Format "2006-01-02 15:04:05" }}</td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="item-space">&nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td align="left">
+                            <table role="presentation" class="item-row" border="0" cellpadding="0" cellspacing="0">
+                              <tr>
+                                <td class="item-title">结束时间：</td>
+                                <td class="item-context">{{ $alert.EndsAt.Local.Format "2006-01-02 15:04:05" }}</td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="item-space">&nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td align="left">
+                            <table role="presentation" class="item-row" border="0" cellpadding="0" cellspacing="0">
+                              <tr>
+                                <td class="item-title">告警级别：</td>
+                                <td class="item-context">
+                                  {{ if eq $alert.Labels.severity "warn" }}
+                                    <span class="level level--warnning">警告</span>
+                                  {{ else }}
+                                    <span class="level level--critical">严重</span>
+                                  {{ end }}
+                                </td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="item-space">&nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td align="left">
+                            <table role="presentation" class="item-row" border="0" cellpadding="0" cellspacing="0">
+                              <tr>
+                                <td class="item-title">通知信息：</td>
+                                <td class="item-context">
+                                  在过去 5m 内没有持续触发该告警，因此告警被判定为已解决。
+                                </td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </table>
+                    {{ end }}
+                  </td>
+                </tr>
+              </table>
+            </div>
+          {{ end }}
+        </td>
+        <td>&nbsp;</td>
+      </tr>
+    </table>
+  </body>
+</html>
+{{ end }}

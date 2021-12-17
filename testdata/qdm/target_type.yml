@@ -1,0 +1,8 @@
+# qdm 的监控对象类型
+- name: DMSanfree
+  aliasName: 达梦融合节点
+- name: DMInstance
+  aliasName: 达梦实例
+# 以下为测试类型
+- name: LogNode
+  aliasName: 日志对象

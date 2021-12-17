@@ -1,0 +1,96 @@
+- name: worker001
+  typeName: WorkerNode
+  labels:
+    k1: v1
+    k2: v2
+  status: active
+- name: worker002
+  typeName: WorkerNode
+  labels:
+    k1: v3
+    k2: v4
+  status: active
+- name: worker003
+  typeName: WorkerNode
+  labels:
+    k1: v4
+    k2: v5
+  status: active
+- name: SystemComponent
+  typeName: SystemComponent
+  labels:
+    k1: v6
+    k2: v7
+  status: active
+- name: my001
+  typeName: MySQLCluster
+  labels:
+    k1: v7
+    k2: v8
+  status: active
+- name: my002
+  typeName: MySQLCluster
+  labels:
+    k1: v9
+    k2: v10
+  status: active
+- name: ora001
+  typeName: OracleCluster
+  labels:
+    k1: v11
+    k2: v12
+  status: active
+- name: ora002
+  typeName: OracleCluster
+  labels:
+    k1: v13
+    k2: v14
+  status: active
+- name: ms001
+  typeName: MSSQLCluster
+  labels:
+    k1: v15
+    k2: v16
+  status: active
+- name: ms002
+  typeName: MSSQLCluster
+  labels:
+    k1: v17
+    k2: v18
+  status: active
+- name: e-my001
+  typeName: ExternalMasterMySQLDatabase
+  labels:
+    k1: v19
+    k2: v20
+  status: active
+- name: e-my002
+  typeName: ExternalMasterMySQLDatabase
+  labels:
+    k1: v21
+    k2: v22
+  status: active
+- name: e-ora001
+  typeName: ExternalOracleDatabase
+  labels:
+    k1: v23
+    k2: v24
+  status: active
+- name: e-ora002
+  typeName: ExternalOracleDatabase
+  labels:
+    k1: v25
+    k2: v26
+  status: active
+- name: e-ms001
+  typeName: ExternalMSSQLDatabase
+  labels:
+    k1: v27
+    k2: v28
+  status: active
+- name: e-ms002
+  typeName: ExternalMSSQLDatabase
+  labels:
+    k1: v29
+    k2: v20
+  status: active

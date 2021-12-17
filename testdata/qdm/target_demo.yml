@@ -1,0 +1,107 @@
+# labels 的作用:
+#- 添加到alert的labels中
+#- 作为route的match规则
+#- 作为alertmanager的groupBy依据
+#
+#annotations 的作用:
+#  - 启用默认的告警模板
+#  - 建立file_sd_configs对应的yml文件
+
+# --------------------DM 融合节点
+- name: dm-11(或者其他方式组合用于代表一个dm节点的名称)
+  typeName: DMSanfree
+  # labels 组合需要唯一确定一个监控对象
+  labels:
+    # 对于一体机节点来说:  ip + 集群名 这两个组合就可以唯一确定一个节点
+    sourceIP: 192.168.1.99 # 这个ip是管理节点ip， 用于判定告警从哪个管理节点发出
+    targetIP: 10.10.100.5 # 注意这个是主机ip，非带外，用于判定资源到底在哪台主机上
+    spaceID: "1"  # 集群id
+  annotations:
+    defaultTemplate: "xxx" # 此字段目前dm 不传，用于应用对象的默认模板
+    namespace: 集群123 # 通常可以传一个集群名称，用以判定资源的组织
+    spaceType: 双节点架构  # 集群架构类型，直接传中文名称即可
+    # jobs 标签必传，用于判定需要对哪些exporter建立采集任务(注意jobs的值整体是一个字符串)
+    jobs:
+      # redfish_exporter的采集任务
+      - name: ipmi # 该job下的labels和targets会被写入名为 ipmi.yml的文件供 file_sd_configs使用
+        labels:
+          # __param_开头的label将会被当作参数传递给采集任务
+          # 其他 label 用于建立job任务的时候携带，采集回来的指标将会无条件携带(如果没有被relabel)
+          __param_username: ADMIN     # 带外账户
+          __param_password: 12345678  # 此处密码无需加密
+          __param_target: 10.10.100.105 # 带外ip
+        targets:
+          # 此处ip是一个列表，但是每个job都只配置一个ip
+          - 127.0.0.1 # 此处ip为exporter服务所在ip，因此对于一体机的exporter为一体机ip，管理节点上的ip都是127.0.0.1
+      # blackbox_exporter的tcp端口探测
+      - name: tcp
+        labels:
+          __param_module: tcp  # 此处固定为tcp
+          __param_target: "10.10.100.5:80"  # 需要探测的ip和端口，其中端口固定为80
+        targets:
+          - 127.0.0.1 # 此处固定为127.0.0.1
+      # blackbox_exporter的ping检测
+      - name: ping
+        labels:
+          __param_module: ping # 此处固定为ping
+          __param_target: 10.10.100.5 # 需要ping的主机ip，注意此处不要加端口
+        targets:
+          - 127.0.0.1 # 此处固定为127.0.0.1
+      # node_exporter的采集任务
+      - name: node
+        labels:
+          __param_target: 10.10.100.5   # 节点ip
+        targets:
+          - 10.10.100.5 # 需要采集的一体机节点ip
+      # os_exporter的采集任务
+      - name: os
+        labels:
+          __param_target: 10.10.100.5 # 一体机节点ip
+        targets:
+          - 10.10.100.5 # 一体机节点ip
+      # store_exporter的采集任务
+      - name: store
+        labels:
+          __param_target: 10.10.100.5 # 一体机节点ip
+        targets:
+          - 10.10.100.5 # 一体机节点ip
+      # whitebox_exporter的任务
+      - name: host
+        labels:
+          __param_ip: 10.10.168.3 # 一体机节点ip
+        targets:
+          - 127.0.0.1
+
+# --------------------DM 实例
+- name: 可表示当前资源的任意名称(可以重复)
+  typeName: DMInstance # dm数据库实例监控类型
+  labels:
+    # labels 组合需要唯一确定一个监控对象，对于实例来说，至少需要  集群 + ip + 实例名
+    sourceIP: 192.168.1.99 # 这个ip是管理节点ip， 用于判定告警从哪个管理节点发出
+    targetIP: 10.10.100.5 # 注意这个是主机ip，非带外，用于判定资源到底在哪台主机上
+    instanceName: dmdb01  # 实例名称
+    spaceID: "1"  # 集群id
+  annotations:
+    namespace: 集群123 # 通常可以传一个集群名称，用以判定资源的组织
+    spaceType: 双节点架构  # 集群架构类型，直接传中文名称即可
+    defaultTemplate: "xxx" # 此字段目前dm 不传，用于应用对象的默认模板
+    jobs:
+      - name: dmdb
+        labels:
+          __param_auth: "base64加密的用户名和密码"
+          __param_port: 5236
+          __param_host: 10.10.100.5 # 主机节点物理ip
+        targets:
+          - 127.0.0.1 # dmdb_exporter在管理节点，因此恒为 127.0.0.1
+
+# 日志告警示例数据
+- name: log-10.10.100.218
+  typeName: LogNode
+  labels:
+    sourceIP: 10.10.168.77
+    targetIP: 10.10.100.218
+    spaceID: "1"
+  annotations:
+    namespace: 集群xxx
+    spaceType: 双节点架构  # 集群架构类型，直接传中文名称即可
+

@@ -1,0 +1,119 @@
+- name: 计算节点默认模版
+  type: Compute
+  repeatIntervalMinute: 120
+  groupIntervalMinute: 10
+  metrics:
+    - name: redfish_power_information
+    - name: redfish_thermal_temperature
+    - name: node_ssh_time
+    - name: node_vmstat_pswpin
+    - name: node_ib_port_phystatus
+    - name: node_filesystem_use
+    - name: node_ip_packet_reassembles_failed
+    - name: node_udp_packet_receive_errors
+    - name: node_qlink_compute_lun
+    - name: node_crs_up
+    - name: node_asm_disk
+    - name: node_asm_diskgroup_capacity
+    - name: node_asm_disk_usage
+- name: 存储节点默认模版
+  type: Storage
+  repeatIntervalMinute: 120
+  groupIntervalMinute: 10
+  metrics:
+    - name: redfish_power_information
+    - name: node_ssh_time
+    - name: node_vmstat_pswpin
+    - name: node_ib_port_phystatus
+    - name: node_filesystem_size_mb
+    - name: node_qlink_storage_lun
+    - name: node_disk_state
+- name: 融合节点默认模版
+  type: Sanfree
+  repeatIntervalMinute: 120
+  groupIntervalMinute: 10
+  metrics:
+    - name: redfish_power_information
+    - name: node_ssh_time
+    - name: node_vmstat_pswpin
+    - name: node_ib_port_phystatus
+    - name: node_filesystem_use
+    - name: node_ip_packet_reassembles_failed
+    - name: node_udp_packet_receive_errors
+    - name: node_qlink_compute_lun
+    - name: node_qlink_storage_lun
+    - name: node_crs_up
+    - name: node_asm_disk
+    - name: node_asm_diskgroup_capacity
+    - name: node_asm_disk_usage
+    - name: node_disk_state
+- name: IB交换机默认模版
+  type: IBSwitch
+  repeatIntervalMinute: 120
+  groupIntervalMinute: 10
+  metrics:
+    - name: ib_switch_up
+- name: RAC节点默认模版
+  type: RACNode
+  repeatIntervalMinute: 120
+  groupIntervalMinute: 10
+  metrics:
+    - name: redfish_power_information
+    - name: redfish_thermal_temperature
+    - name: node_ssh_time
+    - name: node_vmstat_pswpin
+    - name: node_ib_port_phystatus
+    - name: node_filesystem_use
+    - name: node_ip_packet_reassembles_failed
+    - name: node_udp_packet_receive_errors
+    - name: node_qlink_compute_lun
+    - name: node_crs_up
+    - name: node_asm_disk
+    - name: node_asm_diskgroup_capacity
+    - name: node_asm_disk_usage
+- name: 单实例节点默认模版
+  type: OracleSingleNode
+  repeatIntervalMinute: 120
+  groupIntervalMinute: 10
+  metrics:
+    - name: redfish_power_information
+    - name: redfish_thermal_temperature
+    - name: node_ssh_time
+    - name: node_vmstat_pswpin
+    - name: node_ib_port_phystatus
+    - name: node_filesystem_use
+    - name: node_ip_packet_reassembles_failed
+    - name: node_udp_packet_receive_errors
+    - name: node_qlink_compute_lun
+    - name: node_crs_up
+    - name: node_asm_disk
+    - name: node_asm_diskgroup_capacity
+    - name: node_asm_disk_usage
+- name: 容器数据库实例默认模版
+  type: OracleContainerInstance
+  repeatIntervalMinute: 120
+  groupIntervalMinute: 10
+  metrics:
+    - name: oracle_db_available_check
+    - name: oracle_db_redo
+    - name: oracle_dba_tablespace_used_percent
+    - name: oracle_user_active_sessions_aas
+    - name: oracle_log_file_parallel_write_time_waited
+    - name: oracle_scheduler_job
+    - name: oracle_db_undo
+    - name: oracle_db_max_blocks
+    - name: oracle_db_max_duration
+- name: 非容器数据库实例默认模版
+  type: NonOracleContainerInstance
+  repeatIntervalMinute: 120
+  groupIntervalMinute: 10
+  metrics:
+    - name: oracle_db_available_check
+    - name: oracle_db_redo
+    - name: oracle_dba_tablespace_used_percent
+    - name: oracle_user_active_sessions_aas
+    - name: oracle_log_file_parallel_write_time_waited
+    - name: oracle_scheduler_job
+    - name: oracle_db_undo
+    - name: oracle_db_max_blocks
+    - name: oracle_db_max_duration

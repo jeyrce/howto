@@ -1,0 +1,76 @@
+- name: 工作节点默认模版
+  type: WorkerNode
+  repeatIntervalMinute: 180
+  groupIntervalMinute: 5
+  metrics:
+    - name: node_available
+    - name: node_filesystem_free_bytes
+    - name: node_network_interface
+    - name: load5
+- name: 系统组件默认模版
+  type: SystemComponent
+  repeatIntervalMinute: 180
+  groupIntervalMinute: 5
+  metrics:
+    - name: kube_system_component_up
+    - name: qcfs_namespace_Encodes_enodes_data_nic_status
+    - name: qcfs_namespace_System_info_enodes_System_percent
+    - name: qcfs_namespace_System_info_enodes_manager_status
+- name: MySQL集群默认模版
+  type: MySQLCluster
+  repeatIntervalMinute: 180
+  groupIntervalMinute: 5
+  metrics:
+    - name: mysql_up
+    - name: kube_mycat_up
+    - name: mysql_filesystem_avail_percent
+    - name: mysql_inst_memory_usage
+    - name: mysql_inst_cpu_usage
+    - name: mysql_slave_status_slave_sql_running
+    - name: mysql_slave_status_seconds_behind_master
+- name: Oracle实例默认模版
+  type: OracleCluster
+  repeatIntervalMinute: 180
+  groupIntervalMinute: 5
+  metrics:
+    - name: oracle_db_available_check
+    - name: oracle_filesystem_avail_percent
+    - name: oracle_tablespace_usage
+    - name: oracle_inst_cpu_usage
+    - name: oracle_inst_memory_usage
+- name: MSSQL实例默认模版
+  type: MSSQLCluster
+  repeatIntervalMinute: 180
+  groupIntervalMinute: 5
+  metrics:
+    - name: mssql_up
+    - name: mssql_filesystem_avail_percent
+    - name: mssql_inst_cpu_usage
+    - name: mssql_inst_memory_usage
+- name: 外部MySQL主库实例默认模版
+  type: ExternalMasterMySQLDatabase
+  repeatIntervalMinute: 180
+  groupIntervalMinute: 5
+  metrics:
+    - name: external_mysql_up
+- name: 外部MySQL从库实例默认模版
+  type: ExternalSlaveMySQLDatabase
+  repeatIntervalMinute: 180
+  groupIntervalMinute: 5
+  metrics:
+    - name: external_mysql_up
+    - name: external_mysql_slave_status_slave_sql_running
+    - name: external_mysql_slave_status_seconds_behind_master
+- name: 外部MSSQL实例默认模版
+  type: ExternalMSSQLDatabase
+  repeatIntervalMinute: 180
+  groupIntervalMinute: 5
+  metrics:
+    - name: external_mssql_up
+- name: 外部Oracle实例默认模版
+  type: ExternalOracleDatabase
+  repeatIntervalMinute: 180
+  groupIntervalMinute: 5
+  metrics:
+    - name: external_oracle_db_available_check
+    - name: oracle_tablespace_usage

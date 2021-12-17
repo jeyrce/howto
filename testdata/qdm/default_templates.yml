@@ -1,0 +1,33 @@
+# qdm 的默认告警模板
+
+- name: 达梦融合节点默认模版
+  type: DMSanfree
+  repeatIntervalMinute: 20
+  groupIntervalMinute: 5
+  # 模板包含的告警项
+  metrics:
+    - name: redfish_power_information
+    - name: node_available
+    - name: white_system_time_offset
+    - name: node_vmstat_pswpout
+    - name: node_filesystem_free_capacity_pct
+    - name: node_inode_free_pct
+    - name: store_qstor_res_state
+
+- name: 达梦实例默认模版
+  type: DMInstance
+  repeatIntervalMinute: 20
+  groupIntervalMinute: 5
+  metrics:
+    - name: os_dm_css_state
+    - name: os_dm_db_state
+    - name: dmbd_tablespace_free_capacity
+
+# 实验性日志告警模板
+- name: 日志告警模板
+  type: LogNode
+  # 在日志告警中代表执行周期
+  repeatIntervalMinute: 1
+  groupInterValMinute: 0
+  metrics:
+    - name: log_keyword

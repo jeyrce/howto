@@ -1,0 +1,15 @@
+# eg.同一个对象的同一告警项warn和critical都发生时抑制warn
+- source_match:
+    severity: critical
+  target_match:
+    severity: warn
+  equal:
+    - _alertingTargetUuid
+    - _alertingRuleUuid
+# eg.当同一个对象的A和B告警都产生时抑制A
+- source_match:
+    alertname: A
+  target_match:
+    alertname: B
+  equal:
+    - _alertingTargetUuid
