@@ -25,3 +25,10 @@ func TestTimeFromString(t *testing.T) {
 	}
 	t.Log(duration)
 }
+
+func TestTimeStamp(t *testing.T) {
+	ts := time.Now().Unix()
+	t.Log(ts)
+	rt := time.Unix(ts, 0).AddDate(0, 3, 0)
+	t.Log(rt.Format("2006-01-02 15:04:05"))
+}

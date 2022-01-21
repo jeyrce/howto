@@ -29,6 +29,7 @@ func TestFsWatch(t *testing.T) {
 		}
 		select {
 		case e := <-watcher.Events:
+			reset = false
 			switch {
 			case e.Op&fsnotify.Create == fsnotify.Create:
 				t.Log("new file")
