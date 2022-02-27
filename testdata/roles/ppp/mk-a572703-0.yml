@@ -1,0 +1,834 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    pod.beta.kubernetes.io/initialized: "true"
+  creationTimestamp: "2022-02-25T07:49:23Z"
+  generateName: mk-a572703-
+  labels:
+    AppName: mk-a5727
+    CreatedBy: woqutech.com
+    DBBranch: mysql8.0.26-mgr
+    DBRole: MGR
+    DBType: mysql
+    IsMaster: "false"
+    Name: mk-a57270
+    ResourceUseType: share
+    SetName: mk-a572703
+    TenantId: 847798ee3db44716b6357b04e5a55c16
+    Type: Database
+    controller-revision-hash: mk-a572703-74ddc7fdb8
+    statefulset.kubernetes.io/pod-name: mk-a572703-0
+  managedFields:
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:pod.beta.kubernetes.io/initialized: {}
+        f:generateName: {}
+        f:labels:
+          .: {}
+          f:AppName: {}
+          f:CreatedBy: {}
+          f:DBBranch: {}
+          f:DBRole: {}
+          f:DBType: {}
+          f:Name: {}
+          f:ResourceUseType: {}
+          f:SetName: {}
+          f:TenantId: {}
+          f:Type: {}
+          f:controller-revision-hash: {}
+          f:statefulset.kubernetes.io/pod-name: {}
+        f:ownerReferences:
+          .: {}
+          k:{"uid":"56cca633-ed19-4561-a343-ffb22442be56"}:
+            .: {}
+            f:apiVersion: {}
+            f:blockOwnerDeletion: {}
+            f:controller: {}
+            f:kind: {}
+            f:name: {}
+            f:uid: {}
+      f:spec:
+        f:affinity:
+          .: {}
+          f:nodeAffinity:
+            .: {}
+            f:requiredDuringSchedulingIgnoredDuringExecution:
+              .: {}
+              f:nodeSelectorTerms: {}
+          f:podAntiAffinity:
+            .: {}
+            f:preferredDuringSchedulingIgnoredDuringExecution: {}
+        f:containers:
+          k:{"name":"backup"}:
+            .: {}
+            f:env:
+              .: {}
+              k:{"name":"APP_NAME"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"ARCHIVEDIR"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"CLUSTER_REPLICA"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"DATADIR"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"DBROLE"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"MY_POD_IP"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:fieldRef:
+                    .: {}
+                    f:apiVersion: {}
+                    f:fieldPath: {}
+              k:{"name":"MYSQL_DATABASE"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"MYSQL_MASTER_PASSWORD"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:secretKeyRef:
+                    .: {}
+                    f:key: {}
+                    f:name: {}
+              k:{"name":"MYSQL_MASTER_USER"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:secretKeyRef:
+                    .: {}
+                    f:key: {}
+                    f:name: {}
+              k:{"name":"MYSQL_ROOT_PASSWORD"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:secretKeyRef:
+                    .: {}
+                    f:key: {}
+                    f:name: {}
+              k:{"name":"MYSQL_ROOT_USER"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:secretKeyRef:
+                    .: {}
+                    f:key: {}
+                    f:name: {}
+              k:{"name":"POD_NAMESPACE"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:fieldRef:
+                    .: {}
+                    f:apiVersion: {}
+                    f:fieldPath: {}
+              k:{"name":"REDODIR"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+            f:image: {}
+            f:imagePullPolicy: {}
+            f:name: {}
+            f:resources: {}
+            f:securityContext:
+              .: {}
+              f:capabilities:
+                .: {}
+                f:add: {}
+              f:privileged: {}
+            f:terminationMessagePath: {}
+            f:terminationMessagePolicy: {}
+            f:volumeMounts:
+              .: {}
+              k:{"mountPath":"/etc/localtime"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+              k:{"mountPath":"/etc/mysql/"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+              k:{"mountPath":"/etc/timezone"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+                f:subPath: {}
+              k:{"mountPath":"/var/lib/mysql"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+              k:{"mountPath":"/var/log/mysql"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+          k:{"name":"mysql"}:
+            .: {}
+            f:env:
+              .: {}
+              k:{"name":"APP_NAME"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"ARCHIVEDIR"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"CLUSTER_REPLICA"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"DATADIR"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"DBROLE"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"MY_POD_IP"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:fieldRef:
+                    .: {}
+                    f:apiVersion: {}
+                    f:fieldPath: {}
+              k:{"name":"MYSQL_DATABASE"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"MYSQL_MASTER_PASSWORD"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:secretKeyRef:
+                    .: {}
+                    f:key: {}
+                    f:name: {}
+              k:{"name":"MYSQL_MASTER_USER"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:secretKeyRef:
+                    .: {}
+                    f:key: {}
+                    f:name: {}
+              k:{"name":"MYSQL_ROOT_PASSWORD"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:secretKeyRef:
+                    .: {}
+                    f:key: {}
+                    f:name: {}
+              k:{"name":"MYSQL_ROOT_USER"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:secretKeyRef:
+                    .: {}
+                    f:key: {}
+                    f:name: {}
+              k:{"name":"POD_NAMESPACE"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:fieldRef:
+                    .: {}
+                    f:apiVersion: {}
+                    f:fieldPath: {}
+              k:{"name":"REDODIR"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+            f:image: {}
+            f:imagePullPolicy: {}
+            f:name: {}
+            f:readinessProbe:
+              .: {}
+              f:exec:
+                .: {}
+                f:command: {}
+              f:failureThreshold: {}
+              f:initialDelaySeconds: {}
+              f:periodSeconds: {}
+              f:successThreshold: {}
+              f:timeoutSeconds: {}
+            f:resources:
+              .: {}
+              f:limits:
+                .: {}
+                f:cpu: {}
+                f:memory: {}
+              f:requests:
+                .: {}
+                f:cpu: {}
+                f:memory: {}
+            f:terminationMessagePath: {}
+            f:terminationMessagePolicy: {}
+            f:volumeMounts:
+              .: {}
+              k:{"mountPath":"/etc/localtime"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+              k:{"mountPath":"/etc/my.cnf.d/global.conf"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+                f:subPath: {}
+              k:{"mountPath":"/etc/mysql/"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+              k:{"mountPath":"/etc/mysql/mysql.cnf.d"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+              k:{"mountPath":"/etc/timezone"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+                f:subPath: {}
+              k:{"mountPath":"/var/lib/mysql"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+              k:{"mountPath":"/var/log/mysql"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+        f:dnsPolicy: {}
+        f:enableServiceLinks: {}
+        f:hostname: {}
+        f:initContainers:
+          .: {}
+          k:{"name":"sysctl"}:
+            .: {}
+            f:command: {}
+            f:image: {}
+            f:imagePullPolicy: {}
+            f:name: {}
+            f:resources: {}
+            f:securityContext:
+              .: {}
+              f:capabilities:
+                .: {}
+                f:add: {}
+              f:privileged: {}
+            f:terminationMessagePath: {}
+            f:terminationMessagePolicy: {}
+            f:volumeMounts:
+              .: {}
+              k:{"mountPath":"/etc/localtime"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+              k:{"mountPath":"/etc/timezone"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+                f:subPath: {}
+        f:restartPolicy: {}
+        f:schedulerName: {}
+        f:securityContext: {}
+        f:serviceAccount: {}
+        f:serviceAccountName: {}
+        f:shareProcessNamespace: {}
+        f:subdomain: {}
+        f:terminationGracePeriodSeconds: {}
+        f:tolerations: {}
+        f:volumes:
+          .: {}
+          k:{"name":"cluster-config"}:
+            .: {}
+            f:configMap:
+              .: {}
+              f:defaultMode: {}
+              f:name: {}
+            f:name: {}
+          k:{"name":"data"}:
+            .: {}
+            f:name: {}
+            f:persistentVolumeClaim:
+              .: {}
+              f:claimName: {}
+          k:{"name":"database-config"}:
+            .: {}
+            f:configMap:
+              .: {}
+              f:defaultMode: {}
+              f:name: {}
+            f:name: {}
+          k:{"name":"localtime"}:
+            .: {}
+            f:hostPath:
+              .: {}
+              f:path: {}
+              f:type: {}
+            f:name: {}
+          k:{"name":"log-data"}:
+            .: {}
+            f:emptyDir: {}
+            f:name: {}
+          k:{"name":"mk-a57270-slave-delay-threshold"}:
+            .: {}
+            f:configMap:
+              .: {}
+              f:defaultMode: {}
+              f:items: {}
+              f:name: {}
+            f:name: {}
+          k:{"name":"timezone"}:
+            .: {}
+            f:configMap:
+              .: {}
+              f:defaultMode: {}
+              f:items: {}
+              f:name: {}
+            f:name: {}
+    manager: kube-controller-manager
+    operation: Update
+    time: "2022-02-25T07:49:23Z"
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:spec:
+        f:nodeName: {}
+      f:status:
+        f:conditions:
+          .: {}
+          k:{"type":"PodScheduled"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:message: {}
+            f:reason: {}
+            f:status: {}
+            f:type: {}
+    manager: kube-scheduler
+    operation: Update
+    time: "2022-02-25T07:49:23Z"
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:labels:
+          f:IsMaster: {}
+    manager: mgrmanager
+    operation: Update
+    time: "2022-02-25T07:49:26Z"
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:status:
+        f:conditions:
+          k:{"type":"ContainersReady"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:status: {}
+            f:type: {}
+          k:{"type":"Initialized"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:status: {}
+            f:type: {}
+          k:{"type":"Ready"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:status: {}
+            f:type: {}
+        f:containerStatuses: {}
+        f:hostIP: {}
+        f:initContainerStatuses: {}
+        f:phase: {}
+        f:podIP: {}
+        f:podIPs:
+          .: {}
+          k:{"ip":"10.244.1.199"}:
+            .: {}
+            f:ip: {}
+        f:startTime: {}
+    manager: kubelet
+    operation: Update
+    time: "2022-02-25T07:49:56Z"
+  name: mk-a572703-0
+  namespace: qfusion-admin
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: StatefulSet
+    name: mk-a572703
+    uid: 56cca633-ed19-4561-a343-ffb22442be56
+  resourceVersion: "286806"
+  selfLink: /api/v1/namespaces/qfusion-admin/pods/mk-a572703-0
+  uid: 1ab0f6b9-5309-4c9b-a3ab-4753c16fef7a
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: qfusion/node
+            operator: Exists
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - podAffinityTerm:
+          labelSelector:
+            matchLabels:
+              AppName: mk-a5727
+              CreatedBy: woqutech.com
+              DBBranch: mysql8.0.26-mgr
+              DBType: mysql
+              Name: mk-a57270
+              ResourceUseType: share
+              TenantId: 847798ee3db44716b6357b04e5a55c16
+              Type: Database
+          topologyKey: kubernetes.io/hostname
+        weight: 100
+  containers:
+  - env:
+    - name: POD_NAMESPACE
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.namespace
+    - name: DBROLE
+      value: MGR
+    - name: DATADIR
+      value: /var/lib/mysql/data
+    - name: REDODIR
+      value: /var/lib/mysql/data/redo
+    - name: MYSQL_DATABASE
+      value: mysql
+    - name: APP_NAME
+      value: mk-a5727
+    - name: MYSQL_MASTER_USER
+      valueFrom:
+        secretKeyRef:
+          key: username
+          name: mk-a57270-master-suffix
+    - name: MYSQL_MASTER_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          key: password
+          name: mk-a57270-master-suffix
+    - name: MYSQL_ROOT_USER
+      valueFrom:
+        secretKeyRef:
+          key: username
+          name: mk-a57270-root-suffix
+    - name: MYSQL_ROOT_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          key: password
+          name: mk-a57270-root-suffix
+    - name: MY_POD_IP
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: status.podIP
+    - name: CLUSTER_REPLICA
+      value: "5"
+    - name: ARCHIVEDIR
+      value: /var/lib/mysql/archive
+    image: k8smaster.qfusion.irds/irds/mysql-8.0.26-mgr:v3.12.2
+    imagePullPolicy: IfNotPresent
+    name: mysql
+    readinessProbe:
+      exec:
+        command:
+        - mysqlprobe
+      failureThreshold: 3
+      initialDelaySeconds: 20
+      periodSeconds: 3
+      successThreshold: 1
+      timeoutSeconds: 1
+    resources:
+      limits:
+        cpu: "4"
+        memory: 8Gi
+      requests:
+        cpu: "2"
+        memory: 8Gi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/log/mysql
+      name: log-data
+    - mountPath: /etc/mysql/
+      name: database-config
+    - mountPath: /etc/mysql/mysql.cnf.d
+      name: cluster-config
+    - mountPath: /etc/my.cnf.d/global.conf
+      name: mk-a57270-slave-delay-threshold
+      subPath: global.conf
+    - mountPath: /var/lib/mysql
+      name: data
+    - mountPath: /etc/localtime
+      name: localtime
+    - mountPath: /etc/timezone
+      name: timezone
+      subPath: timezone
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: dboperator-token-zcnwt
+      readOnly: true
+  - env:
+    - name: POD_NAMESPACE
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.namespace
+    - name: DBROLE
+      value: MGR
+    - name: DATADIR
+      value: /var/lib/mysql/data
+    - name: REDODIR
+      value: /var/lib/mysql/data/redo
+    - name: MYSQL_DATABASE
+      value: mysql
+    - name: APP_NAME
+      value: mk-a5727
+    - name: MYSQL_MASTER_USER
+      valueFrom:
+        secretKeyRef:
+          key: username
+          name: mk-a57270-master-suffix
+    - name: MYSQL_MASTER_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          key: password
+          name: mk-a57270-master-suffix
+    - name: MYSQL_ROOT_USER
+      valueFrom:
+        secretKeyRef:
+          key: username
+          name: mk-a57270-root-suffix
+    - name: MYSQL_ROOT_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          key: password
+          name: mk-a57270-root-suffix
+    - name: MY_POD_IP
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: status.podIP
+    - name: CLUSTER_REPLICA
+      value: "5"
+    - name: ARCHIVEDIR
+      value: /var/lib/mysql/archive
+    image: k8smaster.qfusion.irds/irds/mysql-backup-8.0.26:v1.2.3
+    imagePullPolicy: IfNotPresent
+    name: backup
+    resources: {}
+    securityContext:
+      capabilities:
+        add:
+        - SYS_ADMIN
+        - DAC_READ_SEARCH
+      privileged: true
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /etc/mysql/
+      name: database-config
+    - mountPath: /var/log/mysql
+      name: log-data
+    - mountPath: /var/lib/mysql
+      name: data
+    - mountPath: /etc/localtime
+      name: localtime
+    - mountPath: /etc/timezone
+      name: timezone
+      subPath: timezone
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: dboperator-token-zcnwt
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: false
+  hostname: mk-a572703-0
+  initContainers:
+  - command:
+    - sh
+    - -c
+    - |-
+      sysctl -w net.ipv4.tcp_retries2=7
+      sysctl -w net.ipv4.tcp_keepalive_time=90
+      sysctl -w net.ipv4.tcp_keepalive_intvl=10
+      sysctl -w net.ipv4.tcp_keepalive_probes=5
+    image: k8smaster.qfusion.irds/irds/alpine:3.6
+    imagePullPolicy: IfNotPresent
+    name: sysctl
+    resources: {}
+    securityContext:
+      capabilities:
+        add:
+        - SYS_ADMIN
+        - DAC_READ_SEARCH
+      privileged: true
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: FallbackToLogsOnError
+    volumeMounts:
+    - mountPath: /etc/localtime
+      name: localtime
+    - mountPath: /etc/timezone
+      name: timezone
+      subPath: timezone
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: dboperator-token-zcnwt
+      readOnly: true
+  nodeName: 172-16-130-25
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: dboperator
+  serviceAccountName: dboperator
+  shareProcessNamespace: true
+  subdomain: mk-a57270-headless
+  terminationGracePeriodSeconds: 60
+  tolerations:
+  - key: qfusion/worker
+    operator: Exists
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: data
+    persistentVolumeClaim:
+      claimName: data-mk-a572703-0
+  - emptyDir: {}
+    name: log-data
+  - configMap:
+      defaultMode: 420
+      name: mk-a57270
+    name: database-config
+  - configMap:
+      defaultMode: 420
+      name: mk-a5727-config
+    name: cluster-config
+  - configMap:
+      defaultMode: 420
+      items:
+      - key: slave-delay-threshold
+        path: global.conf
+      name: mk-a57270-slave-delay-threshold
+    name: mk-a57270-slave-delay-threshold
+  - configMap:
+      defaultMode: 420
+      items:
+      - key: timezone
+        path: timezone
+      name: timezone
+    name: timezone
+  - hostPath:
+      path: /usr/share/zoneinfo/Asia/Shanghai
+      type: ""
+    name: localtime
+  - name: dboperator-token-zcnwt
+    secret:
+      defaultMode: 420
+      secretName: dboperator-token-zcnwt
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T07:49:31Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T07:49:56Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T07:49:56Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T07:49:24Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: docker://e937c219e989194bb198d663538223c419923d4ee0df54009ca939b07e9031c9
+    image: k8smaster.qfusion.irds/irds/mysql-backup-8.0.26:v1.2.3
+    imageID: docker-pullable://k8smaster.qfusion.irds/irds/mysql-backup-8.0.26@sha256:71b5ae561acb69b3ca7f5ddd87665eadb30d18f87d994e7357e82961034465b8
+    lastState: {}
+    name: backup
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2022-02-25T07:49:33Z"
+  - containerID: docker://508602f991f15b460542c6826dfa04c80d0ee518b3ee7cb964dd38d3da75f8cc
+    image: k8smaster.qfusion.irds/irds/mysql-8.0.26-mgr:v3.12.2
+    imageID: docker-pullable://k8smaster.qfusion.irds/irds/mysql-8.0.26-mgr@sha256:9f2c921db403445b51e802ec3550704149e5a3940721f70a92fde54cefc11d56
+    lastState: {}
+    name: mysql
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2022-02-25T07:49:32Z"
+  hostIP: 10.10.40.25
+  initContainerStatuses:
+  - containerID: docker://117ffc4b5985695e023b133b3fd8cae5fde552f4d02f41692f1a2cab92ba9624
+    image: k8smaster.qfusion.irds/irds/alpine:3.6
+    imageID: docker-pullable://k8smaster.qfusion.irds/irds/alpine@sha256:d6eda1410b93902ac84bdd775167c84ab59e5abadad88791d742fea93b161e93
+    lastState: {}
+    name: sysctl
+    ready: true
+    restartCount: 0
+    state:
+      terminated:
+        containerID: docker://117ffc4b5985695e023b133b3fd8cae5fde552f4d02f41692f1a2cab92ba9624
+        exitCode: 0
+        finishedAt: "2022-02-25T07:49:29Z"
+        reason: Completed
+        startedAt: "2022-02-25T07:49:29Z"
+  phase: Running
+  podIP: 10.244.1.199
+  podIPs:
+  - ip: 10.244.1.199
+  qosClass: Burstable
+  startTime: "2022-02-25T07:49:24Z"

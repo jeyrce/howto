@@ -1,0 +1,405 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: "2022-02-25T07:39:10Z"
+  generateName: adg-8b37c-bf813-backup-
+  labels:
+    AppName: adg-8b37c
+    DBType: oracle
+    TenantId: 847798ee3db44716b6357b04e5a55c16
+    controller-revision-hash: adg-8b37c-bf813-backup-6c5756588f
+    statefulset.kubernetes.io/pod-name: adg-8b37c-bf813-backup-0
+    workload: backup-controller
+  managedFields:
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:generateName: {}
+        f:labels:
+          .: {}
+          f:AppName: {}
+          f:DBType: {}
+          f:TenantId: {}
+          f:controller-revision-hash: {}
+          f:statefulset.kubernetes.io/pod-name: {}
+          f:workload: {}
+        f:ownerReferences:
+          .: {}
+          k:{"uid":"f23ea019-cf3b-4977-8c2b-19d5885705be"}:
+            .: {}
+            f:apiVersion: {}
+            f:blockOwnerDeletion: {}
+            f:controller: {}
+            f:kind: {}
+            f:name: {}
+            f:uid: {}
+      f:spec:
+        f:affinity:
+          .: {}
+          f:nodeAffinity:
+            .: {}
+            f:requiredDuringSchedulingIgnoredDuringExecution:
+              .: {}
+              f:nodeSelectorTerms: {}
+        f:containers:
+          k:{"name":"controller"}:
+            .: {}
+            f:command: {}
+            f:env:
+              .: {}
+              k:{"name":"BackupServices"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"ClusterName"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"DATABASE_ADDR"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:secretKeyRef:
+                    .: {}
+                    f:key: {}
+                    f:name: {}
+              k:{"name":"DATABASE_NAME"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:secretKeyRef:
+                    .: {}
+                    f:key: {}
+                    f:name: {}
+              k:{"name":"DATABASE_PASSWORD"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:secretKeyRef:
+                    .: {}
+                    f:key: {}
+                    f:name: {}
+              k:{"name":"DATABASE_PORT"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:secretKeyRef:
+                    .: {}
+                    f:key: {}
+                    f:name: {}
+              k:{"name":"DATABASE_USERNAME"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:secretKeyRef:
+                    .: {}
+                    f:key: {}
+                    f:name: {}
+              k:{"name":"DatabaseType"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"POD_NAMESPACE"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+            f:image: {}
+            f:imagePullPolicy: {}
+            f:name: {}
+            f:readinessProbe:
+              .: {}
+              f:failureThreshold: {}
+              f:httpGet:
+                .: {}
+                f:path: {}
+                f:port: {}
+                f:scheme: {}
+              f:initialDelaySeconds: {}
+              f:periodSeconds: {}
+              f:successThreshold: {}
+              f:timeoutSeconds: {}
+            f:resources: {}
+            f:securityContext:
+              .: {}
+              f:capabilities:
+                .: {}
+                f:add: {}
+              f:privileged: {}
+            f:terminationMessagePath: {}
+            f:terminationMessagePolicy: {}
+            f:volumeMounts:
+              .: {}
+              k:{"mountPath":"/etc/localtime"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+              k:{"mountPath":"/etc/timezone"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+                f:subPath: {}
+        f:dnsPolicy: {}
+        f:enableServiceLinks: {}
+        f:hostname: {}
+        f:restartPolicy: {}
+        f:schedulerName: {}
+        f:securityContext: {}
+        f:serviceAccount: {}
+        f:serviceAccountName: {}
+        f:subdomain: {}
+        f:terminationGracePeriodSeconds: {}
+        f:volumes:
+          .: {}
+          k:{"name":"localtime"}:
+            .: {}
+            f:hostPath:
+              .: {}
+              f:path: {}
+              f:type: {}
+            f:name: {}
+          k:{"name":"timezone"}:
+            .: {}
+            f:configMap:
+              .: {}
+              f:defaultMode: {}
+              f:items: {}
+              f:name: {}
+            f:name: {}
+    manager: kube-controller-manager
+    operation: Update
+    time: "2022-02-25T07:39:10Z"
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:status:
+        f:conditions:
+          k:{"type":"ContainersReady"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:status: {}
+            f:type: {}
+          k:{"type":"Initialized"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:status: {}
+            f:type: {}
+          k:{"type":"Ready"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:status: {}
+            f:type: {}
+        f:containerStatuses: {}
+        f:hostIP: {}
+        f:phase: {}
+        f:podIP: {}
+        f:podIPs:
+          .: {}
+          k:{"ip":"10.244.2.127"}:
+            .: {}
+            f:ip: {}
+        f:startTime: {}
+    manager: kubelet
+    operation: Update
+    time: "2022-02-25T07:45:44Z"
+  name: adg-8b37c-bf813-backup-0
+  namespace: qfusion-admin
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: StatefulSet
+    name: adg-8b37c-bf813-backup
+    uid: f23ea019-cf3b-4977-8c2b-19d5885705be
+  resourceVersion: "280357"
+  selfLink: /api/v1/namespaces/qfusion-admin/pods/adg-8b37c-bf813-backup-0
+  uid: b796d8d3-08fc-4851-ba76-7c7dcf7be8df
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: qfusion/node
+            operator: Exists
+  containers:
+  - command:
+    - qfb
+    - controller
+    env:
+    - name: ClusterName
+      value: adg-8b37c
+    - name: BackupServices
+      value: adg-8b37c-replica-headless.qfusion-admin,adg-8b37c0-headless.qfusion-admin
+    - name: POD_NAMESPACE
+      value: qfusion-admin
+    - name: DatabaseType
+      value: oracle
+    - name: DATABASE_NAME
+      valueFrom:
+        secretKeyRef:
+          key: database
+          name: webserver-cmdb
+    - name: DATABASE_USERNAME
+      valueFrom:
+        secretKeyRef:
+          key: username
+          name: webserver-cmdb
+    - name: DATABASE_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          key: password
+          name: webserver-cmdb
+    - name: DATABASE_ADDR
+      valueFrom:
+        secretKeyRef:
+          key: addr
+          name: webserver-cmdb
+    - name: DATABASE_PORT
+      valueFrom:
+        secretKeyRef:
+          key: port
+          name: webserver-cmdb
+    image: k8smaster.qfusion.irds/irds/qfom:v0.0.6
+    imagePullPolicy: IfNotPresent
+    name: controller
+    readinessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /readyz
+        port: 8080
+        scheme: HTTP
+      initialDelaySeconds: 10
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 30
+    resources: {}
+    securityContext:
+      capabilities:
+        add:
+        - SYS_ADMIN
+        - DAC_READ_SEARCH
+      privileged: true
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: FallbackToLogsOnError
+    volumeMounts:
+    - mountPath: /etc/localtime
+      name: localtime
+    - mountPath: /etc/timezone
+      name: timezone
+      subPath: timezone
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: dboperator-token-zcnwt
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  hostname: adg-8b37c-bf813-backup-0
+  nodeName: 172-16-130-27
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: dboperator
+  serviceAccountName: dboperator
+  subdomain: adg-8b37c-bf813-backup
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - hostPath:
+      path: /usr/share/zoneinfo/Asia/Shanghai
+      type: ""
+    name: localtime
+  - configMap:
+      defaultMode: 420
+      items:
+      - key: timezone
+        path: timezone
+      name: timezone
+    name: timezone
+  - name: dboperator-token-zcnwt
+    secret:
+      defaultMode: 420
+      secretName: dboperator-token-zcnwt
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T07:39:10Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T07:45:44Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T07:45:44Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T07:39:10Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: docker://cea6ed033b7510eaabdc43eb629af4aab7f596c6343b71f558f282d329371825
+    image: k8smaster.qfusion.irds/irds/qfom:v0.0.6
+    imageID: docker-pullable://k8smaster.qfusion.irds/irds/qfom@sha256:f0d9641edd8b823371ea003d2e6c00b40ca0f168e0b63612791e992da892d8d1
+    lastState:
+      terminated:
+        containerID: docker://484cb9e74309c29f16ad0d689c028012bf63e048b7d4e099391e86d1a9d8f0f5
+        exitCode: 255
+        finishedAt: "2022-02-25T07:42:25Z"
+        message: "W0225 15:42:22.359372       1 client_config.go:552] Neither --kubeconfig
+          nor --master was specified.  Using the inClusterConfig.  This might not
+          work.\nI0225 15:42:22.359654       1 k8sconfig.go:63] set default timeout
+          10s. \nI0225 15:42:22.359673       1 k8sconfig.go:65] kubeconfig timeout
+          10s\nI0225 15:42:22.361911       1 config.go:125] wait cache ready\nI0225
+          15:42:22.362198       1 reflector.go:175] Starting reflector *v1.Pod (10m0s)
+          from k8s.io/client-go/informers/factory.go:135\nI0225 15:42:22.362218       1
+          reflector.go:211] Listing and watching *v1.Pod from k8s.io/client-go/informers/factory.go:135\nI0225
+          15:42:22.362199       1 reflector.go:175] Starting reflector *v1.ConfigMap
+          (10m0s) from k8s.io/client-go/informers/factory.go:135\nI0225 15:42:22.362281
+          \      1 reflector.go:211] Listing and watching *v1.ConfigMap from k8s.io/client-go/informers/factory.go:135\nI0225
+          15:42:22.362326       1 reflector.go:175] Starting reflector *v1.Endpoints
+          (10m0s) from k8s.io/client-go/informers/factory.go:135\nI0225 15:42:22.362342
+          \      1 reflector.go:211] Listing and watching *v1.Endpoints from k8s.io/client-go/informers/factory.go:135\nI0225
+          15:42:22.562962       1 reflector.go:175] Starting reflector *v1.OracleCluster
+          (10m0s) from github.com/woqutech/database-operator/pkg/crd/informers/externalversions/factory.go:124\nI0225
+          15:42:22.562982       1 reflector.go:175] Starting reflector *v1.Backup
+          (10m0s) from github.com/woqutech/database-operator/pkg/crd/informers/externalversions/factory.go:124\nI0225
+          15:42:22.563011       1 reflector.go:211] Listing and watching *v1.Backup
+          from github.com/woqutech/database-operator/pkg/crd/informers/externalversions/factory.go:124\nI0225
+          15:42:22.562986       1 reflector.go:211] Listing and watching *v1.OracleCluster
+          from github.com/woqutech/database-operator/pkg/crd/informers/externalversions/factory.go:124\nError:
+          primary instance not found\nF0225 15:42:25.329482       1 main.go:34] primary
+          instance not found\n"
+        reason: Error
+        startedAt: "2022-02-25T07:42:22Z"
+    name: controller
+    ready: true
+    restartCount: 6
+    started: true
+    state:
+      running:
+        startedAt: "2022-02-25T07:45:25Z"
+  hostIP: 10.10.40.27
+  phase: Running
+  podIP: 10.244.2.127
+  podIPs:
+  - ip: 10.244.2.127
+  qosClass: BestEffort
+  startTime: "2022-02-25T07:39:10Z"

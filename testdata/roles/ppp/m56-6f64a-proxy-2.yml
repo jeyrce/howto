@@ -1,0 +1,458 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    pod.beta.kubernetes.io/initialized: "true"
+  creationTimestamp: "2022-02-25T08:02:35Z"
+  generateName: m56-6f64a-proxy-
+  labels:
+    AppName: m56-6f64a
+    CreatedBy: woqutech.com
+    DBRole: maxscale
+    DBType: mysql
+    ProxyType: maxscale
+    SetName: m56-6f64a-proxy
+    TenantId: 847798ee3db44716b6357b04e5a55c16
+    Type: proxy
+    controller-revision-hash: m56-6f64a-proxy-78bb599b9f
+    statefulset.kubernetes.io/pod-name: m56-6f64a-proxy-2
+  managedFields:
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:pod.beta.kubernetes.io/initialized: {}
+        f:generateName: {}
+        f:labels:
+          .: {}
+          f:AppName: {}
+          f:CreatedBy: {}
+          f:DBRole: {}
+          f:DBType: {}
+          f:ProxyType: {}
+          f:SetName: {}
+          f:TenantId: {}
+          f:Type: {}
+          f:controller-revision-hash: {}
+          f:statefulset.kubernetes.io/pod-name: {}
+        f:ownerReferences:
+          .: {}
+          k:{"uid":"4f1196ca-f1f7-4243-bc76-c5fafad420f1"}:
+            .: {}
+            f:apiVersion: {}
+            f:blockOwnerDeletion: {}
+            f:controller: {}
+            f:kind: {}
+            f:name: {}
+            f:uid: {}
+      f:spec:
+        f:affinity:
+          .: {}
+          f:nodeAffinity:
+            .: {}
+            f:requiredDuringSchedulingIgnoredDuringExecution:
+              .: {}
+              f:nodeSelectorTerms: {}
+          f:podAntiAffinity:
+            .: {}
+            f:preferredDuringSchedulingIgnoredDuringExecution: {}
+        f:containers:
+          k:{"name":"m56-6f64a-proxy"}:
+            .: {}
+            f:env:
+              .: {}
+              k:{"name":"MYSQL_ROOT_PASSWORD"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:secretKeyRef:
+                    .: {}
+                    f:key: {}
+                    f:name: {}
+            f:image: {}
+            f:imagePullPolicy: {}
+            f:name: {}
+            f:ports:
+              .: {}
+              k:{"containerPort":4006,"protocol":"TCP"}:
+                .: {}
+                f:containerPort: {}
+                f:name: {}
+                f:protocol: {}
+              k:{"containerPort":4008,"protocol":"TCP"}:
+                .: {}
+                f:containerPort: {}
+                f:name: {}
+                f:protocol: {}
+              k:{"containerPort":8989,"protocol":"TCP"}:
+                .: {}
+                f:containerPort: {}
+                f:name: {}
+                f:protocol: {}
+            f:readinessProbe:
+              .: {}
+              f:exec:
+                .: {}
+                f:command: {}
+              f:failureThreshold: {}
+              f:initialDelaySeconds: {}
+              f:periodSeconds: {}
+              f:successThreshold: {}
+              f:timeoutSeconds: {}
+            f:resources:
+              .: {}
+              f:limits:
+                .: {}
+                f:cpu: {}
+                f:memory: {}
+              f:requests:
+                .: {}
+                f:cpu: {}
+                f:memory: {}
+            f:terminationMessagePath: {}
+            f:terminationMessagePolicy: {}
+            f:volumeMounts:
+              .: {}
+              k:{"mountPath":"/etc/localtime"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+              k:{"mountPath":"/etc/maxscale"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+              k:{"mountPath":"/etc/ssl/"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+                f:readOnly: {}
+              k:{"mountPath":"/etc/timezone"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+                f:subPath: {}
+        f:dnsPolicy: {}
+        f:enableServiceLinks: {}
+        f:hostname: {}
+        f:initContainers:
+          .: {}
+          k:{"name":"sysctl"}:
+            .: {}
+            f:command: {}
+            f:image: {}
+            f:imagePullPolicy: {}
+            f:name: {}
+            f:resources: {}
+            f:securityContext:
+              .: {}
+              f:capabilities:
+                .: {}
+                f:add: {}
+              f:privileged: {}
+            f:terminationMessagePath: {}
+            f:terminationMessagePolicy: {}
+            f:volumeMounts:
+              .: {}
+              k:{"mountPath":"/etc/localtime"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+              k:{"mountPath":"/etc/timezone"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+                f:subPath: {}
+        f:restartPolicy: {}
+        f:schedulerName: {}
+        f:securityContext: {}
+        f:subdomain: {}
+        f:terminationGracePeriodSeconds: {}
+        f:tolerations: {}
+        f:volumes:
+          .: {}
+          k:{"name":"config-rule"}:
+            .: {}
+            f:configMap:
+              .: {}
+              f:defaultMode: {}
+              f:name: {}
+            f:name: {}
+          k:{"name":"localtime"}:
+            .: {}
+            f:hostPath:
+              .: {}
+              f:path: {}
+              f:type: {}
+            f:name: {}
+          k:{"name":"ssl-config"}:
+            .: {}
+            f:name: {}
+            f:secret:
+              .: {}
+              f:defaultMode: {}
+              f:secretName: {}
+          k:{"name":"timezone"}:
+            .: {}
+            f:configMap:
+              .: {}
+              f:defaultMode: {}
+              f:items: {}
+              f:name: {}
+            f:name: {}
+    manager: kube-controller-manager
+    operation: Update
+    time: "2022-02-25T08:02:35Z"
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:status:
+        f:conditions:
+          k:{"type":"ContainersReady"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:status: {}
+            f:type: {}
+          k:{"type":"Initialized"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:status: {}
+            f:type: {}
+          k:{"type":"Ready"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:status: {}
+            f:type: {}
+        f:containerStatuses: {}
+        f:hostIP: {}
+        f:initContainerStatuses: {}
+        f:phase: {}
+        f:podIP: {}
+        f:podIPs:
+          .: {}
+          k:{"ip":"10.244.1.159"}:
+            .: {}
+            f:ip: {}
+        f:startTime: {}
+    manager: kubelet
+    operation: Update
+    time: "2022-02-25T08:02:51Z"
+  name: m56-6f64a-proxy-2
+  namespace: qfusion-admin
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: StatefulSet
+    name: m56-6f64a-proxy
+    uid: 4f1196ca-f1f7-4243-bc76-c5fafad420f1
+  resourceVersion: "304937"
+  selfLink: /api/v1/namespaces/qfusion-admin/pods/m56-6f64a-proxy-2
+  uid: 6777e680-8eb8-4a3a-8f13-3f253ae2e44e
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: qfusion/node
+            operator: Exists
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - podAffinityTerm:
+          labelSelector:
+            matchLabels:
+              AppName: m56-6f64a
+              CreatedBy: woqutech.com
+              DBType: mysql
+              ProxyType: maxscale
+              TenantId: 847798ee3db44716b6357b04e5a55c16
+              Type: proxy
+          topologyKey: kubernetes.io/hostname
+        weight: 10
+  containers:
+  - env:
+    - name: MYSQL_ROOT_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          key: password
+          name: m56-6f64a0-root-suffix
+    image: k8smaster.qfusion.irds/irds/maxscale:v3.12.2
+    imagePullPolicy: IfNotPresent
+    name: m56-6f64a-proxy
+    ports:
+    - containerPort: 8989
+      name: manager-port
+      protocol: TCP
+    - containerPort: 4006
+      name: server-rw-port
+      protocol: TCP
+    - containerPort: 4008
+      name: server-ro-port
+      protocol: TCP
+    readinessProbe:
+      exec:
+        command:
+        - maxscaleprobe
+      failureThreshold: 3
+      initialDelaySeconds: 10
+      periodSeconds: 3
+      successThreshold: 1
+      timeoutSeconds: 1
+    resources:
+      limits:
+        cpu: "1"
+        memory: 2Gi
+      requests:
+        cpu: 500m
+        memory: 2Gi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /etc/maxscale
+      name: config-rule
+    - mountPath: /etc/ssl/
+      name: ssl-config
+      readOnly: true
+    - mountPath: /etc/localtime
+      name: localtime
+    - mountPath: /etc/timezone
+      name: timezone
+      subPath: timezone
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: default-token-n6q2x
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: false
+  hostname: m56-6f64a-proxy-2
+  initContainers:
+  - command:
+    - sh
+    - -c
+    - |-
+      sysctl -w net.ipv4.tcp_retries2=7
+      sysctl -w net.ipv4.tcp_keepalive_time=90
+      sysctl -w net.ipv4.tcp_keepalive_intvl=10
+      sysctl -w net.ipv4.tcp_keepalive_probes=5
+    image: k8smaster.qfusion.irds/irds/alpine:3.6
+    imagePullPolicy: IfNotPresent
+    name: sysctl
+    resources: {}
+    securityContext:
+      capabilities:
+        add:
+        - SYS_ADMIN
+        - DAC_READ_SEARCH
+      privileged: true
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: FallbackToLogsOnError
+    volumeMounts:
+    - mountPath: /etc/localtime
+      name: localtime
+    - mountPath: /etc/timezone
+      name: timezone
+      subPath: timezone
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: default-token-n6q2x
+      readOnly: true
+  nodeName: 172-16-130-25
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  subdomain: m56-6f64a-proxy
+  terminationGracePeriodSeconds: 0
+  tolerations:
+  - key: qfusion/worker
+    operator: Exists
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - configMap:
+      defaultMode: 420
+      name: m56-6f64a-proxy
+    name: config-rule
+  - name: ssl-config
+    secret:
+      defaultMode: 420
+      secretName: m56-6f64a-proxy-ssl
+  - configMap:
+      defaultMode: 420
+      items:
+      - key: timezone
+        path: timezone
+      name: timezone
+    name: timezone
+  - hostPath:
+      path: /usr/share/zoneinfo/Asia/Shanghai
+      type: ""
+    name: localtime
+  - name: default-token-n6q2x
+    secret:
+      defaultMode: 420
+      secretName: default-token-n6q2x
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T08:02:37Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T08:02:51Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T08:02:51Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T08:02:35Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: docker://e3d865ad70d61827a02c5420a76fbeeab43b691dec9325e7a4322d775f626139
+    image: k8smaster.qfusion.irds/irds/maxscale:v3.12.2
+    imageID: docker-pullable://k8smaster.qfusion.irds/irds/maxscale@sha256:abdcae78c6dfd8cca0e2483954c9c471af9d3ce58f11cb9f44a32a5a9d6e1201
+    lastState: {}
+    name: m56-6f64a-proxy
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2022-02-25T08:02:38Z"
+  hostIP: 10.10.40.25
+  initContainerStatuses:
+  - containerID: docker://22dc2021127725807d21b9981bdd465ad35e9f7c8c486ef873c2854f27ac2251
+    image: k8smaster.qfusion.irds/irds/alpine:3.6
+    imageID: docker-pullable://k8smaster.qfusion.irds/irds/alpine@sha256:d6eda1410b93902ac84bdd775167c84ab59e5abadad88791d742fea93b161e93
+    lastState: {}
+    name: sysctl
+    ready: true
+    restartCount: 0
+    state:
+      terminated:
+        containerID: docker://22dc2021127725807d21b9981bdd465ad35e9f7c8c486ef873c2854f27ac2251
+        exitCode: 0
+        finishedAt: "2022-02-25T08:02:37Z"
+        reason: Completed
+        startedAt: "2022-02-25T08:02:37Z"
+  phase: Running
+  podIP: 10.244.1.159
+  podIPs:
+  - ip: 10.244.1.159
+  qosClass: Burstable
+  startTime: "2022-02-25T08:02:35Z"

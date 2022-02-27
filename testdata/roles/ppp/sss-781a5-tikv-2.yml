@@ -1,0 +1,417 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    prometheus.io/path: /metrics
+    prometheus.io/port: "20180"
+    prometheus.io/scrape: "true"
+  creationTimestamp: "2022-02-25T07:43:54Z"
+  generateName: sss-781a5-tikv-
+  labels:
+    AppName: sss-781a5
+    CreatedBy: woqutech.com
+    ResourceUseType: share
+    TenantId: 847798ee3db44716b6357b04e5a55c16
+    app.kubernetes.io/component: tikv
+    app.kubernetes.io/instance: sss-781a5
+    app.kubernetes.io/managed-by: tidb-operator
+    app.kubernetes.io/name: tidb-cluster
+    controller-revision-hash: sss-781a5-tikv-7b6bb7568c
+    statefulset.kubernetes.io/pod-name: sss-781a5-tikv-2
+    tidb.pingcap.com/cluster-id: "7068549874571667330"
+    tidb.pingcap.com/store-id: "4"
+  managedFields:
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:prometheus.io/path: {}
+          f:prometheus.io/port: {}
+          f:prometheus.io/scrape: {}
+        f:generateName: {}
+        f:labels:
+          .: {}
+          f:app.kubernetes.io/component: {}
+          f:app.kubernetes.io/instance: {}
+          f:app.kubernetes.io/managed-by: {}
+          f:app.kubernetes.io/name: {}
+          f:controller-revision-hash: {}
+          f:statefulset.kubernetes.io/pod-name: {}
+        f:ownerReferences:
+          .: {}
+          k:{"uid":"1e644946-e4a9-46bd-b6fc-654972a6f85e"}:
+            .: {}
+            f:apiVersion: {}
+            f:blockOwnerDeletion: {}
+            f:controller: {}
+            f:kind: {}
+            f:name: {}
+            f:uid: {}
+      f:spec:
+        f:affinity:
+          .: {}
+          f:nodeAffinity:
+            .: {}
+            f:requiredDuringSchedulingIgnoredDuringExecution:
+              .: {}
+              f:nodeSelectorTerms: {}
+        f:containers:
+          k:{"name":"tikv"}:
+            .: {}
+            f:command: {}
+            f:env:
+              .: {}
+              k:{"name":"CAPACITY"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"CLUSTER_NAME"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"HEADLESS_SERVICE_NAME"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"NAMESPACE"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:fieldRef:
+                    .: {}
+                    f:apiVersion: {}
+                    f:fieldPath: {}
+              k:{"name":"TZ"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+            f:image: {}
+            f:imagePullPolicy: {}
+            f:name: {}
+            f:ports:
+              .: {}
+              k:{"containerPort":20160,"protocol":"TCP"}:
+                .: {}
+                f:containerPort: {}
+                f:name: {}
+                f:protocol: {}
+            f:resources:
+              .: {}
+              f:limits:
+                .: {}
+                f:cpu: {}
+                f:memory: {}
+              f:requests:
+                .: {}
+                f:cpu: {}
+                f:memory: {}
+            f:securityContext:
+              .: {}
+              f:privileged: {}
+            f:terminationMessagePath: {}
+            f:terminationMessagePolicy: {}
+            f:volumeMounts:
+              .: {}
+              k:{"mountPath":"/etc/podinfo"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+                f:readOnly: {}
+              k:{"mountPath":"/etc/tikv"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+                f:readOnly: {}
+              k:{"mountPath":"/usr/local/bin"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+                f:readOnly: {}
+              k:{"mountPath":"/var/lib/tikv"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+        f:dnsPolicy: {}
+        f:enableServiceLinks: {}
+        f:hostname: {}
+        f:restartPolicy: {}
+        f:schedulerName: {}
+        f:securityContext: {}
+        f:subdomain: {}
+        f:terminationGracePeriodSeconds: {}
+        f:tolerations: {}
+        f:volumes:
+          .: {}
+          k:{"name":"annotations"}:
+            .: {}
+            f:downwardAPI:
+              .: {}
+              f:defaultMode: {}
+              f:items: {}
+            f:name: {}
+          k:{"name":"config"}:
+            .: {}
+            f:configMap:
+              .: {}
+              f:defaultMode: {}
+              f:items: {}
+              f:name: {}
+            f:name: {}
+          k:{"name":"startup-script"}:
+            .: {}
+            f:configMap:
+              .: {}
+              f:defaultMode: {}
+              f:items: {}
+              f:name: {}
+            f:name: {}
+          k:{"name":"tikv"}:
+            .: {}
+            f:name: {}
+            f:persistentVolumeClaim:
+              .: {}
+              f:claimName: {}
+    manager: advanced-statefulset-controller-manager
+    operation: Update
+    time: "2022-02-25T07:43:54Z"
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:spec:
+        f:nodeName: {}
+      f:status:
+        f:conditions:
+          .: {}
+          k:{"type":"PodScheduled"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:message: {}
+            f:reason: {}
+            f:status: {}
+            f:type: {}
+    manager: localpv-controller
+    operation: Update
+    time: "2022-02-25T07:43:54Z"
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:labels:
+          f:AppName: {}
+          f:CreatedBy: {}
+          f:ResourceUseType: {}
+          f:TenantId: {}
+    manager: database-operator
+    operation: Update
+    time: "2022-02-25T07:44:06Z"
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:status:
+        f:conditions:
+          k:{"type":"ContainersReady"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:status: {}
+            f:type: {}
+          k:{"type":"Initialized"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:status: {}
+            f:type: {}
+          k:{"type":"Ready"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:status: {}
+            f:type: {}
+        f:containerStatuses: {}
+        f:hostIP: {}
+        f:phase: {}
+        f:podIP: {}
+        f:podIPs:
+          .: {}
+          k:{"ip":"10.244.0.110"}:
+            .: {}
+            f:ip: {}
+        f:startTime: {}
+    manager: kubelet
+    operation: Update
+    time: "2022-02-25T07:44:06Z"
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:labels:
+          f:tidb.pingcap.com/cluster-id: {}
+          f:tidb.pingcap.com/store-id: {}
+    manager: tidb-controller-manager
+    operation: Update
+    time: "2022-02-25T07:44:27Z"
+  name: sss-781a5-tikv-2
+  namespace: qfusion-admin
+  ownerReferences:
+  - apiVersion: apps.pingcap.com/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: StatefulSet
+    name: sss-781a5-tikv
+    uid: 1e644946-e4a9-46bd-b6fc-654972a6f85e
+  resourceVersion: "278389"
+  selfLink: /api/v1/namespaces/qfusion-admin/pods/sss-781a5-tikv-2
+  uid: fd8f2f89-e921-405f-a718-1cb614705726
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: qfusion/node
+            operator: Exists
+  containers:
+  - command:
+    - /bin/sh
+    - /usr/local/bin/tikv_start_script.sh
+    env:
+    - name: NAMESPACE
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.namespace
+    - name: CLUSTER_NAME
+      value: sss-781a5
+    - name: HEADLESS_SERVICE_NAME
+      value: sss-781a5-tikv-peer
+    - name: CAPACITY
+      value: "0"
+    - name: TZ
+      value: Asia/Shanghai
+    image: k8smaster.qfusion.irds/irds/tikv:v4.0.9
+    imagePullPolicy: IfNotPresent
+    name: tikv
+    ports:
+    - containerPort: 20160
+      name: server
+      protocol: TCP
+    resources:
+      limits:
+        cpu: "4"
+        memory: 8Gi
+      requests:
+        cpu: "2"
+        memory: 8Gi
+    securityContext:
+      privileged: false
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /etc/podinfo
+      name: annotations
+      readOnly: true
+    - mountPath: /var/lib/tikv
+      name: tikv
+    - mountPath: /etc/tikv
+      name: config
+      readOnly: true
+    - mountPath: /usr/local/bin
+      name: startup-script
+      readOnly: true
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: default-token-n6q2x
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  hostname: sss-781a5-tikv-2
+  nodeName: 172-16-130-26
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  subdomain: sss-781a5-tikv-peer
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - key: qfusion/worker
+    operator: Exists
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: tikv
+    persistentVolumeClaim:
+      claimName: tikv-sss-781a5-tikv-2
+  - downwardAPI:
+      defaultMode: 420
+      items:
+      - fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.annotations
+        path: annotations
+    name: annotations
+  - configMap:
+      defaultMode: 420
+      items:
+      - key: config-file
+        path: tikv.toml
+      name: sss-781a5-tikv
+    name: config
+  - configMap:
+      defaultMode: 420
+      items:
+      - key: startup-script
+        path: tikv_start_script.sh
+      name: sss-781a5-tikv
+    name: startup-script
+  - name: default-token-n6q2x
+    secret:
+      defaultMode: 420
+      secretName: default-token-n6q2x
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T07:43:55Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T07:44:06Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T07:44:06Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T07:43:55Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: docker://959d4b5a3cbd5078958f5bfe814b04a27be73786088e0d79698290eac317efb5
+    image: k8smaster.qfusion.irds/irds/tikv:v4.0.9
+    imageID: docker-pullable://k8smaster.qfusion.irds/irds/tikv@sha256:13a6cea7eba034d0a9330e212856869f602554d4d929ec0ced98e89bb897360d
+    lastState: {}
+    name: tikv
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2022-02-25T07:44:06Z"
+  hostIP: 10.10.40.26
+  phase: Running
+  podIP: 10.244.0.110
+  podIPs:
+  - ip: 10.244.0.110
+  qosClass: Burstable
+  startTime: "2022-02-25T07:43:55Z"

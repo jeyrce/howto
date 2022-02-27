@@ -1,0 +1,435 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    prometheus.io/path: /metrics
+    prometheus.io/port: "2379"
+    prometheus.io/scrape: "true"
+  creationTimestamp: "2022-02-25T07:42:44Z"
+  generateName: sss-781a5-pd-
+  labels:
+    AppName: sss-781a5
+    CreatedBy: woqutech.com
+    ResourceUseType: share
+    TenantId: 847798ee3db44716b6357b04e5a55c16
+    app.kubernetes.io/component: pd
+    app.kubernetes.io/instance: sss-781a5
+    app.kubernetes.io/managed-by: tidb-operator
+    app.kubernetes.io/name: tidb-cluster
+    controller-revision-hash: sss-781a5-pd-79dc4f6ff5
+    statefulset.kubernetes.io/pod-name: sss-781a5-pd-2
+    tidb.pingcap.com/cluster-id: "7068549874571667330"
+    tidb.pingcap.com/member-id: "10854990252613460804"
+  managedFields:
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:prometheus.io/path: {}
+          f:prometheus.io/port: {}
+          f:prometheus.io/scrape: {}
+        f:generateName: {}
+        f:labels:
+          .: {}
+          f:app.kubernetes.io/component: {}
+          f:app.kubernetes.io/instance: {}
+          f:app.kubernetes.io/managed-by: {}
+          f:app.kubernetes.io/name: {}
+          f:controller-revision-hash: {}
+          f:statefulset.kubernetes.io/pod-name: {}
+        f:ownerReferences:
+          .: {}
+          k:{"uid":"ae3c6697-d3aa-4b03-bdc1-a406d4e24de3"}:
+            .: {}
+            f:apiVersion: {}
+            f:blockOwnerDeletion: {}
+            f:controller: {}
+            f:kind: {}
+            f:name: {}
+            f:uid: {}
+      f:spec:
+        f:affinity:
+          .: {}
+          f:nodeAffinity:
+            .: {}
+            f:requiredDuringSchedulingIgnoredDuringExecution:
+              .: {}
+              f:nodeSelectorTerms: {}
+        f:containers:
+          k:{"name":"pd"}:
+            .: {}
+            f:command: {}
+            f:env:
+              .: {}
+              k:{"name":"NAMESPACE"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:fieldRef:
+                    .: {}
+                    f:apiVersion: {}
+                    f:fieldPath: {}
+              k:{"name":"PEER_SERVICE_NAME"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"SERVICE_NAME"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"SET_NAME"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"TZ"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+            f:image: {}
+            f:imagePullPolicy: {}
+            f:name: {}
+            f:ports:
+              .: {}
+              k:{"containerPort":2379,"protocol":"TCP"}:
+                .: {}
+                f:containerPort: {}
+                f:name: {}
+                f:protocol: {}
+              k:{"containerPort":2380,"protocol":"TCP"}:
+                .: {}
+                f:containerPort: {}
+                f:name: {}
+                f:protocol: {}
+            f:resources:
+              .: {}
+              f:limits:
+                .: {}
+                f:cpu: {}
+                f:memory: {}
+              f:requests:
+                .: {}
+                f:cpu: {}
+                f:memory: {}
+            f:terminationMessagePath: {}
+            f:terminationMessagePolicy: {}
+            f:volumeMounts:
+              .: {}
+              k:{"mountPath":"/etc/pd"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+                f:readOnly: {}
+              k:{"mountPath":"/etc/podinfo"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+                f:readOnly: {}
+              k:{"mountPath":"/usr/local/bin"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+                f:readOnly: {}
+              k:{"mountPath":"/var/lib/pd"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+        f:dnsPolicy: {}
+        f:enableServiceLinks: {}
+        f:hostname: {}
+        f:restartPolicy: {}
+        f:schedulerName: {}
+        f:securityContext: {}
+        f:subdomain: {}
+        f:terminationGracePeriodSeconds: {}
+        f:tolerations: {}
+        f:volumes:
+          .: {}
+          k:{"name":"annotations"}:
+            .: {}
+            f:downwardAPI:
+              .: {}
+              f:defaultMode: {}
+              f:items: {}
+            f:name: {}
+          k:{"name":"config"}:
+            .: {}
+            f:configMap:
+              .: {}
+              f:defaultMode: {}
+              f:items: {}
+              f:name: {}
+            f:name: {}
+          k:{"name":"pd"}:
+            .: {}
+            f:name: {}
+            f:persistentVolumeClaim:
+              .: {}
+              f:claimName: {}
+          k:{"name":"startup-script"}:
+            .: {}
+            f:configMap:
+              .: {}
+              f:defaultMode: {}
+              f:items: {}
+              f:name: {}
+            f:name: {}
+    manager: advanced-statefulset-controller-manager
+    operation: Update
+    time: "2022-02-25T07:42:44Z"
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:status:
+        f:conditions:
+          .: {}
+          k:{"type":"PodScheduled"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:status: {}
+            f:type: {}
+    manager: localpv-controller
+    operation: Update
+    time: "2022-02-25T07:42:44Z"
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:labels:
+          f:AppName: {}
+          f:CreatedBy: {}
+          f:ResourceUseType: {}
+          f:TenantId: {}
+    manager: database-operator
+    operation: Update
+    time: "2022-02-25T07:42:45Z"
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:spec:
+        f:nodeName: {}
+      f:status:
+        f:conditions:
+          k:{"type":"PodScheduled"}:
+            f:message: {}
+            f:reason: {}
+    manager: kube-scheduler
+    operation: Update
+    time: "2022-02-25T07:42:45Z"
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:status:
+        f:conditions:
+          k:{"type":"ContainersReady"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:status: {}
+            f:type: {}
+          k:{"type":"Initialized"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:status: {}
+            f:type: {}
+          k:{"type":"Ready"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:status: {}
+            f:type: {}
+        f:containerStatuses: {}
+        f:hostIP: {}
+        f:phase: {}
+        f:podIP: {}
+        f:podIPs:
+          .: {}
+          k:{"ip":"10.244.1.116"}:
+            .: {}
+            f:ip: {}
+        f:startTime: {}
+    manager: kubelet
+    operation: Update
+    time: "2022-02-25T07:43:24Z"
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:labels:
+          f:tidb.pingcap.com/cluster-id: {}
+          f:tidb.pingcap.com/member-id: {}
+    manager: tidb-controller-manager
+    operation: Update
+    time: "2022-02-25T07:44:24Z"
+  name: sss-781a5-pd-2
+  namespace: qfusion-admin
+  ownerReferences:
+  - apiVersion: apps.pingcap.com/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: StatefulSet
+    name: sss-781a5-pd
+    uid: ae3c6697-d3aa-4b03-bdc1-a406d4e24de3
+  resourceVersion: "278289"
+  selfLink: /api/v1/namespaces/qfusion-admin/pods/sss-781a5-pd-2
+  uid: b327000c-a022-4ef3-ad89-38aeb735c85c
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: qfusion/node
+            operator: Exists
+  containers:
+  - command:
+    - /bin/sh
+    - /usr/local/bin/pd_start_script.sh
+    env:
+    - name: NAMESPACE
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.namespace
+    - name: PEER_SERVICE_NAME
+      value: sss-781a5-pd-peer
+    - name: SERVICE_NAME
+      value: sss-781a5-pd
+    - name: SET_NAME
+      value: sss-781a5-pd
+    - name: TZ
+      value: Asia/Shanghai
+    image: k8smaster.qfusion.irds/irds/pd:v4.0.9
+    imagePullPolicy: IfNotPresent
+    name: pd
+    ports:
+    - containerPort: 2380
+      name: server
+      protocol: TCP
+    - containerPort: 2379
+      name: client
+      protocol: TCP
+    resources:
+      limits:
+        cpu: "2"
+        memory: 4Gi
+      requests:
+        cpu: "1"
+        memory: 4Gi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /etc/podinfo
+      name: annotations
+      readOnly: true
+    - mountPath: /etc/pd
+      name: config
+      readOnly: true
+    - mountPath: /usr/local/bin
+      name: startup-script
+      readOnly: true
+    - mountPath: /var/lib/pd
+      name: pd
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: default-token-n6q2x
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  hostname: sss-781a5-pd-2
+  nodeName: 172-16-130-25
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  subdomain: sss-781a5-pd-peer
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - key: qfusion/worker
+    operator: Exists
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: pd
+    persistentVolumeClaim:
+      claimName: pd-sss-781a5-pd-2
+  - downwardAPI:
+      defaultMode: 420
+      items:
+      - fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.annotations
+        path: annotations
+    name: annotations
+  - configMap:
+      defaultMode: 420
+      items:
+      - key: config-file
+        path: pd.toml
+      name: sss-781a5-pd
+    name: config
+  - configMap:
+      defaultMode: 420
+      items:
+      - key: startup-script
+        path: pd_start_script.sh
+      name: sss-781a5-pd
+    name: startup-script
+  - name: default-token-n6q2x
+    secret:
+      defaultMode: 420
+      secretName: default-token-n6q2x
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T07:42:45Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T07:43:24Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T07:43:24Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T07:42:45Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: docker://e39f124dc322ef748f0b23b6a731f92c0a9c06ac335e2eb17796add7fa20c92d
+    image: k8smaster.qfusion.irds/irds/pd:v4.0.9
+    imageID: docker-pullable://k8smaster.qfusion.irds/irds/pd@sha256:e13b2a438f7bf0cc7b287463d07e60ff58801eb4d5dbb1e862e3a0c302bf8437
+    lastState:
+      terminated:
+        containerID: docker://eef11d274b39e3645887902e9bb24901f5275f3512a5776c271f114d996dc33a
+        exitCode: 1
+        finishedAt: "2022-02-25T07:43:23Z"
+        reason: Error
+        startedAt: "2022-02-25T07:42:52Z"
+    name: pd
+    ready: true
+    restartCount: 1
+    started: true
+    state:
+      running:
+        startedAt: "2022-02-25T07:43:24Z"
+  hostIP: 10.10.40.25
+  phase: Running
+  podIP: 10.244.1.116
+  podIPs:
+  - ip: 10.244.1.116
+  qosClass: Burstable
+  startTime: "2022-02-25T07:42:45Z"

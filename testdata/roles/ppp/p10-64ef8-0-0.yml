@@ -1,0 +1,946 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    status: '{"conn_url":"postgres://10.244.2.191:5432/postgres","api_url":"http://10.244.2.191:8009/patroni","state":"running","role":"master","version":"2.1.0","xlog_location":50372936,"timeline":1}'
+  creationTimestamp: "2022-02-25T07:14:09Z"
+  generateName: p10-64ef8-0-
+  labels:
+    AppName: p10-64ef8
+    CreatedBy: woqutech.com
+    DBBranch: postgres10
+    DBType: postgres
+    ResourceUseType: share
+    TenantId: 847798ee3db44716b6357b04e5a55c16
+    Type: Database
+    controller-revision-hash: p10-64ef8-0-5b855dd64b
+    postgres.woqutech.com/sts-name: p10-64ef8-0
+    postgresCluster.resource.type: pg
+    qfusion-pgha-scope: p10-64ef8
+    role: master
+    statefulset.kubernetes.io/pod-name: p10-64ef8-0-0
+    vendor: qfusion
+  managedFields:
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:generateName: {}
+        f:labels:
+          .: {}
+          f:AppName: {}
+          f:CreatedBy: {}
+          f:DBBranch: {}
+          f:DBType: {}
+          f:ResourceUseType: {}
+          f:TenantId: {}
+          f:Type: {}
+          f:controller-revision-hash: {}
+          f:postgres.woqutech.com/sts-name: {}
+          f:postgresCluster.resource.type: {}
+          f:qfusion-pgha-scope: {}
+          f:statefulset.kubernetes.io/pod-name: {}
+          f:vendor: {}
+        f:ownerReferences:
+          .: {}
+          k:{"uid":"22d2ce75-32b8-4711-b39a-b61c253796d2"}:
+            .: {}
+            f:apiVersion: {}
+            f:blockOwnerDeletion: {}
+            f:controller: {}
+            f:kind: {}
+            f:name: {}
+            f:uid: {}
+      f:spec:
+        f:affinity:
+          .: {}
+          f:nodeAffinity:
+            .: {}
+            f:requiredDuringSchedulingIgnoredDuringExecution:
+              .: {}
+              f:nodeSelectorTerms: {}
+          f:podAntiAffinity:
+            .: {}
+            f:requiredDuringSchedulingIgnoredDuringExecution: {}
+        f:containers:
+          k:{"name":"exporter"}:
+            .: {}
+            f:env:
+              .: {}
+              k:{"name":"EXPORTER_PG_DATABASE"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"EXPORTER_PG_HOST"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"EXPORTER_PG_PARAMS"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"EXPORTER_PG_PASSWORD"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:secretKeyRef:
+                    .: {}
+                    f:key: {}
+                    f:name: {}
+              k:{"name":"EXPORTER_PG_PORT"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"EXPORTER_PG_USER"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:secretKeyRef:
+                    .: {}
+                    f:key: {}
+                    f:name: {}
+              k:{"name":"JOB_NAME"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"PG_EXPORTER_DISABLE_SETTINGS_METRICS"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"POSTGRES_EXPORTER_PORT"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+            f:image: {}
+            f:imagePullPolicy: {}
+            f:name: {}
+            f:resources: {}
+            f:securityContext:
+              .: {}
+              f:capabilities:
+                .: {}
+                f:add: {}
+              f:privileged: {}
+            f:terminationMessagePath: {}
+            f:terminationMessagePolicy: {}
+            f:volumeMounts:
+              .: {}
+              k:{"mountPath":"/etc/localtime"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+              k:{"mountPath":"/etc/timezone"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+                f:subPath: {}
+              k:{"mountPath":"/tmp"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+          k:{"name":"postgres"}:
+            .: {}
+            f:env:
+              .: {}
+              k:{"name":"ClusterName"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"ENABLE_SSHD"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"LD_PRELOAD"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"MODE"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"NSS_WRAPPER_GROUP"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"NSS_WRAPPER_PASSWD"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"PATRONI_KUBERNETES_LABELS"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"PATRONI_KUBERNETES_NAMESPACE"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:fieldRef:
+                    .: {}
+                    f:apiVersion: {}
+                    f:fieldPath: {}
+              k:{"name":"PATRONI_KUBERNETES_SCOPE_LABEL"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"PATRONI_LOG_LEVEL"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"PATRONI_POSTGRESQL_DATA_DIR"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"PATRONI_SCOPE"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:fieldRef:
+                    .: {}
+                    f:apiVersion: {}
+                    f:fieldPath: {}
+              k:{"name":"PGHA_DATABASE"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"PGHA_INIT"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"PGHA_PASSWORD_TYPE"}:
+                .: {}
+                f:name: {}
+              k:{"name":"PGHA_PG_PORT"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"PGHA_REPLICA_REINIT_ON_START_FAIL"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"PGHA_STANDBY"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"PGHA_SYNC_REPLICATION"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"PGHA_TLS_ENABLED"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"PGHA_TLS_ONLY"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"PGHA_USER"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"PGHOST"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"PGMONITOR_PASSWORD"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:secretKeyRef:
+                    .: {}
+                    f:key: {}
+                    f:name: {}
+              k:{"name":"POD_NAMESPACE"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+            f:image: {}
+            f:imagePullPolicy: {}
+            f:name: {}
+            f:readinessProbe:
+              .: {}
+              f:failureThreshold: {}
+              f:httpGet:
+                .: {}
+                f:path: {}
+                f:port: {}
+                f:scheme: {}
+              f:initialDelaySeconds: {}
+              f:periodSeconds: {}
+              f:successThreshold: {}
+              f:timeoutSeconds: {}
+            f:resources:
+              .: {}
+              f:limits:
+                .: {}
+                f:cpu: {}
+                f:memory: {}
+              f:requests:
+                .: {}
+                f:cpu: {}
+                f:memory: {}
+            f:securityContext:
+              .: {}
+              f:capabilities:
+                .: {}
+                f:add: {}
+              f:privileged: {}
+            f:terminationMessagePath: {}
+            f:terminationMessagePolicy: {}
+            f:volumeMounts:
+              .: {}
+              k:{"mountPath":"/dev/shm"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+              k:{"mountPath":"/etc/localtime"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+              k:{"mountPath":"/etc/podinfo"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+              k:{"mountPath":"/etc/timezone"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+                f:subPath: {}
+              k:{"mountPath":"/mnt/qfusion/storage/"}:
+                .: {}
+                f:mountPath: {}
+                f:mountPropagation: {}
+                f:name: {}
+              k:{"mountPath":"/pgconf"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+              k:{"mountPath":"/pgconf/pgreplicator"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+              k:{"mountPath":"/pgconf/pgsuper"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+              k:{"mountPath":"/pgconf/pguser"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+              k:{"mountPath":"/pgdata"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+              k:{"mountPath":"/pglog"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+              k:{"mountPath":"/tmp"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+        f:dnsPolicy: {}
+        f:enableServiceLinks: {}
+        f:hostname: {}
+        f:initContainers:
+          .: {}
+          k:{"name":"init"}:
+            .: {}
+            f:env:
+              .: {}
+              k:{"name":"PG_DATA_DIR"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"PG_DATA_ROOT_DIR"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+            f:image: {}
+            f:imagePullPolicy: {}
+            f:name: {}
+            f:resources: {}
+            f:securityContext:
+              .: {}
+              f:capabilities:
+                .: {}
+                f:add: {}
+              f:privileged: {}
+            f:terminationMessagePath: {}
+            f:terminationMessagePolicy: {}
+            f:volumeMounts:
+              .: {}
+              k:{"mountPath":"/pgdata"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+        f:restartPolicy: {}
+        f:schedulerName: {}
+        f:securityContext: {}
+        f:serviceAccount: {}
+        f:serviceAccountName: {}
+        f:subdomain: {}
+        f:terminationGracePeriodSeconds: {}
+        f:volumes:
+          .: {}
+          k:{"name":"backup"}:
+            .: {}
+            f:hostPath:
+              .: {}
+              f:path: {}
+              f:type: {}
+            f:name: {}
+          k:{"name":"dshm"}:
+            .: {}
+            f:emptyDir:
+              .: {}
+              f:medium: {}
+            f:name: {}
+          k:{"name":"ha-config"}:
+            .: {}
+            f:name: {}
+            f:projected:
+              .: {}
+              f:defaultMode: {}
+              f:sources: {}
+          k:{"name":"localtime"}:
+            .: {}
+            f:hostPath:
+              .: {}
+              f:path: {}
+              f:type: {}
+            f:name: {}
+          k:{"name":"log"}:
+            .: {}
+            f:emptyDir: {}
+            f:name: {}
+          k:{"name":"pgdata"}:
+            .: {}
+            f:name: {}
+            f:persistentVolumeClaim:
+              .: {}
+              f:claimName: {}
+          k:{"name":"podinfo"}:
+            .: {}
+            f:downwardAPI:
+              .: {}
+              f:defaultMode: {}
+              f:items: {}
+            f:name: {}
+          k:{"name":"primary-volume"}:
+            .: {}
+            f:name: {}
+            f:secret:
+              .: {}
+              f:defaultMode: {}
+              f:items: {}
+              f:secretName: {}
+          k:{"name":"root-volume"}:
+            .: {}
+            f:name: {}
+            f:secret:
+              .: {}
+              f:defaultMode: {}
+              f:items: {}
+              f:secretName: {}
+          k:{"name":"timezone"}:
+            .: {}
+            f:configMap:
+              .: {}
+              f:defaultMode: {}
+              f:items: {}
+              f:name: {}
+            f:name: {}
+          k:{"name":"tmp"}:
+            .: {}
+            f:emptyDir: {}
+            f:name: {}
+          k:{"name":"user-volume"}:
+            .: {}
+            f:name: {}
+            f:secret:
+              .: {}
+              f:defaultMode: {}
+              f:items: {}
+              f:secretName: {}
+    manager: kube-controller-manager
+    operation: Update
+    time: "2022-02-25T07:14:09Z"
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:spec:
+        f:nodeName: {}
+      f:status:
+        f:conditions:
+          .: {}
+          k:{"type":"PodScheduled"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:message: {}
+            f:reason: {}
+            f:status: {}
+            f:type: {}
+    manager: kube-scheduler
+    operation: Update
+    time: "2022-02-25T07:14:09Z"
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:status: {}
+        f:labels:
+          f:role: {}
+    manager: Patroni
+    operation: Update
+    time: "2022-02-25T07:14:47Z"
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:status:
+        f:conditions:
+          k:{"type":"ContainersReady"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:status: {}
+            f:type: {}
+          k:{"type":"Initialized"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:status: {}
+            f:type: {}
+          k:{"type":"Ready"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:status: {}
+            f:type: {}
+        f:containerStatuses: {}
+        f:hostIP: {}
+        f:initContainerStatuses: {}
+        f:phase: {}
+        f:podIP: {}
+        f:podIPs:
+          .: {}
+          k:{"ip":"10.244.2.191"}:
+            .: {}
+            f:ip: {}
+        f:startTime: {}
+    manager: kubelet
+    operation: Update
+    time: "2022-02-25T07:15:08Z"
+  name: p10-64ef8-0-0
+  namespace: qfusion-admin
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: StatefulSet
+    name: p10-64ef8-0
+    uid: 22d2ce75-32b8-4711-b39a-b61c253796d2
+  resourceVersion: "258094"
+  selfLink: /api/v1/namespaces/qfusion-admin/pods/p10-64ef8-0-0
+  uid: 8f594345-84f3-4831-9256-971f328d0c68
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: qfusion/node
+            operator: Exists
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchLabels:
+            AppName: p10-64ef8
+            CreatedBy: woqutech.com
+            DBBranch: postgres10
+            DBType: postgres
+            ResourceUseType: share
+            TenantId: 847798ee3db44716b6357b04e5a55c16
+        topologyKey: kubernetes.io/hostname
+  containers:
+  - env:
+    - name: MODE
+      value: postgres
+    - name: ENABLE_SSHD
+      value: "true"
+    - name: PGHOST
+      value: /tmp
+    - name: LD_PRELOAD
+      value: /usr/lib64/libnss_wrapper.so
+    - name: ClusterName
+      value: p10-64ef8
+    - name: POD_NAMESPACE
+      value: qfusion-admin
+    - name: PGMONITOR_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          key: ExporterPassword
+          name: pg-user-p10-64ef8
+    - name: NSS_WRAPPER_PASSWD
+      value: /tmp/nss_wrapper/postgres/passwd
+    - name: NSS_WRAPPER_GROUP
+      value: /tmp/nss_wrapper/postgres/group
+    - name: PGHA_INIT
+      value: "false"
+    - name: PGHA_PG_PORT
+      value: "5432"
+    - name: PGHA_USER
+      value: postgres
+    - name: PGHA_DATABASE
+      value: p10-64ef8
+    - name: PGHA_REPLICA_REINIT_ON_START_FAIL
+      value: "true"
+    - name: PGHA_SYNC_REPLICATION
+      value: "false"
+    - name: PGHA_TLS_ENABLED
+      value: "false"
+    - name: PGHA_TLS_ONLY
+      value: "false"
+    - name: PGHA_PASSWORD_TYPE
+    - name: PGHA_STANDBY
+      value: "false"
+    - name: PATRONI_POSTGRESQL_DATA_DIR
+      value: /pgdata/data/p10-64ef8
+    - name: PATRONI_SCOPE
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.labels['qfusion-pgha-scope']
+    - name: PATRONI_KUBERNETES_NAMESPACE
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.namespace
+    - name: PATRONI_KUBERNETES_SCOPE_LABEL
+      value: qfusion-pgha-scope
+    - name: PATRONI_KUBERNETES_LABELS
+      value: '{vendor: "qfusion"}'
+    - name: PATRONI_LOG_LEVEL
+      value: INFO
+    image: k8smaster.qfusion.irds/irds/postgres-10:v1.0.0
+    imagePullPolicy: IfNotPresent
+    name: postgres
+    readinessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /readiness
+        port: 8009
+        scheme: HTTP
+      initialDelaySeconds: 10
+      periodSeconds: 1
+      successThreshold: 1
+      timeoutSeconds: 1
+    resources:
+      limits:
+        cpu: "2"
+        memory: 4Gi
+      requests:
+        cpu: "1"
+        memory: 4Gi
+    securityContext:
+      capabilities:
+        add:
+        - SYS_ADMIN
+        - DAC_READ_SEARCH
+      privileged: true
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /pgdata
+      name: pgdata
+    - mountPath: /pgconf/pguser
+      name: user-volume
+    - mountPath: /pgconf/pgsuper
+      name: root-volume
+    - mountPath: /pgconf/pgreplicator
+      name: primary-volume
+    - mountPath: /pgconf
+      name: ha-config
+    - mountPath: /dev/shm
+      name: dshm
+    - mountPath: /etc/podinfo
+      name: podinfo
+    - mountPath: /tmp
+      name: tmp
+    - mountPath: /mnt/qfusion/storage/
+      mountPropagation: Bidirectional
+      name: backup
+    - mountPath: /pglog
+      name: log
+    - mountPath: /etc/localtime
+      name: localtime
+    - mountPath: /etc/timezone
+      name: timezone
+      subPath: timezone
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: dboperator-token-zcnwt
+      readOnly: true
+  - env:
+    - name: EXPORTER_PG_HOST
+      value: 127.0.0.1
+    - name: EXPORTER_PG_PORT
+      value: "5432"
+    - name: EXPORTER_PG_DATABASE
+      value: postgres
+    - name: EXPORTER_PG_PARAMS
+      value: sslmode=disable
+    - name: POSTGRES_EXPORTER_PORT
+      value: "9187"
+    - name: JOB_NAME
+      value: p10-64ef8
+    - name: EXPORTER_PG_USER
+      valueFrom:
+        secretKeyRef:
+          key: ExporterUsername
+          name: pg-user-p10-64ef8
+    - name: EXPORTER_PG_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          key: ExporterPassword
+          name: pg-user-p10-64ef8
+    - name: PG_EXPORTER_DISABLE_SETTINGS_METRICS
+      value: "true"
+    image: k8smaster.qfusion.irds/irds/postgres-exporter:v1.0.0
+    imagePullPolicy: IfNotPresent
+    name: exporter
+    resources: {}
+    securityContext:
+      capabilities:
+        add:
+        - SYS_ADMIN
+        - DAC_READ_SEARCH
+      privileged: true
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /tmp
+      name: tmp
+    - mountPath: /etc/localtime
+      name: localtime
+    - mountPath: /etc/timezone
+      name: timezone
+      subPath: timezone
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: dboperator-token-zcnwt
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: false
+  hostname: p10-64ef8-0-0
+  initContainers:
+  - env:
+    - name: PG_DATA_ROOT_DIR
+      value: /pgdata/data
+    - name: PG_DATA_DIR
+      value: /pgdata/data/p10-64ef8
+    image: k8smaster.qfusion.irds/irds/postgres-init:v1.0.0
+    imagePullPolicy: IfNotPresent
+    name: init
+    resources: {}
+    securityContext:
+      capabilities:
+        add:
+        - SYS_ADMIN
+        - DAC_READ_SEARCH
+      privileged: true
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /pgdata
+      name: pgdata
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: dboperator-token-zcnwt
+      readOnly: true
+  nodeName: 172-16-130-27
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: dboperator
+  serviceAccountName: dboperator
+  subdomain: p10-64ef8-0
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: pgdata
+    persistentVolumeClaim:
+      claimName: data-p10-64ef8-0-0
+  - name: user-volume
+    secret:
+      defaultMode: 420
+      items:
+      - key: NormalUsername
+        mode: 511
+        path: username
+      - key: NormalPassword
+        mode: 511
+        path: password
+      secretName: pg-user-p10-64ef8
+  - name: root-volume
+    secret:
+      defaultMode: 420
+      items:
+      - key: RootUsername
+        mode: 511
+        path: username
+      - key: RootPassword
+        mode: 511
+        path: password
+      secretName: pg-user-p10-64ef8
+  - name: primary-volume
+    secret:
+      defaultMode: 420
+      items:
+      - key: PrimaryUsername
+        mode: 511
+        path: username
+      - key: PrimaryPassword
+        mode: 511
+        path: password
+      secretName: pg-user-p10-64ef8
+  - name: ha-config
+    projected:
+      defaultMode: 420
+      sources:
+      - configMap:
+          name: pg-params-p10-64ef8
+  - emptyDir:
+      medium: Memory
+    name: dshm
+  - emptyDir: {}
+    name: tmp
+  - downwardAPI:
+      defaultMode: 420
+      items:
+      - path: cpu_limit
+        resourceFieldRef:
+          containerName: postgres
+          divisor: "0"
+          resource: limits.cpu
+      - path: cpu_request
+        resourceFieldRef:
+          containerName: postgres
+          divisor: "0"
+          resource: requests.cpu
+      - path: mem_limit
+        resourceFieldRef:
+          containerName: postgres
+          divisor: "0"
+          resource: limits.memory
+      - path: mem_request
+        resourceFieldRef:
+          containerName: postgres
+          divisor: "0"
+          resource: requests.memory
+      - fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.labels
+        path: labels
+      - fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.annotations
+        path: annotations
+    name: podinfo
+  - hostPath:
+      path: /mnt/qfusion/storage/
+      type: DirectoryOrCreate
+    name: backup
+  - emptyDir: {}
+    name: log
+  - hostPath:
+      path: /usr/share/zoneinfo/Asia/Shanghai
+      type: ""
+    name: localtime
+  - configMap:
+      defaultMode: 420
+      items:
+      - key: timezone
+        path: timezone
+      name: timezone
+    name: timezone
+  - name: dboperator-token-zcnwt
+    secret:
+      defaultMode: 420
+      secretName: dboperator-token-zcnwt
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T07:14:12Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T07:15:08Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T07:15:08Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T07:14:10Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: docker://a55f3a1724e519210305cec517c7995721e33346a475a6a900d17d45c37c4d80
+    image: k8smaster.qfusion.irds/irds/postgres-exporter:v1.0.0
+    imageID: docker-pullable://k8smaster.qfusion.irds/irds/postgres-exporter@sha256:6cc8ae6574c69695e8990a01b265fa64a8d3376b98a4de6f1513e727e5d80738
+    lastState: {}
+    name: exporter
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2022-02-25T07:15:08Z"
+  - containerID: docker://f35049f60374b7678762bd0935ab329d4cb32075ee0b55bbe9407308f5d2e2e6
+    image: k8smaster.qfusion.irds/irds/postgres-10:v1.0.0
+    imageID: docker-pullable://k8smaster.qfusion.irds/irds/postgres-10@sha256:15ea0e3f2a415cc9b5a8383f1d0ad879684d496a13548bd745546b7167dadc36
+    lastState: {}
+    name: postgres
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2022-02-25T07:14:46Z"
+  hostIP: 10.10.40.27
+  initContainerStatuses:
+  - containerID: docker://86b76200b00b0e80c027226e68d086cff1870aac72512b8623f7330e88f9f035
+    image: k8smaster.qfusion.irds/irds/postgres-init:v1.0.0
+    imageID: docker-pullable://k8smaster.qfusion.irds/irds/postgres-init@sha256:3a97cec0ce8b6bdbef1beb460c466d93d389b5dcdc2ceb064768791114ff5483
+    lastState: {}
+    name: init
+    ready: true
+    restartCount: 0
+    state:
+      terminated:
+        containerID: docker://86b76200b00b0e80c027226e68d086cff1870aac72512b8623f7330e88f9f035
+        exitCode: 0
+        finishedAt: "2022-02-25T07:14:12Z"
+        reason: Completed
+        startedAt: "2022-02-25T07:14:12Z"
+  phase: Running
+  podIP: 10.244.2.191
+  podIPs:
+  - ip: 10.244.2.191
+  qosClass: Burstable
+  startTime: "2022-02-25T07:14:10Z"

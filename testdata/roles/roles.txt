@@ -1,0 +1,11 @@
+
+[DB_ROLE_MASTER]: '读写主库',
+[DB_ROLE_REPLICA]: '高可用备库',
+[DB_ROLE_SLAVE]: '只读从库',
+[DB_ROLE_SINGLETON]: '单实例',
+[DB_ROLE_MYCAT]: '中间件',
+[SENTINEL]: '哨兵',
+tidb: '计算节点'
+tikv: 'KV存储'
+pd: '元数据节点'
+

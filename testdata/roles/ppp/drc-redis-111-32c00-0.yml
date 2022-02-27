@@ -1,0 +1,382 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: "2022-02-25T08:03:11Z"
+  generateName: drc-redis-111-32c00-
+  labels:
+    AppName: redis-111-32c00
+    CreatedBy: woqutech.com
+    DBBranch: redis5.0
+    DBType: redis
+    ResourceUseType: share
+    TenantId: 847798ee3db44716b6357b04e5a55c16
+    controller-revision-hash: drc-redis-111-32c00-59b69cf54f
+    qfr.type: QfrStandalone
+    redis.kun/name: redis-111-32c00
+    redis.resource.type: server
+    statefulset.kubernetes.io/pod-name: drc-redis-111-32c00-0
+  managedFields:
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:generateName: {}
+        f:labels:
+          .: {}
+          f:AppName: {}
+          f:CreatedBy: {}
+          f:DBBranch: {}
+          f:DBType: {}
+          f:ResourceUseType: {}
+          f:TenantId: {}
+          f:controller-revision-hash: {}
+          f:qfr.type: {}
+          f:redis.kun/name: {}
+          f:redis.resource.type: {}
+          f:statefulset.kubernetes.io/pod-name: {}
+        f:ownerReferences:
+          .: {}
+          k:{"uid":"8074e9d1-d109-4d37-bf1c-2562c7a6ad96"}:
+            .: {}
+            f:apiVersion: {}
+            f:blockOwnerDeletion: {}
+            f:controller: {}
+            f:kind: {}
+            f:name: {}
+            f:uid: {}
+      f:spec:
+        f:affinity:
+          .: {}
+          f:nodeAffinity:
+            .: {}
+            f:requiredDuringSchedulingIgnoredDuringExecution:
+              .: {}
+              f:nodeSelectorTerms: {}
+        f:containers:
+          k:{"name":"exporter"}:
+            .: {}
+            f:env:
+              .: {}
+              k:{"name":"REDIS_ALIAS"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:fieldRef:
+                    .: {}
+                    f:apiVersion: {}
+                    f:fieldPath: {}
+              k:{"name":"REDIS_PASSWORD"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+            f:image: {}
+            f:imagePullPolicy: {}
+            f:name: {}
+            f:ports:
+              .: {}
+              k:{"containerPort":9121,"protocol":"TCP"}:
+                .: {}
+                f:containerPort: {}
+                f:name: {}
+                f:protocol: {}
+            f:resources:
+              .: {}
+              f:limits:
+                .: {}
+                f:cpu: {}
+                f:memory: {}
+              f:requests:
+                .: {}
+                f:cpu: {}
+                f:memory: {}
+            f:terminationMessagePath: {}
+            f:terminationMessagePolicy: {}
+          k:{"name":"redis"}:
+            .: {}
+            f:command: {}
+            f:image: {}
+            f:imagePullPolicy: {}
+            f:livenessProbe:
+              .: {}
+              f:exec:
+                .: {}
+                f:command: {}
+              f:failureThreshold: {}
+              f:initialDelaySeconds: {}
+              f:periodSeconds: {}
+              f:successThreshold: {}
+              f:timeoutSeconds: {}
+            f:name: {}
+            f:ports:
+              .: {}
+              k:{"containerPort":6379,"protocol":"TCP"}:
+                .: {}
+                f:containerPort: {}
+                f:name: {}
+                f:protocol: {}
+            f:readinessProbe:
+              .: {}
+              f:exec:
+                .: {}
+                f:command: {}
+              f:failureThreshold: {}
+              f:initialDelaySeconds: {}
+              f:periodSeconds: {}
+              f:successThreshold: {}
+              f:timeoutSeconds: {}
+            f:resources:
+              .: {}
+              f:limits:
+                .: {}
+                f:cpu: {}
+                f:memory: {}
+              f:requests:
+                .: {}
+                f:cpu: {}
+                f:memory: {}
+            f:terminationMessagePath: {}
+            f:terminationMessagePolicy: {}
+            f:volumeMounts:
+              .: {}
+              k:{"mountPath":"/data"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+        f:dnsPolicy: {}
+        f:enableServiceLinks: {}
+        f:hostname: {}
+        f:restartPolicy: {}
+        f:schedulerName: {}
+        f:securityContext: {}
+        f:subdomain: {}
+        f:terminationGracePeriodSeconds: {}
+        f:volumes:
+          .: {}
+          k:{"name":"redis-data"}:
+            .: {}
+            f:name: {}
+            f:persistentVolumeClaim:
+              .: {}
+              f:claimName: {}
+    manager: kube-controller-manager
+    operation: Update
+    time: "2022-02-25T08:03:11Z"
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:status:
+        f:conditions:
+          k:{"type":"ContainersReady"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:message: {}
+            f:reason: {}
+            f:status: {}
+            f:type: {}
+          k:{"type":"Initialized"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:status: {}
+            f:type: {}
+          k:{"type":"Ready"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:message: {}
+            f:reason: {}
+            f:status: {}
+            f:type: {}
+        f:containerStatuses: {}
+        f:hostIP: {}
+        f:phase: {}
+        f:podIP: {}
+        f:podIPs:
+          .: {}
+          k:{"ip":"10.244.1.233"}:
+            .: {}
+            f:ip: {}
+        f:startTime: {}
+    manager: kubelet
+    operation: Update
+    time: "2022-02-25T08:03:15Z"
+  name: drc-redis-111-32c00-0
+  namespace: qfusion-admin
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: StatefulSet
+    name: drc-redis-111-32c00
+    uid: 8074e9d1-d109-4d37-bf1c-2562c7a6ad96
+  resourceVersion: "305751"
+  selfLink: /api/v1/namespaces/qfusion-admin/pods/drc-redis-111-32c00-0
+  uid: 6fdd30f4-b011-4c30-8689-284b4b9506b3
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: qfusion/node
+            operator: Exists
+  containers:
+  - command:
+    - redis-server
+    - --requirepass 'R5JybYRR'
+    - --masterauth 'R5JybYRR'
+    image: k8smaster.qfusion.irds/irds/redis:5.0.4-alpine
+    imagePullPolicy: IfNotPresent
+    livenessProbe:
+      exec:
+        command:
+        - sh
+        - -c
+        - redis-cli -h $(hostname) -a 'R5JybYRR' ping
+      failureThreshold: 3
+      initialDelaySeconds: 30
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 5
+    name: redis
+    ports:
+    - containerPort: 6379
+      name: redis
+      protocol: TCP
+    readinessProbe:
+      exec:
+        command:
+        - sh
+        - -c
+        - redis-cli -h $(hostname) -a 'R5JybYRR' ping
+      failureThreshold: 3
+      initialDelaySeconds: 30
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 5
+    resources:
+      limits:
+        cpu: 500m
+        memory: 4Gi
+      requests:
+        cpu: 250m
+        memory: 4Gi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /data
+      name: redis-data
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: default-token-n6q2x
+      readOnly: true
+  - env:
+    - name: REDIS_ALIAS
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.name
+    - name: REDIS_PASSWORD
+      value: R5JybYRR
+    image: k8smaster.qfusion.irds/irds/redis-exporter:v3.11.1
+    imagePullPolicy: IfNotPresent
+    name: exporter
+    ports:
+    - containerPort: 9121
+      name: http-metrics
+      protocol: TCP
+    resources:
+      limits:
+        cpu: 100m
+        memory: 200Mi
+      requests:
+        cpu: 50m
+        memory: 50Mi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: default-token-n6q2x
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: false
+  hostname: drc-redis-111-32c00-0
+  nodeName: 172-16-130-25
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  subdomain: drc-redis-111-32c00
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: redis-data
+    persistentVolumeClaim:
+      claimName: redis-data-drc-redis-111-32c00-0
+  - name: default-token-n6q2x
+    secret:
+      defaultMode: 420
+      secretName: default-token-n6q2x
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T08:03:12Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T08:03:12Z"
+    message: 'containers with unready status: [redis]'
+    reason: ContainersNotReady
+    status: "False"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T08:03:12Z"
+    message: 'containers with unready status: [redis]'
+    reason: ContainersNotReady
+    status: "False"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T08:03:12Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: docker://ba24e39006f6b0796ade8127aa5fe7ab94ce6525d456d4eb266be14b7323ea47
+    image: k8smaster.qfusion.irds/irds/redis-exporter:v3.11.1
+    imageID: docker-pullable://k8smaster.qfusion.irds/irds/redis-exporter@sha256:f3f51453e4261734f08579fe9c812c66ee443626690091401674be4fb724da70
+    lastState: {}
+    name: exporter
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2022-02-25T08:03:14Z"
+  - containerID: docker://8926cba5b609a2bc5fab7f7d924a42816135ab08ff5f82ebad385e0a8569163e
+    image: k8smaster.qfusion.irds/irds/redis:5.0.4-alpine
+    imageID: docker-pullable://k8smaster.qfusion.irds/irds/redis@sha256:8205a681aa6eea2b0c27249894def02a14ff2cbe9fc78e83d62ad04d1180deb9
+    lastState: {}
+    name: redis
+    ready: false
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2022-02-25T08:03:14Z"
+  hostIP: 10.10.40.25
+  phase: Running
+  podIP: 10.244.1.233
+  podIPs:
+  - ip: 10.244.1.233
+  qosClass: Burstable
+  startTime: "2022-02-25T08:03:12Z"

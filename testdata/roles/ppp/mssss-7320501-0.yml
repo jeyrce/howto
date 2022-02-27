@@ -1,0 +1,1096 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    pod.beta.kubernetes.io/initialized: "true"
+  creationTimestamp: "2022-02-25T07:44:48Z"
+  generateName: mssss-7320501-
+  labels:
+    AppName: mssss-73205
+    CreatedBy: woqutech.com
+    DBBranch: mssql2017
+    DBRole: Replica
+    DBType: mssql
+    IsMaster: "false"
+    Name: mssss-732050
+    ResourceUseType: share
+    SetName: mssss-7320501
+    TenantId: 847798ee3db44716b6357b04e5a55c16
+    Type: Database
+    controller-revision-hash: mssss-7320501-c94bc57c
+    statefulset.kubernetes.io/pod-name: mssss-7320501-0
+  managedFields:
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:pod.beta.kubernetes.io/initialized: {}
+        f:generateName: {}
+        f:labels:
+          .: {}
+          f:AppName: {}
+          f:CreatedBy: {}
+          f:DBBranch: {}
+          f:DBRole: {}
+          f:DBType: {}
+          f:Name: {}
+          f:ResourceUseType: {}
+          f:SetName: {}
+          f:TenantId: {}
+          f:Type: {}
+          f:controller-revision-hash: {}
+          f:statefulset.kubernetes.io/pod-name: {}
+        f:ownerReferences:
+          .: {}
+          k:{"uid":"4e66fbbe-4f0a-4b7a-ae06-771af7f4e522"}:
+            .: {}
+            f:apiVersion: {}
+            f:blockOwnerDeletion: {}
+            f:controller: {}
+            f:kind: {}
+            f:name: {}
+            f:uid: {}
+      f:spec:
+        f:affinity:
+          .: {}
+          f:nodeAffinity:
+            .: {}
+            f:requiredDuringSchedulingIgnoredDuringExecution:
+              .: {}
+              f:nodeSelectorTerms: {}
+          f:podAntiAffinity:
+            .: {}
+            f:requiredDuringSchedulingIgnoredDuringExecution: {}
+        f:containers:
+          k:{"name":"exporter"}:
+            .: {}
+            f:env:
+              .: {}
+              k:{"name":"DATA_SOURCE_NAME"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"PASSWORD"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:secretKeyRef:
+                    .: {}
+                    f:key: {}
+                    f:name: {}
+              k:{"name":"PORT"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"SERVER"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"USERNAME"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+            f:image: {}
+            f:imagePullPolicy: {}
+            f:name: {}
+            f:resources: {}
+            f:terminationMessagePath: {}
+            f:terminationMessagePolicy: {}
+            f:volumeMounts:
+              .: {}
+              k:{"mountPath":"/etc/localtime"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+              k:{"mountPath":"/etc/timezone"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+                f:subPath: {}
+          k:{"name":"leader"}:
+            .: {}
+            f:args: {}
+            f:env:
+              .: {}
+              k:{"name":"ACCEPT_EULA"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"DATADIR"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"DBROLE"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"MSSQL_MAX_CONNECTIONS"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"MSSQL_PID"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"MSSQL_ROOT_PASSWORD"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:secretKeyRef:
+                    .: {}
+                    f:key: {}
+                    f:name: {}
+              k:{"name":"MSSQL_ROOT_USER"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"MY_POD_IP"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:fieldRef:
+                    .: {}
+                    f:apiVersion: {}
+                    f:fieldPath: {}
+              k:{"name":"PORT"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"SA_PASSWORD"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:secretKeyRef:
+                    .: {}
+                    f:key: {}
+                    f:name: {}
+              k:{"name":"STRATEGY"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"TZ"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+            f:image: {}
+            f:imagePullPolicy: {}
+            f:name: {}
+            f:readinessProbe:
+              .: {}
+              f:failureThreshold: {}
+              f:httpGet:
+                .: {}
+                f:path: {}
+                f:port: {}
+                f:scheme: {}
+              f:initialDelaySeconds: {}
+              f:periodSeconds: {}
+              f:successThreshold: {}
+              f:timeoutSeconds: {}
+            f:resources: {}
+            f:securityContext:
+              .: {}
+              f:capabilities:
+                .: {}
+                f:add: {}
+            f:terminationMessagePath: {}
+            f:terminationMessagePolicy: {}
+            f:volumeMounts:
+              .: {}
+              k:{"mountPath":"/etc/localtime"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+              k:{"mountPath":"/etc/timezone"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+                f:subPath: {}
+              k:{"mountPath":"/jfs_sqlite"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+              k:{"mountPath":"/var/opt/mssql/cert"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+              k:{"mountPath":"/var/opt/mssql/data/data"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+              k:{"mountPath":"/var/opt/mssql/log"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+              k:{"mountPath":"/var/opt/mssql/mssql.conf"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+              k:{"mountPath":"/var/opt/mssql/ssl"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+          k:{"name":"mssql"}:
+            .: {}
+            f:env:
+              .: {}
+              k:{"name":"ACCEPT_EULA"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"DATADIR"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"DBROLE"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"MSSQL_MAX_CONNECTIONS"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"MSSQL_PID"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"MSSQL_ROOT_PASSWORD"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:secretKeyRef:
+                    .: {}
+                    f:key: {}
+                    f:name: {}
+              k:{"name":"MSSQL_ROOT_USER"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"MY_POD_IP"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:fieldRef:
+                    .: {}
+                    f:apiVersion: {}
+                    f:fieldPath: {}
+              k:{"name":"PORT"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"SA_PASSWORD"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:secretKeyRef:
+                    .: {}
+                    f:key: {}
+                    f:name: {}
+              k:{"name":"STRATEGY"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"TZ"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+            f:image: {}
+            f:imagePullPolicy: {}
+            f:name: {}
+            f:readinessProbe:
+              .: {}
+              f:exec:
+                .: {}
+                f:command: {}
+              f:failureThreshold: {}
+              f:initialDelaySeconds: {}
+              f:periodSeconds: {}
+              f:successThreshold: {}
+              f:timeoutSeconds: {}
+            f:resources:
+              .: {}
+              f:limits:
+                .: {}
+                f:cpu: {}
+                f:memory: {}
+              f:requests:
+                .: {}
+                f:cpu: {}
+                f:memory: {}
+            f:securityContext:
+              .: {}
+              f:privileged: {}
+            f:terminationMessagePath: {}
+            f:terminationMessagePolicy: {}
+            f:volumeMounts:
+              .: {}
+              k:{"mountPath":"/etc/localtime"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+              k:{"mountPath":"/etc/timezone"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+                f:subPath: {}
+              k:{"mountPath":"/jfs_sqlite"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+              k:{"mountPath":"/var/opt/mssql/cert"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+              k:{"mountPath":"/var/opt/mssql/data/data"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+              k:{"mountPath":"/var/opt/mssql/log"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+              k:{"mountPath":"/var/opt/mssql/mssql.conf"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+                f:subPath: {}
+              k:{"mountPath":"/var/opt/mssql/ssl"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+        f:dnsPolicy: {}
+        f:enableServiceLinks: {}
+        f:hostname: {}
+        f:initContainers:
+          .: {}
+          k:{"name":"restorer"}:
+            .: {}
+            f:command: {}
+            f:env:
+              .: {}
+              k:{"name":"ACCEPT_EULA"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"DATADIR"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"DBROLE"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"MSSQL_MAX_CONNECTIONS"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"MSSQL_PID"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"MSSQL_ROOT_PASSWORD"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:secretKeyRef:
+                    .: {}
+                    f:key: {}
+                    f:name: {}
+              k:{"name":"MSSQL_ROOT_USER"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"MY_POD_IP"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:fieldRef:
+                    .: {}
+                    f:apiVersion: {}
+                    f:fieldPath: {}
+              k:{"name":"PORT"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"SA_PASSWORD"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:secretKeyRef:
+                    .: {}
+                    f:key: {}
+                    f:name: {}
+              k:{"name":"STRATEGY"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"TZ"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"clusterName"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+            f:image: {}
+            f:imagePullPolicy: {}
+            f:name: {}
+            f:resources: {}
+            f:securityContext:
+              .: {}
+              f:capabilities:
+                .: {}
+                f:add: {}
+              f:privileged: {}
+            f:terminationMessagePath: {}
+            f:terminationMessagePolicy: {}
+            f:volumeMounts:
+              .: {}
+              k:{"mountPath":"/etc/localtime"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+              k:{"mountPath":"/etc/timezone"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+                f:subPath: {}
+              k:{"mountPath":"/jfs_sqlite"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+              k:{"mountPath":"/var/opt/mssql/data/data"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+              k:{"mountPath":"/var/opt/mssql/log"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+              k:{"mountPath":"/var/opt/mssql/mssql.conf"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+                f:subPath: {}
+          k:{"name":"sysctl"}:
+            .: {}
+            f:command: {}
+            f:image: {}
+            f:imagePullPolicy: {}
+            f:name: {}
+            f:resources: {}
+            f:securityContext:
+              .: {}
+              f:capabilities:
+                .: {}
+                f:add: {}
+              f:privileged: {}
+            f:terminationMessagePath: {}
+            f:terminationMessagePolicy: {}
+            f:volumeMounts:
+              .: {}
+              k:{"mountPath":"/etc/localtime"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+              k:{"mountPath":"/etc/timezone"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+                f:subPath: {}
+        f:restartPolicy: {}
+        f:schedulerName: {}
+        f:securityContext: {}
+        f:serviceAccount: {}
+        f:serviceAccountName: {}
+        f:subdomain: {}
+        f:terminationGracePeriodSeconds: {}
+        f:tolerations: {}
+        f:volumes:
+          .: {}
+          k:{"name":"cert-dir"}:
+            .: {}
+            f:emptyDir: {}
+            f:name: {}
+          k:{"name":"data"}:
+            .: {}
+            f:name: {}
+            f:persistentVolumeClaim:
+              .: {}
+              f:claimName: {}
+          k:{"name":"database-config"}:
+            .: {}
+            f:configMap:
+              .: {}
+              f:defaultMode: {}
+              f:items: {}
+              f:name: {}
+            f:name: {}
+          k:{"name":"jfs-sqlite"}:
+            .: {}
+            f:emptyDir: {}
+            f:name: {}
+          k:{"name":"localtime"}:
+            .: {}
+            f:hostPath:
+              .: {}
+              f:path: {}
+              f:type: {}
+            f:name: {}
+          k:{"name":"log-data"}:
+            .: {}
+            f:emptyDir: {}
+            f:name: {}
+          k:{"name":"ssl-dir"}:
+            .: {}
+            f:emptyDir: {}
+            f:name: {}
+          k:{"name":"timezone"}:
+            .: {}
+            f:configMap:
+              .: {}
+              f:defaultMode: {}
+              f:items: {}
+              f:name: {}
+            f:name: {}
+    manager: kube-controller-manager
+    operation: Update
+    time: "2022-02-25T07:44:48Z"
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:labels:
+          f:IsMaster: {}
+    manager: leader
+    operation: Update
+    time: "2022-02-25T07:46:08Z"
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:status:
+        f:conditions:
+          k:{"type":"ContainersReady"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:status: {}
+            f:type: {}
+          k:{"type":"Initialized"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:status: {}
+            f:type: {}
+          k:{"type":"Ready"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:status: {}
+            f:type: {}
+        f:containerStatuses: {}
+        f:hostIP: {}
+        f:initContainerStatuses: {}
+        f:phase: {}
+        f:podIP: {}
+        f:podIPs:
+          .: {}
+          k:{"ip":"10.244.2.200"}:
+            .: {}
+            f:ip: {}
+        f:startTime: {}
+    manager: kubelet
+    operation: Update
+    time: "2022-02-25T07:46:47Z"
+  name: mssss-7320501-0
+  namespace: qfusion-admin
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: StatefulSet
+    name: mssss-7320501
+    uid: 4e66fbbe-4f0a-4b7a-ae06-771af7f4e522
+  resourceVersion: "281841"
+  selfLink: /api/v1/namespaces/qfusion-admin/pods/mssss-7320501-0
+  uid: 1720d876-0fce-4485-ab98-e6de2484eaad
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: qfusion/node
+            operator: Exists
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchLabels:
+            AppName: mssss-73205
+            CreatedBy: woqutech.com
+            DBBranch: mssql2017
+            DBType: mssql
+            Name: mssss-732050
+            ResourceUseType: share
+            TenantId: 847798ee3db44716b6357b04e5a55c16
+            Type: Database
+        topologyKey: kubernetes.io/hostname
+  containers:
+  - env:
+    - name: DATADIR
+      value: /var/opt/mssql/data/data
+    - name: PORT
+      value: "1433"
+    - name: DBROLE
+      value: Replica
+    - name: MY_POD_IP
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: status.podIP
+    - name: ACCEPT_EULA
+      value: "Y"
+    - name: MSSQL_PID
+      value: Enterprise
+    - name: STRATEGY
+      value: MssqlRWCluster
+    - name: SA_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          key: password
+          name: mssss-732050-root-suffix
+    - name: MSSQL_ROOT_USER
+      value: SA
+    - name: MSSQL_ROOT_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          key: password
+          name: mssss-732050-root-suffix
+    - name: MSSQL_MAX_CONNECTIONS
+      value: "1000"
+    - name: TZ
+      value: Asia/Shanghai
+    image: k8smaster.qfusion.irds/irds/mssql-2017:v3.12.2
+    imagePullPolicy: IfNotPresent
+    name: mssql
+    readinessProbe:
+      exec:
+        command:
+        - /probe/mssqlprobe
+      failureThreshold: 3
+      initialDelaySeconds: 60
+      periodSeconds: 3
+      successThreshold: 1
+      timeoutSeconds: 1
+    resources:
+      limits:
+        cpu: "2"
+        memory: 8Gi
+      requests:
+        cpu: "1"
+        memory: 8Gi
+    securityContext:
+      privileged: true
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/opt/mssql/mssql.conf
+      name: database-config
+      subPath: mssql.conf
+    - mountPath: /var/opt/mssql/log
+      name: log-data
+    - mountPath: /var/opt/mssql/cert
+      name: cert-dir
+    - mountPath: /var/opt/mssql/ssl
+      name: ssl-dir
+    - mountPath: /jfs_sqlite
+      name: jfs-sqlite
+    - mountPath: /var/opt/mssql/data/data
+      name: data
+    - mountPath: /etc/localtime
+      name: localtime
+    - mountPath: /etc/timezone
+      name: timezone
+      subPath: timezone
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: dboperator-token-zcnwt
+      readOnly: true
+  - args:
+    - --clusterName=mssss-73205
+    - --setName=mssss-7320501
+    - --renewDeadline=10
+    - --retryPeriod=1
+    - --alsologtostderr
+    - --nameSpace=qfusion-admin
+    - --dbBranch=mssql2017
+    - --configNamespace=qfusion
+    env:
+    - name: DATADIR
+      value: /var/opt/mssql/data/data
+    - name: PORT
+      value: "1433"
+    - name: DBROLE
+      value: Replica
+    - name: MY_POD_IP
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: status.podIP
+    - name: ACCEPT_EULA
+      value: "Y"
+    - name: MSSQL_PID
+      value: Enterprise
+    - name: STRATEGY
+      value: MssqlRWCluster
+    - name: SA_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          key: password
+          name: mssss-732050-root-suffix
+    - name: MSSQL_ROOT_USER
+      value: SA
+    - name: MSSQL_ROOT_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          key: password
+          name: mssss-732050-root-suffix
+    - name: MSSQL_MAX_CONNECTIONS
+      value: "1000"
+    - name: TZ
+      value: Asia/Shanghai
+    image: k8smaster.qfusion.irds/irds/mssqlleader:v3.12.0
+    imagePullPolicy: IfNotPresent
+    name: leader
+    readinessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /health
+        port: 9001
+        scheme: HTTP
+      initialDelaySeconds: 10
+      periodSeconds: 1
+      successThreshold: 1
+      timeoutSeconds: 1
+    resources: {}
+    securityContext:
+      capabilities:
+        add:
+        - SYS_PTRACE
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/opt/mssql/mssql.conf
+      name: database-config
+    - mountPath: /var/opt/mssql/log
+      name: log-data
+    - mountPath: /var/opt/mssql/cert
+      name: cert-dir
+    - mountPath: /var/opt/mssql/ssl
+      name: ssl-dir
+    - mountPath: /jfs_sqlite
+      name: jfs-sqlite
+    - mountPath: /var/opt/mssql/data/data
+      name: data
+    - mountPath: /etc/localtime
+      name: localtime
+    - mountPath: /etc/timezone
+      name: timezone
+      subPath: timezone
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: dboperator-token-zcnwt
+      readOnly: true
+  - env:
+    - name: SERVER
+      value: localhost
+    - name: PORT
+      value: "1433"
+    - name: USERNAME
+      value: SA
+    - name: PASSWORD
+      valueFrom:
+        secretKeyRef:
+          key: password
+          name: mssss-732050-root-suffix
+    - name: DATA_SOURCE_NAME
+      value: sqlserver://$(USERNAME):$(PASSWORD)@$(SERVER):$(PORT)
+    image: k8smaster.qfusion.irds/irds/mssql-exporter:v0.2.0
+    imagePullPolicy: IfNotPresent
+    name: exporter
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /etc/localtime
+      name: localtime
+    - mountPath: /etc/timezone
+      name: timezone
+      subPath: timezone
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: dboperator-token-zcnwt
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: false
+  hostname: mssss-7320501-0
+  initContainers:
+  - command:
+    - sh
+    - -c
+    - |-
+      sysctl -w net.ipv4.tcp_retries2=7
+      sysctl -w net.ipv4.tcp_keepalive_time=90
+      sysctl -w net.ipv4.tcp_keepalive_intvl=10
+      sysctl -w net.ipv4.tcp_keepalive_probes=5
+    image: k8smaster.qfusion.irds/irds/alpine:3.6
+    imagePullPolicy: IfNotPresent
+    name: sysctl
+    resources: {}
+    securityContext:
+      capabilities:
+        add:
+        - SYS_ADMIN
+        - DAC_READ_SEARCH
+      privileged: true
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: FallbackToLogsOnError
+    volumeMounts:
+    - mountPath: /etc/localtime
+      name: localtime
+    - mountPath: /etc/timezone
+      name: timezone
+      subPath: timezone
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: dboperator-token-zcnwt
+      readOnly: true
+  - command:
+    - qfb
+    - restore
+    env:
+    - name: DATADIR
+      value: /var/opt/mssql/data/data
+    - name: PORT
+      value: "1433"
+    - name: DBROLE
+      value: Replica
+    - name: MY_POD_IP
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: status.podIP
+    - name: ACCEPT_EULA
+      value: "Y"
+    - name: MSSQL_PID
+      value: Enterprise
+    - name: STRATEGY
+      value: MssqlRWCluster
+    - name: SA_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          key: password
+          name: mssss-732050-root-suffix
+    - name: MSSQL_ROOT_USER
+      value: SA
+    - name: MSSQL_ROOT_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          key: password
+          name: mssss-732050-root-suffix
+    - name: MSSQL_MAX_CONNECTIONS
+      value: "1000"
+    - name: TZ
+      value: Asia/Shanghai
+    - name: clusterName
+      value: mssss-73205
+    image: k8smaster.qfusion.irds/irds/mssql-2017:v3.12.2
+    imagePullPolicy: IfNotPresent
+    name: restorer
+    resources: {}
+    securityContext:
+      capabilities:
+        add:
+        - SYS_ADMIN
+        - DAC_READ_SEARCH
+      privileged: true
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/opt/mssql/mssql.conf
+      name: database-config
+      subPath: mssql-restorer.conf
+    - mountPath: /var/opt/mssql/log
+      name: log-data
+    - mountPath: /jfs_sqlite
+      name: jfs-sqlite
+    - mountPath: /var/opt/mssql/data/data
+      name: data
+    - mountPath: /etc/localtime
+      name: localtime
+    - mountPath: /etc/timezone
+      name: timezone
+      subPath: timezone
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: dboperator-token-zcnwt
+      readOnly: true
+  nodeName: 172-16-130-27
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: dboperator
+  serviceAccountName: dboperator
+  subdomain: mssss-732050-headless
+  terminationGracePeriodSeconds: 60
+  tolerations:
+  - key: qfusion/worker
+    operator: Exists
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: data
+    persistentVolumeClaim:
+      claimName: data-mssss-7320501-0
+  - configMap:
+      defaultMode: 420
+      items:
+      - key: mssql.conf
+        mode: 420
+        path: mssql.conf
+      - key: mssql-restorer.conf
+        mode: 420
+        path: mssql-restorer.conf
+      name: mssss-732050
+    name: database-config
+  - emptyDir: {}
+    name: log-data
+  - emptyDir: {}
+    name: cert-dir
+  - emptyDir: {}
+    name: ssl-dir
+  - emptyDir: {}
+    name: jfs-sqlite
+  - configMap:
+      defaultMode: 420
+      items:
+      - key: timezone
+        path: timezone
+      name: timezone
+    name: timezone
+  - hostPath:
+      path: /usr/share/zoneinfo/Asia/Shanghai
+      type: ""
+    name: localtime
+  - name: dboperator-token-zcnwt
+    secret:
+      defaultMode: 420
+      secretName: dboperator-token-zcnwt
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T07:45:44Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T07:46:47Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T07:46:47Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T07:44:49Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: docker://da0d0516dbddfa14bfbd4003494f6ea23acabb21d70442189770fa343d9dbfc5
+    image: k8smaster.qfusion.irds/irds/mssql-exporter:v0.2.0
+    imageID: docker-pullable://k8smaster.qfusion.irds/irds/mssql-exporter@sha256:549b537ca6fa0d76290887a707b9a1e13918fccb40dc59a8a60dc633708b900e
+    lastState: {}
+    name: exporter
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2022-02-25T07:45:47Z"
+  - containerID: docker://073663bb40f2df94cb5550f3c2727ce80fcb1e1e844945c07994748a080aa393
+    image: k8smaster.qfusion.irds/irds/mssqlleader:v3.12.0
+    imageID: docker-pullable://k8smaster.qfusion.irds/irds/mssqlleader@sha256:081e0f58f9e16aa85ae4db1ac52e9fbfbe25dbec0bf0f628fe977fa39911eef5
+    lastState:
+      terminated:
+        containerID: docker://52b5d5a6df517dc957b662f3d11d5d68906c21ed5df50ad26bba73c58835b5fe
+        exitCode: 255
+        finishedAt: "2022-02-25T07:45:52Z"
+        reason: Error
+        startedAt: "2022-02-25T07:45:46Z"
+    name: leader
+    ready: true
+    restartCount: 1
+    started: true
+    state:
+      running:
+        startedAt: "2022-02-25T07:45:53Z"
+  - containerID: docker://2dac0039dbe6675fc47553364fbaa10a33944018cd25969c9f69842f12c5a4cf
+    image: k8smaster.qfusion.irds/irds/mssql-2017:v3.12.2
+    imageID: docker-pullable://k8smaster.qfusion.irds/irds/mssql-2017@sha256:b0c8d8187a3f58759483599ebab941d5d0f5f5fcd76d2ae872d880b57814bda2
+    lastState: {}
+    name: mssql
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2022-02-25T07:45:44Z"
+  hostIP: 10.10.40.27
+  initContainerStatuses:
+  - containerID: docker://950ae19a339a1504ede9b3482ec144d980bf6ea7eec0340474590e82532cfd9f
+    image: k8smaster.qfusion.irds/irds/alpine:3.6
+    imageID: docker-pullable://k8smaster.qfusion.irds/irds/alpine@sha256:d6eda1410b93902ac84bdd775167c84ab59e5abadad88791d742fea93b161e93
+    lastState: {}
+    name: sysctl
+    ready: true
+    restartCount: 0
+    state:
+      terminated:
+        containerID: docker://950ae19a339a1504ede9b3482ec144d980bf6ea7eec0340474590e82532cfd9f
+        exitCode: 0
+        finishedAt: "2022-02-25T07:44:51Z"
+        reason: Completed
+        startedAt: "2022-02-25T07:44:51Z"
+  - containerID: docker://7bd2dce25968b264e332d359d754d2dd01da943dac84624843e9436f916fecd2
+    image: k8smaster.qfusion.irds/irds/mssql-2017:v3.12.2
+    imageID: docker-pullable://k8smaster.qfusion.irds/irds/mssql-2017@sha256:b0c8d8187a3f58759483599ebab941d5d0f5f5fcd76d2ae872d880b57814bda2
+    lastState: {}
+    name: restorer
+    ready: true
+    restartCount: 0
+    state:
+      terminated:
+        containerID: docker://7bd2dce25968b264e332d359d754d2dd01da943dac84624843e9436f916fecd2
+        exitCode: 0
+        finishedAt: "2022-02-25T07:45:43Z"
+        reason: Completed
+        startedAt: "2022-02-25T07:45:43Z"
+  phase: Running
+  podIP: 10.244.2.200
+  podIPs:
+  - ip: 10.244.2.200
+  qosClass: Burstable
+  startTime: "2022-02-25T07:44:49Z"

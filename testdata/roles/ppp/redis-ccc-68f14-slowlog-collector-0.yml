@@ -1,0 +1,219 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: "2022-02-25T07:41:10Z"
+  generateName: redis-ccc-68f14-slowlog-collector-
+  labels:
+    AppName: redis-ccc-68f14-slowlog-collector
+    controller-revision-hash: redis-ccc-68f14-slowlog-collector-5c7cdbdcd5
+    statefulset.kubernetes.io/pod-name: redis-ccc-68f14-slowlog-collector-0
+  managedFields:
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:generateName: {}
+        f:labels:
+          .: {}
+          f:AppName: {}
+          f:controller-revision-hash: {}
+          f:statefulset.kubernetes.io/pod-name: {}
+        f:ownerReferences:
+          .: {}
+          k:{"uid":"458e847a-4b49-43bc-9ad8-c3e82949b840"}:
+            .: {}
+            f:apiVersion: {}
+            f:blockOwnerDeletion: {}
+            f:controller: {}
+            f:kind: {}
+            f:name: {}
+            f:uid: {}
+      f:spec:
+        f:affinity:
+          .: {}
+          f:nodeAffinity:
+            .: {}
+            f:requiredDuringSchedulingIgnoredDuringExecution:
+              .: {}
+              f:nodeSelectorTerms: {}
+        f:containers:
+          k:{"name":"redis-ccc-68f14-slowlog-collector"}:
+            .: {}
+            f:env:
+              .: {}
+              k:{"name":"CLUSTER_NAME"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"NAMESPACE"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+            f:image: {}
+            f:imagePullPolicy: {}
+            f:name: {}
+            f:resources: {}
+            f:terminationMessagePath: {}
+            f:terminationMessagePolicy: {}
+            f:volumeMounts:
+              .: {}
+              k:{"mountPath":"/redis/slowlog"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+        f:dnsPolicy: {}
+        f:enableServiceLinks: {}
+        f:hostname: {}
+        f:restartPolicy: {}
+        f:schedulerName: {}
+        f:securityContext: {}
+        f:serviceAccount: {}
+        f:serviceAccountName: {}
+        f:terminationGracePeriodSeconds: {}
+        f:volumes:
+          .: {}
+          k:{"name":"slowlogdir"}:
+            .: {}
+            f:emptyDir: {}
+            f:name: {}
+    manager: kube-controller-manager
+    operation: Update
+    time: "2022-02-25T07:41:10Z"
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:status:
+        f:conditions:
+          k:{"type":"ContainersReady"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:status: {}
+            f:type: {}
+          k:{"type":"Initialized"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:status: {}
+            f:type: {}
+          k:{"type":"Ready"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:status: {}
+            f:type: {}
+        f:containerStatuses: {}
+        f:hostIP: {}
+        f:phase: {}
+        f:podIP: {}
+        f:podIPs:
+          .: {}
+          k:{"ip":"10.244.2.135"}:
+            .: {}
+            f:ip: {}
+        f:startTime: {}
+    manager: kubelet
+    operation: Update
+    time: "2022-02-25T07:41:14Z"
+  name: redis-ccc-68f14-slowlog-collector-0
+  namespace: qfusion-admin
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: StatefulSet
+    name: redis-ccc-68f14-slowlog-collector
+    uid: 458e847a-4b49-43bc-9ad8-c3e82949b840
+  resourceVersion: "272759"
+  selfLink: /api/v1/namespaces/qfusion-admin/pods/redis-ccc-68f14-slowlog-collector-0
+  uid: 35a4295e-8d43-4b4c-a95d-afcd88820d64
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: qfusion/node
+            operator: Exists
+  containers:
+  - env:
+    - name: CLUSTER_NAME
+      value: redis-ccc-68f14
+    - name: NAMESPACE
+      value: qfusion-admin
+    image: k8smaster.qfusion.irds/irds/redis-log-collector:v3.12.0
+    imagePullPolicy: IfNotPresent
+    name: redis-ccc-68f14-slowlog-collector
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /redis/slowlog
+      name: slowlogdir
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: dboperator-token-zcnwt
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: false
+  hostname: redis-ccc-68f14-slowlog-collector-0
+  nodeName: 172-16-130-27
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: dboperator
+  serviceAccountName: dboperator
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - emptyDir: {}
+    name: slowlogdir
+  - name: dboperator-token-zcnwt
+    secret:
+      defaultMode: 420
+      secretName: dboperator-token-zcnwt
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T07:41:10Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T07:41:14Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T07:41:14Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T07:41:10Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: docker://9cf09ae30416aa07dfa8c582de238189d799cee7a8615092626bc1648acdf3f9
+    image: k8smaster.qfusion.irds/irds/redis-log-collector:v3.12.0
+    imageID: docker-pullable://k8smaster.qfusion.irds/irds/redis-log-collector@sha256:d085d6b88aa6b061b234808b61bf0980e5a8e2b2dead33787a7991c71753a188
+    lastState: {}
+    name: redis-ccc-68f14-slowlog-collector
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2022-02-25T07:41:12Z"
+  hostIP: 10.10.40.27
+  phase: Running
+  podIP: 10.244.2.135
+  podIPs:
+  - ip: 10.244.2.135
+  qosClass: BestEffort
+  startTime: "2022-02-25T07:41:10Z"

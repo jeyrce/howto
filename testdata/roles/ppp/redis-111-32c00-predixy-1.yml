@@ -1,0 +1,320 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: "2022-02-25T08:03:09Z"
+  generateName: redis-111-32c00-predixy-
+  labels:
+    AppName: redis-111-32c00
+    CreatedBy: woqutech.com
+    DBBranch: redis5.0
+    DBType: redis
+    ResourceUseType: share
+    TenantId: 847798ee3db44716b6357b04e5a55c16
+    controller-revision-hash: redis-111-32c00-predixy-5985d7cbb5
+    qfr.type: QfrStandalone
+    redis.kun/name: redis-111-32c00
+    redis.resource.type: predixy
+    statefulset.kubernetes.io/pod-name: redis-111-32c00-predixy-1
+  managedFields:
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:generateName: {}
+        f:labels:
+          .: {}
+          f:AppName: {}
+          f:CreatedBy: {}
+          f:DBBranch: {}
+          f:DBType: {}
+          f:ResourceUseType: {}
+          f:TenantId: {}
+          f:controller-revision-hash: {}
+          f:qfr.type: {}
+          f:redis.kun/name: {}
+          f:redis.resource.type: {}
+          f:statefulset.kubernetes.io/pod-name: {}
+        f:ownerReferences:
+          .: {}
+          k:{"uid":"d34ecf40-04ec-4646-b633-b8581587b0aa"}:
+            .: {}
+            f:apiVersion: {}
+            f:blockOwnerDeletion: {}
+            f:controller: {}
+            f:kind: {}
+            f:name: {}
+            f:uid: {}
+      f:spec:
+        f:affinity:
+          .: {}
+          f:nodeAffinity:
+            .: {}
+            f:requiredDuringSchedulingIgnoredDuringExecution:
+              .: {}
+              f:nodeSelectorTerms: {}
+        f:containers:
+          k:{"name":"exporter"}:
+            .: {}
+            f:env:
+              .: {}
+              k:{"name":"REDIS_ALIAS"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:fieldRef:
+                    .: {}
+                    f:apiVersion: {}
+                    f:fieldPath: {}
+              k:{"name":"REDIS_PASSWORD"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+            f:image: {}
+            f:imagePullPolicy: {}
+            f:name: {}
+            f:ports:
+              .: {}
+              k:{"containerPort":9617,"protocol":"TCP"}:
+                .: {}
+                f:containerPort: {}
+                f:name: {}
+                f:protocol: {}
+            f:resources:
+              .: {}
+              f:limits:
+                .: {}
+                f:cpu: {}
+                f:memory: {}
+              f:requests:
+                .: {}
+                f:cpu: {}
+                f:memory: {}
+            f:terminationMessagePath: {}
+            f:terminationMessagePolicy: {}
+          k:{"name":"predixy"}:
+            .: {}
+            f:command: {}
+            f:image: {}
+            f:imagePullPolicy: {}
+            f:name: {}
+            f:resources:
+              .: {}
+              f:limits:
+                .: {}
+                f:cpu: {}
+                f:memory: {}
+              f:requests:
+                .: {}
+                f:cpu: {}
+                f:memory: {}
+            f:terminationMessagePath: {}
+            f:terminationMessagePolicy: {}
+            f:volumeMounts:
+              .: {}
+              k:{"mountPath":"predixy-conf"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+        f:dnsPolicy: {}
+        f:enableServiceLinks: {}
+        f:hostname: {}
+        f:restartPolicy: {}
+        f:schedulerName: {}
+        f:securityContext: {}
+        f:terminationGracePeriodSeconds: {}
+        f:volumes:
+          .: {}
+          k:{"name":"predixy-conf"}:
+            .: {}
+            f:configMap:
+              .: {}
+              f:defaultMode: {}
+              f:name: {}
+            f:name: {}
+    manager: kube-controller-manager
+    operation: Update
+    time: "2022-02-25T08:03:09Z"
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:status:
+        f:conditions:
+          k:{"type":"ContainersReady"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:status: {}
+            f:type: {}
+          k:{"type":"Initialized"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:status: {}
+            f:type: {}
+          k:{"type":"Ready"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:status: {}
+            f:type: {}
+        f:containerStatuses: {}
+        f:hostIP: {}
+        f:phase: {}
+        f:podIP: {}
+        f:podIPs:
+          .: {}
+          k:{"ip":"10.244.1.88"}:
+            .: {}
+            f:ip: {}
+        f:startTime: {}
+    manager: kubelet
+    operation: Update
+    time: "2022-02-25T08:03:13Z"
+  name: redis-111-32c00-predixy-1
+  namespace: qfusion-admin
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: StatefulSet
+    name: redis-111-32c00-predixy
+    uid: d34ecf40-04ec-4646-b633-b8581587b0aa
+  resourceVersion: "305693"
+  selfLink: /api/v1/namespaces/qfusion-admin/pods/redis-111-32c00-predixy-1
+  uid: 65aa72c7-fbfe-4d94-b332-4c30ddd03ebb
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: qfusion/node
+            operator: Exists
+  containers:
+  - command:
+    - predixy
+    - /predixy-conf/predixy.conf
+    image: k8smaster.qfusion.irds/irds/predixy:1.0.5
+    imagePullPolicy: IfNotPresent
+    name: predixy
+    resources:
+      limits:
+        cpu: "1"
+        memory: 2Gi
+      requests:
+        cpu: 500m
+        memory: 2Gi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: predixy-conf
+      name: predixy-conf
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: default-token-n6q2x
+      readOnly: true
+  - env:
+    - name: REDIS_ALIAS
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.name
+    - name: REDIS_PASSWORD
+      value: R5JybYRR
+    image: k8smaster.qfusion.irds/irds/predixy-exporter:v3.12.0
+    imagePullPolicy: IfNotPresent
+    name: exporter
+    ports:
+    - containerPort: 9617
+      name: exporter
+      protocol: TCP
+    resources:
+      limits:
+        cpu: 100m
+        memory: 200Mi
+      requests:
+        cpu: 50m
+        memory: 50Mi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: default-token-n6q2x
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: false
+  hostname: redis-111-32c00-predixy-1
+  nodeName: 172-16-130-25
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - configMap:
+      defaultMode: 420
+      name: redis-111-32c00-predixy-conf
+    name: predixy-conf
+  - name: default-token-n6q2x
+    secret:
+      defaultMode: 420
+      secretName: default-token-n6q2x
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T08:03:09Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T08:03:13Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T08:03:13Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T08:03:09Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: docker://b40635599720ce16dc627735297ed83fe19d1ca91ae60aebfd02267ed072a871
+    image: k8smaster.qfusion.irds/irds/predixy-exporter:v3.12.0
+    imageID: docker-pullable://k8smaster.qfusion.irds/irds/predixy-exporter@sha256:e8be94c26a7485f0d4bfa873e09833be5c5b74ecb466ab93ce4de78da3bfec6d
+    lastState: {}
+    name: exporter
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2022-02-25T08:03:12Z"
+  - containerID: docker://ac4d9a0f7233134dee47c42abede6fa87565adc618ee926f6af5cb5de591e8d7
+    image: k8smaster.qfusion.irds/irds/predixy:1.0.5
+    imageID: docker-pullable://k8smaster.qfusion.irds/irds/predixy@sha256:f12348b58205fc3ebba44450b100b3e6b6c46d34185715a472432c0b2d03cb8e
+    lastState: {}
+    name: predixy
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2022-02-25T08:03:12Z"
+  hostIP: 10.10.40.25
+  phase: Running
+  podIP: 10.244.1.88
+  podIPs:
+  - ip: 10.244.1.88
+  qosClass: Burstable
+  startTime: "2022-02-25T08:03:09Z"

@@ -1,0 +1,821 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: "2022-02-25T03:37:26Z"
+  generateName: zfane-2fd37-replica0-0-
+  labels:
+    AppName: zfane-2fd37
+    CreatedBy: woqutech.com
+    DBBranch: mongo4.4
+    DBType: mongo
+    ResourceUseType: ""
+    SetName: zfane-2fd37-replica0-0
+    TenantId: 847798ee3db44716b6357b04e5a55c16
+    Type: Database
+    controller-revision-hash: zfane-2fd37-replica0-0-666df9567
+    mongo/clusterName: zfane-2fd37
+    mongo/instanceRoleInReplicaset: primary
+    mongo/replicasetName: zfane-2fd37-replica0
+    mongo/replicasetRoleInCluster: replica
+    statefulset.kubernetes.io/pod-name: zfane-2fd37-replica0-0-0
+    zfane-2fd37-replica0-replicaset-conf: "15506"
+  managedFields:
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:generateName: {}
+        f:labels:
+          .: {}
+          f:AppName: {}
+          f:CreatedBy: {}
+          f:DBBranch: {}
+          f:DBType: {}
+          f:ResourceUseType: {}
+          f:SetName: {}
+          f:TenantId: {}
+          f:Type: {}
+          f:controller-revision-hash: {}
+          f:mongo/clusterName: {}
+          f:mongo/replicasetName: {}
+          f:mongo/replicasetRoleInCluster: {}
+          f:statefulset.kubernetes.io/pod-name: {}
+          f:zfane-2fd37-replica0-replicaset-conf: {}
+        f:ownerReferences:
+          .: {}
+          k:{"uid":"d8fb18f2-25c1-481c-b104-14047f550241"}:
+            .: {}
+            f:apiVersion: {}
+            f:blockOwnerDeletion: {}
+            f:controller: {}
+            f:kind: {}
+            f:name: {}
+            f:uid: {}
+      f:spec:
+        f:affinity:
+          .: {}
+          f:nodeAffinity:
+            .: {}
+            f:requiredDuringSchedulingIgnoredDuringExecution:
+              .: {}
+              f:nodeSelectorTerms: {}
+          f:podAntiAffinity:
+            .: {}
+            f:requiredDuringSchedulingIgnoredDuringExecution: {}
+        f:containers:
+          k:{"name":"backup"}:
+            .: {}
+            f:args: {}
+            f:command: {}
+            f:env:
+              .: {}
+              k:{"name":"CLUSTER_NAME"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"MONGO_ROOT_PASSWORD"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:secretKeyRef:
+                    .: {}
+                    f:key: {}
+                    f:name: {}
+              k:{"name":"MONGO_ROOT_USERNAME"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:secretKeyRef:
+                    .: {}
+                    f:key: {}
+                    f:name: {}
+              k:{"name":"NAMESPACE"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"REPL_NAME"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+            f:image: {}
+            f:imagePullPolicy: {}
+            f:name: {}
+            f:resources: {}
+            f:securityContext:
+              .: {}
+              f:privileged: {}
+            f:terminationMessagePath: {}
+            f:terminationMessagePolicy: {}
+            f:volumeMounts:
+              .: {}
+              k:{"mountPath":"/etc/keyfile"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+                f:subPath: {}
+              k:{"mountPath":"/etc/mongod.conf"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+                f:subPath: {}
+              k:{"mountPath":"/mongodata"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+          k:{"name":"exporter"}:
+            .: {}
+            f:args: {}
+            f:env:
+              .: {}
+              k:{"name":"CLUSTER_NAME"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"MONGO_ROOT_PASSWORD"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:secretKeyRef:
+                    .: {}
+                    f:key: {}
+                    f:name: {}
+              k:{"name":"MONGO_ROOT_USERNAME"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:secretKeyRef:
+                    .: {}
+                    f:key: {}
+                    f:name: {}
+              k:{"name":"NAMESPACE"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"REPL_NAME"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+            f:image: {}
+            f:imagePullPolicy: {}
+            f:name: {}
+            f:resources: {}
+            f:terminationMessagePath: {}
+            f:terminationMessagePolicy: {}
+          k:{"name":"mongod"}:
+            .: {}
+            f:command: {}
+            f:env:
+              .: {}
+              k:{"name":"CLUSTER_NAME"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"MONGO_ROOT_PASSWORD"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:secretKeyRef:
+                    .: {}
+                    f:key: {}
+                    f:name: {}
+              k:{"name":"MONGO_ROOT_USERNAME"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:secretKeyRef:
+                    .: {}
+                    f:key: {}
+                    f:name: {}
+              k:{"name":"NAMESPACE"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"REPL_NAME"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+            f:image: {}
+            f:imagePullPolicy: {}
+            f:name: {}
+            f:ports:
+              .: {}
+              k:{"containerPort":27017,"protocol":"TCP"}:
+                .: {}
+                f:containerPort: {}
+                f:name: {}
+                f:protocol: {}
+            f:readinessProbe:
+              .: {}
+              f:exec:
+                .: {}
+                f:command: {}
+              f:failureThreshold: {}
+              f:periodSeconds: {}
+              f:successThreshold: {}
+              f:timeoutSeconds: {}
+            f:resources:
+              .: {}
+              f:limits:
+                .: {}
+                f:cpu: {}
+                f:memory: {}
+              f:requests:
+                .: {}
+                f:cpu: {}
+                f:memory: {}
+            f:terminationMessagePath: {}
+            f:terminationMessagePolicy: {}
+            f:volumeMounts:
+              .: {}
+              k:{"mountPath":"/etc/keyfile"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+                f:subPath: {}
+              k:{"mountPath":"/etc/mongod.conf"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+                f:subPath: {}
+              k:{"mountPath":"/mongodata"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+          k:{"name":"mrs-manager"}:
+            .: {}
+            f:env:
+              .: {}
+              k:{"name":"CLUSTER_NAME"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"MONGO_ROOT_PASSWORD"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:secretKeyRef:
+                    .: {}
+                    f:key: {}
+                    f:name: {}
+              k:{"name":"MONGO_ROOT_USERNAME"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:secretKeyRef:
+                    .: {}
+                    f:key: {}
+                    f:name: {}
+              k:{"name":"NAMESPACE"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"REPL_NAME"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+            f:image: {}
+            f:imagePullPolicy: {}
+            f:name: {}
+            f:resources: {}
+            f:securityContext:
+              .: {}
+              f:privileged: {}
+            f:terminationMessagePath: {}
+            f:terminationMessagePolicy: {}
+            f:volumeMounts:
+              .: {}
+              k:{"mountPath":"/mongodata"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+        f:dnsPolicy: {}
+        f:enableServiceLinks: {}
+        f:hostname: {}
+        f:initContainers:
+          .: {}
+          k:{"name":"restore"}:
+            .: {}
+            f:command: {}
+            f:env:
+              .: {}
+              k:{"name":"CLUSTER_NAME"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"MONGO_ROOT_PASSWORD"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:secretKeyRef:
+                    .: {}
+                    f:key: {}
+                    f:name: {}
+              k:{"name":"MONGO_ROOT_USERNAME"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:secretKeyRef:
+                    .: {}
+                    f:key: {}
+                    f:name: {}
+              k:{"name":"NAMESPACE"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"REPL_NAME"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+            f:image: {}
+            f:imagePullPolicy: {}
+            f:name: {}
+            f:resources: {}
+            f:securityContext:
+              .: {}
+              f:privileged: {}
+            f:terminationMessagePath: {}
+            f:terminationMessagePolicy: {}
+            f:volumeMounts:
+              .: {}
+              k:{"mountPath":"/etc/keyfile"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+                f:subPath: {}
+              k:{"mountPath":"/etc/mongod.conf"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+                f:subPath: {}
+              k:{"mountPath":"/mongodata"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+        f:restartPolicy: {}
+        f:schedulerName: {}
+        f:securityContext: {}
+        f:serviceAccount: {}
+        f:serviceAccountName: {}
+        f:subdomain: {}
+        f:terminationGracePeriodSeconds: {}
+        f:volumes:
+          .: {}
+          k:{"name":"data"}:
+            .: {}
+            f:name: {}
+            f:persistentVolumeClaim:
+              .: {}
+              f:claimName: {}
+          k:{"name":"keyfile"}:
+            .: {}
+            f:configMap:
+              .: {}
+              f:defaultMode: {}
+              f:name: {}
+            f:name: {}
+          k:{"name":"mongo-cfg"}:
+            .: {}
+            f:configMap:
+              .: {}
+              f:defaultMode: {}
+              f:name: {}
+            f:name: {}
+    manager: kube-controller-manager
+    operation: Update
+    time: "2022-02-25T03:37:26Z"
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:spec:
+        f:nodeName: {}
+      f:status:
+        f:conditions:
+          .: {}
+          k:{"type":"PodScheduled"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:message: {}
+            f:reason: {}
+            f:status: {}
+            f:type: {}
+    manager: kube-scheduler
+    operation: Update
+    time: "2022-02-25T03:37:26Z"
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:status:
+        f:conditions:
+          k:{"type":"ContainersReady"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:status: {}
+            f:type: {}
+          k:{"type":"Initialized"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:status: {}
+            f:type: {}
+          k:{"type":"Ready"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:status: {}
+            f:type: {}
+        f:containerStatuses: {}
+        f:hostIP: {}
+        f:initContainerStatuses: {}
+        f:phase: {}
+        f:podIP: {}
+        f:podIPs:
+          .: {}
+          k:{"ip":"10.244.2.208"}:
+            .: {}
+            f:ip: {}
+        f:startTime: {}
+    manager: kubelet
+    operation: Update
+    time: "2022-02-25T03:38:55Z"
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:labels:
+          f:mongo/instanceRoleInReplicaset: {}
+    manager: mrs-manager
+    operation: Update
+    time: "2022-02-25T03:39:03Z"
+  name: zfane-2fd37-replica0-0-0
+  namespace: qfusion-admin
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: StatefulSet
+    name: zfane-2fd37-replica0-0
+    uid: d8fb18f2-25c1-481c-b104-14047f550241
+  resourceVersion: "258703"
+  selfLink: /api/v1/namespaces/qfusion-admin/pods/zfane-2fd37-replica0-0-0
+  uid: ffe8c28f-81b2-4817-9894-0751893f2655
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: qfusion/node
+            operator: Exists
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchLabels:
+            AppName: zfane-2fd37
+            CreatedBy: woqutech.com
+            DBBranch: mongo4.4
+            DBType: mongo
+            ResourceUseType: ""
+            TenantId: 847798ee3db44716b6357b04e5a55c16
+            Type: Database
+            mongo/clusterName: zfane-2fd37
+            mongo/replicasetName: zfane-2fd37-replica0
+            mongo/replicasetRoleInCluster: replica
+        topologyKey: kubernetes.io/hostname
+  containers:
+  - command:
+    - sh
+    - -c
+    - mongod -f /etc/mongod.conf
+    env:
+    - name: MONGO_ROOT_USERNAME
+      valueFrom:
+        secretKeyRef:
+          key: username
+          name: zfane-2fd37-root-user
+    - name: MONGO_ROOT_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          key: password
+          name: zfane-2fd37-root-user
+    - name: CLUSTER_NAME
+      value: zfane-2fd37
+    - name: NAMESPACE
+      value: qfusion-admin
+    - name: REPL_NAME
+      value: zfane-2fd37-replica0
+    image: k8smaster.qfusion.irds/irds/mongo:4.4
+    imagePullPolicy: IfNotPresent
+    name: mongod
+    ports:
+    - containerPort: 27017
+      name: mongo
+      protocol: TCP
+    readinessProbe:
+      exec:
+        command:
+        - /mongodata/mongoprobe.sh
+      failureThreshold: 3
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 1
+    resources:
+      limits:
+        cpu: "2"
+        memory: 4Gi
+      requests:
+        cpu: "1"
+        memory: 4Gi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /mongodata
+      name: data
+    - mountPath: /etc/keyfile
+      name: keyfile
+      subPath: keyfile
+    - mountPath: /etc/mongod.conf
+      name: mongo-cfg
+      subPath: mongod.conf
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: dboperator-token-zcnwt
+      readOnly: true
+  - env:
+    - name: MONGO_ROOT_USERNAME
+      valueFrom:
+        secretKeyRef:
+          key: username
+          name: zfane-2fd37-root-user
+    - name: MONGO_ROOT_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          key: password
+          name: zfane-2fd37-root-user
+    - name: CLUSTER_NAME
+      value: zfane-2fd37
+    - name: NAMESPACE
+      value: qfusion-admin
+    - name: REPL_NAME
+      value: zfane-2fd37-replica0
+    image: k8smaster.qfusion.irds/irds/mrs-manager:v3.13.1-p2
+    imagePullPolicy: Always
+    name: mrs-manager
+    resources: {}
+    securityContext:
+      privileged: true
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /mongodata
+      name: data
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: dboperator-token-zcnwt
+      readOnly: true
+  - args:
+    - --mongodb.uri=mongodb://root:$(MONGO_ROOT_PASSWORD)@127.0.0.1:27017
+    - --mongodb.direct-connect=true
+    - --compatible-mode
+    - --mongodb.global-conn-pool
+    env:
+    - name: MONGO_ROOT_USERNAME
+      valueFrom:
+        secretKeyRef:
+          key: username
+          name: zfane-2fd37-root-user
+    - name: MONGO_ROOT_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          key: password
+          name: zfane-2fd37-root-user
+    - name: CLUSTER_NAME
+      value: zfane-2fd37
+    - name: NAMESPACE
+      value: qfusion-admin
+    - name: REPL_NAME
+      value: zfane-2fd37-replica0
+    image: k8smaster.qfusion.irds/irds/mongodb-exporter:0.20.9
+    imagePullPolicy: Always
+    name: exporter
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: dboperator-token-zcnwt
+      readOnly: true
+  - args:
+    - -f
+    - /dev/null
+    command:
+    - tail
+    env:
+    - name: MONGO_ROOT_USERNAME
+      valueFrom:
+        secretKeyRef:
+          key: username
+          name: zfane-2fd37-root-user
+    - name: MONGO_ROOT_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          key: password
+          name: zfane-2fd37-root-user
+    - name: CLUSTER_NAME
+      value: zfane-2fd37
+    - name: NAMESPACE
+      value: qfusion-admin
+    - name: REPL_NAME
+      value: zfane-2fd37-replica0
+    image: k8smaster.qfusion.irds/irds/mongodb-backup:v3.13.0
+    imagePullPolicy: Always
+    name: backup
+    resources: {}
+    securityContext:
+      privileged: true
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /mongodata
+      name: data
+    - mountPath: /etc/mongod.conf
+      name: mongo-cfg
+      subPath: mongod.conf
+    - mountPath: /etc/keyfile
+      name: keyfile
+      subPath: keyfile
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: dboperator-token-zcnwt
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  hostname: zfane-2fd37-replica0-0-0
+  initContainers:
+  - command:
+    - qfb
+    - restore
+    env:
+    - name: MONGO_ROOT_USERNAME
+      valueFrom:
+        secretKeyRef:
+          key: username
+          name: zfane-2fd37-root-user
+    - name: MONGO_ROOT_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          key: password
+          name: zfane-2fd37-root-user
+    - name: CLUSTER_NAME
+      value: zfane-2fd37
+    - name: NAMESPACE
+      value: qfusion-admin
+    - name: REPL_NAME
+      value: zfane-2fd37-replica0
+    image: k8smaster.qfusion.irds/irds/mongodb-backup:v3.13.0
+    imagePullPolicy: Always
+    name: restore
+    resources: {}
+    securityContext:
+      privileged: true
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /mongodata
+      name: data
+    - mountPath: /etc/mongod.conf
+      name: mongo-cfg
+      subPath: mongod.conf
+    - mountPath: /etc/keyfile
+      name: keyfile
+      subPath: keyfile
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: dboperator-token-zcnwt
+      readOnly: true
+  nodeName: 172-16-130-27
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: dboperator
+  serviceAccountName: dboperator
+  subdomain: zfane-2fd37-replica0-headless
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: data
+    persistentVolumeClaim:
+      claimName: data-zfane-2fd37-replica0-0-0
+  - configMap:
+      defaultMode: 384
+      name: zfane-2fd37-replica0-keyfile
+    name: keyfile
+  - configMap:
+      defaultMode: 511
+      name: zfane-2fd37-replica0-replicaset-conf
+    name: mongo-cfg
+  - name: dboperator-token-zcnwt
+    secret:
+      defaultMode: 420
+      secretName: dboperator-token-zcnwt
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T03:37:55Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T03:38:55Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T03:38:55Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T03:37:27Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: docker://69c55e3f1d5dc5bae2c31a813e7c57da568c6c3d671c9fd3096cb6e0ede340bb
+    image: k8smaster.qfusion.irds/irds/mongodb-backup:v3.13.0
+    imageID: docker-pullable://k8smaster.qfusion.irds/irds/mongodb-backup@sha256:bbe08a3c8c8535dbd92d07a0b55cf33c85af7da08d48be9648a99f53cc2d30bc
+    lastState: {}
+    name: backup
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2022-02-25T03:38:22Z"
+  - containerID: docker://1bad099ee6f101eb0b4ab44601f87f0a60ca45eeb81450a26387d483177977b8
+    image: k8smaster.qfusion.irds/irds/mongodb-exporter:0.20.9
+    imageID: docker-pullable://k8smaster.qfusion.irds/irds/mongodb-exporter@sha256:efe613027fead44c95e779a02655744bf4475d60671346542e053674593f3ea8
+    lastState: {}
+    name: exporter
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2022-02-25T03:38:22Z"
+  - containerID: docker://7932f4910c53201301417bd7b9f242fa41a78c8206596be552d24c92caa8ae1e
+    image: k8smaster.qfusion.irds/irds/mongo:4.4
+    imageID: docker-pullable://k8smaster.qfusion.irds/irds/mongo@sha256:713102f39b5a6cb1a3d92794099c86f1d53d2aee037d2d6a18bbd323db6aeef7
+    lastState: {}
+    name: mongod
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2022-02-25T03:38:08Z"
+  - containerID: docker://82aa0e5540dbef0ea3f75ddb9748c31794541ad6ec0a94f4abfc14190e83faed
+    image: k8smaster.qfusion.irds/irds/mrs-manager:v3.13.1-p2
+    imageID: docker-pullable://k8smaster.qfusion.irds/irds/mrs-manager@sha256:86f281525ec4bfd1139e86c10935490996cb6214fb182bb21632fd720bcaddb9
+    lastState: {}
+    name: mrs-manager
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2022-02-25T03:38:21Z"
+  hostIP: 10.10.40.27
+  initContainerStatuses:
+  - containerID: docker://226f3ed4cd0f7a5ddd1a2074d1c67af9020300ad422d7a25a87bd7789b05ce45
+    image: k8smaster.qfusion.irds/irds/mongodb-backup:v3.13.0
+    imageID: docker-pullable://k8smaster.qfusion.irds/irds/mongodb-backup@sha256:bbe08a3c8c8535dbd92d07a0b55cf33c85af7da08d48be9648a99f53cc2d30bc
+    lastState: {}
+    name: restore
+    ready: true
+    restartCount: 0
+    state:
+      terminated:
+        containerID: docker://226f3ed4cd0f7a5ddd1a2074d1c67af9020300ad422d7a25a87bd7789b05ce45
+        exitCode: 0
+        finishedAt: "2022-02-25T03:37:54Z"
+        reason: Completed
+        startedAt: "2022-02-25T03:37:49Z"
+  phase: Running
+  podIP: 10.244.2.208
+  podIPs:
+  - ip: 10.244.2.208
+  qosClass: Burstable
+  startTime: "2022-02-25T03:37:27Z"

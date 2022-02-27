@@ -1,0 +1,702 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    pod.beta.kubernetes.io/initialized: "true"
+    qfusion.woqutech.com/customStatus: '{"status":"","heartbeatTime":"2022-02-25T16:03:19.533610335+08:00"}'
+  creationTimestamp: "2022-02-25T07:28:55Z"
+  generateName: oc11-258740-
+  labels:
+    AppName: oc11-25874
+    CreatedBy: woqutech.com
+    DBRole: Master
+    DBType: oracle
+    IsMaster: "true"
+    Name: oc11-258740
+    SetName: oc11-258740
+    TenantId: 847798ee3db44716b6357b04e5a55c16
+    Type: Database
+    controller-revision-hash: oc11-258740-749c9dff98
+    qfusion.woqutech.com/oracleDatabaseName: OC123
+    statefulset.kubernetes.io/pod-name: oc11-258740-0
+  managedFields:
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:pod.beta.kubernetes.io/initialized: {}
+        f:generateName: {}
+        f:labels:
+          .: {}
+          f:AppName: {}
+          f:CreatedBy: {}
+          f:DBRole: {}
+          f:DBType: {}
+          f:Name: {}
+          f:SetName: {}
+          f:TenantId: {}
+          f:Type: {}
+          f:controller-revision-hash: {}
+          f:qfusion.woqutech.com/oracleDatabaseName: {}
+          f:statefulset.kubernetes.io/pod-name: {}
+        f:ownerReferences:
+          .: {}
+          k:{"uid":"7699bc7e-d1d0-4510-ad12-b05e0ede6384"}:
+            .: {}
+            f:apiVersion: {}
+            f:blockOwnerDeletion: {}
+            f:controller: {}
+            f:kind: {}
+            f:name: {}
+            f:uid: {}
+      f:spec:
+        f:affinity:
+          .: {}
+          f:nodeAffinity:
+            .: {}
+            f:requiredDuringSchedulingIgnoredDuringExecution:
+              .: {}
+              f:nodeSelectorTerms: {}
+          f:podAntiAffinity:
+            .: {}
+            f:requiredDuringSchedulingIgnoredDuringExecution: {}
+        f:containers:
+          k:{"name":"oracle"}:
+            .: {}
+            f:command: {}
+            f:env:
+              .: {}
+              k:{"name":"AUDIT_FILE_DEST"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"CPU_COUNT"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"DATABASE_VERSION"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"DB_RECOVERY_FILE_DEST_SIZE"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"DB_ROLE"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"DB_UNIQUE_NAME"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"DEST_DATADIR"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"DEST_LOGDIR"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"ENABLE_ARCH"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"ENABLE_HOST_NETWORK"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"HOST_IP"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:fieldRef:
+                    .: {}
+                    f:apiVersion: {}
+                    f:fieldPath: {}
+              k:{"name":"MEMORY_TARGET"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"ORACLE_BASE"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"ORACLE_CHARACTERSET"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"ORACLE_HOME"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"ORACLE_MONITOR"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"ORACLE_PWD"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:secretKeyRef:
+                    .: {}
+                    f:key: {}
+                    f:name: {}
+              k:{"name":"ORACLE_SID"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"PGA_SIZE"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"POD_IP"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:fieldRef:
+                    .: {}
+                    f:apiVersion: {}
+                    f:fieldPath: {}
+              k:{"name":"POD_NAME"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:fieldRef:
+                    .: {}
+                    f:apiVersion: {}
+                    f:fieldPath: {}
+              k:{"name":"POD_NAMESPACE"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:fieldRef:
+                    .: {}
+                    f:apiVersion: {}
+                    f:fieldPath: {}
+              k:{"name":"ROOTDIR"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"SGA_SIZE"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"SRC_DATADIR"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"SRC_LOGDIR"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"VOLUMES_DIR"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+            f:image: {}
+            f:imagePullPolicy: {}
+            f:name: {}
+            f:readinessProbe:
+              .: {}
+              f:exec:
+                .: {}
+                f:command: {}
+              f:failureThreshold: {}
+              f:initialDelaySeconds: {}
+              f:periodSeconds: {}
+              f:successThreshold: {}
+              f:timeoutSeconds: {}
+            f:resources:
+              .: {}
+              f:limits:
+                .: {}
+                f:cpu: {}
+                f:memory: {}
+              f:requests:
+                .: {}
+                f:cpu: {}
+                f:memory: {}
+            f:securityContext:
+              .: {}
+              f:privileged: {}
+            f:terminationMessagePath: {}
+            f:terminationMessagePolicy: {}
+            f:volumeMounts:
+              .: {}
+              k:{"mountPath":"/etc/localtime"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+              k:{"mountPath":"/etc/timezone"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+                f:subPath: {}
+              k:{"mountPath":"/hostroot"}:
+                .: {}
+                f:mountPath: {}
+                f:mountPropagation: {}
+                f:name: {}
+              k:{"mountPath":"/opt/oracle/oradata"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+              k:{"mountPath":"/opt/oracle/oralog"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+              k:{"mountPath":"/oraconfig"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+        f:dnsPolicy: {}
+        f:enableServiceLinks: {}
+        f:hostPID: {}
+        f:hostname: {}
+        f:initContainers:
+          .: {}
+          k:{"name":"sysctl"}:
+            .: {}
+            f:command: {}
+            f:image: {}
+            f:imagePullPolicy: {}
+            f:name: {}
+            f:resources: {}
+            f:securityContext:
+              .: {}
+              f:capabilities:
+                .: {}
+                f:add: {}
+              f:privileged: {}
+            f:terminationMessagePath: {}
+            f:terminationMessagePolicy: {}
+            f:volumeMounts:
+              .: {}
+              k:{"mountPath":"/etc/localtime"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+              k:{"mountPath":"/etc/timezone"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+                f:subPath: {}
+        f:restartPolicy: {}
+        f:schedulerName: {}
+        f:securityContext: {}
+        f:serviceAccount: {}
+        f:serviceAccountName: {}
+        f:subdomain: {}
+        f:terminationGracePeriodSeconds: {}
+        f:tolerations: {}
+        f:volumes:
+          .: {}
+          k:{"name":"archive"}:
+            .: {}
+            f:name: {}
+            f:persistentVolumeClaim:
+              .: {}
+              f:claimName: {}
+          k:{"name":"data"}:
+            .: {}
+            f:name: {}
+            f:persistentVolumeClaim:
+              .: {}
+              f:claimName: {}
+          k:{"name":"database-config"}:
+            .: {}
+            f:configMap:
+              .: {}
+              f:defaultMode: {}
+              f:name: {}
+            f:name: {}
+          k:{"name":"hostroot"}:
+            .: {}
+            f:hostPath:
+              .: {}
+              f:path: {}
+              f:type: {}
+            f:name: {}
+          k:{"name":"localtime"}:
+            .: {}
+            f:hostPath:
+              .: {}
+              f:path: {}
+              f:type: {}
+            f:name: {}
+          k:{"name":"timezone"}:
+            .: {}
+            f:configMap:
+              .: {}
+              f:defaultMode: {}
+              f:items: {}
+              f:name: {}
+            f:name: {}
+    manager: kube-controller-manager
+    operation: Update
+    time: "2022-02-25T07:28:55Z"
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:status:
+        f:conditions:
+          .: {}
+          k:{"type":"PodScheduled"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:message: {}
+            f:reason: {}
+            f:status: {}
+            f:type: {}
+    manager: kube-scheduler
+    operation: Update
+    time: "2022-02-25T07:28:55Z"
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          f:qfusion.woqutech.com/customStatus: {}
+        f:labels:
+          f:IsMaster: {}
+    manager: qfom
+    operation: Update
+    time: "2022-02-25T07:35:49Z"
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:status:
+        f:conditions:
+          k:{"type":"ContainersReady"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:status: {}
+            f:type: {}
+          k:{"type":"Initialized"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:status: {}
+            f:type: {}
+          k:{"type":"Ready"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:status: {}
+            f:type: {}
+        f:containerStatuses: {}
+        f:hostIP: {}
+        f:initContainerStatuses: {}
+        f:phase: {}
+        f:podIP: {}
+        f:podIPs:
+          .: {}
+          k:{"ip":"10.244.1.142"}:
+            .: {}
+            f:ip: {}
+        f:startTime: {}
+    manager: kubelet
+    operation: Update
+    time: "2022-02-25T07:36:03Z"
+  name: oc11-258740-0
+  namespace: qfusion-admin
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: StatefulSet
+    name: oc11-258740
+    uid: 7699bc7e-d1d0-4510-ad12-b05e0ede6384
+  resourceVersion: "305870"
+  selfLink: /api/v1/namespaces/qfusion-admin/pods/oc11-258740-0
+  uid: 8400f61a-608b-433e-9e62-18b9bb35508a
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: qfusion/oracle
+            operator: Exists
+          - key: qfusion/node
+            operator: Exists
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchLabels:
+            AppName: oc11-25874
+            CreatedBy: woqutech.com
+            DBType: oracle
+            Name: oc11-258740
+            TenantId: 847798ee3db44716b6357b04e5a55c16
+            Type: Database
+        topologyKey: kubernetes.io/hostname
+      - labelSelector:
+          matchLabels:
+            qfusion.woqutech.com/oracleDatabaseName: OC123
+        topologyKey: kubernetes.io/hostname
+  containers:
+  - command:
+    - /qfom
+    - run
+    - --cluster-name=oc11-25874
+    - --logtostderr
+    - -v=5
+    env:
+    - name: ORACLE_CHARACTERSET
+      value: ZHS16GBK
+    - name: ENABLE_ARCH
+      value: "true"
+    - name: SRC_DATADIR
+      value: /opt/oracle/oradata
+    - name: SRC_LOGDIR
+      value: /opt/oracle/oralog
+    - name: DEST_DATADIR
+      value: /opt/oracle/qfusion/volumes/qfusion-admin_oc11-258740-0/oradata
+    - name: DEST_LOGDIR
+      value: /opt/oracle/qfusion/volumes/qfusion-admin_oc11-258740-0/oralog
+    - name: ORACLE_HOME
+      value: /opt/11g/product/11.2.0/dbhome_1
+    - name: ORACLE_BASE
+      value: /opt/11g
+    - name: DATABASE_VERSION
+      value: 11.2.0.4.0
+    - name: POD_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.name
+    - name: POD_NAMESPACE
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.namespace
+    - name: ROOTDIR
+      value: /opt/oracle/qfusion
+    - name: VOLUMES_DIR
+      value: /opt/oracle/qfusion/volumes/qfusion-admin_oc11-258740-0
+    - name: AUDIT_FILE_DEST
+      value: /opt/oracle/qfusion/volumes/qfusion-admin_oc11-258740-0/oralog/audit
+    - name: ORACLE_PWD
+      valueFrom:
+        secretKeyRef:
+          key: password
+          name: oc11-258740-root
+    - name: ENABLE_HOST_NETWORK
+      value: "false"
+    - name: ORACLE_SID
+      value: oc123
+    - name: SGA_SIZE
+      value: "6144"
+    - name: PGA_SIZE
+      value: "2048"
+    - name: DB_UNIQUE_NAME
+      value: oc123
+    - name: MEMORY_TARGET
+      value: "8192"
+    - name: CPU_COUNT
+      value: "2"
+    - name: DB_ROLE
+      value: primary
+    - name: DB_RECOVERY_FILE_DEST_SIZE
+      value: "30720"
+    - name: POD_IP
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: status.podIP
+    - name: HOST_IP
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: status.hostIP
+    - name: ORACLE_MONITOR
+      value: "True"
+    image: k8smaster.qfusion.irds/irds/qfom:v0.0.6
+    imagePullPolicy: IfNotPresent
+    name: oracle
+    readinessProbe:
+      exec:
+        command:
+        - /qfom
+        - ready
+      failureThreshold: 3
+      initialDelaySeconds: 1
+      periodSeconds: 20
+      successThreshold: 1
+      timeoutSeconds: 15
+    resources:
+      limits:
+        cpu: "2"
+        memory: 8Gi
+      requests:
+        cpu: "1"
+        memory: 8Gi
+    securityContext:
+      privileged: true
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /oraconfig
+      name: database-config
+    - mountPath: /hostroot
+      mountPropagation: Bidirectional
+      name: hostroot
+    - mountPath: /opt/oracle/oradata
+      name: data
+    - mountPath: /opt/oracle/oralog
+      name: archive
+    - mountPath: /etc/localtime
+      name: localtime
+    - mountPath: /etc/timezone
+      name: timezone
+      subPath: timezone
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: dboperator-token-zcnwt
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: false
+  hostPID: true
+  hostname: oc11-258740-0
+  initContainers:
+  - command:
+    - sh
+    - -c
+    - |-
+      sysctl -w net.ipv4.tcp_retries2=7
+      sysctl -w net.ipv4.tcp_keepalive_time=90
+      sysctl -w net.ipv4.tcp_keepalive_intvl=10
+      sysctl -w net.ipv4.tcp_keepalive_probes=5
+    image: k8smaster.qfusion.irds/irds/alpine:3.6
+    imagePullPolicy: IfNotPresent
+    name: sysctl
+    resources: {}
+    securityContext:
+      capabilities:
+        add:
+        - SYS_ADMIN
+        - DAC_READ_SEARCH
+      privileged: true
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: FallbackToLogsOnError
+    volumeMounts:
+    - mountPath: /etc/localtime
+      name: localtime
+    - mountPath: /etc/timezone
+      name: timezone
+      subPath: timezone
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: dboperator-token-zcnwt
+      readOnly: true
+  nodeName: 172-16-130-25
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: dboperator
+  serviceAccountName: dboperator
+  subdomain: oc11-258740-headless
+  terminationGracePeriodSeconds: 600
+  tolerations:
+  - key: qfusion/worker
+    operator: Exists
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: data
+    persistentVolumeClaim:
+      claimName: data-oc11-258740-0
+  - name: archive
+    persistentVolumeClaim:
+      claimName: archive-oc11-258740-0
+  - hostPath:
+      path: /
+      type: ""
+    name: hostroot
+  - configMap:
+      defaultMode: 420
+      name: oc11-258740
+    name: database-config
+  - configMap:
+      defaultMode: 420
+      items:
+      - key: timezone
+        path: timezone
+      name: timezone
+    name: timezone
+  - hostPath:
+      path: /usr/share/zoneinfo/Asia/Shanghai
+      type: ""
+    name: localtime
+  - name: dboperator-token-zcnwt
+    secret:
+      defaultMode: 420
+      secretName: dboperator-token-zcnwt
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T07:30:59Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T07:36:03Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T07:36:03Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T07:30:51Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: docker://11fbc0f4a0114da563f235d3a92b5ca0bd92687c5aa911df212d003c48be7869
+    image: k8smaster.qfusion.irds/irds/qfom:v0.0.6
+    imageID: docker-pullable://k8smaster.qfusion.irds/irds/qfom@sha256:f0d9641edd8b823371ea003d2e6c00b40ca0f168e0b63612791e992da892d8d1
+    lastState: {}
+    name: oracle
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2022-02-25T07:30:59Z"
+  hostIP: 10.10.40.25
+  initContainerStatuses:
+  - containerID: docker://396f06bf1d4012a36bc36124d806f4e9731689fae995e439ff9c146b73c8e10d
+    image: k8smaster.qfusion.irds/irds/alpine:3.6
+    imageID: docker-pullable://k8smaster.qfusion.irds/irds/alpine@sha256:d6eda1410b93902ac84bdd775167c84ab59e5abadad88791d742fea93b161e93
+    lastState: {}
+    name: sysctl
+    ready: true
+    restartCount: 0
+    state:
+      terminated:
+        containerID: docker://396f06bf1d4012a36bc36124d806f4e9731689fae995e439ff9c146b73c8e10d
+        exitCode: 0
+        finishedAt: "2022-02-25T07:30:57Z"
+        reason: Completed
+        startedAt: "2022-02-25T07:30:57Z"
+  phase: Running
+  podIP: 10.244.1.142
+  podIPs:
+  - ip: 10.244.1.142
+  qosClass: Burstable
+  startTime: "2022-02-25T07:30:51Z"

@@ -1,0 +1,460 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    prometheus.io/path: /metrics
+    prometheus.io/port: "10080"
+    prometheus.io/scrape: "true"
+  creationTimestamp: "2022-02-25T07:44:24Z"
+  generateName: sss-781a5-tidb-
+  labels:
+    app.kubernetes.io/component: tidb
+    app.kubernetes.io/instance: sss-781a5
+    app.kubernetes.io/managed-by: tidb-operator
+    app.kubernetes.io/name: tidb-cluster
+    controller-revision-hash: sss-781a5-tidb-9956855b6
+    statefulset.kubernetes.io/pod-name: sss-781a5-tidb-1
+    tidb.pingcap.com/cluster-id: "7068549874571667330"
+  managedFields:
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:prometheus.io/path: {}
+          f:prometheus.io/port: {}
+          f:prometheus.io/scrape: {}
+        f:generateName: {}
+        f:labels:
+          .: {}
+          f:app.kubernetes.io/component: {}
+          f:app.kubernetes.io/instance: {}
+          f:app.kubernetes.io/managed-by: {}
+          f:app.kubernetes.io/name: {}
+          f:controller-revision-hash: {}
+          f:statefulset.kubernetes.io/pod-name: {}
+        f:ownerReferences:
+          .: {}
+          k:{"uid":"0ad00d61-860c-4c0a-b160-090997a5faf4"}:
+            .: {}
+            f:apiVersion: {}
+            f:blockOwnerDeletion: {}
+            f:controller: {}
+            f:kind: {}
+            f:name: {}
+            f:uid: {}
+      f:spec:
+        f:affinity:
+          .: {}
+          f:nodeAffinity:
+            .: {}
+            f:requiredDuringSchedulingIgnoredDuringExecution:
+              .: {}
+              f:nodeSelectorTerms: {}
+        f:containers:
+          k:{"name":"slowlog"}:
+            .: {}
+            f:command: {}
+            f:image: {}
+            f:imagePullPolicy: {}
+            f:name: {}
+            f:resources: {}
+            f:terminationMessagePath: {}
+            f:terminationMessagePolicy: {}
+            f:volumeMounts:
+              .: {}
+              k:{"mountPath":"/var/log/tidb"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+          k:{"name":"tidb"}:
+            .: {}
+            f:command: {}
+            f:env:
+              .: {}
+              k:{"name":"BINLOG_ENABLED"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"CLUSTER_NAME"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"HEADLESS_SERVICE_NAME"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"NAMESPACE"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:fieldRef:
+                    .: {}
+                    f:apiVersion: {}
+                    f:fieldPath: {}
+              k:{"name":"POD_NAME"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:fieldRef:
+                    .: {}
+                    f:apiVersion: {}
+                    f:fieldPath: {}
+              k:{"name":"SLOW_LOG_FILE"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"TZ"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+            f:image: {}
+            f:imagePullPolicy: {}
+            f:name: {}
+            f:ports:
+              .: {}
+              k:{"containerPort":4000,"protocol":"TCP"}:
+                .: {}
+                f:containerPort: {}
+                f:name: {}
+                f:protocol: {}
+              k:{"containerPort":10080,"protocol":"TCP"}:
+                .: {}
+                f:containerPort: {}
+                f:name: {}
+                f:protocol: {}
+            f:readinessProbe:
+              .: {}
+              f:failureThreshold: {}
+              f:initialDelaySeconds: {}
+              f:periodSeconds: {}
+              f:successThreshold: {}
+              f:tcpSocket:
+                .: {}
+                f:port: {}
+              f:timeoutSeconds: {}
+            f:resources:
+              .: {}
+              f:limits:
+                .: {}
+                f:cpu: {}
+                f:memory: {}
+              f:requests:
+                .: {}
+                f:cpu: {}
+                f:memory: {}
+            f:terminationMessagePath: {}
+            f:terminationMessagePolicy: {}
+            f:volumeMounts:
+              .: {}
+              k:{"mountPath":"/etc/podinfo"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+                f:readOnly: {}
+              k:{"mountPath":"/etc/tidb"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+                f:readOnly: {}
+              k:{"mountPath":"/usr/local/bin"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+                f:readOnly: {}
+              k:{"mountPath":"/var/log/tidb"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+        f:dnsPolicy: {}
+        f:enableServiceLinks: {}
+        f:hostname: {}
+        f:restartPolicy: {}
+        f:schedulerName: {}
+        f:securityContext: {}
+        f:subdomain: {}
+        f:terminationGracePeriodSeconds: {}
+        f:tolerations: {}
+        f:volumes:
+          .: {}
+          k:{"name":"annotations"}:
+            .: {}
+            f:downwardAPI:
+              .: {}
+              f:defaultMode: {}
+              f:items: {}
+            f:name: {}
+          k:{"name":"config"}:
+            .: {}
+            f:configMap:
+              .: {}
+              f:defaultMode: {}
+              f:items: {}
+              f:name: {}
+            f:name: {}
+          k:{"name":"slowlog"}:
+            .: {}
+            f:emptyDir: {}
+            f:name: {}
+          k:{"name":"startup-script"}:
+            .: {}
+            f:configMap:
+              .: {}
+              f:defaultMode: {}
+              f:items: {}
+              f:name: {}
+            f:name: {}
+    manager: advanced-statefulset-controller-manager
+    operation: Update
+    time: "2022-02-25T07:44:24Z"
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:labels:
+          f:tidb.pingcap.com/cluster-id: {}
+    manager: tidb-controller-manager
+    operation: Update
+    time: "2022-02-25T07:44:28Z"
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:status:
+        f:conditions:
+          k:{"type":"ContainersReady"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:status: {}
+            f:type: {}
+          k:{"type":"Initialized"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:status: {}
+            f:type: {}
+          k:{"type":"Ready"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:status: {}
+            f:type: {}
+        f:containerStatuses: {}
+        f:hostIP: {}
+        f:phase: {}
+        f:podIP: {}
+        f:podIPs:
+          .: {}
+          k:{"ip":"10.244.1.71"}:
+            .: {}
+            f:ip: {}
+        f:startTime: {}
+    manager: kubelet
+    operation: Update
+    time: "2022-02-25T07:44:44Z"
+  name: sss-781a5-tidb-1
+  namespace: qfusion-admin
+  ownerReferences:
+  - apiVersion: apps.pingcap.com/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: StatefulSet
+    name: sss-781a5-tidb
+    uid: 0ad00d61-860c-4c0a-b160-090997a5faf4
+  resourceVersion: "278849"
+  selfLink: /api/v1/namespaces/qfusion-admin/pods/sss-781a5-tidb-1
+  uid: 19d2c956-8aff-45dc-9906-5d880361e4af
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: qfusion/node
+            operator: Exists
+  containers:
+  - command:
+    - sh
+    - -c
+    - touch /var/log/tidb/slowlog; tail -n0 -F /var/log/tidb/slowlog;
+    image: k8smaster.qfusion.irds/irds/busybox:1.26.2
+    imagePullPolicy: IfNotPresent
+    name: slowlog
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/log/tidb
+      name: slowlog
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: default-token-n6q2x
+      readOnly: true
+  - command:
+    - /bin/sh
+    - /usr/local/bin/tidb_start_script.sh
+    env:
+    - name: CLUSTER_NAME
+      value: sss-781a5
+    - name: TZ
+      value: Asia/Shanghai
+    - name: BINLOG_ENABLED
+      value: "false"
+    - name: SLOW_LOG_FILE
+      value: /var/log/tidb/slowlog
+    - name: POD_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.name
+    - name: NAMESPACE
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.namespace
+    - name: HEADLESS_SERVICE_NAME
+      value: sss-781a5-tidb-peer
+    image: k8smaster.qfusion.irds/irds/tidb:v4.0.9
+    imagePullPolicy: IfNotPresent
+    name: tidb
+    ports:
+    - containerPort: 4000
+      name: server
+      protocol: TCP
+    - containerPort: 10080
+      name: status
+      protocol: TCP
+    readinessProbe:
+      failureThreshold: 3
+      initialDelaySeconds: 10
+      periodSeconds: 10
+      successThreshold: 1
+      tcpSocket:
+        port: 4000
+      timeoutSeconds: 1
+    resources:
+      limits:
+        cpu: "4"
+        memory: 8Gi
+      requests:
+        cpu: "2"
+        memory: 8Gi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /etc/podinfo
+      name: annotations
+      readOnly: true
+    - mountPath: /etc/tidb
+      name: config
+      readOnly: true
+    - mountPath: /usr/local/bin
+      name: startup-script
+      readOnly: true
+    - mountPath: /var/log/tidb
+      name: slowlog
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: default-token-n6q2x
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  hostname: sss-781a5-tidb-1
+  nodeName: 172-16-130-25
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  subdomain: sss-781a5-tidb-peer
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - key: qfusion/worker
+    operator: Exists
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - downwardAPI:
+      defaultMode: 420
+      items:
+      - fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.annotations
+        path: annotations
+    name: annotations
+  - configMap:
+      defaultMode: 420
+      items:
+      - key: config-file
+        path: tidb.toml
+      name: sss-781a5-tidb
+    name: config
+  - configMap:
+      defaultMode: 420
+      items:
+      - key: startup-script
+        path: tidb_start_script.sh
+      name: sss-781a5-tidb
+    name: startup-script
+  - emptyDir: {}
+    name: slowlog
+  - name: default-token-n6q2x
+    secret:
+      defaultMode: 420
+      secretName: default-token-n6q2x
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T07:44:24Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T07:44:44Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T07:44:44Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2022-02-25T07:44:24Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: docker://2145d4e001f906a94959d7cf7c685e82436e8d2712ae5b24fdb048fa2b16015c
+    image: k8smaster.qfusion.irds/irds/busybox:1.26.2
+    imageID: docker-pullable://k8smaster.qfusion.irds/irds/busybox@sha256:da7614ed2b95da47e5a751113734b84be346f17fa2f2507351054a4246e551ce
+    lastState: {}
+    name: slowlog
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2022-02-25T07:44:27Z"
+  - containerID: docker://9d62b45adc9439bd42aa8a4d0478273cf8e728ac7b777338359f2ed723cfa09d
+    image: k8smaster.qfusion.irds/irds/tidb:v4.0.9
+    imageID: docker-pullable://k8smaster.qfusion.irds/irds/tidb@sha256:7fc5a3f1c09348ce210575fb49da3e6f6d5764d2348f1f794c7ebe6ec9954c33
+    lastState: {}
+    name: tidb
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2022-02-25T07:44:34Z"
+  hostIP: 10.10.40.25
+  phase: Running
+  podIP: 10.244.1.71
+  podIPs:
+  - ip: 10.244.1.71
+  qosClass: Burstable
+  startTime: "2022-02-25T07:44:24Z"
