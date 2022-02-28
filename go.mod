@@ -1,4 +1,4 @@
-module ioseek.cn/howto
+module github.com/jeyrce/howto
 
 go 1.16
 
