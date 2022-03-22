@@ -9,7 +9,7 @@ import (
 var (
 	addr  = kingpin.Flag("listen.addr", "地址").Default(":9090").String()
 	check = kingpin.Command("check", "检查配置")
-	file  = check.Arg("filename", "文件名").String()
+	file  = check.Arg("filename", "文件名").ExistingFiles()
 )
 
 func init() {
