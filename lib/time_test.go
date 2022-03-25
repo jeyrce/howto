@@ -32,3 +32,16 @@ func TestTimeStamp(t *testing.T) {
 	rt := time.Unix(ts, 0).AddDate(0, 3, 0)
 	t.Log(rt.Format("2006-01-02 15:04:05"))
 }
+
+func TestTimestamp16(t *testing.T) {
+	var (
+		end    int64 = 1647949309160803
+		start  int64 = 1647949309160568
+		layout       = "2006/01/02 15:04:05.000000"
+	)
+	startTime := time.UnixMicro(start).Local().Format(layout)
+	endTime := time.UnixMicro(end).Local().Format(layout)
+	t.Log(startTime)
+	t.Log(endTime)
+	t.Log(time.Duration(end - start).String())
+}

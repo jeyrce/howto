@@ -1,0 +1,13 @@
+神马搜索（移动端）   http://zhanzhang.sm.cn/ 
+
+360搜索 http://zhanzhang.so.com/ 
+
+百度搜索 https://ziyuan.baidu.com/dashboard/index
+
+搜狗搜索 http://zhanzhang.sogou.com/
+
+必应搜索 https://www.bing.com/toolbox/webmaster/?setlang=zh-cn&setmkt=zh-cn
+
+谷歌搜索 https://www.google.com/intl/zh-CN/webmasters/#?modal_active=none
+
+头条搜索 https://zhanzhang.toutiao.com/
