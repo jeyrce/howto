@@ -1,0 +1,37 @@
+version: "3.8"
+
+networks:
+  nginx:
+    driver: overlay
+    name: nginx
+
+services:
+  nginx:
+    image: nginx:1.22.0-alpine
+    networks:
+      - nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /etc/nginx/ssl/:/etc/nginx/ssl/
+      - /etc/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - /etc/nginx/conf.d/:/etc/nginx/conf.d/
+      - /etc/nginx/html/:/etc/nginx/html/
+    logging:
+      options:
+        max-size: 10m
+        max-file: 3
+        
+  ishare:
+    image: jeyrce/ishare:v1.0.1
+    networks:
+      - nginx
+    volumes:
+      - /root/db.sqlite3:/ishare/db.sqlite3
+      - /root/media/:/ishare/media/
+    logging:
+      options:
+        max-size: 10m
+        max-file: 3
+  
