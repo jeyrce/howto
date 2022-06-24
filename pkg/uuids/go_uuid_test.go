@@ -1,4 +1,4 @@
-package pkg
+package uuids
 
 import (
 	"testing"
