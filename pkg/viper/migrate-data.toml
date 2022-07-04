@@ -1,0 +1,72 @@
+# 迁移ch配置
+[ClickHouse]
+
+[ClickHouse.UDCP_LOG_CH]
+[ClickHouse.UDCP_LOG_CH.Slave]
+dialect = "clickhouse"                       # DB类型:clickhouse
+dsn = "tcp://127.0.0.1:10009?database=udcp_log_ch&username=uos&password=Uos123!&read_timeout=10&write_timeout=20"      # 地址
+maxOpenConns = 100                      # 最大连接数
+maxIdleConns = 50                       # 最大空闲连接数
+connMaxLifetime = 300                   # 最大空闲回收时间，单位：s
+logMode = false                          # 是否开启debug日志
+logSQL = false                            # 是否显示日志中的sql
+slowThreshold = 10000                     # 慢日志阈值，单位：ms
+
+[ClickHouse.UDCP_LOG_CH.Master]
+dialect = "clickhouse"                       # DB类型:clickhouse
+dsn = "tcp://127.0.0.5:10009?database=udcp_log_ch&username=uos&password=Uos123!&read_timeout=10&write_timeout=20"      # 地址
+maxOpenConns = 100                      # 最大连接数
+maxIdleConns = 50                       # 最大空闲连接数
+connMaxLifetime = 300                   # 最大空闲回收时间，单位：s
+logMode = false                          # 是否开启debug日志
+logSQL = false                            # 是否显示日志中的sql
+slowThreshold = 10000                     # 慢日志阈值，单位：ms
+
+
+# 只写库, Master
+[ClickHouse.UDCP_REPORT]
+[ClickHouse.UDCP_REPORT.Slave]
+dialect = "clickhouse"                       # DB类型:clickhouse
+dsn = "tcp://127.0.0.1:10009?database=udcp_report&username=uos&password=Uos123!&read_timeout=10&write_timeout=20"      # 地址
+maxOpenConns = 100                      # 最大连接数
+maxIdleConns = 50                       # 最大空闲连接数
+connMaxLifetime = 300                   # 最大空闲回收时间，单位：s
+logMode = false                          # 是否开启debug日志
+logSQL = false                            # 是否显示日志中的sql
+slowThreshold = 10000                     # 慢日志阈值，单位：ms
+
+[ClickHouse.UDCP_REPORT.Master]
+dialect = "clickhouse"                       # DB类型:clickhouse
+dsn = "tcp://127.0.0.1:10009?database=udcp_report&username=uos&password=Uos123!&read_timeout=10&write_timeout=20"      # 地址
+maxOpenConns = 100                      # 最大连接数
+maxIdleConns = 50                       # 最大空闲连接数
+connMaxLifetime = 300                   # 最大空闲回收时间，单位：s
+logMode = false                          # 是否开启debug日志
+logSQL = false                            # 是否显示日志中的sql
+slowThreshold = 10000                     # 慢日志阈值，单位：ms
+
+# 迁移mysql配置
+[Mysql]
+
+[Mysql.Reader]
+
+[Mysql.Writer]
+
+# 迁移文件配置
+[File]
+
+# 迁移过程日志记录
+[Log]
+output = "file"
+level = "info"
+jsonEncode = true
+dir = "/var/log/migrate-data"
+fileName = "migrate-data.log"
+addCaller = true
+callerSkip = 2
+maxSize = 128
+maxAge = 30
+maxBackups = 7
+compress = true
+[Log.fields] # 每条日志都带这个关键字
+appName = "udcplog"
