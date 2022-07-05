@@ -21,11 +21,36 @@ var (
 		Short:   "查看服务状态",
 		Aliases: []string{"status", "ls"},
 		Run: func(cmd *cobra.Command, args []string) {
-			bar := NewBar(300, "1任务进度:")
-			for i := 0; i <= 300; i++ {
-				bar.Add(2)
+			bar := NewBar(200, "任务1进度:")
+			for i := 0; i <= 100; i++ {
+				bar.Add(3)
+				if bar.IsFinished() {
+					break
+				}
 				time.Sleep(time.Millisecond * 100)
 			}
+			bar.Close()
+			time.Sleep(time.Millisecond * 200)
+			bar2 := NewBar(200, "任务2进度:")
+			for j := 0; j <= 200; j++ {
+				bar2.Add(2)
+				if bar2.IsFinished() {
+					break
+				}
+				time.Sleep(time.Millisecond * 100)
+			}
+			bar2.Close()
+			time.Sleep(time.Millisecond * 200)
+			bar3 := NewBar(200, "任务3进度:")
+			for j := 0; j <= 200; j++ {
+				bar3.Add(4)
+				if bar3.IsFinished() {
+					break
+				}
+				time.Sleep(time.Millisecond * 100)
+			}
+			bar3.Close()
+			fmt.Println("所有任务都执行完毕...")
 		},
 	}
 )
@@ -49,7 +74,7 @@ func NewBar(max int, desc string) *pbar.ProgressBar {
 		pbar.OptionSetDescription(desc),
 		pbar.OptionUseANSICodes(true),
 		pbar.OptionSetWriter(os.Stderr),
-		pbar.OptionSetWidth(10),
+		pbar.OptionFullWidth(),
 		pbar.OptionThrottle(65*time.Millisecond),
 		pbar.OptionShowCount(),
 		pbar.OptionShowIts(),
@@ -60,6 +85,5 @@ func NewBar(max int, desc string) *pbar.ProgressBar {
 		pbar.OptionFullWidth(),
 	)
 	bar.RenderBlank()
-	bar.Clear()
 	return bar
 }
