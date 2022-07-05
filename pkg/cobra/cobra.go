@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"strings"
 	"time"
 
 	pbar "github.com/schollz/progressbar/v3"
@@ -11,15 +12,26 @@ import (
 )
 
 var (
-	cli = &cobra.Command{
-		Use:     "cli",
+	Factory = map[string]func(){
+		"1.0": func() {
+			fmt.Println("v1.0")
+		},
+		"1.9.0-gfyh": func() {
+
+		},
+		"1.7U1": func() {
+
+		},
+	}
+	cobrax = &cobra.Command{
+		Use:     "cobra",
 		Short:   "测试cobra",
 		Version: "0.1.0",
 	}
 	ps = &cobra.Command{
 		Use:     "ps",
 		Short:   "查看服务状态",
-		Aliases: []string{"status", "ls"},
+		Aliases: []string{"status"},
 		Run: func(cmd *cobra.Command, args []string) {
 			bar := NewBar(200, "任务1进度:")
 			for i := 0; i <= 100; i++ {
@@ -53,6 +65,38 @@ var (
 			fmt.Println("所有任务都执行完毕...")
 		},
 	}
+	run = cobra.Command{
+		Use:     "run",
+		Aliases: []string{"exec"},
+		Short:   "执行迁移",
+		Example: "cobra run 1.0",
+		Run: func(cmd *cobra.Command, args []string) {
+			if len(args) < 1 {
+				fmt.Println("请指定版本")
+				return
+			}
+			if f, ok := Factory[args[0]]; ok {
+				f()
+				return
+			}
+			fmt.Println("不支持的版本:", args[0])
+			return
+		},
+	}
+	ls = cobra.Command{
+		Use:     "ls",
+		Aliases: []string{"list"},
+		Short:   "列出所有支持的版本",
+		Example: "cobra ls",
+		Run: func(cmd *cobra.Command, args []string) {
+			var versions = make([]string, 0)
+			for v := range Factory {
+				versions = append(versions, v)
+			}
+			fmt.Printf("%s\n", strings.Join(versions, ", "))
+			return
+		},
+	}
 )
 
 func init() {
@@ -62,11 +106,13 @@ func init() {
 	if err != nil {
 		panic(err)
 	}
-	cli.AddCommand(ps)
+	cobrax.AddCommand(ps)
+	cobrax.AddCommand(&run)
+	cobrax.AddCommand(&ls)
 }
 
 func main() {
-	_ = cli.Execute()
+	_ = cobrax.Execute()
 }
 
 func NewBar(max int, desc string) *pbar.ProgressBar {
