@@ -1,6 +1,6 @@
 module github.com/jeyrce/howto
 
-go 1.16
+go 1.18
 
 require (
 	github.com/PuerkitoBio/goquery v1.8.0 // indirect
@@ -9,6 +9,7 @@ require (
 	github.com/antchfx/xmlquery v1.3.11 // indirect
 	github.com/briandowns/spinner v1.18.1
 	github.com/fsnotify/fsnotify v1.5.4
+	github.com/go-sql-driver/mysql v1.6.0
 	github.com/gobwas/glob v0.2.3 // indirect
 	github.com/gocolly/colly v1.2.0
 	github.com/google/uuid v1.3.0
