@@ -1,0 +1,17 @@
+version: "3.8"
+
+services:
+  udcp_collect:
+    image: hub.deepin.com/wuhan_udcp/udcp_collect/api:pre-amd64
+    privileged: true
+    volumes:
+      - /opt/udcp/udcp_collect/hardware_information/:/service/data/
+      - /sbin/dmidecode:/sbin/dmidecode
+      - /dev/mem:/dev/mem
+    command:
+      - "/service/api"
+    logging:
+      options:
+        max-size: 10m
+        max-file: 3
+      
