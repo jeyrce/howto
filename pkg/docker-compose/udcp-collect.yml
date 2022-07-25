@@ -8,10 +8,13 @@ services:
       - /opt/udcp/udcp_collect/hardware_information/:/service/data/
       - /sbin/dmidecode:/sbin/dmidecode
       - /dev/mem:/dev/mem
+    cap_add:
+      - ALL
     command:
       - "/service/api"
     logging:
       options:
         max-size: 10m
         max-file: 3
+      
       
