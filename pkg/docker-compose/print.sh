@@ -69,82 +69,78 @@ function get_color_code {
 }
 
 function print_usage {
-	$0 "\n"
-	$0 --rainbow "===================================="
-	$0 -W        " $0                                 "
-	$0 --rainbow "   The most colorful echo command   "
-	$0 --rainbow "===================================="
+	print_text "\n"
+	print_text --rainbow "===================================="
+	print_text -W        " print_text                                 "
+	print_text --rainbow "   The most colorful echo command   "
+	print_text --rainbow "===================================="
 
-	$0 -Y "\n\nUsage:"
-	$0 -W "$0 [[options] text]"
-	$0 -W "Typical usage: " -G "$0 color1 text1 color2 text2 ..."
+	print_text -Y "\n\nUsage:"
+	print_text -W "print_text [[options] text]"
+	print_text -W "Typical usage: " -G "print_text color1 text1 color2 text2 ..."
 
-	$0 -Y "\n\nOptions:"
-	$0 -C " -h|--help" 			-W " Print the correct usage" 
-	$0 -C " -bk|--black" 		-W " Print the following parameters with a black color" -bk " example"
-	$0 -C " -r|--red" 			-W " Print the following parameters with a red color" -r " example"
-	$0 -C " -g|--green" 		-W " Print the following parameters with a green color" -g " example"
-	$0 -C " -y|--yellow" 		-W " Print the following parameters with a yellow color" -y " example"
-	$0 -C " -b|--blue" 			-W " Print the following parameters with a blue color" -b " example"
-	$0 -C " -m|--magenta" 		-W " Print the following parameters with a magenta color" -m " example"
-	$0 -C " -c|--cyan" 			-W " Print the following parameters with a cyan color" -c " example"
-	$0 -C " -w|--white" 		-W " Print the following parameters with a white color" -w " example"
-	$0 -C " -gy|--grey" 		-W " Print the following parameters with a grey color" -gy " example"
-	$0 -C " -R|--Red"			-W " Print the following parameters with a bright red color" -R " example"
-	$0 -C " -G|--Green"			-W " Print the following parameters with a bright green color" -G " example"
-	$0 -C " -Y|--Yellow"		-W " Print the following parameters with a bright yellow color" -Y " example"
-	$0 -C " -B|--Blue"			-W " Print the following parameters with a bright blue color" -B " example"
-	$0 -C " -M|--Magenta"		-W " Print the following parameters with a bright magenta color" -M " example"
-	$0 -C " -C|--Cyan"			-W " Print the following parameters with a bright cyan color" -C " example"
-	$0 -C " -W|--White"			-W " Print the following parameters with a bright white color" -W " example"
-	$0 -C " -Gy|--Gray"			-W " Print the following parameters with a bright grey color" -Gy " example"
-	$0 -C " -h|--hex"			-W " Print the following parameters with a color from in a hex format.\n The hex color shall not start with the # but just 6 hex digits.\n example: " -G "$0 --hex F8E4B0 text \n"
-	$0 -C " -rgb5"				-W " Print the following parameters with the specified R G B components.\n The R G B components must have a range between 0-5 and must be divided by a comma without spaces.\n example: " -G "$0 -rgb5 1,2,3 text \n"
-	$0 -C " -rgb100"			-W " Print the following parameters with the specified R G B components.\n The R G B components must have a range between 0-100 and must be divided by a comma without spaces.\n example: " -G "$0 -rgb5 10,20,30 text \n"
-	$0 -C " -rgb|-rgb255"		-W " Print the following parameters with the specified R G B components.\n The R G B components must have a range between 0-255 and must be divided by a comma without spaces.\n example: " -G "$0 -rgb5 100,200,255 text \n"
-	$0 -C " -fg|--foreground"	-W " Color the foreground ( default )"
-	$0 -C " -bg|--background"	-W " Color the background " -bg -R " example " -fg ""
-	$0 -C " -n|-il|--in-line"	-W " With this option the command will not print the new line character after the execution\n"
-	$0 -C " -ran|--random"		-W " Print the following parameters with a random color"
-	$0 -C " -rb|--rainbow"		-W " Print the following parameters with a different color for each character following the classical Rainbow schema " -rb "example"
-	$0 -C " -code|--color-code <code>" -W " Print the following parameters with the specified color code, the code must be a number between 0-255.\n"
-	$0 -C " --get-color-code <r,g,b>" 	-W " Print the color code from the R G B components. The R G B components must have a range between 0-255 and must be divided by a comma without spaces.\n"
+	print_text -Y "\n\nOptions:"
+	print_text -C " -h|--help" 			-W " Print the correct usage" 
+	print_text -C " -bk|--black" 		-W " Print the following parameters with a black color" -bk " example"
+	print_text -C " -r|--red" 			-W " Print the following parameters with a red color" -r " example"
+	print_text -C " -g|--green" 		-W " Print the following parameters with a green color" -g " example"
+	print_text -C " -y|--yellow" 		-W " Print the following parameters with a yellow color" -y " example"
+	print_text -C " -b|--blue" 			-W " Print the following parameters with a blue color" -b " example"
+	print_text -C " -m|--magenta" 		-W " Print the following parameters with a magenta color" -m " example"
+	print_text -C " -c|--cyan" 			-W " Print the following parameters with a cyan color" -c " example"
+	print_text -C " -w|--white" 		-W " Print the following parameters with a white color" -w " example"
+	print_text -C " -gy|--grey" 		-W " Print the following parameters with a grey color" -gy " example"
+	print_text -C " -R|--Red"			-W " Print the following parameters with a bright red color" -R " example"
+	print_text -C " -G|--Green"			-W " Print the following parameters with a bright green color" -G " example"
+	print_text -C " -Y|--Yellow"		-W " Print the following parameters with a bright yellow color" -Y " example"
+	print_text -C " -B|--Blue"			-W " Print the following parameters with a bright blue color" -B " example"
+	print_text -C " -M|--Magenta"		-W " Print the following parameters with a bright magenta color" -M " example"
+	print_text -C " -C|--Cyan"			-W " Print the following parameters with a bright cyan color" -C " example"
+	print_text -C " -W|--White"			-W " Print the following parameters with a bright white color" -W " example"
+	print_text -C " -Gy|--Gray"			-W " Print the following parameters with a bright grey color" -Gy " example"
+	print_text -C " -h|--hex"			-W " Print the following parameters with a color from in a hex format.\n The hex color shall not start with the # but just 6 hex digits.\n example: " -G "print_text --hex F8E4B0 text \n"
+	print_text -C " -rgb5"				-W " Print the following parameters with the specified R G B components.\n The R G B components must have a range between 0-5 and must be divided by a comma without spaces.\n example: " -G "print_text -rgb5 1,2,3 text \n"
+	print_text -C " -rgb100"			-W " Print the following parameters with the specified R G B components.\n The R G B components must have a range between 0-100 and must be divided by a comma without spaces.\n example: " -G "print_text -rgb5 10,20,30 text \n"
+	print_text -C " -rgb|-rgb255"		-W " Print the following parameters with the specified R G B components.\n The R G B components must have a range between 0-255 and must be divided by a comma without spaces.\n example: " -G "print_text -rgb5 100,200,255 text \n"
+	print_text -C " -fg|--foreground"	-W " Color the foreground ( default )"
+	print_text -C " -bg|--background"	-W " Color the background " -bg -R " example " -fg ""
+	print_text -C " -n|-il|--in-line"	-W " With this option the command will not print the new line character after the execution\n"
+	print_text -C " -ran|--random"		-W " Print the following parameters with a random color"
+	print_text -C " -rb|--rainbow"		-W " Print the following parameters with a different color for each character following the classical Rainbow schema " -rb "example"
+	print_text -C " -code|--color-code <code>" -W " Print the following parameters with the specified color code, the code must be a number between 0-255.\n"
+	print_text -C " --get-color-code <r,g,b>" 	-W " Print the color code from the R G B components. The R G B components must have a range between 0-255 and must be divided by a comma without spaces.\n"
 
 
 
-	$0 -Y "\n\nExamples:"
-	$0 -il -G "$0 text" -W " will print: "
-	$0 text
+	print_text -Y "\n\nExamples:"
+	print_text -il -G "print_text text" -W " will print: "
+	print_text text
 	
-	$0 -il -G "$0 --Red RedText" -W " will print: "
-	$0 --Red RedText
+	print_text -il -G "print_text --Red RedText" -W " will print: "
+	print_text --Red RedText
 	
-	$0 -il -G "$0 --Green GreenText" -W " will print: "
-	$0 --Green GreenText
+	print_text -il -G "print_text --Green GreenText" -W " will print: "
+	print_text --Green GreenText
 	
-	$0 -il -G "$0 --Blue BlueText" -W " will print: "
-	$0 --Blue BlueText
+	print_text -il -G "print_text --Blue BlueText" -W " will print: "
+	print_text --Blue BlueText
 	
-	$0 -il -G "$0 --Red \"RedText\" --Green \" GreenText\" --Blue \" BlueText\"" -W " will print: "
-	$0 --Red RedText --Green " GreenText" --Blue " BlueText"
+	print_text -il -G "print_text --Red \"RedText\" --Green \" GreenText\" --Blue \" BlueText\"" -W " will print: "
+	print_text --Red RedText --Green " GreenText" --Blue " BlueText"
 
-	$0 -il -G "$0 --rainbow \"Rainbow Colored Text\"" -W " will print: "
-	$0 --rainbow "Rainbow Colored Text"
+	print_text -il -G "print_text --rainbow \"Rainbow Colored Text\"" -W " will print: "
+	print_text --rainbow "Rainbow Colored Text"
 	
-	$0 -il -G "$0 -rgb 100,200,30 \"Custom Color Text\"" -W " will print: "
-	$0 -rgb 200,100,30 "Custom Color Text"
+	print_text -il -G "print_text -rgb 100,200,30 \"Custom Color Text\"" -W " will print: "
+	print_text -rgb 200,100,30 "Custom Color Text"
 
-	$0 -il -G "$0 --hex FF88ee \"Color From Hex\"" -W " will print: "
-	$0 --hex FF88ee "Color From Hex"
+	print_text -il -G "print_text --hex FF88ee \"Color From Hex\"" -W " will print: "
+	print_text --hex FF88ee "Color From Hex"
 	
-	$0 -il -G "$0 -B G -R o -Y o -B g -G l -R e" -W " will print: "
-	$0 -B G -R o -Y o -B g -G l -R e
+	print_text -il -G "print_text -B G -R o -Y o -B g -G l -R e" -W " will print: "
+	print_text -B G -R o -Y o -B g -G l -R e
 
-	$0 -Y "\n\nInfo:"
-	$0 -Gy "Original Sources at: https://github.com/Gruppio/Echolor.git"
-	$0 -Gy "Created by Gruppio 2015"
-	
-	$0 "\n"
+	print_text "\n"
 	exit 1
 }
 
