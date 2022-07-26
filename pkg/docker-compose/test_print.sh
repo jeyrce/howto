@@ -2,4 +2,4 @@
 
 source ./print.sh
 
-print_usage
+print_text -rb "赤橙黄绿青蓝紫，谁持彩练当空舞"
