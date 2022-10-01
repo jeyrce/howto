@@ -1,0 +1,40 @@
+version: "3.8"
+
+networks:
+  nginx:
+    external: true
+  mysql:
+    external: true
+
+services:
+  ishare:
+    image: jeyrce/ishare:v1.0.2-final
+    networks:
+      - nginx
+    volumes:
+      - /root/db.sqlite3:/ishare/db.sqlite3
+      - /root/media/:/ishare/media/
+    deploy:
+      replicas: 2
+    logging:
+      options:
+        max-size: 10m
+        max-file: 3
+  
+  imseek:
+    image: jeyrce/index:latest
+    networks:
+      - nginx
+      - mysql
+    deploy:
+      replicas: 1
+    environment:
+      WEB_DOMAIN: imseek.cn
+      WEB_TITLE: 修齐方法论
+      WEB_ICP: 浙ICP备18053740-5号
+    logging:
+      options:
+        max-size: 5m
+        max-file: 3
+
+

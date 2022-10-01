@@ -1,0 +1,58 @@
+# 运行所需要的一些基础环境
+version: "3.8"
+
+networks:
+  nginx:
+    driver: overlay
+    name: nginx
+  mysql:
+    driver: overlay
+    name: mysql
+
+services:
+  nginx:
+    image: nginx:1.23.1-alpine
+    networks:
+      - nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /etc/nginx/:/etc/nginx/
+    deploy:
+      replicas: 2
+    logging:
+      options:
+        max-size: 10m
+        max-file: 3
+  
+  mysql:
+    image: mysql:8.0.29
+    networks:
+      - nginx
+      - mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: imseek.cn
+    volumes:
+      - /var/lib/mysql/:/var/lib/mysql/
+    logging:
+      options:
+        max-size: 10m
+        max-file: 3
+  
+  redis:
+    image: redis:7.0.4-alpine
+    networks:
+      - nginx
+    command:
+      - "--requirepass"
+      - "imseek.cn"
+      - "--appendonly"
+      - "yes"
+    volumes:
+      - /var/lib/redis/data/:/data/
+    logging:
+      options:
+        max-size: 10m
+        max-file: 3
+  

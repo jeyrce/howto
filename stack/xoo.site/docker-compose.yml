@@ -1,0 +1,32 @@
+version: "3.8"
+
+networks:
+  nginx:
+    driver: overlay
+    name: nginx
+
+services:
+  nginx:
+    image: nginx:1.23.1-alpine
+    networks:
+      - nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    deploy:
+      replicas: 2
+    volumes:
+      - /etc/nginx/:/etc/nginx/
+
+  jeyrce:
+    image: jeyrce/jeyrce:2022-09-05
+    networks:
+      - nginx
+    deploy:
+      replicas: 1
+
+  xoo:
+    image: jeyrce/index:latest
+    networks:
+      - nginx
+

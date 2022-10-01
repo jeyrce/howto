@@ -1,0 +1,49 @@
+# 监控相关组件
+version: "3.8"
+
+networks:
+  nginx:
+    external: true
+  mysql:
+    external: true
+
+services:
+  prometheus:
+    image: prom/prometheus:v2.35.0
+    networks:
+      - nginx
+    user: root
+    volumes:
+      - /etc/prom/prometheus.yml:/prometheus/prometheus.yml
+      - /var/lib/prom/data/:/prometheus/data/
+    command:
+      - "--storage.tsdb.retention.time=7d"
+    logging:
+      options:
+        max-size: 10m
+        max-file: 3
+
+  alertmanager:
+    image: prom/alertmanager:v0.24.0
+    networks:
+      - nginx
+    user: root
+    volumes:
+      - /etc/prom/alertmanager.yml:/etc/alertmanager/alertmanager.yml
+      - /var/lib/prom/:/alertmanager/
+    logging:
+      options:
+        max-size: 10m
+        max-file: 3
+
+  blackbox_exporter:
+    image: prom/blackbox-exporter:v0.20.0
+    networks:
+      - nginx
+    volumes:
+      - /etc/prom/blackbox.yml:/etc/blackbox_exporter/config.yml
+    logging:
+      options:
+        max-size: 10m
+        max-file: 3
+
