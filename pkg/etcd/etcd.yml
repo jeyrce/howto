@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  node-1:
+    image: quay.io/coreos/etcd:v3.5.6
+    user: root:root
+    command:
+      - etcd
+      - --name=node-1
+      - --listen-peer-urls=http://0.0.0.0:2380
+      - --listen-client-urls=http://0.0.0.0:2379
+      - --advertise-client-urls=http://0.0.0.0:2379
+      - --initial-advertise-peer-urls=http://node-1:2380
+      - --initial-cluster-state=new
+    environment:
+      ETCD_INITIAL_CLUSTER: node-1=http://node-1:2380,node-2=http://node-2:2380,node-3=http://node-3:2380
+    ports:
+      - "2379:2379"
+      - "2380:2380"
+    volumes:
+      - /data/node-1/:/node-1.etcd/
+  node-2:
+    image: quay.io/coreos/etcd:v3.5.6
+    user: root:root
+    command:
+      - etcd
+      - --name=node-2
+      - --listen-peer-urls=http://0.0.0.0:2380
+      - --listen-client-urls=http://0.0.0.0:2379
+      - --advertise-client-urls=http://0.0.0.0:2379
+      - --initial-advertise-peer-urls=http://node-2:2380
+      - --initial-cluster-state=new
+    environment:
+      ETCD_INITIAL_CLUSTER: node-1=http://node-1:2380,node-2=http://node-2:2380,node-3=http://node-3:2380
+    ports:
+      - "12379:2379"
+      - "12380:2380"
+    volumes:
+      - /data/node-2/:/node-2.etcd/
+  node-3:
+    image: quay.io/coreos/etcd:v3.5.6
+    user: root:root
+    command:
+      - etcd
+      - --name=node-3
+      - --listen-peer-urls=http://0.0.0.0:2380
+      - --listen-client-urls=http://0.0.0.0:2379
+      - --advertise-client-urls=http://0.0.0.0:2379
+      - --initial-advertise-peer-urls=http://node-3:2380
+      - --initial-cluster-state=new
+    environment:
+      ETCD_INITIAL_CLUSTER: node-1=http://node-1:2380,node-2=http://node-2:2380,node-3=http://node-3:2380
+    ports:
+      - "22379:2379"
+      - "22380:2380"
+    volumes:
+      - /data/node-3/:/node-3.etcd/
+
