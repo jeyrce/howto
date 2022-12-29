@@ -1,0 +1,54 @@
+apiVersion: kubeadm.k8s.io/v1beta2
+bootstrapTokens:
+- groups:
+  - system:bootstrappers:kubeadm:default-node-token
+  token: abcdef.0123456789abcdef
+  ttl: 24h0m0s
+  usages:
+  - signing
+  - authentication
+kind: InitConfiguration
+localAPIEndpoint:
+  advertiseAddress: 10.20.255.35   # 本机IP
+  bindPort: 6443
+nodeRegistration:
+  criSocket: /var/run/containerd/containerd.sock
+  name: k8s-1               # 主机名
+#  taints:
+#  - effect: NoSchedule
+#    key: node-role.kubernetes.io/master
+---
+apiServer:
+  extraArgs:
+    service-node-port-range: '1024-65535'
+    default-not-ready-toleration-seconds: '60'
+    default-unreachable-toleration-seconds: '60'
+  timeoutForControlPlane: 4m0s
+apiVersion: kubeadm.k8s.io/v1beta2
+certificatesDir: /etc/kubernetes/pki
+clusterName: kubernetes
+# 控制平面端点
+controlPlaneEndpoint: 10.20.255.35   # 虚拟IP和haproxy端口
+controllerManager:
+  extraArgs:
+    node-monitor-period: '5s'
+    node-monitor-grace-period: '20s'
+    node-startup-grace-period: '30s'
+    pod-eviction-timeout: '1m'
+dns:
+  type: CoreDNS
+etcd:
+  local:
+    dataDir: /var/lib/etcd
+imageRepository: registry.cn-hangzhou.aliyuncs.com/google_containers
+kind: ClusterConfiguration
+kubernetesVersion: v1.26.0
+networking:
+  dnsDomain: cluster.local
+  podSubnet: 10.244.0.0/16
+  serviceSubnet: 10.96.0.0/12
+scheduler: {}
+---
+apiVersion: kubeproxy.config.k8s.io/v1alpha1
+kind: KubeProxyConfiguration
+mode: ipvs

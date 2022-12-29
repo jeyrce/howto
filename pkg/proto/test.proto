@@ -1,0 +1,10 @@
+
+message User {
+  string name=1;
+  int32 id=2;
+  bool isDeleted=3;
+}
+
+message AdminUser {
+  message User=1;
+}
