@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<!-- CSS -->
+<link href="https://unpkg.com/artalk@2.4.3/dist/Artalk.css" rel="stylesheet">
+
+<!-- JS -->
+<script src="https://unpkg.com/artalk@2.4.3/dist/Artalk.js"></script>
+
+<!-- Artalk -->
+<div id="Comments"></div>
+<script>
+  new Artalk({
+    el:        '#Comments',              // 绑定元素的 Selector
+    pageKey:   '/123',                // 固定链接 (留空自动获取)
+    pageTitle: '关于引入 Artalk 这档子事', // 页面标题 (留空自动获取)
+    server:    'http://xoo.site',  // 后端地址
+    site:      'xoo.site',           // 你的站点名
+  })
+</script>
+
+</body>
+</html>
