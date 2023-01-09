@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # coding: utf-8
+set -o errexit
 # 定时清理文件夹避免挂载点爆满，不进行递归
 
 target_dir=${1:?}          # 需要管理的文件夹，必填
@@ -19,14 +20,14 @@ fi
 black_items=$(ls -t /udcp/udcp |grep -E "$black_list" |grep -vE "$white_list")
 for item in ${black_items[*]}; do
     item="$target_dir/$item"
-    if [ "$item" -eq "/" ]; then
+    if [ "$item" == "/" ]; then
         break
     fi
     rm -rf "${item:-/tmp/xyz}"
 done
 
 # 逐个删除旧文件，直到满足阈值
-while 1; do
+while true; do
     free_size=$(df --output=avail "$target_dir" |tail -n 1)
     if [ $free_size -ge $threshold ]; then
         echo "符合域值退出"
@@ -34,7 +35,7 @@ while 1; do
     fi
     oldest=$(ls -t "$target_dir" |grep -vE "$white_list" | tail -n 1)
     oldest="$target_dir/$oldest"
-    if [ "$oldest" -eq "/" ]; then
+    if [ "$oldest" == "/" ]; then
         break
     fi
     echo "即将删除 $oldest"
