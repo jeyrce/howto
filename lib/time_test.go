@@ -1,6 +1,9 @@
 package lib
 
 import (
+	"fmt"
+	"io"
+	"net/http"
 	"strconv"
 	"testing"
 	"time"
@@ -44,4 +47,17 @@ func TestTimestamp16(t *testing.T) {
 	t.Log(startTime)
 	t.Log(endTime)
 	t.Log(time.Duration(end - start).String())
+}
+
+func TestAfterTimeTask(t *testing.T) {
+	http.HandleFunc("/", async)
+	t.Fatal(http.ListenAndServe(":80", nil))
+}
+
+// 验证发现主进程不结束任务依然可以执行，因此time.After并不是以当前函数生命周期作为结束
+func async(w http.ResponseWriter, r *http.Request) {
+	time.AfterFunc(time.Second*5, func() {
+		fmt.Println("执行任务")
+	})
+	io.WriteString(w, "请求已提交")
 }
