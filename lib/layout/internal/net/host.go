@@ -1,0 +1,5 @@
+package net
+
+func Host() {
+
+}
