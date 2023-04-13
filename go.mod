@@ -7,6 +7,7 @@ require (
 	github.com/fsnotify/fsnotify v1.6.0
 	github.com/go-sql-driver/mysql v1.6.0
 	github.com/gocolly/colly v1.2.0
+	github.com/gogf/gf v1.16.9
 	github.com/google/uuid v1.3.0
 	github.com/lithammer/shortuuid v3.0.0+incompatible
 	github.com/matoous/go-nanoid/v2 v2.0.0
@@ -19,6 +20,7 @@ require (
 	github.com/spf13/cobra v1.4.0
 	github.com/spf13/viper v1.12.0
 	github.com/xuri/excelize/v2 v2.7.0
+	gocv.io/x/gocv v0.32.1
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
 	gopkg.in/yaml.v2 v2.4.0
 	gorm.io/driver/sqlite v1.2.6
@@ -37,7 +39,6 @@ require (
 	github.com/clbanning/mxj v1.8.5-0.20200714211355-ff02cfb8ea28 // indirect
 	github.com/fatih/color v1.13.0 // indirect
 	github.com/gobwas/glob v0.2.3 // indirect
-	github.com/gogf/gf v1.16.9 // indirect
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/golang/snappy v0.0.4 // indirect
@@ -66,9 +67,6 @@ require (
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/subosito/gotenv v1.3.0 // indirect
 	github.com/temoto/robotstxt v1.1.2 // indirect
-	github.com/tidwall/gjson v1.14.4 // indirect
-	github.com/tidwall/match v1.1.1 // indirect
-	github.com/tidwall/pretty v1.2.1 // indirect
 	github.com/xuri/efp v0.0.0-20220603152613-6918739fd470 // indirect
 	github.com/xuri/nfp v0.0.0-20220409054826-5e722a1d9e22 // indirect
 	go.opentelemetry.io/otel v1.14.0 // indirect
