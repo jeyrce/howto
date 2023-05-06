@@ -1,0 +1,108 @@
+
+# 填入所有机器的地址（包括主控机）
+# 用于环境检测和初始化配置
+# 同一个标签组内的ip地址不要重复，一个ip一行
+# 序号从1递增，比如只有2台机器，那么序号保留tdsql_mac1 tdsql_mac2
+# 后续如果有扩容，新扩容的机器也需要在这里补上
+[tdsql_allmacforcheck]
+tdsql_mac1 ansible_ssh_host=9.134.217.153
+tdsql_mac2 ansible_ssh_host=9.134.218.66
+tdsql_mac3 ansible_ssh_host=9.134.219.65
+
+
+# zookeeper机器ip地址
+# 数量只能是1、3、5， 正式环境建议3台或者5台
+# 如果是使用自己已有的zk集群，这里同样要填写正确的zk地址
+[tdsql_zk]
+tdsql_zk1 ansible_ssh_host=9.134.217.153
+tdsql_zk2 ansible_ssh_host=9.134.218.66
+tdsql_zk3 ansible_ssh_host=9.134.219.65
+
+
+# scheduler机器的ip地址，正式环境建议2个
+[tdsql_scheduler]
+tdsql_scheduler1 ansible_ssh_host=9.134.219.65
+
+
+# oss机器的ip地址， 正式环境建议2个
+[tdsql_oss]
+tdsql_oss1 ansible_ssh_host=9.134.219.65
+
+
+# 赤兔机器的ip地址， 正式环境建议2个
+[tdsql_chitu]
+tdsql_chitu1 ansible_ssh_host=9.134.219.65
+
+
+# 监控采集模块的IP地址，正式环境建议2个
+[tdsql_monitor]
+tdsql_monitor1 ansible_ssh_host=9.134.219.65
+
+
+# db机器地址
+# 有多少台就填多少个ip地址
+# 注意tdsql_db序号逐个递增，不要跳跃
+[tdsql_db]
+tdsql_db1 ansible_ssh_host=9.134.217.153
+tdsql_db2 ansible_ssh_host=9.134.218.66
+tdsql_db3 ansible_ssh_host=9.134.219.65
+
+
+# proxy机器地址
+[tdsql_proxy]
+tdsql_proxy1 ansible_ssh_host=9.134.217.153
+tdsql_proxy2 ansible_ssh_host=9.134.218.66
+tdsql_proxy3 ansible_ssh_host=9.134.219.65
+
+
+# hdfs机器地址
+# 机器数量只能是1台或者3台
+# 如果单节点部署，则只保留tdsql_hdfs1，其他删除
+# 正式环境建议高可用部署，初始安装数量只能3台
+[tdsql_hdfs]
+tdsql_hdfs1 ansible_ssh_host=172.16.16.47
+tdsql_hdfs2 ansible_ssh_host=172.16.16.30
+tdsql_hdfs3 ansible_ssh_host=172.16.16.48
+
+
+# lvs机器地址，数量固定2台
+[tdsql_lvs]
+tdsql_lvs1 ansible_ssh_host=172.16.16.30
+tdsql_lvs2 ansible_ssh_host=172.16.16.48
+
+
+# kafka机器地址，数量固定3台
+[tdsql_kafka]
+tdsql_kafka1 ansible_ssh_host=172.16.16.47
+tdsql_kafka2 ansible_ssh_host=172.16.16.30
+tdsql_kafka3 ansible_ssh_host=172.16.16.48
+
+
+# 多源同步消费者服务ip地址
+[tdsql_consumer]
+tdsql_consumer1 ansible_ssh_host=172.16.16.30
+
+
+# es机器地址
+[tdsql_es]
+tdsql_es1 ansible_ssh_host=10.235.49.132
+
+
+[tdsql_mc]
+tdsql_mc1 ansible_ssh_host=172.16.16.26
+tdsql_mc2 ansible_ssh_host=172.16.16.34
+tdsql_mc3 ansible_ssh_host=172.16.16.48
+
+
+
+
+[tdsql_newdb]
+tdsql_newdb1 ansible_ssh_host=1.1.1.1
+tdsql_newdb2 ansible_ssh_host=2.2.2.2
+tdsql_newdb3 ansible_ssh_host=3.3.3.3
+
+ 
+[tdsql_ansible_test]
+tdsql_ansible_test1 ansible_ssh_host=1.1.1.1
+tdsql_ansible_test2 ansible_ssh_host=2.2.2.2
+tdsql_ansible_test3 ansible_ssh_host=3.3.3.3

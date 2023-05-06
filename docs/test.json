@@ -1,0 +1,242 @@
+{
+  "code": "Success",
+  "msg": "",
+  "data": {
+    "config": {
+      "base_line": "8.0.24",
+      "create_time": 1678267941
+    },
+    "mtime": 1682411941,
+    "object_id": "set_1678267941_1",
+    "object_type": "noshard",
+    "topology": [
+      {
+        "items": [
+          {
+            "object_type": "proxy",
+            "object_id": "9.134.218.66:15001",
+            "object_path": "set_1678267941_1",
+            "config": {
+              "arch": "X86",
+              "description": "used",
+              "dev_version": "\"proxy-22.1.0 \"20221125\" d87142bd\"",
+              "enable_upgrade": true,
+              "group": "GROUP_0000000000",
+              "idc": "IDC1",
+              "ip": "9.134.218.66",
+              "ipv6_addr": "",
+              "new_version": [
+                ""
+              ],
+              "set": "set_1678267941_1",
+              "single_backend": 1,
+              "start_time": "2023-03-08 17:33:16",
+              "status": 1,
+              "support_ipv6": false,
+              "trace_id": "0986da421678267819147101974871",
+              "version": "proxy-22.1.0"
+            },
+            "mtime": 1682411942
+          },
+          {
+            "object_type": "proxy",
+            "object_id": "9.134.219.65:15001",
+            "object_path": "set_1678267941_1",
+            "config": {
+              "arch": "X86",
+              "description": "used",
+              "dev_version": "\"proxy-22.1.0 \"20221125\" d87142bd\"",
+              "enable_upgrade": true,
+              "group": "GROUP_0000000000",
+              "idc": "IDC1",
+              "ip": "9.134.219.65",
+              "ipv6_addr": "",
+              "new_version": [
+                ""
+              ],
+              "set": "set_1678267941_1",
+              "single_backend": 1,
+              "start_time": "2023-03-08 17:32:50",
+              "status": 1,
+              "support_ipv6": false,
+              "trace_id": "0986da421678267819147101974871",
+              "version": "proxy-22.1.0"
+            },
+            "mtime": 1682411942
+          }
+        ],
+        "object_type": "proxy"
+      },
+      {
+        "items": [
+          {
+            "object_type": "producter",
+            "object_id": "9.134.218.66:4001",
+            "object_path": "set_1678267941_1",
+            "config": {
+              "enable_upgrade": true,
+              "idc": "IDC1",
+              "new_version": [
+                ""
+              ],
+              "version": "multisrcsync-22.1.0"
+            },
+            "mtime": 1682411942
+          },
+          {
+            "object_type": "producter",
+            "object_id": "9.134.217.153:4001",
+            "object_path": "set_1678267941_1",
+            "config": {
+              "enable_upgrade": true,
+              "idc": "IDC1",
+              "new_version": [
+                ""
+              ],
+              "version": "multisrcsync-22.1.0"
+            },
+            "mtime": 1682411942
+          },
+          {
+            "object_type": "producter",
+            "object_id": "9.134.219.65:4001",
+            "object_path": "set_1678267941_1",
+            "config": {
+              "enable_upgrade": true,
+              "idc": "IDC1",
+              "new_version": [
+                ""
+              ],
+              "version": "multisrcsync-22.1.0"
+            },
+            "mtime": 1682411941
+          }
+        ],
+        "object_type": "producter"
+      },
+      {
+        "items": [],
+        "object_type": "noshard"
+      },
+      {
+        "items": [
+          {
+            "object_type": "db",
+            "object_id": "9.134.219.65:4001",
+            "object_path": "set_1678267941_1",
+            "config": {
+              "base_line": "8.0.24",
+              "delay_slave": "0",
+              "enable_upgrade": true,
+              "idc": "IDC1",
+              "ip": "9.134.219.65",
+              "master": 1,
+              "new_version": [
+                "mysql-server-8.0.24-"
+              ],
+              "port": 4001,
+              "v24_new_version": [
+                "mysql-server-8.0.24-"
+              ],
+              "version": "8.0.24-v24-txsql-2.0.1-V2.0R751D003-20221125"
+            },
+            "mtime": 1682411941
+          },
+          {
+            "object_type": "db",
+            "object_id": "9.134.218.66:4001",
+            "object_path": "set_1678267941_1",
+            "config": {
+              "base_line": "8.0.24",
+              "delay_slave": "0",
+              "enable_upgrade": true,
+              "idc": "IDC1",
+              "ip": "9.134.218.66",
+              "master": 0,
+              "new_version": [
+                "mysql-server-8.0.24-"
+              ],
+              "port": 4001,
+              "v24_new_version": [
+                "mysql-server-8.0.24-"
+              ],
+              "version": "8.0.24-v24-txsql-2.0.1-V2.0R751D003-20221125"
+            },
+            "mtime": 1682411942
+          },
+          {
+            "object_type": "db",
+            "object_id": "9.134.217.153:4001",
+            "object_path": "set_1678267941_1",
+            "config": {
+              "base_line": "8.0.24",
+              "delay_slave": "0",
+              "enable_upgrade": true,
+              "idc": "IDC1",
+              "ip": "9.134.217.153",
+              "master": 0,
+              "new_version": [
+                "mysql-server-8.0.24-"
+              ],
+              "port": 4001,
+              "v24_new_version": [
+                "mysql-server-8.0.24-"
+              ],
+              "version": "8.0.24-v24-txsql-2.0.1-V2.0R751D003-20221125"
+            },
+            "mtime": 1682411942
+          }
+        ],
+        "object_type": "db"
+      },
+      {
+        "items": [
+          {
+            "object_type": "agent",
+            "object_id": "9.134.219.65:4001",
+            "object_path": "set_1678267941_1",
+            "config": {
+              "enable_upgrade": true,
+              "idc": "IDC1",
+              "new_version": [
+                ""
+              ],
+              "version": "agent-22.1.0"
+            },
+            "mtime": 1682411941
+          },
+          {
+            "object_type": "agent",
+            "object_id": "9.134.217.153:4001",
+            "object_path": "set_1678267941_1",
+            "config": {
+              "enable_upgrade": true,
+              "idc": "IDC1",
+              "new_version": [
+                ""
+              ],
+              "version": "agent-22.1.0"
+            },
+            "mtime": 1682411942
+          },
+          {
+            "object_type": "agent",
+            "object_id": "9.134.218.66:4001",
+            "object_path": "set_1678267941_1",
+            "config": {
+              "enable_upgrade": true,
+              "idc": "IDC1",
+              "new_version": [
+                ""
+              ],
+              "version": "agent-22.1.0"
+            },
+            "mtime": 1682411942
+          }
+        ],
+        "object_type": "agent"
+      }
+    ]
+  },
+  "trace": "fzss2p08cj0cs5p9tmvbn0iq0023qo5d"
+}

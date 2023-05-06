@@ -1,0 +1,15 @@
+{
+  "Response": {
+    "RequestId": "41525af98cffe913d396c83bdd493181tring",
+    "Data": [
+      {
+        "frames": [
+          "Frm1",
+          "Frm2"
+        ],
+        "name": "IDC_66",
+        "weight": 100
+      }
+    ]
+  }
+}

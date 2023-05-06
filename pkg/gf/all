@@ -1,0 +1,57 @@
+---
+# 操作系统账号tdsql的明文密码
+# 如果有规划要部署两个集群做DCN同步, 则这两个集群的tdsql密码要一致
+tdsql_os_pass: JEerP*2748Jy
+
+# tdsql在zk上的根路径, 保持默认不允许修改
+tdsql_zk_rootdir: /tdsqlzk
+
+# zk机器的域名配置, 会写入各配置文件, 并将域名配置到/etc/hosts中
+# 正式环境必须用机房或者地区的关键字, 有意义的关键字来命名
+# 如果部署多套TDSQL集群, 则名字需要唯一
+# 例如: 深圳机房zk的域名可以定义为tdsql_sz_zk
+tdsql_zk_domain_name: tdsql_rtrih75i4_zk
+
+# zk端口配置, 保持默认不要改,如果是自建的zk, 则和已有zk端口保持一致
+tdsql_zk_clientport: 2118
+tdsql_zk_serverport1: 2338
+tdsql_zk_serverport2: 2558
+
+# zk的ACL级别, 支持WEAK和STRONG
+# WEAK模式下访问zk数据无需鉴权，STRONG模式下访问需要鉴权
+# 该配置为19.3版本引入, 在此之前的版本中是固定用WEAK
+tdsql_zk_acl: WEAK
+
+# 赤兔监控库配置, 赤兔初始化完成后需要将监控库信息在这里更新
+# 下面信息需要时修改，注意不能配置空值
+# 监控库账号密码不能特殊字符开头，不能含有中文、引号、反斜杠、空格等特殊字符
+tdsql_metadb_ip: 9.134.217.153
+tdsql_metadb_port: 15001
+tdsql_metadb_ip_bak: 9.134.219.65
+tdsql_metadb_port_bak: 15001
+tdsql_metadb_user: tdsqlpcloud
+tdsql_metadb_password: JEerP*2748Jy
+
+
+# hdfs机器的ssh端口
+tdsql_hdfs_ssh: 22
+
+# hdfs数据目录, 正式环境要求mount挂载比较大的数据盘
+tdsql_hdfs_datadir: /data2/hdfs,/data3/hdfs,/data4/hdfs
+
+
+# kafka日志目录，正式环境要求mount挂载比较大的数据盘
+tdsql_kafka_logdir: /data2/kafka,/data3/kafka,/data4/kafka
+
+
+# es7配置
+tdsql_es7_mem: 4
+tdsql_es7_base_path: /data1/es
+tdsql_helper_cluster_name: tdsql
+
+
+# 资源分配模式，仅支持fixed和comb配置
+# 迭代19版本开始默认使用comb自由分配
+tdsql_res_mngr: comb
+
+update_tdsqlinstall_packet: mysqlagent
