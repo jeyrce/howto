@@ -1,0 +1,16 @@
+msg
+:
+"[tdsqlinstall类型对象发起任务失败：对象必须为IP或者IP:PORT的格式
+oc_agent类型对象发起任务失败：对象必须为IP或者IP:PORT的格式
+consumer类型对象发起任务失败：对象必须为IP或者IP:PORT的格式
+keeper类型对象发起任务失败：对象必须为IP或者IP:PORT的格式
+proxy_public类型对象发起任务失败：对象必须为IP或者IP:PORT的格式
+agent_public类型对象发起任务失败：对象必须为IP或者IP:PORT的格式
+onlineddl类型对象发起任务失败：对象必须为IP或者IP:PORT的格式
+clouddba类型对象发起任务失败：对象必须为IP或者IP:PORT的格式
+analysis类型对象发起任务失败：对象必须为IP或者IP:PORT的格式
+oss类型对象发起任务失败：对象必须为IP或者IP:PORT的格式
+db_public类型对象发起任务失败：对象必须为IP或者IP:PORT的格式]"
+trace
+:
+"ch7wbc021kocsimuinwg8rt800c43d5g"
