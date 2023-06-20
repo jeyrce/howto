@@ -20,21 +20,14 @@ services:
       options:
         max-size: 10m
         max-file: 3
-  
-  imseek:
-    image: jeyrce/index:latest
+
+  vv-happy-birthday:
+    image: jeyrce/vv-happy-birthday:latest
     networks:
       - nginx
-      - mysql
-    deploy:
-      replicas: 1
-    environment:
-      WEB_DOMAIN: imseek.cn
-      WEB_TITLE: 修齐方法论
-      WEB_ICP: 浙ICP备18053740-5号
-    logging:
-      options:
-        max-size: 5m
-        max-file: 3
 
+  firework:
+    image: jeyrce/firework:latest
+    networks:
+      - nginx
 

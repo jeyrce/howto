@@ -72,3 +72,8 @@ func TestStringIndex(t *testing.T) {
 		}
 	}
 }
+
+func TestEmptyString(t *testing.T) {
+	var s = ""
+	t.Log(strings.Split(s, ";"))
+}

@@ -14,3 +14,13 @@ func TestJsonList(t *testing.T) {
 		fmt.Println(item)
 	}
 }
+
+func TestMapSliceAssertion(t *testing.T) {
+	var m = map[string]interface{}{
+		"s": []string{"s1", "s2"},
+		"e": []string{},
+	}
+	for k := range m {
+		fmt.Println(len(m[k].([]string)))
+	}
+}
