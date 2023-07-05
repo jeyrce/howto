@@ -27,7 +27,5 @@ func TestLen(t *testing.T) {
 			Name string
 		}{"j"},
 	}
-	for _, i := range x {
-		t.Log(len(i))
-	}
+	t.Log(x)
 }
