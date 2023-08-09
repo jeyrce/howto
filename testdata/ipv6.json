@@ -1,0 +1,168 @@
+{
+  "return_code": 1,
+  "return_msg": "OK",
+  "return_data": {
+    "num": 1,
+    "rows": [
+      {
+        "session_id": "",
+        "json_id": 0,
+        "project_id": 18,
+        "instance_id": "tbase-33sem7r3",
+        "project_name": "tbase-33sem7r3",
+        "cluster_name": "tbase-33sem7r3",
+        "cluster_type": "",
+        "charset": "UTF8",
+        "def_password": "",
+        "project_desc": "",
+        "retant_name": "100004603025",
+        "project_type": "TbaseV2",
+        "package_name": "tbase_pgxz-2.0.9-i.x86_64.rpm",
+        "prj_comment": "",
+        "num_of_cn": 2,
+        "cn_node_name": [
+          "cn0002"
+        ],
+        "cn_t_name": "template_test",
+        "cn_template": {
+          "session_id": "",
+          "json_id": 0,
+          "template_id": 1,
+          "template_name": "template_test",
+          "template_desc": "",
+          "cpu_cores": 2,
+          "cpu_mode": 0,
+          "dram_cap": 5,
+          "ssd_cap": 0,
+          "hdd_cap": 100,
+          "is_shared": true
+        },
+        "dn_groups": 1,
+        "dns_in_group": 2,
+        "dn_node_name": [
+          "dn0001"
+        ],
+        "dn_t_name": "template_test",
+        "dn_template": {
+          "session_id": "",
+          "json_id": 0,
+          "template_id": 1,
+          "template_name": "template_test",
+          "template_desc": "",
+          "cpu_cores": 2,
+          "cpu_mode": 0,
+          "dram_cap": 5,
+          "ssd_cap": 0,
+          "hdd_cap": 100,
+          "is_shared": true
+        },
+        "num_of_gtm": 2,
+        "gtm_master_name": "gtm0001",
+        "gtm_slave_name": [
+          "gtm0002"
+        ],
+        "gtm_t_name": "template_test",
+        "gtm_template": {
+          "session_id": "",
+          "json_id": 0,
+          "template_id": 1,
+          "template_name": "template_test",
+          "template_desc": "",
+          "cpu_cores": 2,
+          "cpu_mode": 0,
+          "dram_cap": 5,
+          "ssd_cap": 0,
+          "hdd_cap": 100,
+          "is_shared": true
+        },
+        "num_of_fn": 0,
+        "fn_node_name": [
+          "any",
+          {},
+          null
+        ],
+        "fn_t_name": "",
+        "fn_template": {
+          "session_id": "",
+          "json_id": 0,
+          "template_id": 0,
+          "template_name": "",
+          "template_desc": "",
+          "cpu_cores": 0,
+          "cpu_mode": 0,
+          "dram_cap": 0,
+          "ssd_cap": 0,
+          "hdd_cap": 0,
+          "is_shared": false
+        },
+        "proj_adm_num": 0,
+        "project_adm": [
+          "any",
+          {},
+          null
+        ],
+        "proj_viewer_num": 0,
+        "project_viewer": [
+          "any",
+          {},
+          null
+        ],
+        "project_sec": "",
+        "project_adt": "",
+        "status": 4,
+        "op_status": 4,
+        "cur_handler": "100004603025",
+        "create_time": "2019-01-18T21:24:34.752774+08:00",
+        "cn_node_num": 2,
+        "dn_node_num": 1,
+        "gtm_node_num": 2,
+        "fn_node_num": 0,
+        "node_num": 6,
+        "node_list": [
+          {
+            "idc_name": "idc1",
+            "region": "local",
+            "project_id": 18,
+            "cluster_name": "tbase-33sem7r3",
+            "cluster_type": "",
+            "plane_name": "tbase_cluster",
+            "node_id": 13,
+            "node_ip": "10.10.0.13",
+            "node_name": "dn0001",
+            "node_type": 0,
+            "node_port": 11036,
+            "node_role": 1,
+            "master_nid": 0,
+            "node_op_status": 0,
+            "sync_type": 0,
+            "data_dir": "/data/tbase/user/tdata_00/tbase-33sem7r3/data/dn0001",
+            "bin_dir": "/data/tbase/user/tdata_00/tbase-33sem7r3/2.0.9/install/tbase_pgxz/",
+            "template_name": "template_test",
+            "session_id": "",
+            "json_id": 2,
+            "plane_id": 0,
+            "vmachine_type": "C24M62H1341",
+            "node_status": 0,
+            "wal_status": 0,
+            "op_time": "",
+            "template_obj": {
+              "session_id": "",
+              "json_id": 0,
+              "template_id": 1,
+              "template_name": "template_test",
+              "template_desc": "",
+              "cpu_cores": 2,
+              "cpu_mode": 0,
+              "dram_cap": 5,
+              "ssd_cap": 0,
+              "hdd_cap": 100,
+              "is_shared": true
+            },
+            "server_ipv6": "server_ipv6"
+          }
+        ],
+        "enable_ipv6": 1
+      }
+    ]
+  }
+}
