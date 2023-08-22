@@ -25,6 +25,11 @@ func (c *Child) Parse() {
 	fmt.Println("Child's parse")
 }
 
+func (c *Child) Call() {
+	fmt.Println("Child call")
+	c.Parse()
+}
+
 func TestNest(t *testing.T) {
 	var f, c = Father{}, Child{}
 	f.Call()
