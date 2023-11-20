@@ -24,3 +24,8 @@ func TestU(t *testing.T) {
 		}
 	}
 }
+
+func TestPathJoin(t *testing.T) {
+	t.Log(path.Join("/", "", "api/v2"))
+	t.Log(path.Join("/", "app", "api/v3"))
+}
