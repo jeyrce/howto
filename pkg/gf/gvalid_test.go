@@ -2,8 +2,9 @@ package main
 
 import (
 	"context"
-	"github.com/gogf/gf/util/gvalid"
 	"testing"
+
+	"github.com/gogf/gf/v2/util/gvalid"
 )
 
 type Req struct {
@@ -32,7 +33,7 @@ func TestGValidStruct(t *testing.T) {
 		},
 	}
 	for _, r := range reqs {
-		if err := gvalid.CheckStruct(context.TODO(), r, nil); err != nil {
+		if err := gvalid.New().Data(r).Run(context.TODO()); err != nil {
 			t.Fatal(err)
 		}
 	}

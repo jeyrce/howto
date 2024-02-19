@@ -77,3 +77,16 @@ func TestEmptyString(t *testing.T) {
 	var s = ""
 	t.Log(strings.Split(s, ";"))
 }
+
+func TestStrSplit(t *testing.T) {
+	var strs = []string{
+		"xxx.ccc_CM_ddd",
+		"xxx.ccc_ddd",
+		"xxx.ddd",
+		" ",
+		"",
+	}
+	for _, str := range strs {
+		t.Log(strings.Split(str, "_CM_"))
+	}
+}

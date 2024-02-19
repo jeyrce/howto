@@ -3,6 +3,8 @@ package lib
 import (
 	"encoding/json"
 	"testing"
+
+	"github.com/gogf/gf/encoding/gjson"
 )
 
 func TestMap(t *testing.T) {
@@ -56,4 +58,68 @@ func TestOmitempty(t *testing.T) {
 	}
 	t.Log(string(marshal)) // {}
 	t.Log(string(bytes))   // {"name":"","age":0}
+}
+
+type Handler interface {
+	Type() string
+	Code() string
+	Version() string
+}
+
+type TestHandler struct {
+	t string
+	c string
+	v string
+}
+
+func (t TestHandler) Type() string {
+	return t.t
+}
+
+func (t TestHandler) Code() string {
+	return t.c
+}
+
+func (t TestHandler) Version() string {
+	return t.v
+}
+
+func Registry(handlers ...Handler) {
+	for _, h := range handlers {
+		if _, ok := m[h.Type()]; !ok {
+			m[h.Type()] = make(map[string]map[string]Handler)
+		}
+		if _, ok := m[h.Type()][h.Code()]; !ok {
+			m[h.Type()][h.Code()] = make(map[string]Handler)
+		}
+		m[h.Type()][h.Code()][h.Version()] = h
+	}
+}
+
+var m = make(map[string]map[string]map[string]Handler)
+
+func TestMapRegistry(t *testing.T) {
+	Registry(
+		&TestHandler{
+			t: "x",
+			c: "x.cc",
+			v: "1.0.0",
+		},
+		&TestHandler{
+			t: "x",
+			c: "x.cc",
+			v: "1.0.2",
+		},
+		&TestHandler{
+			t: "y",
+			c: "y.cc",
+			v: "1.0.0",
+		},
+		&TestHandler{
+			t: "y",
+			c: "y.dd",
+			v: "1.0.0",
+		},
+	)
+	t.Log(gjson.New(m).MustToJsonString())
 }

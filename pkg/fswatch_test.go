@@ -1,9 +1,10 @@
 package pkg
 
 import (
-	"github.com/fsnotify/fsnotify"
 	"testing"
 	"time"
+
+	"github.com/fsnotify/fsnotify"
 )
 
 func TestFsWatch(t *testing.T) {
@@ -43,4 +44,8 @@ func TestFsWatch(t *testing.T) {
 			}
 		}
 	}
+}
+
+type Data struct {
+	xxx string
 }
