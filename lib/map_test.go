@@ -123,3 +123,21 @@ func TestMapRegistry(t *testing.T) {
 	)
 	t.Log(gjson.New(m).MustToJsonString())
 }
+
+func TestMapCount(t *testing.T) {
+	var data = []struct {
+		A string
+		B int
+	}{
+		{A: "1", B: 1},
+		{A: "1", B: 2},
+		{A: "x", B: 1},
+		{A: "x", B: 1},
+		{A: "-", B: 1},
+	}
+	m := make(map[string]int)
+	for _, d := range data {
+		m[d.A]++
+	}
+	t.Log(m)
+}
