@@ -90,3 +90,17 @@ func TestStrSplit(t *testing.T) {
 		t.Log(strings.Split(str, "_CM_"))
 	}
 }
+
+func TestStrConv(t *testing.T) {
+	var ss = []string{
+		"xxx",
+		"34",
+	}
+	for _, s := range ss {
+		atoi, err := strconv.Atoi(s)
+		if err != nil {
+			t.Log(err)
+		}
+		t.Log(">>>", atoi)
+	}
+}
