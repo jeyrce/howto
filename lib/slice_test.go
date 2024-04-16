@@ -2,6 +2,7 @@ package lib
 
 import (
 	"fmt"
+	"sort"
 	"testing"
 )
 
@@ -35,5 +36,15 @@ func TestSliceIdx(t *testing.T) {
 func TestNewSlice(t *testing.T) {
 	var ss []string
 	ss = append(ss, "xxx", "yyy")
+	t.Log(ss)
+}
+
+func TestSortStr(t *testing.T) {
+	var ss = []string{
+		"master",
+		"ro",
+		"slave",
+	}
+	sort.Strings(ss)
 	t.Log(ss)
 }
