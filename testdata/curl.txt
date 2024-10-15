@@ -1,0 +1,12 @@
+curl --location --request POST 'http://30.46.164.12:36987/cdb/query_cluster_instance' \
+--header 'User-Agent: Apifox/1.0.0 (https://apifox.com)' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "cluster_id":60004,
+    "query_filter":"query_all_app",
+    "instance_id":"e5a24d12-144c-4059-b595-822cf72d21aa",
+    "instance_type":"rw",
+    "operator":"jeyrcelu",
+    "limit":1,
+    "offset":0
+}'
