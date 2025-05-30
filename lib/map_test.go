@@ -130,7 +130,7 @@ func TestMapCount(t *testing.T) {
 		B int
 	}{
 		{A: "1", B: 1},
-		{A: "1", B: 2},
+		{A: "1", B: 1},
 		{A: "x", B: 1},
 		{A: "x", B: 1},
 		{A: "-", B: 1},

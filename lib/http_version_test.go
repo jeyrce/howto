@@ -2,6 +2,7 @@ package lib
 
 import (
 	"net/http"
+	"net/url"
 	"testing"
 )
 
@@ -19,4 +20,13 @@ func (s *server) ServeHTTP(writer http.ResponseWriter, request *http.Request) {
 
 func TestHttpVersion(t *testing.T) {
 	_ = http.NewServeMux()
+}
+
+func TestUulJoin(t *testing.T) {
+	path, err := url.JoinPath("https://polaris.woa.com/#/services/info/instance/", "Development", "txstore_global_api-server")
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	t.Log(path)
 }
