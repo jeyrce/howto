@@ -1,10 +1,16 @@
 package lib
 
 import (
+	"crypto/md5"
+	"encoding/json"
+	"fmt"
 	"regexp"
 	"strconv"
 	"strings"
 	"testing"
+	"time"
+
+	"github.com/gogf/gf/v2/util/gconv"
 )
 
 func fakeString() string {
@@ -103,4 +109,44 @@ func TestStrConv(t *testing.T) {
 		}
 		t.Log(">>>", atoi)
 	}
+}
+
+func TestStr2Slice(t *testing.T) {
+	var s = "[\"成都电信西区803DC11号楼M705\"，\"上海电信西区803DC11号楼M705\"]"
+	var ss = gconv.Strings(s)
+
+	t.Log(len(ss), ss)
+}
+
+type GlobalSearchReq struct {
+	MessageType string `json:"MessageType" dc:"消息类型"`
+	Duration    int64  `json:"Duration" dc:"查询耗时(ms)"`
+	Succeed     bool   `json:"Succeed" dc:"是否查询成功"`
+	Message     string `json:"Message" dc:"查询失败时返回原因"`
+}
+
+// MD5 计算一次请求的md5，用于过滤同一个链接的多次请求
+// struct的json序列化是有序的，因此可以先进行json序列化然后求md5
+func (g *GlobalSearchReq) MD5() string {
+	j, err := json.Marshal(g)
+	if err != nil {
+		return fmt.Sprintf("%x", md5.Sum([]byte(fmt.Sprint(g))))
+	}
+
+	return fmt.Sprintf("%x", md5.Sum(j))
+}
+
+func TestMD5(t *testing.T) {
+	var (
+		items = []GlobalSearchReq{
+			{"1", int64(time.Minute), true, "test"},
+			{"1", int64(time.Minute), true, "test"},
+			{"2", int64(time.Minute), true, "test"},
+			{"3", int64(time.Minute), true, "test"},
+		}
+	)
+	for _, item := range items {
+		t.Log(item.MD5())
+	}
+
 }
