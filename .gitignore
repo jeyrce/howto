@@ -9,3 +9,7 @@
 *.db
 *.tmp
 *.sqlite
+
+__pycache__/
+*.pyc
+
