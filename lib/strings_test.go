@@ -10,6 +10,7 @@ import (
 	"testing"
 	"time"
 
+	"github.com/gogf/gf/v2/text/gstr"
 	"github.com/gogf/gf/v2/util/gconv"
 )
 
@@ -149,4 +150,20 @@ func TestMD5(t *testing.T) {
 		t.Log(item.MD5())
 	}
 
+}
+
+func TestSplitStr(t *testing.T) {
+	var strs = []string{
+		"育英技术中心",
+		"|TEG技术工程事业群|数据库研发部|运营技术中心",
+		"",
+	}
+	for _, c := range strs {
+		items := gstr.SplitAndTrim(c, "|")
+		if len(items) > 0 {
+			t.Log(items[len(items)-1])
+		}
+	}
+
+	t.Log("pass")
 }

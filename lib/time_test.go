@@ -7,6 +7,8 @@ import (
 	"strconv"
 	"testing"
 	"time"
+
+	"golang.org/x/net/context"
 )
 
 func TestTimeToTimeStamp(t *testing.T) {
@@ -60,4 +62,31 @@ func async(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("执行任务")
 	})
 	io.WriteString(w, "请求已提交")
+}
+
+func timeoutFunc(cxt context.Context) {
+	for {
+		select {
+		case <-cxt.Done():
+			fmt.Println("func timeout return")
+			return
+		}
+	}
+}
+
+func TestTimeoutCtx(t *testing.T) {
+	var (
+		ctx, cancel = context.WithTimeout(context.Background(), time.Second*3)
+	)
+	defer cancel()
+	timeoutFunc(ctx)
+	for {
+		select {
+		case <-ctx.Done():
+			t.Log("timeout...")
+			return
+		default:
+			// pass
+		}
+	}
 }
