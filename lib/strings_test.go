@@ -167,3 +167,36 @@ func TestSplitStr(t *testing.T) {
 
 	t.Log("pass")
 }
+
+func TestFindSubString(t *testing.T) {
+	var (
+		AZServiceNameRegex     = regexp.MustCompile(`^txstore_(?P<RegionKey>[a-zA-Z][a-zA-Z0-9-]{1,49})_(?P<ZoneKey>[a-zA-Z][a-zA-Z0-9-]{1,49})_(?P<Suffix>[a-z-]{2,16})$`)
+		RegionServiceNameRegex = regexp.MustCompile(`^txstore_(?P<RegionKey>[a-zA-Z][a-zA-Z0-9-]{1,49})_(?P<Suffix>[a-z-]{2,16})$`)
+		ss                     = []string{
+			"txstore_global_api-server",
+			"txstore_cross-region-1_cross-region-1-az_dbres",
+			"txstore_ncdbtest-80036_cdp-checker",
+			"txstore_region-W8HJ1D_az-773482_dbmgr",
+			"xxx-cxcsjdjs",
+		}
+	)
+
+	for _, s := range ss {
+		switch {
+		case RegionServiceNameRegex.MatchString(s):
+			t.Log("地域匹配", s)
+			items := RegionServiceNameRegex.FindStringSubmatch(s)
+			if len(items) > 0 {
+				t.Log(items[RegionServiceNameRegex.SubexpIndex("RegionKey")])
+			}
+		case AZServiceNameRegex.MatchString(s):
+			t.Log("az匹配", s)
+			items := AZServiceNameRegex.FindStringSubmatch(s)
+			if len(items) > 0 {
+				t.Log(items[AZServiceNameRegex.SubexpIndex("ZoneKey")])
+			}
+		default:
+			t.Log("不匹配", s)
+		}
+	}
+}
