@@ -48,3 +48,14 @@ func TestSortStr(t *testing.T) {
 	sort.Strings(ss)
 	t.Log(ss)
 }
+
+func TestSliceItems(t *testing.T) {
+	var items = []string{
+		"x", "y", "z",
+	}
+
+	newItems := items[:]
+	oldItems := items
+
+	t.Logf("%p\n%p\n%p", &items, &oldItems, &newItems)
+}

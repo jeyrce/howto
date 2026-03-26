@@ -200,3 +200,26 @@ func TestFindSubString(t *testing.T) {
 		}
 	}
 }
+
+func genInstanceName(rk, zk, svc string) string {
+	var (
+		sep   = "-"
+		items = []string{
+			"txstore3",
+			rk,
+			zk,
+			svc,
+			"cdb",
+		}
+	)
+	if zk == "" {
+		items = append(items[:2], items[2+1:]...)
+	}
+
+	return strings.Join(items, sep)
+}
+
+func TestGenInstanceName(t *testing.T) {
+	t.Log(genInstanceName("gz", "gz-7", "dbmgr"))
+	t.Log(genInstanceName("gz", "", "dbmgr"))
+}

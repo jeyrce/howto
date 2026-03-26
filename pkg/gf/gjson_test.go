@@ -48,3 +48,16 @@ func TestGJsonMarshal(t *testing.T) {
 	})
 	t.Log(j.MustToJsonString())
 }
+
+func TestEmptyStringScan(t *testing.T) {
+	var (
+		emptyStr = ``
+		d        = new(Data)
+	)
+	err := gjson.New(emptyStr).Scan(d)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	t.Log(*d)
+}

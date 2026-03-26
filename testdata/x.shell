@@ -1,0 +1,13 @@
+
+curl --location "http://newstore-svr.new-store.svc.cluster.local/openapi/v1" \
+--header "X-Txstoreops-Clientid: mydbops-worker" \
+--header "X-Txstoreops-Nonce: 521744791004667191" \
+--header "X-Txstoreops-Signature: 20408faedc40fa75024d499aea1570ad51a5849f6b8505229abf8443bd710c68" \
+--header "X-Txstoreops-Staffname: jeyrcelu" \
+--header "X-Txstoreops-Timestamp: 1773389037" \
+--header "Content-Type: application/json" \
+--data '{
+  "ApiModule": "mydbops",
+  "Action": "ListSysMenuTree",
+  "ClusterType": ""
+}'
