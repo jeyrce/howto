@@ -1,7 +1,6 @@
 package lib
 
 import (
-	"fmt"
 	"os"
 	"path"
 	"testing"
@@ -13,11 +12,11 @@ func TestFmt(t *testing.T) {
 	for _, i := range ss {
 		switch i {
 		case "x":
-			fmt.Printf(i)
+			t.Log(i)
 		case "y":
-			fmt.Printf("Y")
+			t.Log("Y")
 		default:
-			fmt.Printf("-")
+			t.Log("-")
 		}
 	}
 }

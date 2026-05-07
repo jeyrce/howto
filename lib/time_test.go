@@ -90,3 +90,8 @@ func TestTimeoutCtx(t *testing.T) {
 		}
 	}
 }
+
+func TestZeroDuration(t *testing.T) {
+	t.Log(time.Duration(0).String())
+	t.Log(time.Duration(23232320 * time.Second).String())
+}

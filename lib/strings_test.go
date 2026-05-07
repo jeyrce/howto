@@ -223,3 +223,9 @@ func TestGenInstanceName(t *testing.T) {
 	t.Log(genInstanceName("gz", "gz-7", "dbmgr"))
 	t.Log(genInstanceName("gz", "", "dbmgr"))
 }
+
+func TestSplitEmptyString(t *testing.T) {
+	var s = ""
+	t.Log(gstr.Split(s, ","))
+
+}
